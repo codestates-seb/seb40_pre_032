@@ -1,4 +1,4 @@
-## 🚀 pre-project-SEB40-032
+# pre-project-SEB40-032
 ### Team Name : 📋Ctrl+C,V
 #### Description : Stack Overflow 클론코딩   
 2022/10/20 ~ 2022/11/07

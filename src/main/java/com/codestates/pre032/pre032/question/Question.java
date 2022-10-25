@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.tag.QuestionTag;
+import com.codestates.pre032.pre032.tag.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -58,4 +59,11 @@ public class Question {
     @Column
     private int answerCount;
 
+    public List<Tag> getTags() {
+        List<Tag> tags = new ArrayList<>();
+        for (int i = 0; i < this.tags.size(); i++) {
+            tags.add(this.tags.get(i).getTag());
+        }
+        return tags;
+    }
 }

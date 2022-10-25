@@ -36,26 +36,9 @@ public class QuestionDto {
     @Getter
     @AllArgsConstructor
     public static class questionResponse{
-        private Long questionId;
-
-        private String title;
-
-        private String questionContent;
-
-        private LocalDateTime creationDate;
-
-        private LocalDateTime modifiedAt;
-
-    }
-
-    @Getter
-    @AllArgsConstructor
-    public static class questionsResponse {
-        private Long questionId;
-
         private List<Tag> tags;
 
-        private String title;
+//        private User owner;
 
         private boolean isAnswered;
 
@@ -67,9 +50,33 @@ public class QuestionDto {
 
         private LocalDateTime creationDate;
 
-        private LocalDateTime modifiedAt;
+        private Long questionId;
 
-        // todo : 유저 연관관계 추가
+        private String title;
+
     }
 
+    @Getter
+    @AllArgsConstructor
+    public static class questionsResponse {
+        private List<Tag> tags;
+
+//        private User owner;
+
+        private boolean isAnswered;
+
+        private int viewCount;
+
+        private int answerCount;
+
+        private int score;
+
+        private LocalDateTime creationDate;
+
+        private Long questionId;
+
+        private String title;
+
+//        private LocalDateTime modifiedAt;
+    }
 }

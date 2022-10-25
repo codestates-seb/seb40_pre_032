@@ -2,11 +2,9 @@ package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
 import com.codestates.pre032.pre032.tag.*;
-import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -56,11 +54,8 @@ public class QuestionService {
         }
     }
 
-    public List<Question> getQuestionsByDate(){
-        // size 페이지네이션 사이즈
-        List<Sort.Order> sorts = new ArrayList<>();
-        sorts.add(Sort.Order.desc("createdAt"));
-        return this.questionRepository.findAll(Sort.by(sorts));
+    public List<Question> getQuestions(){
+        return this.questionRepository.findAll();
     }
 
 

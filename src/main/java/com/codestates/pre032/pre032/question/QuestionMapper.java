@@ -2,6 +2,7 @@ package com.codestates.pre032.pre032.question;
 
 import org.mapstruct.Mapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Mapper(componentModel = "spring")
@@ -17,19 +18,28 @@ public interface QuestionMapper {
             return question;
         }
     }
-//    default Question questionPatchDtoToQuestion(QuestionDto.Patch questionPatchDto){
-//        if (questionPatchDto == null) {
-//            return null;
-//        } else {
-//            Question question = new Question();
-//            question.setTitle(questionPostDto.getTitle());
-//            question.setQuestionContent(questionPostDto.getQuestionContent());
-//            question.setAccessToken(questionPostDto.getAccessToken());
-//            return question;
-//        }
-//    };
 
-    QuestionDto.questionResponse questionToQuestionResponseDto(Question question);
+//    QuestionDto.questionResponse questionToQuestionResponseDto(Question question);
 
-//    List<QuestionDto.questionsResponse> questionsToQuestionResponseDto(List<Question> questions);
+    default List<QuestionDto.questionResponse> questionsToQuestionResponseDto(List<Question> questions){
+        List<QuestionDto.questionResponse> answer = new ArrayList<>();
+        if (questions.size()==0) {
+            return null;
+        } else {
+            for (Question question : questions){
+                QuestionDto.questionResponse response = new QuestionDto.questionResponse(
+                        question.getTags(),
+                        question.isAnswered(),
+                        question.getViewCount(),
+                        question.getAnswerCount(),
+                        question.getScore(),
+                        question.getCreationDate(),
+                        question.getQuestionId(),
+                        question.getTitle()
+                );
+                answer.add(response);
+            }
+            return answer;
+        }
+    }
 }

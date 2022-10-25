@@ -1,9 +1,7 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import com.codestates.pre032.pre032.tag.QuestionTag;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -20,24 +18,34 @@ public class QuestionService {
         this.questionRepository = questionRepository;
     }
 
-    public Question create(Question question) {
-        Question newQuestion = new Question(
-                question.getSubject(),
-                question.getContent()
-        );
-
-        newQuestion.setCreatedAt(LocalDateTime.now());
-        newQuestion.setModifiedAt(LocalDateTime.now());
+    public Question create(Question question, List<String> tags) {
+        question.setScore(0);
+        question.setViewCount(0);
+        question.setAnswerCount(0);
+        question.setAnswered(false);
+        question.setCreationDate(LocalDateTime.now());
+        question.setModifiedAt(LocalDateTime.now());
         //todo : user 정보 입력
 
-        return this.questionRepository.save(newQuestion);
+        return this.questionRepository.save(question);
     }
 
-    public Question update(Long id, Question question) {
+    // 입력받은 스트링을 태그로 변환
+    public List<QuestionTag> stringToTag(Question question, List<String> list){
+        List<QuestionTag> tags = new ArrayList<>();
+        for (String a : list) {
+            tags.add(new QuestionTag(question,a));
+        }
+        return tags;
+    }
+
+
+    public Question update(Long id, QuestionDto.Patch patch) {
         Question updateQuestion = find(id);
 
-        updateQuestion.setSubject(question.getSubject());
-        updateQuestion.setContent(question.getContent());
+        //todo : 일단은 내용수정만 구현하기로 합의
+//        updateQuestion.setTitle(question.getTitle());
+        updateQuestion.setQuestionContent(patch.getQuestionContent());
         updateQuestion.setModifiedAt(LocalDateTime.now());
 
         this.questionRepository.save(updateQuestion);
@@ -54,13 +62,11 @@ public class QuestionService {
         }
     }
 
-    public Page<Question> getQuestions(int page){
+    public List<Question> getQuestionsByDate(){
         // size 페이지네이션 사이즈
-        int size = 10;
         List<Sort.Order> sorts = new ArrayList<>();
         sorts.add(Sort.Order.desc("createdAt"));
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sorts));
-        return this.questionRepository.findAll(pageable);
+        return this.questionRepository.findAll(Sort.by(sorts));
     }
 
 

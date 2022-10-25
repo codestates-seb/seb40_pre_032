@@ -1,19 +1,19 @@
 package com.codestates.pre032.pre032.question;
 
-import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
 public class QuestionDto {
     @Getter
     @AllArgsConstructor
     public static class Post{
-        @NotNull
+        @NotBlank
         private String subject;
 
-        @NotNull
+        @NotBlank
         private String content;
     }
 

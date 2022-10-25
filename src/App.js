@@ -8,24 +8,24 @@ function App() {
 				<a
 					href="https://stackoverflow.com/questions"
 					aria-current="page"
-					className="py-2 px-4 text-sm  text-[hsl(210,8%,45%)] bg-white rounded-l-little border border-[hsl(210,8%,65%)] hover:bg-gray-100  hover:text-gray-900 focus:z-10   focus:text-[hsl(210,8%,45%)]  "
+					className="py-[5px] px-4 text-[13px] h-full  text-[#64686e] bg-white rounded-l-little border border-[hsl(210,8%,65%)] hover:bg-gray-100  hover:text-gray-900 focus:z-10   focus:text-[#64686e]  "
 				>
-					Newest
+					<div>Newest</div>
 				</a>
 				<a
 					href="https://stackoverflow.com/questions"
-					className="py-2 px-4 text-sm  text-[hsl(210,8%,45%)] bg-white border-t border-b border-[hsl(210,8%,65%)] hover:bg-[hsl(210,8%,95%)] hover:text-gray-900  focus:z-10   focus:text-[hsl(210,8%,45%)]  "
+					className="py-[5px] px-4 text-[13px] h-full test-center text-[#64686e] bg-white border-t border-b border-[hsl(210,8%,65%)]  hover:bg-gray-100 hover:text-gray-900  focus:z-10   focus:text-[#64686e]  "
 				>
-					Active
+					<div>Active</div>
 				</a>
 				<a
 					href="https://stackoverflow.com/questions"
-					className="py-2 px-4 text-sm  text-[hsl(210,8%,45%)] bg-white rounded-r-little border border-[hsl(210,8%,65%)] hover:bg-gray-100 hover:text-gray-900 focus:z-10   focus:text-[hsl(210,8%,45%)]  "
+					className="py-[5px] px-4 text-[13px] h-full text-[#64686e] bg-white rounded-r-little border border-[hsl(210,8%,65%)] hover:bg-gray-100 hover:text-gray-900 focus:z-10   focus:text-[#64686e]  "
 				>
-					Unanswered
+					<div>Unanswered</div>
 				</a>
 			</div>
-			<div className="border-solid flex border-border-blue border h-[36px] hover:bg-[#b3d3e9] rounded-little text-[#37739c] bg-[#e0ecf3] text-[13px]">
+			<div className="border-solid flex border-border-blue border h-[34px] hover:bg-[#b3d3e9] rounded-little text-[#37739c] bg-[#e0ecf3] text-[13px]">
 				<button
 					type="button"
 					className="w-[68px] flex items-center justify-center decoration-[#e0ecf3] "

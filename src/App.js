@@ -1,5 +1,8 @@
+import React from 'react';
+import Logout from './routes/logout';
+
 function App() {
-	return <div className="App"></div>;
+	return <Logout />;
 }
 
 export default App;

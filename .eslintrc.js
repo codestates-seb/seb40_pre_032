@@ -15,6 +15,8 @@ module.exports = {
 		ecmaVersion: 'latest',
 		sourceType: 'module',
 	},
-	plugins: ['react'],
-	rules: {},
+	plugins: ['react', 'prettuer'],
+	rules: {
+		'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx'] }],
+	},
 };

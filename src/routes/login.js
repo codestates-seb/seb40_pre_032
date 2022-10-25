@@ -30,7 +30,7 @@ export default function Login() {
 						<div className="bg-blue-900 my-3  py-2 px-10 text-center rounded text-white">
 							<FontAwesomeIcon icon={faFacebook} /> Log in with faFacebook
 						</div>
-						<form className="lg:w-full bg-white p-5 mt-6 shadow">
+						<form className="lg:w-full bg-white p-5 mt-6 drop-shadow-md">
 							<div className="font-bold">Email</div>
 							<input
 								type="email"

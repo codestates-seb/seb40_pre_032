@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.tag;
 
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
+@NoArgsConstructor
 public class Tag {
     public Tag(String tag) {
         this.tag = tag;

@@ -1,4 +1,5 @@
 import React from 'react';
+import { HiMagnifyingGlass } from 'react-icons/hi2';
 
 export default function App() {
 	return (
@@ -19,6 +20,7 @@ export default function App() {
 				</div>
 				<form className="align-baseline text-[100%] px-2">
 					<input className="cursor-text" />
+					<HiMagnifyingGlass />
 				</form>
 			</div>
 		</header>

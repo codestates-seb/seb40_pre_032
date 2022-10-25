@@ -1,7 +1,7 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
-import com.codestates.pre032.pre032.tag.QuestionTag;
+import com.codestates.pre032.pre032.tag.*;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +14,11 @@ import java.util.Optional;
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
-    public QuestionService(QuestionRepository questionRepository) {
+    private final TagService tagService;
+
+    public QuestionService(QuestionRepository questionRepository, TagService tagService) {
         this.questionRepository = questionRepository;
+        this.tagService = tagService;
     }
 
     public Question create(Question question, List<String> tags) {
@@ -25,20 +28,11 @@ public class QuestionService {
         question.setAnswered(false);
         question.setCreationDate(LocalDateTime.now());
         question.setModifiedAt(LocalDateTime.now());
+        tagService.stringToTag(question,tags);
         //todo : user 정보 입력
 
         return this.questionRepository.save(question);
     }
-
-    // 입력받은 스트링을 태그로 변환
-    public List<QuestionTag> stringToTag(Question question, List<String> list){
-        List<QuestionTag> tags = new ArrayList<>();
-        for (String a : list) {
-            tags.add(new QuestionTag(question,a));
-        }
-        return tags;
-    }
-
 
     public Question update(Long id, QuestionDto.Patch patch) {
         Question updateQuestion = find(id);

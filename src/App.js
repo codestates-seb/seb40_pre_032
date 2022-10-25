@@ -7,7 +7,7 @@ function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Sidebar />} />
+				<Route path="/questions" element={<Sidebar />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>
 		</BrowserRouter>

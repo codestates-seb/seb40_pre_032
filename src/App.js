@@ -1,8 +1,8 @@
 import React from 'react';
-import Logout from './routes/logout';
+import Accordian from './component/Accordian';
 
 function App() {
-	return <Logout />;
+	return <Accordian />;
 }
 
 export default App;

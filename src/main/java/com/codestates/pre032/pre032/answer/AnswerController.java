@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.answer;
 
 
+import com.codestates.pre032.pre032.question.QuestionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,10 +17,12 @@ public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
 
+    private final QuestionService questionService;
 
-    public AnswerController(AnswerService answerService, AnswerMapper mapper) {
+    public AnswerController(AnswerService answerService, AnswerMapper mapper, QuestionService questionService) {
         this.answerService = answerService;
         this.mapper = mapper;
+        this.questionService = questionService;
     }
 
     // 답변 등록
@@ -37,9 +40,8 @@ public class AnswerController {
     public ResponseEntity patchAnswer(@PathVariable("id") @Positive long answerId,
                                       @Valid @RequestBody AnswerDto.PatchDto patchDto){
         Answer answer = mapper.answerPatchDtoAnswer(patchDto);
-        Answer response = answerService.updateAnswer(answerId,answer);
 
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //답변 삭제

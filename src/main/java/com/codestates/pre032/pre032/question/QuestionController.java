@@ -47,8 +47,7 @@ public class QuestionController {
     // 질문 상세 페이지
     @GetMapping("/{questionId}")
     public ResponseEntity questionDetail(@PathVariable("questionId") Long id){
-        Question question = questionService.find(id);
-
+        Question question = questionService.getDetail(id);
         QuestionDto.questionContentResponse response = questionMapper.questionToQuestionContentResponseDto(question);
 
         return new ResponseEntity<> (response, HttpStatus.OK);

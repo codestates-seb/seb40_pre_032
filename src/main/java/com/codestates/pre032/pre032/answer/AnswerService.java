@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.answer;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
+import com.codestates.pre032.pre032.question.Question;
 import com.codestates.pre032.pre032.question.QuestionService;
 import org.springframework.stereotype.Service;
 
@@ -19,7 +20,10 @@ public class AnswerService {
     }
 
     public Answer createAnswer(Long id, Answer answer){
-        answer.setQuestion(questionService.find(id));
+        Question question = questionService.find(id);
+        question.setAnswerCount(question.getAnswerCount()+1);
+        answer.setQuestion(question);
+
         return answerRepository.save(answer);
     }
 
@@ -41,6 +45,7 @@ public class AnswerService {
 
     public void deleteAnswer(Long answerId){
         Answer answer = findVerifiedAnswer(answerId);
+        answer.getQuestion().setAnswerCount(answer.getQuestion().getAnswerCount()-1);
         answerRepository.delete(answer);
     }
 }

@@ -42,6 +42,13 @@ public class QuestionService {
         return this.questionRepository.save(updateQuestion);
     }
 
+    public Question getDetail(Long id){
+        Question question = find(id);
+        // 일단 상세페이지 접속마다 1씩 증가하게 설정
+        question.setViewCount(question.getViewCount()+1);
+        return this.questionRepository.save(question);
+    }
+
     public Question find(Long id) {
         Optional<Question> findQuestion = this.questionRepository.findById(id);
         if (findQuestion.isPresent()) {
@@ -67,7 +74,6 @@ public class QuestionService {
             throw new DataNotFoundException("question not found");
         }
     }
-
 
     //테스트용 메서드 모든 질문 삭제
     public void deleteAll() {

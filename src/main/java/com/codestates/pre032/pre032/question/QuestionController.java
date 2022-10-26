@@ -1,5 +1,7 @@
 package com.codestates.pre032.pre032.question;
 
+import com.codestates.pre032.pre032.answer.AnswerController;
+import com.codestates.pre032.pre032.answer.AnswerDto;
 import com.codestates.pre032.pre032.dto.MainResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,9 +18,12 @@ public class QuestionController {
 
     private final QuestionMapper questionMapper;
 
-    public QuestionController(QuestionService questionService, QuestionMapper questionMapper) {
+    private final AnswerController answerController;
+
+    public QuestionController(QuestionService questionService, QuestionMapper questionMapper, AnswerController answerController) {
         this.questionService = questionService;
         this.questionMapper = questionMapper;
+        this.answerController = answerController;
     }
 
     // 작성 기능
@@ -74,6 +79,12 @@ public class QuestionController {
         this.questionService.delete(id,accessToken);
 
         return new ResponseEntity(HttpStatus.OK);
+    }
+
+    @PostMapping("/{id}/answer/add")
+    public void addAnswer(@PathVariable Long id,
+                          @RequestBody AnswerDto.PostDto requestBody){
+        answerController.postAnswer(id, requestBody);
     }
 
     // 테스트용 메서드 모든 질문 삭제

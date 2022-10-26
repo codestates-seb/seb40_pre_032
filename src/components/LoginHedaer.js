@@ -3,7 +3,7 @@ import { HiMagnifyingGlass, HiInbox } from 'react-icons/hi2';
 import { GrTrophy } from 'react-icons/gr';
 import { BsFillQuestionCircleFill } from 'react-icons/bs';
 
-export default function LoginHeader() {
+function LoginHeader() {
 	return (
 		<div className="flex flex-col">
 			<div className="w-full bg-[#f38227] h-[3px]" />
@@ -20,13 +20,7 @@ export default function LoginHeader() {
 						/>
 					</a>
 					<div className="w-[82px] h-[33px] cursor-pointer flex items-center justify-center rounded-large hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
-						<span>About</span>
-					</div>
-					<div className="w-[82px] h-[33px] cursor-pointer flex items-center justify-center rounded-large hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
 						<span>Product</span>
-					</div>
-					<div className="w-[82px] h-[33px] cursor-pointer flex items-center justify-center rounded-large hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
-						<span>For Teams</span>
 					</div>
 					<form className="align-baseline relative text-[100%] flex px-2 w-[773px]">
 						<HiMagnifyingGlass className="absolute left-[15px] mt-[9px]" />
@@ -48,12 +42,12 @@ export default function LoginHeader() {
 						</div>
 						<ol className="list-none px-[10]">
 							<li className=" ml-[4px] float-left flex h-[34px]  text-[13px] ">
-								<a
-									href="https://www.naver.com"
+								<button
+									type="submit"
 									className=" flex items-center w-[68px] justify-center  text-white border-[0.5px] rounded-[3px] hover:bg-[#0074CC] bg-[#0a94ff]"
 								>
 									Log out
-								</a>
+								</button>
 							</li>
 						</ol>
 					</nav>
@@ -62,3 +56,5 @@ export default function LoginHeader() {
 		</div>
 	);
 }
+
+export default LoginHeader;

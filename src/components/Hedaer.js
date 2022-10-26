@@ -1,7 +1,7 @@
 import React from 'react';
 import { HiMagnifyingGlass } from 'react-icons/hi2';
 
-export default function Header() {
+function Header() {
 	return (
 		<div className="flex flex-col">
 			<div className="w-full bg-[#f38227] h-[3px]" />
@@ -60,3 +60,5 @@ export default function Header() {
 		</div>
 	);
 }
+
+export default Header;

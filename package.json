@@ -3,6 +3,13 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@fortawesome/fontawesome-svg-core": "^6.2.0",
+		"@fortawesome/free-brands-svg-icons": "^6.2.0",
+		"@fortawesome/free-regular-svg-icons": "^6.2.0",
+		"@fortawesome/free-solid-svg-icons": "^6.2.0",
+		"@fortawesome/react-fontawesome": "^0.2.0",
+		"@headlessui/react": "^1.7.3",
+		"@stackoverflow/stacks-icons": "^4.0.0",
 		"@testing-library/jest-dom": "^5.16.5",
 		"@testing-library/react": "^13.4.0",
 		"@testing-library/user-event": "^13.5.0",
@@ -10,7 +17,11 @@
 		"eslint-plugin-prettier": "^4.2.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
+<<<<<<< HEAD
 		"react-icons": "^4.6.0",
+=======
+		"react-router-dom": "^6.4.2",
+>>>>>>> 1208ff84db666c9e47bd80ffef69aa61b1f30965
 		"react-scripts": "5.0.1",
 		"web-vitals": "^2.1.4"
 	},
@@ -36,7 +47,8 @@
 	"eslintConfig": {
 		"extends": [
 			"react-app",
-			"react-app/jest"
+			"react-app/jest",
+			"airbnb"
 		]
 	},
 	"browserslist": {
@@ -55,6 +67,7 @@
 		"autoprefixer": "^10.4.12",
 		"eslint": "^8.26.0",
 		"eslint-config-airbnb": "^19.0.4",
+<<<<<<< HEAD
 		"eslint-config-react-app": "^7.0.1",
 		"eslint-plugin-import": "^2.26.0",
 		"eslint-plugin-jsx-a11y": "^6.6.1",
@@ -63,6 +76,23 @@
 		"husky": "^8.0.1",
 		"lint-staged": "^13.0.3",
 		"postcss": "^8.4.18",
+=======
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-config-react-app": "^7.0.1",
+		"eslint-plugin-import": "^2.26.0",
+		"eslint-plugin-jsx-a11y": "^6.6.1",
+		"eslint-plugin-prettier": "^4.2.1",
+		"eslint-plugin-react": "^7.31.10",
+		"eslint-plugin-react-hooks": "^4.6.0",
+		"eslint-plugin-tailwindcss": "^3.6.2",
+		"husky": "^8.0.1",
+		"lint-staged": "^13.0.3",
+		"postcss": "^8.4.18",
+		"postcss-flexbugs-fixes": "^5.0.2",
+		"postcss-loader": "^7.0.1",
+		"postcss-preset-env": "^7.8.2",
+		"prettier": "^2.7.1",
+>>>>>>> 1208ff84db666c9e47bd80ffef69aa61b1f30965
 		"tailwindcss": "^3.2.1"
 	}
 }

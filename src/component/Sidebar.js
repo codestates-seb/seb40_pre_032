@@ -5,7 +5,7 @@ const Sidebar = () => {
 	return (
 		<div className="h-screen p-2">
 			<Link className="group" to="/questions">
-				<div className="text-lg font-normal text-gray-500 mb-4 group-link group-visited:font-bold group-visited:bg-gray-100 group-hover:text-black">
+				<div className="text-lg font-normal text-gray-500 mb-4 group-visited:text-black group-visited-after textgroup-hover:text-black">
 					Home
 				</div>
 			</Link>

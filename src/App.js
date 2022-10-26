@@ -1,5 +1,8 @@
+import React from 'react';
+import Accordian from './component/Accordian';
+
 function App() {
-	return <div className="App"></div>;
+	return <Accordian />;
 }
 
 export default App;

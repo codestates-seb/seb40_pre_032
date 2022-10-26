@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.tag;
 
 import com.codestates.pre032.pre032.question.Question;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -27,10 +28,12 @@ public class QuestionTag {
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "QUESTION_ID")
+    @JsonBackReference
     private Question question;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "TAG_ID")
+    @JsonBackReference
     private Tag tag;
 
 }

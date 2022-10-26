@@ -31,7 +31,7 @@ public class QuestionTag {
     @JsonBackReference
     private Question question;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "TAG_ID")
     @JsonBackReference
     private Tag tag;

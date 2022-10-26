@@ -33,4 +33,15 @@ public class TagService {
         }
         return tags;
     }
+
+    public List<Question> findQuestionsTagByString(String tagStr){
+        List<Question> questions = new ArrayList<>();
+        Tag tag = this.tagRepository.findByTag(tagStr);
+
+        List<QuestionTag> questionTags = this.questionTagRepository.findAllByTag(tag);
+        for (QuestionTag questionTag : questionTags){
+            questions.add(questionTag.getQuestion());
+        }
+        return questions;
+    }
 }

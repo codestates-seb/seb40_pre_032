@@ -14,7 +14,7 @@ export default function Logout() {
 						</div>
 						<div className="text-center"> domains on this device:</div>
 
-						<div className="w-3/4 bg-white p-7 mt-6 mx-auto drop-shadow-lg rounded-md">
+						<div className="rounded-md w-3/4 bg-white p-7 mt-6 mx-auto drop-shadow-lg">
 							<div>
 								<FontAwesomeIcon
 									icon={faStackOverflow}
@@ -81,13 +81,13 @@ export default function Logout() {
 							<span className="text-xs">Logout on all device</span>
 							<div className="my-3">
 								<button
-									className="  bg-sky-500 text-white rounded py-2 px-2"
+									className="  rounded bg-sky-500 text-white p-2"
 									type="submit"
 								>
 									<span className="">Log out</span>
 								</button>
 								<button
-									className="  text-blue-500 rounded py-2 px-2 ml-3"
+									className="  rounded text-blue-500 p-2 ml-3"
 									type="submit"
 								>
 									cancel

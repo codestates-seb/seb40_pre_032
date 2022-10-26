@@ -3,24 +3,24 @@ import { Link } from 'react-router-dom';
 
 function Sidebar() {
 	return (
-		<div className="p-2">
+		<div className="sticky p-2 w-48">
 			<Link
 				className="group text-lg font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
 				to="/questions"
 			>
-				<div className="h-8 flex items-center mb-4 group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
+				<div className="p-1 h-8 flex items-center mb-4 group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
 					Home
 				</div>
 			</Link>
-			<div className="text-sm font-normal text-gray-500 mb-1.5">PUBLIC</div>
-			<ul>
+			<div className="p-1 text-sm font-normal text-gray-500 mb-1.5">PUBLIC</div>
+			<ul className="mb-3">
 				<Link
 					className="group text-sm text-gray-500 hover:text-black focus:font-bold focus:text-black"
 					to="/questions"
 				>
 					<li>
 						{' '}
-						<div className="h-8 flex flex-row items-center group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
+						<div className="p-1 h-8 flex flex-row items-center group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
 							<svg
 								aria-hidden="true"
 								className="mr-1.5"
@@ -42,7 +42,7 @@ function Sidebar() {
 					to="/tags"
 				>
 					<li>
-						<div className="h-8 flex flex-row items-center group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
+						<div className="p-1 h-8 flex flex-row items-center group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
 							<span className="ml-6">Tags</span>
 						</div>
 					</li>
@@ -52,19 +52,19 @@ function Sidebar() {
 					to="/users"
 				>
 					<li className="">
-						<div className="h-8 flex flex-row items-center group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
+						<div className="p-1 h-8 flex flex-row items-center group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
 							<span className="ml-6">Users</span>
 						</div>
 					</li>
 				</Link>
 			</ul>
 			<div className="flex flex-row">
-				<span className="text-sm font-normal text-gray-500 mb-1.5">
+				<span className="p-1 text-sm font-normal text-gray-500">
 					COLLECTIVES
 				</span>
 				<svg
 					aria-hidden="true"
-					className="ml-1.5"
+					className="mt-1.5 ml-1.5"
 					width="14"
 					height="14"
 					viewBox="0 0 14 14"
@@ -80,13 +80,13 @@ function Sidebar() {
 					className="group text-sm font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
 					to="/questions"
 				>
-					<div className="h-8 flex items-center group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
+					<div className="p-1 h-8 flex items-center group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400 mb-4">
 						<li className="flex flex-row">
 							<svg
 								aria-hidden="true"
 								className="mr-2"
-								width="18"
-								height="18"
+								width="16"
+								height="16"
 								viewBox="0 0 18 18"
 							>
 								<path
@@ -100,10 +100,12 @@ function Sidebar() {
 				</Link>
 			</ul>
 			<div className="flex flex-row">
-				<span className="text-sm font-normal text-gray-500 mb-1.5">TEAMS</span>
+				<span className="p-1 flex items-center text-sm font-normal text-gray-500">
+					TEAMS
+				</span>
 				<svg
 					aria-hidden="true"
-					className="ml-1.5"
+					className="mt-1.5 ml-1.5"
 					width="14"
 					height="14"
 					viewBox="0 0 14 14"
@@ -119,7 +121,7 @@ function Sidebar() {
 					className="group text-sm font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
 					to="/questions"
 				>
-					<div className="h-8 flex items-center group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
+					<div className="p-1 h-8 flex items-center group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
 						<li className="flex flex-row">
 							<svg
 								aria-hidden="true"

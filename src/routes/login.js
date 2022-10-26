@@ -21,29 +21,29 @@ export default function Login() {
 							/>
 						</div>
 
-						<div className="bg-white  my-1 py-2 px-10 text-center  rounded">
+						<div className="rounded  bg-white my-1 py-2 px-10  text-center">
 							<FontAwesomeIcon icon={faGoogle} /> Log in with Google
 						</div>
-						<div className="bg-neutral-800  my-3  py-2 px-10 text-center rounded text-white">
+						<div className="rounded  bg-neutral-800  my-3 py-2 px-10 text-center text-white">
 							<FontAwesomeIcon icon={faGithub} /> Log in with GitHub
 						</div>
-						<div className="bg-blue-900 my-3  py-2 px-10 text-center rounded text-white">
+						<div className="rounded bg-blue-900  my-3 py-2 px-10 text-center text-white">
 							<FontAwesomeIcon icon={faFacebook} /> Log in with Facebook
 						</div>
 						<form className="lg:w-full bg-white p-5 mt-6 drop-shadow-md">
 							<div className="font-bold">Email</div>
 							<input
 								type="email"
-								className="w-full border-solid border-2 border-gray-500 rounded py-1"
+								className="rounded w-full border-solid border-2 border-gray-500 py-1"
 							/>
 							{/* 이부분 커스텀 필요!! */}
 							<div className="font-bold  mt-4">Password</div>
 							<input
 								type="password"
-								className="w-full border-solid border-2 border-gray-500 rounded py-1"
+								className="rounded w-full border-solid border-2 border-gray-500 py-1"
 							/>
 							<button
-								className="w-full mt-3 bg-sky-500 text-white rounded py-1"
+								className="rounded w-full mt-3 bg-sky-500 text-white py-1"
 								type="submit"
 							>
 								Login

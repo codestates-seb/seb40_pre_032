@@ -20,7 +20,6 @@ export default function signUp() {
 								className="text-4xl text-orange-500"
 							/>
 						</div>
-
 						<div className="bg-white  my-1 py-2 px-10 text-center  rounded">
 							<FontAwesomeIcon icon={faGoogle} /> Sign up with Google
 						</div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const NotFound = () => {
+function NotFound() {
 	return (
 		// 헤더
 		<div className="bg-gray-100 w-screen h-screen flex justify-center items-center">
@@ -9,7 +9,7 @@ const NotFound = () => {
 				<div className="p-6">
 					<svg
 						aria-hidden="true"
-						className="mtn48 sm:d-none svg-spot spotAlertXL"
+						className=""
 						width="196"
 						height="196"
 						viewBox="0 0 196 196"
@@ -59,6 +59,6 @@ const NotFound = () => {
 			</div>
 		</div>
 	);
-};
+}
 
 export default NotFound;

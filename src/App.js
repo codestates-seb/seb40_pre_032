@@ -1,8 +1,8 @@
 import React from 'react';
-import Accordian from './component/Accordian';
+import Sidebar from './component/Sidebar';
 
 function App() {
-	return <Accordian />;
+	return <Sidebar />;
 }
 
 export default App;

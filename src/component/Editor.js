@@ -32,7 +32,7 @@ function Editor() {
 		<main className="flex items-center h-screen bg-[#F1F2F3]">
 			<article>
 				<h1 className="font-bold ml-12 mt-4 text-2xl">Ask a Question</h1>
-				<section className="shadow w-[1000px] h-[800px] px-2 mx-10 mt-10 border border-gray-600">
+				<section className="shadow w-[1000px] h-[800px] px-2 mx-10 mt-10 border border-gray-600 bg-white">
 					<h3 className="font-semibold">Title</h3>
 					<div className="text-gray-700 mb-2">
 						Be specific and imagine you’re asking a question to another person
@@ -51,7 +51,7 @@ function Editor() {
 						theme="snow"
 						value={editorContent}
 						onChange={onEditorStateChange}
-						className="h-96 px-2 mt-3 relative right-2 shadow-gray-700"
+						className="h-96 px-2 mt-3 relative right-2 shadow-gray-700 "
 					/>
 					<p className="px-10">{errors.content && '입력해주세요'}</p>
 					<button

@@ -26,7 +26,7 @@ public class QuestionService {
         question.setAnswered(false);
         question.setCreationDate(LocalDateTime.now());
         question.setModifiedAt(LocalDateTime.now());
-        tagService.stringToTag(question,tags);
+        tagService.stringToTag(question, tags);
         //todo : user 정보 입력
 
         return this.questionRepository.save(question);
@@ -35,14 +35,11 @@ public class QuestionService {
     public Question update(Long id, QuestionDto.Patch patch) {
         Question updateQuestion = find(id);
 
-        //todo : 일단은 내용수정만 구현하기로 합의
-//        updateQuestion.setTitle(question.getTitle());
-        updateQuestion.setQuestionContent(patch.getQuestionContent());
+        updateQuestion.setTitle(patch.getTitle());
+        updateQuestion.setQuestionContent(patch.questionContent);
         updateQuestion.setModifiedAt(LocalDateTime.now());
 
-        this.questionRepository.save(updateQuestion);
-
-        return updateQuestion;
+        return this.questionRepository.save(updateQuestion);
     }
 
     public Question find(Long id) {
@@ -54,12 +51,12 @@ public class QuestionService {
         }
     }
 
-    public List<Question> getQuestions(){
+    public List<Question> getQuestions() {
         return this.questionRepository.findAll();
     }
 
 
-    public void delete(Long id){
+    public void delete(Long id, String accessToken) {
         Optional<Question> findQuestion = this.questionRepository.findById(id);
         if (findQuestion.isPresent()) {
             this.questionRepository.deleteById(id);
@@ -70,7 +67,7 @@ public class QuestionService {
 
 
     //테스트용 메서드 모든 질문 삭제
-    public void deleteAll(){
+    public void deleteAll() {
         this.questionRepository.deleteAll();
     }
 }

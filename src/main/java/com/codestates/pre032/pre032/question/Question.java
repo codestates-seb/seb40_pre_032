@@ -1,7 +1,6 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.tag.QuestionTag;
-import com.codestates.pre032.pre032.tag.Tag;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -49,7 +48,7 @@ public class Question {
     @Column
     private LocalDateTime modifiedAt;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
     private List<QuestionTag> tags = new ArrayList<>();
 
     // todo: answer 연관관계 설정
@@ -59,10 +58,10 @@ public class Question {
     @Column
     private int answerCount;
 
-    public List<Tag> getTags() {
-        List<Tag> tags = new ArrayList<>();
+    public List<String> getTags() {
+        List<String> tags = new ArrayList<>();
         for (int i = 0; i < this.tags.size(); i++) {
-            tags.add(this.tags.get(i).getTag());
+            tags.add(this.tags.get(i).getTag().getTag());
         }
         return tags;
     }

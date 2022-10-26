@@ -1,6 +1,5 @@
 package com.codestates.pre032.pre032.question;
 
-import com.codestates.pre032.pre032.tag.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -27,16 +26,15 @@ public class QuestionDto {
     @Getter
     @AllArgsConstructor
     public static class Patch{
-        //todo : 내용만 수정하기로 합의
-//        private String title;
+        private String title;
 
-        private String questionContent;
+        String questionContent;
     }
 
     @Getter
     @AllArgsConstructor
-    public static class questionResponse{
-        private List<Tag> tags;
+    public static class questionContentResponse {
+        private List<String> tags;
 
 //        private User owner;
 
@@ -52,14 +50,17 @@ public class QuestionDto {
 
         private Long questionId;
 
+        private String questionContent;
+
         private String title;
 
     }
 
+    // 콘텐트 없는 버전
     @Getter
     @AllArgsConstructor
-    public static class questionsResponse {
-        private List<Tag> tags;
+    public static class questionResponse {
+        private List<String> tags;
 
 //        private User owner;
 

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 function Sidebar() {
 	return (
-		<div className="sticky p-2 w-48">
+		<div className="p-2 w-48">
 			<Link
 				className="group text-lg font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
 				to="/questions"

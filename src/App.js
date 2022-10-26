@@ -1,8 +1,8 @@
 import React from 'react';
-import Editor from './component/Editor';
+import Footer from './component/Footer';
 
 function App() {
-	return <Editor />;
+	return <Footer />;
 }
 
 export default App;

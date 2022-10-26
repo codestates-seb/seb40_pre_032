@@ -1,8 +1,8 @@
 import React from 'react';
-import Accordian from './component/Accordian';
+import Editor from './component/Editor';
 
 function App() {
-	return <Accordian />;
+	return <Editor />;
 }
 
 export default App;

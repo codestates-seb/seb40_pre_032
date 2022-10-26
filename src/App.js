@@ -11,7 +11,7 @@ export default function App() {
 				>
 					<img
 						alt="stackoverflow logo"
-						src="/img/stack.png "
+						src="/img/stack.png"
 						className="w-[150px] h-[30px]"
 					/>
 				</a>

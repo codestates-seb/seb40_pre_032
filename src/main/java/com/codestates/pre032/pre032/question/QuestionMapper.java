@@ -19,9 +19,9 @@ public interface QuestionMapper {
         }
     }
 
-//    QuestionDto.questionResponse questionToQuestionResponseDto(Question question);
+    QuestionDto.questionContentResponse questionToQuestionContentResponseDto(Question question);
 
-    default List<QuestionDto.questionResponse> questionsToQuestionResponseDto(List<Question> questions){
+    default List<QuestionDto.questionResponse> questionToQuestionResponseDto(List<Question> questions){
         List<QuestionDto.questionResponse> answer = new ArrayList<>();
         if (questions.size()==0) {
             return null;

@@ -55,6 +55,9 @@ public class QuestionService {
         return this.questionRepository.findAll();
     }
 
+    public List<Question> getQuestionsByTag(String tag){
+        return this.tagService.findQuestionsTagByString(tag);
+    }
 
     public void delete(Long id, String accessToken) {
         Optional<Question> findQuestion = this.questionRepository.findById(id);

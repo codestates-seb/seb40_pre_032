@@ -22,7 +22,9 @@ public class Answer {
     @Column(nullable = false, columnDefinition = "Text")
     private String content;
 
-//    private Question question;
+    @ManyToOne
+    @JoinColumn(name="question_questionId")
+    private Question question;
 
     @Column(nullable = false)
     private LocalDateTime createdAt = LocalDateTime.now();

@@ -22,14 +22,16 @@ public class AnswerController {
         this.mapper = mapper;
     }
 
+    // 답변 등록
     @PostMapping
     public ResponseEntity postAnswer(@Valid @RequestBody AnswerDto.PostDto postDto){
         Answer answer = mapper.answerPostDtoAnswer(postDto);
         Answer response = answerService.createAnswer(answer);
 
-        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response), HttpStatus.OK);
+        return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response), HttpStatus.CREATED);
     }
 
+    //답변 수정
     @PatchMapping("/{id}/edit")
     public ResponseEntity patchAnswer(@PathVariable("id") @Positive long answerId,
                                       @Valid @RequestBody AnswerDto.PatchDto patchDto){
@@ -39,8 +41,9 @@ public class AnswerController {
         return new ResponseEntity<>(mapper.answerToAnswerResponseDto(response),HttpStatus.OK);
     }
 
+    //답변 삭제
     @DeleteMapping("/{id}/delete")
-    public ResponseEntity deleteAnswer(@PathVariable("id") long answerId){
+    public ResponseEntity deleteAnswer(@PathVariable("id") @Positive long answerId){
         answerService.deleteAnswer(answerId);
 
         return new ResponseEntity<>(HttpStatus.OK);

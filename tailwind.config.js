@@ -8,9 +8,6 @@ module.exports = {
 				'button-blue': '#e0ecf3',
 			},
 		},
-		borderRadius: {
-			little: '3px',
-		},
 	},
 	variants: {},
 	plugins: [],

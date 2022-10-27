@@ -5,8 +5,7 @@ import com.codestates.pre032.pre032.tag.*;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class QuestionService {
@@ -42,10 +41,10 @@ public class QuestionService {
         return this.questionRepository.save(updateQuestion);
     }
 
-    public Question getDetail(Long id){
+    public Question getDetail(Long id) {
         Question question = find(id);
         // 일단 상세페이지 접속마다 1씩 증가하게 설정
-        question.setViewCount(question.getViewCount()+1);
+        question.setViewCount(question.getViewCount() + 1);
         return this.questionRepository.save(question);
     }
 
@@ -58,11 +57,55 @@ public class QuestionService {
         }
     }
 
+    //todo: 검색기능
+    public List<Question> search(String text) {
+        // text가 전부 일치하는 결과 담기
+        List<Question> answer = this.questionRepository.findByQuestionContentContaining(text);
+        // 날짜순으로 정렬
+        Collections.sort(answer, new Comparator<Question>() {
+            @Override
+            public int compare(Question q1, Question q2) {
+                return q2.getCreationDate().compareTo(q1.getCreationDate());
+            }
+        });
+
+        // text를 쪼갠 검색 결과 추가
+        List<Question> tempAnswer = new ArrayList<>();
+        String[] keywords = text.split(" ");
+        for (int i = 0; i < keywords.length; i++) {
+            for (int j = keywords.length - 1; j >= i; j--) {
+                String temp = keywords[i];
+                for (int c = i + 1; c < j; c++) {
+                    temp += " " + keywords[c];
+                }
+                answer = sumQuestions(tempAnswer, this.questionRepository.findByQuestionContentContaining(temp));
+            }
+        }
+        Collections.sort(tempAnswer, new Comparator<Question>() {
+            @Override
+            public int compare(Question q1, Question q2) {
+                return q2.getCreationDate().compareTo(q1.getCreationDate());
+            }
+        });
+        answer = sumQuestions(answer, tempAnswer);
+
+        return answer;
+    }
+
+    public List<Question> sumQuestions(List<Question> questionList1, List<Question> questionList2) {
+        for (int i = 0; i < questionList2.size(); i++) {
+            if (!questionList1.contains(questionList2.get(i))) {
+                questionList1.add(questionList2.get(i));
+            }
+        }
+        return questionList1;
+    }
+
     public List<Question> getQuestions() {
         return this.questionRepository.findAll();
     }
 
-    public List<Question> getQuestionsByTag(String tag){
+    public List<Question> getQuestionsByTag(String tag) {
         return this.tagService.findQuestionsTagByString(tag);
     }
 

@@ -46,6 +46,7 @@ public class Question {
 
     @Column
     private LocalDateTime creationDate;
+
     @Column
     private LocalDateTime modifiedAt;
 

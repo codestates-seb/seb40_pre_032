@@ -7,7 +7,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
-     default Question questionPostDtoToQuestion(QuestionDto.Post questionPostDto){
+    default Question questionPostDtoToQuestion(QuestionDto.Post questionPostDto) {
         if (questionPostDto == null) {
             return null;
         } else {
@@ -21,12 +21,14 @@ public interface QuestionMapper {
 
     QuestionDto.questionContentResponse questionToQuestionContentResponseDto(Question question);
 
-    default List<QuestionDto.questionResponse> questionToQuestionResponseDto(List<Question> questions){
+    List<QuestionDto.questionContentResponse> questionsToQuestionContentResponsesDto(List<Question> questions);
+
+    default List<QuestionDto.questionResponse> questionToQuestionResponseDto(List<Question> questions) {
         List<QuestionDto.questionResponse> answer = new ArrayList<>();
-        if (questions.size()==0) {
+        if (questions.size() == 0) {
             return null;
         } else {
-            for (Question question : questions){
+            for (Question question : questions) {
                 QuestionDto.questionResponse response = new QuestionDto.questionResponse(
                         question.getTags(),
                         question.isAnswered(),

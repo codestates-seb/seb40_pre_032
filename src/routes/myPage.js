@@ -1,14 +1,15 @@
 import React from 'react';
 import { FaUserCircle } from 'react-icons/fa';
+import UserButtonCol from '../component/UserButtonCol';
+import UserButtonRow from '../component/UserButtonRow';
 
 export default function myPage() {
 	return (
-		<div className="lg:w-full w-full h-screen bg-gray-200 pt-10">
-			<div className="ml-24 bg-red-100 mr-2">
+		<div className="lg:w-full w-full bg-gray-200 pt-10">
+			<div className="ml-44 h-screen bg-red-100 mr-40">
 				<div className="flex align-middle p-10">
-					<div className="bg-gray-100 p-1 shadow-md mr-4">
-						<FaUserCircle className="w-20 h-20 text-gray-600" />
-					</div>
+					<FaUserCircle className="w-20 h-20 text-gray-600 bg-gray-200 shadow-md p-1 mr-3" />
+
 					<div className="my-2">
 						<div className="text-3xl">Display Name</div>
 						<div className="mt-2">
@@ -18,11 +19,13 @@ export default function myPage() {
 					</div>
 				</div>
 
-				<div>
-					Public information
-					<div className="bg-gray-100 p-1 shadow-md mr-4">
-						<FaUserCircle className="w-20 h-20 text-gray-600" />
+				<UserButtonCol />
+
+				<div className="flex mt-4">
+					<div className="mx-10 border border-solid border-black">
+						<UserButtonRow />
 					</div>
+
 					<form className="lg:w-full bg-white p-5 mt-6 drop-shadow-md">
 						<div className="font-bold">Display Name</div>
 						<input
@@ -47,11 +50,6 @@ export default function myPage() {
 							Sign Up
 						</button>
 					</form>
-				</div>
-
-				<div>
-					<span>Profile</span> <span>Activity</span> <span>Saves</span>
-					<span>Settings</span>
 				</div>
 			</div>
 		</div>

@@ -1,9 +1,12 @@
 package com.codestates.pre032.pre032.question;
 
+import com.codestates.pre032.pre032.answer.Answer;
+import com.codestates.pre032.pre032.answer.AnswerDto;
 import org.mapstruct.Mapper;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
@@ -19,7 +22,39 @@ public interface QuestionMapper {
         }
     }
 
-    QuestionDto.questionContentResponse questionToQuestionContentResponseDto(Question question);
+    default QuestionDto.questionContentResponse questionToQuestionContentResponseDto(Question question ){
+        List<Answer> answers = question.getAnswers();
+
+        QuestionDto.questionContentResponse questionResponse = new QuestionDto.questionContentResponse();
+        questionResponse.setTags(question.getTags());
+        questionResponse.setAnswered(question.isAnswered());
+        questionResponse.setViewCount(question.getViewCount());
+        questionResponse.setAnswerCount(question.getAnswerCount());
+        questionResponse.setScore(question.getScore());
+        questionResponse.setCreationDate(question.getCreationDate());
+        questionResponse.setQuestionId(question.getQuestionId());
+        questionResponse.setTitle(question.getTitle());
+        questionResponse.setQuestionContent(question.getQuestionContent());
+        questionResponse.setAnswers(questionAnswersToQuestionAnswerResponse(answers));
+
+        return questionResponse;
+
+    }
+
+    //질문에 대한 답변
+    default List<AnswerDto.ResponseDto> questionAnswersToQuestionAnswerResponse(List<Answer> answers){
+        return answers
+                .stream()
+                .map(questionAnswer -> AnswerDto.ResponseDto
+                        .builder()
+                        .isAccepted(questionAnswer.isAccepted())
+                        .score(questionAnswer.getScore())
+                        .creationDate(questionAnswer.getCreationDate())
+                        .answerId(questionAnswer.getAnswerId())
+                        .answerContent(questionAnswer.getAnswerContent())
+                        .build())
+                .collect(Collectors.toList());
+    }
 
     default List<QuestionDto.questionResponse> questionToQuestionResponseDto(List<Question> questions){
         List<QuestionDto.questionResponse> answer = new ArrayList<>();

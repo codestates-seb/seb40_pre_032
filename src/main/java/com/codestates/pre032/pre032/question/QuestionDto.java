@@ -32,7 +32,9 @@ public class QuestionDto {
     }
 
     @Getter
+    @Setter
     @AllArgsConstructor
+    @NoArgsConstructor
     public static class questionContentResponse {
         private List<String> tags;
 
@@ -53,6 +55,9 @@ public class QuestionDto {
         private String questionContent;
 
         private String title;
+
+        //질문 답변
+        private List<AnswerDto.ResponseDto> answers;
 
     }
 

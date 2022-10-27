@@ -23,13 +23,15 @@ public class AnswerService {
         Question question = questionService.find(id);
         question.setAnswerCount(question.getAnswerCount()+1);
         answer.setQuestion(question);
+        answer.setAccepted(false);
+        answer.setScore(0);
 
         return answerRepository.save(answer);
     }
 
     public Answer updateAnswer(Long answerId, Answer answer){
         Answer findAnswer = findVerifiedAnswer(answerId);
-        findAnswer.setContent(answer.getContent());
+        findAnswer.setAnswerContent(answer.getAnswerContent());
         return answerRepository.save(findAnswer);
     }
 

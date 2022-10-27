@@ -4,6 +4,7 @@ import Sidebar from './component/Sidebar';
 import NotFound from './component/NotFound';
 import Login from './routes/login';
 import Logout from './routes/logout';
+import SignUp from './routes/signUp';
 
 function App() {
 	return (
@@ -11,6 +12,7 @@ function App() {
 			<Routes>
 				<Route path="login" element={<Login />} />
 				<Route path="logout" element={<Logout />} />
+				<Route path="signup" element={<SignUp />} />
 				<Route path="questions" element={<Sidebar />} />
 				<Route path="*" element={<NotFound />} />
 			</Routes>

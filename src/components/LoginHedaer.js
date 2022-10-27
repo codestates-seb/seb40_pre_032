@@ -19,14 +19,14 @@ function LoginHeader() {
 							className="w-[150px] h-[30px]"
 						/>
 					</a>
-					<div className="w-[82px] h-[33px] cursor-pointer flex items-center justify-center rounded-large hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
+					<div className="rounded w-[82px] h-[33px] cursor-pointer flex items-center justify-center hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
 						<span>Product</span>
 					</div>
 					<form className="align-baseline relative text-[100%] flex px-2 w-[773px]">
 						<HiMagnifyingGlass className="absolute left-[15px] mt-[9px]" />
 						<input
 							placeholder="Search..."
-							className="cursor-text border border-[#babec4] focus:ring-[5px] focus:ring-offset focus:ring-blue-500/[.10]  focus:outline focus:border-[0.5px] focus:outline-[hsl(206,90%,69.5%)] rounded-[3px] border-solid truncate w-full pl-[30px] h-[33px] focus: "
+							className=" focus: cursor-text border border-[#babec4] focus:ring-[5px]  focus:ring-blue-500/[.10] focus:outline focus:border-[0.5px] focus:outline-[hsl(206,90%,69.5%)] rounded-[3px] border-solid truncate w-full pl-[30px] h-[33px] "
 						/>
 					</form>
 					<nav className="flex items-center h-full">

@@ -1,5 +1,5 @@
 import React from 'react';
-import LoginHedaer from './components/LoginHedaer';
+import LoginHedaer from './routes/myPage';
 
 export default function App() {
 	return (

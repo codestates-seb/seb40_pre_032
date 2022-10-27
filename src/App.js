@@ -1,10 +1,11 @@
 import React from 'react';
-import LoginHedaer from './components/LoginHedaer';
+import { BrowserRouter } from 'react-router-dom';
+import QuestionDetail from './routes/QuestionDetail';
 
 export default function App() {
 	return (
-		<div>
-			<LoginHedaer />
-		</div>
+		<BrowserRouter>
+			<QuestionDetail />
+		</BrowserRouter>
 	);
 }

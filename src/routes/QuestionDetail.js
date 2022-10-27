@@ -1,16 +1,13 @@
 import React from 'react';
-import LeftSidebar from '../component/LeftSidebar';
-import RightSidebar from '../component/RightSidebar';
-import Footer from '../component/Footer';
+import QuestionContent from '../components/QuestionContent';
+// import Header from '../components/Header';
+// import LeftSidebar from '../components/LeftSidebar';
+// import RightSidebar from '../components/RightSidebar';
+// import Footer from '../components/Footer';
 
 function QuestionDetail() {
 	return (
-		<div>
-			<LeftSidebar />
-			<RightSidebar />
-			<Footer />
-		</div>
-	);
+		<QuestionContent></QuestionContent>;
 }
 
 export default QuestionDetail;

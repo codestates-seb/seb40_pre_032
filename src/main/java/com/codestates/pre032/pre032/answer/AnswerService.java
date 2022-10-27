@@ -22,6 +22,7 @@ public class AnswerService {
     public Answer createAnswer(Long id, Answer answer){
         Question question = questionService.find(id);
         question.setAnswerCount(question.getAnswerCount()+1);
+        question.setAnswered(true);
         answer.setQuestion(question);
         answer.setAccepted(false);
         answer.setScore(0);
@@ -47,7 +48,11 @@ public class AnswerService {
 
     public void deleteAnswer(Long answerId){
         Answer answer = findVerifiedAnswer(answerId);
-        answer.getQuestion().setAnswerCount(answer.getQuestion().getAnswerCount()-1);
+        Question question = answer.getQuestion();
+        question.setAnswerCount(answer.getQuestion().getAnswerCount()-1);
+        if (question.getAnswerCount()==0){
+            question.setAnswered(false);
+        }
         answerRepository.delete(answer);
     }
 }

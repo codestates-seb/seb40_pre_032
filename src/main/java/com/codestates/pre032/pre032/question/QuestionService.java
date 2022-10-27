@@ -81,6 +81,7 @@ public class QuestionService {
                 answer = sumQuestions(tempAnswer, this.questionRepository.findByQuestionContentContaining(temp));
             }
         }
+        // 날짜순으로 정렬
         Collections.sort(tempAnswer, new Comparator<Question>() {
             @Override
             public int compare(Question q1, Question q2) {

@@ -20,16 +20,22 @@ public class Answer {
     private Long answerId;
 
     @Column(nullable = false, columnDefinition = "Text")
-    private String content;
+    private String answerContent;
 
     @ManyToOne
     @JoinColumn(name="question_questionId")
     private Question question;
 
-    @Column(nullable = false)
-    private LocalDateTime createdAt = LocalDateTime.now();
+    @Column
+    private boolean isAccepted;
 
-    @Column(nullable = false, name="LAST_MODIFIED_AT")
-    private LocalDateTime modifiedAt = LocalDateTime.now();
+    @Column
+    private int score;
+
+    @Column(nullable = false)
+    private LocalDateTime creationDate = LocalDateTime.now();
+
+//    @Column(nullable = false, name="LAST_MODIFIED_AT")
+//    private LocalDateTime modifiedAt = LocalDateTime.now();
 
 }

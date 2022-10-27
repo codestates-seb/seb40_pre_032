@@ -12,20 +12,23 @@ public class AnswerDto {
     @Getter
     public static class PostDto{
         @NotBlank
-        private String content;
+        private String answerContent;
     }
 
     @Getter
     public static class PatchDto{
-        private String content;
+        private String answerContent;
     }
 
     @Builder
     @Getter
     public static class ResponseDto{
+
+        private boolean isAccepted;
+        private int score;
+        private LocalDateTime creationDate;
         private Long answerId;
-        private String content;
-        private LocalDateTime createdAt;
-        private LocalDateTime modifiedAt;
+        private String answerContent;
+//        private LocalDateTime modifiedAt;
     }
 }

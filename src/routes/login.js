@@ -1,5 +1,5 @@
 import React from 'react';
-import '../index.css';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faStackOverflow,
@@ -10,49 +10,59 @@ import {
 
 export default function Login() {
 	return (
-		<div className="lg:w-full w-full  bg-gray-200">
-			<div className="flex flex-col my-auto items-center mx-3">
-				<div className="flex h-screen">
-					<div className="m-auto">
-						<div className="text-center mb-5">
+		<div className="lg:w-full w-full bg-gray-200 h-screen">
+			<div className="flex flex-col items-center">
+				<div className="flex">
+					<div className="mt-24 mx-auto">
+						<div className="text-center mb-5 ">
 							<FontAwesomeIcon
 								icon={faStackOverflow}
 								className="text-4xl text-orange-500"
 							/>
 						</div>
 
-						<div className="bg-white  my-1 py-2 px-10 text-center  rounded">
+						<div className="rounded bg-white my-1 py-2 px-16  text-center text-base   hover:bg-gray-100 focus:outline-none focus:ring focus:ring-violet-300">
 							<FontAwesomeIcon icon={faGoogle} /> Log in with Google
 						</div>
-						<div className="bg-neutral-800  my-3  py-2 px-10 text-center rounded text-white">
+						<div className="rounded  bg-grayblack-100 my-3 py-2 px-16 text-center text-white text-base  hover:bg-grayblack-200 focus:outline-none focus:ring focus:ring-violet-300">
 							<FontAwesomeIcon icon={faGithub} /> Log in with GitHub
 						</div>
-						<div className="bg-blue-900 my-3  py-2 px-10 text-center rounded text-white">
+						<div className="rounded bg-navy-100  my-3 py-2 px-16 text-center text-white text-base  hover:bg-navy-200 focus:outline-none focus:ring focus:ring-blue-300">
 							<FontAwesomeIcon icon={faFacebook} /> Log in with Facebook
 						</div>
-						<form className="lg:w-full bg-white p-5 mt-6 drop-shadow-md">
-							<div className="font-bold">Email</div>
+						<form className="lg:w-full bg-white p-5 mt-6 drop-shadow-md rounded-md">
+							<div className="font-medium mb-1 text-base">Email</div>
 							<input
 								type="email"
-								className="w-full border-solid border-2 border-gray-500 rounded py-1"
+								className="rounded w-full border-solid  border-[1.5px] focus:outline-none focus:ring focus:ring-blue-200 py-1 pl-2"
 							/>
 							{/* 이부분 커스텀 필요!! */}
-							<div className="font-bold  mt-4">Password</div>
+							<div className=" font-medium mb-1 mt-4 text-base">Password</div>
 							<input
 								type="password"
-								className="w-full border-solid border-2 border-gray-500 rounded py-1"
+								className="rounded-md w-full border-solid  border-[1.5px] focus:outline-none focus:ring focus:ring-blue-200 py-1 pl-2"
 							/>
 							<button
-								className="w-full mt-3 bg-sky-500 text-white rounded py-1"
+								className="bg-blue-500 rounded w-full mt-5 mb-2 py-2 text-white text-sm  hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
 								type="submit"
 							>
-								Login
+								Log in
 							</button>
 						</form>
 					</div>
 				</div>
-				<div>Don’t have an account? Sign up </div>
-				<div>Are you an employer? Sign up on Talent</div>
+				<div className="text-sm mt-10">
+					Don’t have an account?
+					<a href="./" className=" text-sm text-sky-600 ml-1">
+						Sign up
+					</a>
+				</div>
+				<div className="mt-2 mb-7 text-sm">
+					Are you an employer?w
+					<a href="./" className="text-sm text-sky-600 ml-1">
+						Sign up on Talent
+					</a>
+				</div>
 			</div>
 		</div>
 	);

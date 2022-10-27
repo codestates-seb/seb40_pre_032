@@ -17,7 +17,6 @@ public interface QuestionMapper {
             Question question = new Question();
             question.setTitle(questionPostDto.getTitle());
             question.setQuestionContent(questionPostDto.getQuestionContent());
-            question.setAccessToken(questionPostDto.getAccessToken());
             return question;
         }
     }
@@ -71,6 +70,7 @@ public interface QuestionMapper {
                         question.getAnswerCount(),
                         question.getScore(),
                         question.getCreationDate(),
+                        question.getModifiedAt(),
                         question.getQuestionId(),
                         question.getTitle()
                 );

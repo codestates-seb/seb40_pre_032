@@ -6,6 +6,7 @@ import com.codestates.pre032.pre032.question.QuestionService;
 import org.springframework.stereotype.Service;
 
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
@@ -33,6 +34,7 @@ public class AnswerService {
     public Answer updateAnswer(Long answerId, Answer answer){
         Answer findAnswer = findVerifiedAnswer(answerId);
         findAnswer.setAnswerContent(answer.getAnswerContent());
+        findAnswer.setModifiedAt(LocalDateTime.now());
         return answerRepository.save(findAnswer);
     }
 

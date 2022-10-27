@@ -53,6 +53,8 @@ public class QuestionDto {
 
         private LocalDateTime creationDate;
 
+        private LocalDateTime modifiedAt;
+
         private Long questionId;
 
         private String questionContent;
@@ -81,6 +83,8 @@ public class QuestionDto {
         private int score;
 
         private LocalDateTime creationDate;
+
+        private LocalDateTime modifiedAt;
 
         private Long questionId;
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function Sidebar() {
+function LeftSidebar() {
 	return (
 		<div className="p-2 w-48">
 			<Link
@@ -144,4 +144,4 @@ function Sidebar() {
 	);
 }
 
-export default Sidebar;
+export default LeftSidebar;

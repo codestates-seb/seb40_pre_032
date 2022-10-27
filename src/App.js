@@ -1,11 +1,14 @@
 import React from 'react';
-import ButtonGroup from './component/ButtonGroup';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import NotFound from './component/NotFound';
 
 function App() {
 	return (
-		<div>
-			<ButtonGroup />
-		</div>
+		<BrowserRouter>
+			<Routes>
+				<Route path="*" element={<NotFound />} />
+			</Routes>
+		</BrowserRouter>
 	);
 }
 

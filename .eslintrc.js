@@ -27,5 +27,15 @@ module.exports = {
 		'tailwindcss/no-arbitrary-value': 'off',
 		'tailwindcss/no-custom-classname': 'warn',
 		'tailwindcss/no-contradicting-classname': 'error',
+		'react/function-component-definition': [
+			2,
+			{ namedcomponents: 'arrow-function' },
+		],
+		'jsx-a11y/label-has-associated-control': [
+			2,
+			{
+				labelAttributes: ['htmlFor'],
+			},
+		],
 	},
 };

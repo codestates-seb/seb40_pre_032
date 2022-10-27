@@ -25,7 +25,7 @@ function ButtonGroup() {
 					<div>Unanswered</div>
 				</a>
 			</div>
-			<div className="rounded border-solid flex border-border-blue border h-[34px] hover:bg-[#b3d3e9] text-[#37739c] bg-[#e0ecf3] text-[13px]">
+			<div className="border-border-blue rounded border-solid flex border h-[34px] hover:bg-[#b3d3e9] text-[#37739c] bg-[#e0ecf3] text-[13px]">
 				<button
 					type="button"
 					className="w-[68px] flex items-center justify-center decoration-[#e0ecf3] "

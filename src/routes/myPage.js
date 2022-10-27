@@ -1,55 +1,62 @@
 import React from 'react';
-import { FaUserCircle } from 'react-icons/fa';
-import UserButtonCol from '../component/UserButtonCol';
-import UserButtonRow from '../component/UserButtonRow';
+import EditUserProfile from '../components/EditUserProfile';
+import UserButtonCol from '../components/UserButtonCol';
+import UserButtonRow from '../components/UserButtonRow';
 
 export default function myPage() {
 	return (
-		<div className="lg:w-full w-full bg-gray-200 pt-10">
-			<div className="ml-44 h-screen bg-red-100 mr-40">
+		<div className="lg:w-full w-full  pt-10">
+			<div className="ml-44 h-screen  mr-40">
 				<div className="flex align-middle p-10">
-					<FaUserCircle className="w-20 h-20 text-gray-600 bg-gray-200 shadow-md p-1 mr-3" />
-
-					<div className="my-2">
-						<div className="text-3xl">Display Name</div>
-						<div className="mt-2">
-							Member for 6 days Last seen this week Visited 5 days, 4
-							consecutive
-						</div>
-					</div>
+					<EditUserProfile />
 				</div>
 
 				<UserButtonCol />
 
-				<div className="flex mt-4">
-					<div className="mx-10 border border-solid border-black">
+				<div className="mx-10">
+					<div className="flex flex-row mt-8">
 						<UserButtonRow />
+						<div className="lg:w-3/5 mx-4">
+							<div className="ml-5 text-2xl font-semibold border-b border-solid border-b-gray-500">
+								Your Profile
+							</div>
+							<form className="rounded-md  py-5 px-10 mx-5 mt-6 drop-shadow-md border border-solid border-b-gray-500 shadow-lg">
+								<EditUserProfile />
+								<div className="font-bold mt-10 mb-1">Display Name</div>
+								<input
+									type="name"
+									value="Name"
+									className="rounded w-2/3 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
+								/>
+								<div className="font-bold mt-4 mb-1">Email</div>
+								<input
+									type="email"
+									value="test@gmail.com"
+									className="rounded w-2/3 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
+								/>
+								{/* 이부분 커스텀 필요!! */}
+								<div className="font-bold  mt-4 mb-1">Password</div>
+								<input
+									type="password"
+									className="rounded w-2/3 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
+								/>
+								<div className="mt-10">
+									<button
+										className="rounded mt-3 bg-sky-500 text-white py-1 mr-1 p-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
+										type="submit"
+									>
+										Save profile
+									</button>
+									<button
+										className="rounded mt-3 bg-sky-100 text-blue-700 py-1 p-2 hover:bg-sky-200 focus:outline-none focus:ring focus:ring-blue-200"
+										type="submit"
+									>
+										Cancel
+									</button>
+								</div>
+							</form>
+						</div>
 					</div>
-
-					<form className="lg:w-full bg-white p-5 mt-6 drop-shadow-md">
-						<div className="font-bold">Display Name</div>
-						<input
-							type="email"
-							className="rounded w-full border-solid border-2 border-gray-500 py-1"
-						/>
-						<div className="font-bold mt-4">Email</div>
-						<input
-							type="email"
-							className="rounded w-full border-solid border-2 border-gray-500 py-1 "
-						/>
-						{/* 이부분 커스텀 필요!! */}
-						<div className="font-bold  mt-4">Password</div>
-						<input
-							type="password"
-							className="rounded w-full border-solid border-2 border-gray-500 py-1"
-						/>
-						<button
-							className="rounded w-full mt-3 bg-sky-500 text-white py-1"
-							type="submit"
-						>
-							Sign Up
-						</button>
-					</form>
 				</div>
 			</div>
 		</div>

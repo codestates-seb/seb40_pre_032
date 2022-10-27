@@ -1,10 +1,11 @@
 import React from 'react';
-import LoginHedaer from './components/LoginHedaer';
+import Answer from './components/Answer/Answer';
+// import LoginHeader from './components/LoginHeader';
 
 export default function App() {
 	return (
 		<div>
-			<LoginHedaer />
+			<Answer />
 		</div>
 	);
 }

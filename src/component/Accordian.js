@@ -3,8 +3,8 @@ import React from 'react';
 
 function Accordian() {
 	return (
-		<aside className="w-full px-4 pt-16">
-			<section className="mx-auto w-full h-3/6 max-w-md rounded-md stroke-slate-600 border border-slate-500 shadow-xl p-2">
+		<div className="w-full px-4 pt-16">
+			<div className="rounded-md mx-auto w-full h-3/6 max-w-md stroke-slate-600 border border-slate-500 shadow-xl p-2">
 				<Disclosure>
 					{({ open }) => (
 						<>
@@ -110,10 +110,10 @@ function Accordian() {
 						</>
 					)}
 				</Disclosure>
-			</section>
+			</div>
 			<Disclosure
 				as="div"
-				className="mx-auto w-full h-3/6 max-w-md rounded-md stroke-slate-800 border border-slate-600 shadow-xl p-2 mt-10"
+				className="rounded-md mx-auto w-full h-3/6 max-w-md stroke-slate-800 border border-slate-600 shadow-xl p-2 mt-10"
 			>
 				{({ open }) => (
 					<>
@@ -168,11 +168,11 @@ function Accordian() {
 			</Disclosure>
 			<Disclosure
 				as="div"
-				className="mx-auto w-full h-3/6 max-w-md rounded-md stroke-slate-800 border border-slate-600 shadow-xl p-2 mt-10"
+				className="rounded-md mx-auto w-full h-3/6 max-w-md stroke-slate-800 border border-slate-600 shadow-xl p-2 mt-10"
 			>
 				{({ open }) => (
 					<>
-						<Disclosure.Button className="flex w-full justify-between rounded-lg px-4 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500">
+						<Disclosure.Button className="rounded-lg flex w-full justify-between px-4 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500">
 							<span>More helpful links</span>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -203,7 +203,7 @@ function Accordian() {
 					</>
 				)}
 			</Disclosure>
-		</aside>
+		</div>
 	);
 }
 

@@ -47,21 +47,23 @@ function Editor() {
 						Include all the information someone would need to answer your
 						question
 					</span>
-					<ReactQuill
-						theme="snow"
-						value={editorContent}
-						onChange={onEditorStateChange}
-						className="h-96 px-2 mt-3 relative right-2 shadow-gray-700 "
-					/>
-					<p className="px-10">{errors.content && '입력해주세요'}</p>
-					<button
-						className="absolute text-white bottom-4 left-10 h-10 mb-10 ml-4 items-center cursor-pointer w-1/6 flex justify-center bg-blue-400 mx-auto hover:bg-blue-500"
-						type="submit"
-						value="Review Your Question"
-						onClick={handleSubmit(onSubmit)}
-					>
-						Review Your Question
-					</button>
+					<form onSubmit={handleSubmit(onSubmit)}>
+						<ReactQuill
+							theme="snow"
+							value={editorContent}
+							onChange={onEditorStateChange}
+							className="h-96 px-2 mt-3 relative right-2 shadow-gray-700 "
+						/>
+						<p className="px-10">{errors.content && '입력해주세요'}</p>
+						<button
+							className="absolute text-white bottom-4 left-10 h-10 mb-10 ml-4 items-center cursor-pointer w-1/6 flex justify-center bg-blue-400 mx-auto hover:bg-blue-500"
+							type="submit"
+							value="Review Your Question"
+							onClick={handleSubmit(onSubmit)}
+						>
+							Review Your Question
+						</button>
+					</form>
 				</section>
 			</article>
 			<Accordian />

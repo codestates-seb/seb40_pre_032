@@ -6,6 +6,7 @@ import LeftSidebar from '../components/LeftSidebar';
 import RightSidebar from '../components/RightSidebar';
 import Footer from '../components/Footer';
 import Answer from '../components/Answer';
+import AnswerTitle from '../components/AnswerTitle';
 
 function QuestionDetail() {
 	return (
@@ -17,10 +18,14 @@ function QuestionDetail() {
 					<div className="border-l-2 border-gray-200 px-4">
 						<QuestionTitle />
 						<div className="flex flex-row">
-							<Question />
+							<div>
+								<Question />
+								<AnswerTitle />
+								<Answer />
+								<Answer />
+							</div>
 							<RightSidebar />
 						</div>
-						<Answer />
 					</div>
 				</div>
 			</div>

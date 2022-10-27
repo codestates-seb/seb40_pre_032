@@ -2,7 +2,7 @@ import React from 'react';
 
 function Answer() {
 	return (
-		<div className="mr-6">
+		<div className="mr-6 py-6">
 			<div className="flex flex-row ">
 				{/* button bar */}
 				<div className="w-[40px] mr-4">

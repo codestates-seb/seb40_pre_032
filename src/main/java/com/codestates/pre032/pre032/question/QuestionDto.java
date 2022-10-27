@@ -1,7 +1,10 @@
 package com.codestates.pre032.pre032.question;
 
+import com.codestates.pre032.pre032.answer.AnswerDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -10,7 +13,7 @@ import java.util.List;
 public class QuestionDto {
     @Getter
     @AllArgsConstructor
-    public static class Post{
+    public static class Post {
         @NotBlank
         private String title;
 
@@ -25,7 +28,7 @@ public class QuestionDto {
 
     @Getter
     @AllArgsConstructor
-    public static class Patch{
+    public static class Patch {
         private String title;
 
         String questionContent;

@@ -41,7 +41,7 @@ public class QuestionController {
                                          @RequestBody QuestionDto.Patch requestBody) {
         Question question = questionService.update(id, requestBody);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity(HttpStatus.OK);
     }
 
     // 질문 상세 페이지
@@ -90,10 +90,13 @@ public class QuestionController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
+    // 질문 - 답변기능으로 연동
     @PostMapping("/{id}/answer/add")
-    public void addAnswer(@PathVariable Long id,
+    public ResponseEntity addAnswer(@PathVariable Long id,
                           @RequestBody AnswerDto.PostDto requestBody) {
         answerController.postAnswer(id, requestBody);
+
+        return new ResponseEntity(HttpStatus.CREATED);
     }
 
     // 테스트용 메서드 모든 질문 삭제

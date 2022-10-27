@@ -26,13 +26,10 @@ public class AnswerController {
     }
 
     // 답변 등록
-    @PostMapping("")
-    public ResponseEntity postAnswer(Long questionId,
+    public void postAnswer(Long questionId,
                                      @Valid @RequestBody AnswerDto.PostDto postDto){
         Answer answer = mapper.answerPostDtoAnswer(postDto);
         answerService.createAnswer(questionId, answer);
-
-        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     //답변 수정
@@ -40,7 +37,6 @@ public class AnswerController {
     public ResponseEntity patchAnswer(@PathVariable("id") @Positive long answerId,
                                       @Valid @RequestBody AnswerDto.PatchDto patchDto){
         answerService.updateAnswer(answerId,mapper.answerPatchDtoAnswer(patchDto));
-
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

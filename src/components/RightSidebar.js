@@ -6,7 +6,7 @@ import { DiStackoverflow } from 'react-icons/di';
 function RightSidebar() {
 	return (
 		<div>
-			<div className="shadow-sidebar w-[300px] mb-4">
+			<div className="w-[300px] mb-4 shadow-sidebar">
 				<ul>
 					<li className="px-[15px] py-[12px] bg-[#fbf4d5] text-[12px] font-bold text-[#5c6067]">
 						The Overflow Blog
@@ -149,7 +149,7 @@ function RightSidebar() {
 					</li>
 				</ul>
 			</div>
-			<div className="shadow-sidebar w-[300px] mb-[16px]">
+			<div className="w-[300px] mb-[16px] shadow-sidebar">
 				<ul>
 					<li className="px-[15px] py-[12px] bg-[#f7faf9] border-b-[1px] text-[14px] text-[#5c6067]">
 						<div>Custom Filters</div>

@@ -32,9 +32,6 @@ public class Question {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String questionContent;
 
-    @Column(nullable = false)
-    private String accessToken;
-
     @Column
     private int score;
 

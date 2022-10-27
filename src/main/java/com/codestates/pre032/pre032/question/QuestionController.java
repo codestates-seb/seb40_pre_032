@@ -62,24 +62,6 @@ public class QuestionController {
                 new MainResponseDto(questionMapper.questionToQuestionResponseDto(questions)), HttpStatus.OK);
     }
 
-    // Tag 검색 기능
-    @GetMapping("/find")
-    public ResponseEntity tagQuestion(@RequestParam(value = "tag") String tag) {
-        List<Question> questions = questionService.getQuestionsByTag(tag);
-        List<QuestionDto.questionResponse> response = this.questionMapper.questionToQuestionResponseDto(questions);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
-    // todo: 검색기능
-    // 검색 기능
-    @GetMapping("/search")
-    public ResponseEntity searchQuestion(@RequestParam(value = "q") String q) {
-        List<Question> questions = questionService.search(q);
-
-        List<QuestionDto.questionContentResponse> response = this.questionMapper.questionsToQuestionContentResponsesDto(questions);
-        return new ResponseEntity<>(response, HttpStatus.OK);
-    }
-
     // 질문 삭제 기능
     // todo: accessToken
     @DeleteMapping("/{id}/delete")

@@ -8,7 +8,7 @@ export default function EditUserProfile() {
 			<div className="my-2">
 				<div className="text-3xl font-semibold">Display Name</div>
 				<div className="mt-2">
-					Member for 6 days Last seen this week Visited 5 days, 4 consecutive
+					Welcome to stack overflow! Try answering a question!
 				</div>
 			</div>
 		</div>

@@ -1,14 +1,14 @@
 import { Disclosure } from '@headlessui/react';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 function Accordian() {
 	return (
 		<div className="w-full px-4 pt-16">
-			<div className="mx-auto w-full h-3/6 max-w-md rounded-md stroke-slate-600 border border-slate-500 shadow-xl p-2">
+			<div className="rounded-md mx-auto w-full h-3/6 max-w-md stroke-slate-600 border border-slate-500 shadow-xl p-2">
 				<Disclosure>
 					{({ open }) => (
 						<>
-							<Disclosure.Button className="flex w-full justify-between px-4 py-2 text-sm font-medium border-b-2 focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+							<Disclosure.Button className="flex w-full justify-between px-4 py-2 text-sm font-medium border-b-[1px] border-gray-500 focus:outline-none focus-visible:ring focus-visible:ring-purple-500">
 								<span className="font-bold text-blue-700">1.</span>
 								<span>
 									<strong className="hover:text-gray-400">
@@ -41,7 +41,7 @@ function Accordian() {
 				<Disclosure as="div" className="mt-2">
 					{({ open }) => (
 						<>
-							<Disclosure.Button className="flex w-full border-b-2 justify-between px-4 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+							<Disclosure.Button className="flex w-full justify-between border-b-[1px] border-gray-500 px-4 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500">
 								<span className="font-bold text-blue-700">2.</span>
 								<span>
 									<strong className="hover:text-gray-400">
@@ -74,7 +74,7 @@ function Accordian() {
 				<Disclosure as="div" className="mt-2">
 					{({ open }) => (
 						<>
-							<Disclosure.Button className="focus-visible:opacity flex w-full border-b-2 justify-between px-4 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500">
+							<Disclosure.Button className="flex w-full border-b-[1px] border-gray-500 justify-between px-4 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring">
 								<span className="font-bold text-blue-700">3.</span>
 								<span>
 									<strong className="hover:text-gray-400">
@@ -113,11 +113,11 @@ function Accordian() {
 			</div>
 			<Disclosure
 				as="div"
-				className="mx-auto w-full h-3/6 max-w-md rounded-md stroke-slate-800 border border-slate-600 shadow-xl p-2 mt-10"
+				className="rounded-md mx-auto w-full h-3/6 max-w-md stroke-slate-800 border border-slate-600 shadow-xl p-2 mt-10"
 			>
 				{({ open }) => (
 					<>
-						<Disclosure.Button className="flex w-full justify-between px-4 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+						<Disclosure.Button className="flex w-full justify-between px-4 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500">
 							<span>Have a non-programming question?</span>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"
@@ -168,11 +168,11 @@ function Accordian() {
 			</Disclosure>
 			<Disclosure
 				as="div"
-				className="mx-auto w-full h-3/6 max-w-md rounded-md stroke-slate-800 border border-slate-600 shadow-xl p-2 mt-10"
+				className="rounded-md mx-auto w-full h-3/6 max-w-md stroke-slate-800 border border-slate-600 shadow-xl p-2 mt-10"
 			>
 				{({ open }) => (
 					<>
-						<Disclosure.Button className="flex w-full justify-between rounded-lg px-4 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500 focus-visible:ring-opacity-75">
+						<Disclosure.Button className="rounded-lg flex w-full justify-between px-4 py-2 text-left text-sm font-medium focus:outline-none focus-visible:ring focus-visible:ring-purple-500">
 							<span>More helpful links</span>
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

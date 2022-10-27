@@ -1,12 +1,14 @@
 import React from 'react';
-import Qlist from './component/Qlist';
-import Sidebar from './component/Sidebar';
-import RightSidebar from './component/RightSidebar';
-import Footer from './component/Footer';
+import Qlist from './components/Qlist';
+import Sidebar from './components/Sidebar';
+import RightSidebar from './components/RightSidebar';
+import Footer from './components/Footer';
+import LoginHedaer from './components/LoginHedaer';
 
-function App() {
+export default function App() {
 	return (
 		<div className="flex flex-col ">
+			<LoginHedaer />
 			<div className="flex  justify-center w-full">
 				<Sidebar />
 				<Qlist />
@@ -16,5 +18,3 @@ function App() {
 		</div>
 	);
 }
-
-export default App;

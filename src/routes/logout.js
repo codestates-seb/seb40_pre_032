@@ -1,24 +1,22 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStackOverflow } from '@fortawesome/free-brands-svg-icons';
+import { SiAskubuntu, SiServerfault, SiSuperuser } from 'react-icons/si';
+import { AiTwotoneSetting } from 'react-icons/ai';
+import { FaStackExchange, FaStackOverflow } from 'react-icons/fa';
+import { GrStackOverflow } from 'react-icons/gr';
 
 export default function Logout() {
 	return (
 		<div className="lg:w-full w-full  bg-gray-200">
 			<div className="flex flex-col">
-				<div className="flex h-screen">
+				<div className="flex h-screen bg-gray-200">
 					<div className="m-auto">
 						<div className="text-center text-xl">
 							Clicking “Log out” will log you out of the following
 						</div>
 						<div className="text-center text-xl"> domains on this device:</div>
-
 						<div className="rounded-md w-3/4 bg-white p-7 mt-6 mx-auto drop-shadow-2xl">
 							<div className="mb-1">
-								<FontAwesomeIcon
-									icon={faStackOverflow}
-									className="text-orange-500 mr-2"
-								/>
+								<SiAskubuntu className="inline mr-2  text-orange-600" />
 								<a
 									href="https://askubuntu.com/"
 									className="text-blue-500 hover:text-blue-400"
@@ -26,23 +24,16 @@ export default function Logout() {
 									akubuntu.com
 								</a>
 							</div>
+
 							<div className="mb-1">
-								<FontAwesomeIcon
-									icon={faStackOverflow}
-									className="text-orange-500 mr-2"
-								/>
-								<a
-									href="https://mathoverflow.net/"
-									className="text-blue-500 hover:text-sky-500"
-								>
+								<GrStackOverflow className="inline mr-2 text-amber-700" />
+								<a href="./" className="text-blue-500 hover:text-sky-500">
 									mathoverflow.net
 								</a>
 							</div>
+
 							<div className="mb-1">
-								<FontAwesomeIcon
-									icon={faStackOverflow}
-									className="text-orange-500 mr-2"
-								/>
+								<SiServerfault className="inline mr-2  text-grayblack-100" />
 								<a
 									href="https://serverfault.com/"
 									className="text-blue-500 hover:text-sky-500"
@@ -50,11 +41,9 @@ export default function Logout() {
 									serverfault.com
 								</a>
 							</div>
+
 							<div className="mb-1">
-								<FontAwesomeIcon
-									icon={faStackOverflow}
-									className="text-orange-500 mr-2"
-								/>
+								<AiTwotoneSetting className="inline mr-2  text-gray-500" />
 								<a
 									href="https://stackapps.com/"
 									className="text-blue-500 hover:text-sky-500"
@@ -62,11 +51,9 @@ export default function Logout() {
 									stackapps.com
 								</a>
 							</div>
+
 							<div className="mb-1">
-								<FontAwesomeIcon
-									icon={faStackOverflow}
-									className="text-orange-500 mr-2"
-								/>
+								<FaStackExchange className="inline mr-2 text-blue-500" />
 								<a
 									href="https://stackexchange.com/"
 									className="text-blue-500 hover:text-sky-500"
@@ -74,11 +61,9 @@ export default function Logout() {
 									stackexchange.com
 								</a>
 							</div>
+
 							<div className="mb-1">
-								<FontAwesomeIcon
-									icon={faStackOverflow}
-									className="text-orange-500 mr-2"
-								/>
+								<FaStackOverflow className="inline mr-2  text-orange-600" />
 								<a
 									href="https://stackoverflow.com/"
 									className="text-blue-500 hover:text-sky-500"
@@ -86,11 +71,9 @@ export default function Logout() {
 									stackoverflow.com
 								</a>
 							</div>
+
 							<div className="mb-1">
-								<FontAwesomeIcon
-									icon={faStackOverflow}
-									className="text-orange-500 mr-2 "
-								/>
+								<SiSuperuser className="inline mr-2  text-blue-700" />
 								<a
 									href="https://askubuntu.com/"
 									className="text-blue-500 hover:text-sky-500"
@@ -98,27 +81,29 @@ export default function Logout() {
 									superuser.com
 								</a>
 							</div>
+
 							<div className="my-4 border-b-2" />
 							<input
 								type="checkbox"
 								className="focus:ring focus:ring-blue-200 rounded-md"
 							/>
-							<span className="text-xs">Logout on all device</span>
+							<span className="text-xs ml-1">Log out on all device</span>
+
 							<div className="my-4">
 								<button
-									className="  rounded bg-sky-500 text-white p-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
+									className="text-sm rounded bg-sky-500 text-white p-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
 									type="submit"
 								>
-									<span className="">Log out</span>
+									Log out
 								</button>
 								<button
-									className="  rounded text-blue-500 p-2 ml-3 hover:bg-blue-100 focus:outline-none focus:ring focus:ring-blue-200"
+									className="text-sm rounded text-blue-500 p-2 ml-3 hover:bg-sky-100 focus:outline-none focus:ring focus:ring-blue-200"
 									type="submit"
 								>
-									cancel
+									Cancel
 								</button>
 							</div>
-							<div className="w-64 text-xs mt-6">
+							<div className="w-64 text-xs mt-7 text-gray-600">
 								If you’re on a shared computer, remember to log out of your Open
 								ID provider (Facebook, Google, Stack Exchange, etc.) as well.
 							</div>

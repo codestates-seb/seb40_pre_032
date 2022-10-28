@@ -2,7 +2,7 @@ import React from 'react';
 
 function Footer() {
 	return (
-		<footer className="h-80 text-gray-300 flex flex-row justify-center w-full bg-zinc-800 p-8">
+		<footer className="bottom-0 inset-x-0 h-80 text-gray-300 flex flex-row justify-center w-full bg-zinc-800 p-8">
 			<div className="w-10 right-0">
 				<svg
 					aria-hidden="true"

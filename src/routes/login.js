@@ -2,7 +2,7 @@ import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineGithub, AiFillFacebook } from 'react-icons/ai';
-import Header from '../components/Hedaer';
+import Header from '../components/Header';
 
 export default function Login() {
 	return (

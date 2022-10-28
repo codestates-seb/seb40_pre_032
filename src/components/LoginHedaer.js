@@ -8,7 +8,7 @@ function LoginHeader() {
 		<div className="flex flex-col">
 			<div className="w-full bg-[#f38227] h-[3px]" />
 			<header className="h-[47px] bg-[#f7faf9] flex flex-row items-center shadow-1top text-[13px]">
-				<div className="w-[1800px] h-full flex items-center mx-auto my-0 max-w-full">
+				<div className=" h-full flex items-center mx-auto my-0 max-w-full">
 					<a
 						href="https://stackoverflow.com/"
 						className="cursor-pointer py-0 px-2 flex items-center bg-transparent w-[166px] h-[47px]"

@@ -16,7 +16,7 @@ function Answer() {
 				<span className="text-blue-500">juliomalves</span>
 				<Date />
 				<AddComment />
-				<span className="opacity-50">Share | Edit | Follow | Flag</span>
+				<span className="opacity-50">Shared | Edit | Follow | Flag</span>
 			</div>
 		</div>
 	);

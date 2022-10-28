@@ -1,4 +1,4 @@
-package com.codestates.pre032.pre032.test;
+package com.codestates.pre032.pre032.exception;
 
 import lombok.Getter;
 import org.springframework.http.HttpStatus;

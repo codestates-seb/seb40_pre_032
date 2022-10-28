@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/pre032?serverTimezone=Asia/Seoul
+    username: user
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true;
+  oauth2:
+    client:
+      registration:
+        google: # /oauth2/authorization/google ? ??? ???? ??.
+          client-id: 651205845903-qai6o7d9i09suejmtb77pdhp8gr2dde1.apps.googleusercontent.com
+          client-secret: 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
+          scope:
+            - email
+            - profile
+            - profile_image
+server:
+  servlet:
+    encoding:
+      force-response: true
+jwt:
+#  원래는 그냥 입력하면 안되는데 환경변수 설정 귀찮아서 그냥 입력함
+  secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
+  access-token-expiration-minutes: 30

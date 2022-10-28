@@ -1,9 +1,10 @@
 package com.codestates.pre032.pre032.security;
 
-import com.codestates.pre032.pre032.security.Dto.SecurityUser;
-import com.codestates.pre032.pre032.security.Services.JwtTokenizer;
 import com.codestates.pre032.pre032.security.Handler.LoginFailureHandler;
 import com.codestates.pre032.pre032.security.Handler.LoginSuccessHandler;
+import com.codestates.pre032.pre032.security.Services.JwtTokenizer;
+import com.codestates.pre032.pre032.security.filter.CustomSecurityFilter;
+import com.codestates.pre032.pre032.security.filter.VerificationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -64,7 +65,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authorize -> authorize
 //                         권한 설정
                                 .anyRequest().permitAll()
-                )
+                ).oauth2Login(withDefaults())
+
         ;
 
         return http.build();
@@ -75,11 +77,14 @@ public class SecurityConfig {
         public void configure(HttpSecurity builder) throws Exception {  // (2-2)
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);  // (2-3)
 
-            SecurityUser.CustomSecurityFilter jwtAuthenticationFilter = new SecurityUser.CustomSecurityFilter(authenticationManager, jwtTokenizer);  // (2-4)
+            CustomSecurityFilter jwtAuthenticationFilter = new CustomSecurityFilter(authenticationManager, jwtTokenizer);  // (2-4)
             jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new LoginFailureHandler());
-            builder.addFilter(jwtAuthenticationFilter);  // (2-6)
+
+            VerificationFilter verificationFilter = new VerificationFilter(jwtTokenizer);
+            builder.addFilter(jwtAuthenticationFilter)
+                    .addFilterAfter(verificationFilter, CustomSecurityFilter.class);  // (2-6)
         }
     }
     @Bean

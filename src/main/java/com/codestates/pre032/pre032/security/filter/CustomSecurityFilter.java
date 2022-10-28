@@ -1,7 +1,7 @@
 package com.codestates.pre032.pre032.security.filter;
 
+import com.codestates.pre032.pre032.security.Dto.LoginDto;
 import com.codestates.pre032.pre032.security.Services.JwtTokenizer;
-import com.codestates.pre032.pre032.test.LoginDto;
 import com.codestates.pre032.pre032.user.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;

@@ -1,14 +1,14 @@
 import React from 'react';
 import Content from './Content';
 import TagContainer from './TagContainer';
-import Userinfo from './Userinfo';
+import ContentInfo from './ContentInfo';
 
 function ContentContainer() {
 	return (
 		<div className="flex flex-col w-[660px]">
 			<Content />
 			<TagContainer />
-			<Userinfo />
+			<ContentInfo />
 		</div>
 	);
 }

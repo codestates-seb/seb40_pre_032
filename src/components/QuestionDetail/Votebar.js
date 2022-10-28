@@ -9,7 +9,7 @@ function Votebar() {
 					<path fill="lightgrey" d="M2 25h32L18 9 2 25Z" />
 				</svg>
 			</div>
-			<div className="flex justify-center text-gray-700">2</div>
+			<div className="flex justify-center text-gray-700">(vote)</div>
 			<div className="flex justify-center mb-2">
 				{/* down button */}
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">

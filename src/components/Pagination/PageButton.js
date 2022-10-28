@@ -8,16 +8,20 @@ function PageButton({ total, limit, page, setPage }) {
 		numbers.push(i);
 	}
 	return (
-		<nav className="flex justify-between">
-			<button
-				onClick={() => setPage(page - 1)}
-				disabled={page === 1}
-				type="button"
-			>
-				Prev
-			</button>
+		<div className="flex my-[76px]">
+			{page === 1 ? null : (
+				<button
+					onClick={() => setPage(page - 1)}
+					disabled={page === 1}
+					type="button"
+					className="border-[hsl(210,8%,85%)] text-[hsl(210,8%,25%)] mr-[2px]  border w-[44px] h-[27px] text-[13px] rounded-[3px] hover:bg-[rgb(215,217,220)]"
+				>
+					Prev
+				</button>
+			)}
 			{numbers.map((num, i) => (
 				<button
+					className="border-solid border-[hsl(210,8%,85%)] border hover:bg-[rgb(215,217,220)] disabled:bg-[#f38227] disabled:text-[white] disabled:border-none w-[24px] h-[27px] rounded-[3px] mx-[2px] text-[13px]"
 					key={num - 1}
 					type="button"
 					disabled={page === num}
@@ -30,16 +34,19 @@ function PageButton({ total, limit, page, setPage }) {
 					{num}
 				</button>
 			))}
-			<button
-				onClick={() => {
-					setPage(page + 1);
-				}}
-				disabled={page === numPages}
-				type="button"
-			>
-				Next
-			</button>
-		</nav>
+			{page === numPages ? null : (
+				<button
+					onClick={() => {
+						setPage(page + 1);
+					}}
+					disabled={page === numPages}
+					type="button"
+					className="border-[hsl(210,8%,85%)] text-[hsl(210,8%,25%)]  border w-[44px] h-[27px] ml-[2px] text-[13px] rounded-[3px] hover:bg-[rgb(215,217,220)]"
+				>
+					Next
+				</button>
+			)}
+		</div>
 	);
 }
 

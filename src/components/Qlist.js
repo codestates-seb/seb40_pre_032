@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ButtonGroup from './ButtonGroup';
 import items from './Dummydata';
 import PageButton from './Pagination/PageButton';
+import PerPageBtn from './Pagination/PerPageBtn';
 
 function Qlist() {
-	const limit = 10;
+	const [limit, setLimit] = useState(15);
 	const [page, setPage] = useState(1);
 	const offset = (page - 1) * limit;
-	const [questions, setQuestions] = useState([]);
+	const questions = items;
+	// const [questions, setQuestions] = useState([]);
 
 	// function onPrevClick() {
 	// 	setPage((prev) => prev - 1);
@@ -21,9 +23,9 @@ function Qlist() {
 	// 	setPage((prev) => prev + 1);
 	// 	console.log(page);
 	// }
-	useEffect(() => {
-		setQuestions(items);
-	}, []);
+	// useEffect(() => {
+	// 	setQuestions(items);
+	// }, []);
 	return (
 		// ml 나중에 꼭 없앨것.
 		<div className="p-[24px] w-[727px]  border-l-[1px] border-solid border-[hsl(210,8%,85%)] mb-4 ml-12">
@@ -41,7 +43,7 @@ function Qlist() {
 			</div>
 			{questions.slice(offset, offset + limit).map((question) => (
 				<div
-					key={question.question_id}
+					key={question.question_id + Math.random()}
 					className="border-t-[1px] border-solid border-[hsl(210,8%,85%)] w-auto float-none clear-both ml-[-24px] "
 				>
 					<div className="border-solid border-b-[1px] border-[hsl(210,8%,85%)] relative flex  p-[16px] align-baseline">
@@ -99,6 +101,7 @@ function Qlist() {
 				page={page}
 				setPage={setPage}
 			/>
+			<PerPageBtn setLimit={setLimit} limit={limit} />
 		</div>
 	);
 }

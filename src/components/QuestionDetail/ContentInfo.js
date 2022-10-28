@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Userinfo() {
+function ContentInfo() {
 	return (
 		<div className="flex flex-row h-[50px]">
 			<div className="w-[260px]">
@@ -28,4 +28,4 @@ function Userinfo() {
 	);
 }
 
-export default Userinfo;
+export default ContentInfo;

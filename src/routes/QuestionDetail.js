@@ -21,7 +21,7 @@ function QuestionDetail() {
 							<div>
 								<Question />
 								<AnswerHeader />
-								<Answer />
+								<Answer />;
 							</div>
 							<RightSidebar />
 						</div>

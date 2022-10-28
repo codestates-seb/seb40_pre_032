@@ -1,5 +1,6 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
-import ContentContainer from './ContentContainer';
+import AnswerContainer from './AnswerContainer';
 import Votebar from './Votebar';
 
 function Answer() {
@@ -7,7 +8,7 @@ function Answer() {
 		<div className="mr-6 py-6">
 			<div className="flex flex-row ">
 				<Votebar />
-				<ContentContainer />
+				<AnswerContainer />
 			</div>
 		</div>
 	);

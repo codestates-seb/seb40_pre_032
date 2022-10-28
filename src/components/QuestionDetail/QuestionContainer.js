@@ -1,16 +1,17 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
-import Content from './Content';
+import QuestionContent from './QuestionContent';
 import TagContainer from './TagContainer';
 import ContentInfo from './ContentInfo';
 
-function ContentContainer() {
+function QuestionContainer() {
 	return (
 		<div className="flex flex-col w-[660px]">
-			<Content />
+			<QuestionContent />
 			<TagContainer />
 			<ContentInfo />
 		</div>
 	);
 }
 
-export default ContentContainer;
+export default QuestionContainer;

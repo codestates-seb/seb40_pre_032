@@ -1,5 +1,5 @@
 import React from 'react';
-import ContentContainer from './ContentContainer';
+import QuestionContainer from './QuestionContainer';
 import Votebar from './Votebar';
 
 function Question() {
@@ -7,7 +7,7 @@ function Question() {
 		<div className="mr-6">
 			<div className="flex flex-row ">
 				<Votebar />
-				<ContentContainer />
+				<QuestionContainer />
 			</div>
 		</div>
 	);

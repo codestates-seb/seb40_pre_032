@@ -2,7 +2,7 @@ import React from 'react';
 
 function QuestionTitle() {
 	return (
-		<div className="">
+		<div className="mt-[47px] py-[5px]">
 			<div className="flex flex-row justify-between mt-[30px]">
 				<h1 className="text-2xl">
 					Remove Leading zeros from StringBuilder object

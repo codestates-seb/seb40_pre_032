@@ -54,25 +54,7 @@ function Answer() {
 				{/* postcell */}
 				<div className="flex flex-col w-[660px]">
 					{/* content */}
-					<p className="mb-4 break-all">
-						I wish for this mySecondClass to have all the properties and methods
-						from myFirstClass but to replace the type of some properties and
-						replace some functions, in this example I wish to change: attr1 from
-						string to boolean firstMethod from outputting I wish for this
-						mySecondClass to have all the properties and methods from
-						myFirstClass but to replace the type of some properties and replace
-						some functions, in this example I wish to change: attr1 from string
-						to boolean firstMethod from outputting I wish for this mySecondClass
-						to have all the properties and methods from myFirstClass but to
-						replace the type of some properties and replace some functions, in
-						this example I wish to change: attr1 from string to boolean
-						firstMethod from outputting I wish for this mySecondClass to have
-						all the properties and methods from myFirstClass but to replace the
-						type of some properties and replace some functions, in this example
-						I wish to change: attr1 from string to boolean firstMethod from
-						outputting I wish for
-						thisasdasdasdajsdkajskldjklasjdklasjdklajskldjaklsdjaskldjalksjdklajlksd
-					</p>
+					<p className="mb-4 break-all">Answer</p>
 					{/* tags */}
 					<div className="mb-4">
 						<span className="rounded-sm align-middle px-2 py-1 mr-2 bg-sky-100 text-blue-500 text-sm">

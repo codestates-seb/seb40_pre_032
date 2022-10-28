@@ -4,6 +4,8 @@ import com.codestates.pre032.pre032.answer.Answer;
 import com.codestates.pre032.pre032.answer.AnswerDto;
 import org.mapstruct.Mapper;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -55,7 +57,24 @@ public interface QuestionMapper {
                 .collect(Collectors.toList());
     }
 
-    List<QuestionDto.questionContentResponse> questionsToQuestionContentResponsesDto(List<Question> questions);
+    default List<QuestionDto.questionContentResponse> questionsToQuestionContentResponsesDto(List<Question> questions){
+        if (questions == null) {
+            return null;
+        } else {
+            List<QuestionDto.questionContentResponse> list = new ArrayList(questions.size());
+            Iterator var3 = questions.iterator();
+
+            while(var3.hasNext()) {
+                Question question = (Question)var3.next();
+                if (question.getQuestionContent().length()>190){
+                    question.setQuestionContent(question.getQuestionContent().substring(0,190));
+                }
+                list.add(this.questionToQuestionContentResponseDto(question));
+            }
+
+            return list;
+        }
+    };
 
 //    default List<QuestionDto.questionResponse> questionToQuestionResponseDto(List<Question> questions) {
 //        List<QuestionDto.questionResponse> answer = new ArrayList<>();

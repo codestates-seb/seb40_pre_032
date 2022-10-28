@@ -1,6 +1,6 @@
 import React from 'react';
 
-function AnswerTitle() {
+function AnswerHeader() {
 	return (
 		<div className="flex flex-row justify-between mr-6 align-middle mt-6">
 			<h2 className="text-xl">2 Answers</h2>
@@ -17,4 +17,4 @@ function AnswerTitle() {
 	);
 }
 
-export default AnswerTitle;
+export default AnswerHeader;

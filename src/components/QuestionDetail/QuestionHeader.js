@@ -1,6 +1,6 @@
 import React from 'react';
 
-function QuestionTitle() {
+function QuestionHeader() {
 	return (
 		<div className="mt-[47px] py-[20px]">
 			<div className="flex flex-row justify-between">
@@ -32,4 +32,4 @@ function QuestionTitle() {
 	);
 }
 
-export default QuestionTitle;
+export default QuestionHeader;

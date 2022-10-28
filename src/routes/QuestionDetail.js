@@ -7,6 +7,7 @@ import RightSidebar from '../components/RightSidebar';
 import Footer from '../components/Footer';
 import Answer from '../components/QuestionDetail/Answer';
 import AnswerHeader from '../components/QuestionDetail/AnswerHeader';
+import AnswerEditor from '../components/QuestionDetail/AnswerEditor';
 
 function QuestionDetail() {
 	return (
@@ -22,6 +23,7 @@ function QuestionDetail() {
 								<Question />
 								<AnswerHeader />
 								<Answer />
+								<AnswerEditor />
 							</div>
 							<RightSidebar />
 						</div>

@@ -6,11 +6,13 @@ import Logout from './routes/logout';
 import SignUp from './routes/signUp';
 import MyPage from './routes/myPage';
 import QuestionDetail from './routes/QuestionDetail';
+import Editor from './components/Editor';
 
 export default function App() {
 	return (
 		<BrowserRouter>
 			<Routes>
+				<Route path="/" element={<Editor />} />
 				<Route path="mypage" element={<MyPage />} />
 				<Route path="login" element={<Login />} />
 				<Route path="logout" element={<Logout />} />

@@ -59,7 +59,7 @@ public class QuestionController {
         List<Question> questions = this.questionService.getQuestions();
 
         return new ResponseEntity<>(
-                new MainResponseDto(questionMapper.questionToQuestionResponseDto(questions)), HttpStatus.OK);
+                new MainResponseDto(questionMapper.questionsToQuestionContentResponsesDto(questions)), HttpStatus.OK);
     }
 
     // 질문 삭제 기능
@@ -75,7 +75,7 @@ public class QuestionController {
     // 질문 - 답변기능으로 연동
     @PostMapping("/{id}/answer/add")
     public ResponseEntity addAnswer(@PathVariable Long id,
-                          @RequestBody AnswerDto.PostDto requestBody) {
+                                    @RequestBody AnswerDto.PostDto requestBody) {
         answerController.postAnswer(id, requestBody);
 
         return new ResponseEntity(HttpStatus.CREATED);

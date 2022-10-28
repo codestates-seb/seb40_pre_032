@@ -4,7 +4,6 @@ import com.codestates.pre032.pre032.answer.Answer;
 import com.codestates.pre032.pre032.answer.AnswerDto;
 import org.mapstruct.Mapper;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +20,7 @@ public interface QuestionMapper {
         }
     }
 
-    default QuestionDto.questionContentResponse questionToQuestionContentResponseDto(Question question ){
+    default QuestionDto.questionContentResponse questionToQuestionContentResponseDto(Question question) {
         List<Answer> answers = question.getAnswers();
 
         QuestionDto.questionContentResponse questionResponse = new QuestionDto.questionContentResponse();
@@ -31,6 +30,7 @@ public interface QuestionMapper {
         questionResponse.setAnswerCount(question.getAnswerCount());
         questionResponse.setScore(question.getScore());
         questionResponse.setCreationDate(question.getCreationDate());
+        questionResponse.setModifiedAt(question.getModifiedAt());
         questionResponse.setQuestionId(question.getQuestionId());
         questionResponse.setTitle(question.getTitle());
         questionResponse.setQuestionContent(question.getQuestionContent());
@@ -41,7 +41,7 @@ public interface QuestionMapper {
     }
 
     //질문에 대한 답변
-    default List<AnswerDto.ResponseDto> questionAnswersToQuestionAnswerResponse(List<Answer> answers){
+    default List<AnswerDto.ResponseDto> questionAnswersToQuestionAnswerResponse(List<Answer> answers) {
         return answers
                 .stream()
                 .map(questionAnswer -> AnswerDto.ResponseDto
@@ -57,26 +57,26 @@ public interface QuestionMapper {
 
     List<QuestionDto.questionContentResponse> questionsToQuestionContentResponsesDto(List<Question> questions);
 
-    default List<QuestionDto.questionResponse> questionToQuestionResponseDto(List<Question> questions) {
-        List<QuestionDto.questionResponse> answer = new ArrayList<>();
-        if (questions.size() == 0) {
-            return null;
-        } else {
-            for (Question question : questions) {
-                QuestionDto.questionResponse response = new QuestionDto.questionResponse(
-                        question.getTags(),
-                        question.isAnswered(),
-                        question.getViewCount(),
-                        question.getAnswerCount(),
-                        question.getScore(),
-                        question.getCreationDate(),
-                        question.getModifiedAt(),
-                        question.getQuestionId(),
-                        question.getTitle()
-                );
-                answer.add(response);
-            }
-            return answer;
-        }
-    }
+//    default List<QuestionDto.questionResponse> questionToQuestionResponseDto(List<Question> questions) {
+//        List<QuestionDto.questionResponse> answer = new ArrayList<>();
+//        if (questions.size() == 0) {
+//            return null;
+//        } else {
+//            for (Question question : questions) {
+//                QuestionDto.questionResponse response = new QuestionDto.questionResponse(
+//                        question.getTags(),
+//                        question.isAnswered(),
+//                        question.getViewCount(),
+//                        question.getAnswerCount(),
+//                        question.getScore(),
+//                        question.getCreationDate(),
+//                        question.getModifiedAt(),
+//                        question.getQuestionId(),
+//                        question.getTitle()
+//                );
+//                answer.add(response);
+//            }
+//            return answer;
+//        }
+//    }
 }

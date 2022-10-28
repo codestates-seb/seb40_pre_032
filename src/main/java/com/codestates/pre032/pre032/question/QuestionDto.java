@@ -66,30 +66,30 @@ public class QuestionDto {
 
     }
 
-    // 콘텐트 없는 버전
-    @Getter
-    @AllArgsConstructor
-    public static class questionResponse {
-        private List<String> tags;
-
-//        private User owner;
-
-        private boolean isAnswered;
-
-        private int viewCount;
-
-        private int answerCount;
-
-        private int score;
-
-        private LocalDateTime creationDate;
-
-        private LocalDateTime modifiedAt;
-
-        private Long questionId;
-
-        private String title;
-
+//    // 콘텐트 없는 버전
+//    @Getter
+//    @AllArgsConstructor
+//    public static class questionResponse {
+//        private List<String> tags;
+//
+////        private User owner;
+//
+//        private boolean isAnswered;
+//
+//        private int viewCount;
+//
+//        private int answerCount;
+//
+//        private int score;
+//
+//        private LocalDateTime creationDate;
+//
 //        private LocalDateTime modifiedAt;
-    }
+//
+//        private Long questionId;
+//
+//        private String title;
+//
+////        private LocalDateTime modifiedAt;
+//    }
 }

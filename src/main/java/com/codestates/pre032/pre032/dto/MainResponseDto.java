@@ -7,9 +7,9 @@ import java.util.List;
 
 @Getter
 public class MainResponseDto {
-    private final List<QuestionDto.questionResponse> items;
+    private final List<QuestionDto.questionContentResponse> items;
 
-    public MainResponseDto(List<QuestionDto.questionResponse> items) {
+    public MainResponseDto(List<QuestionDto.questionContentResponse> items) {
         this.items = items;
     }
 }

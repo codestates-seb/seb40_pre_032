@@ -38,7 +38,7 @@ public class MainController {
     @GetMapping("/search/tag")
     public ResponseEntity tagQuestion(@RequestParam(value = "tag") String tag) {
         List<Question> questions = questionService.getQuestionsByTag(tag);
-        List<QuestionDto.questionResponse> response = this.questionMapper.questionToQuestionResponseDto(questions);
+        List<QuestionDto.questionContentResponse> response = this.questionMapper.questionsToQuestionContentResponsesDto(questions);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 }

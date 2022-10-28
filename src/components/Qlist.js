@@ -5,6 +5,7 @@ import items from './Dummydata';
 function Qlist() {
 	const questions = items;
 	return (
+		// ml 나중에 꼭 없앨것.
 		<div className="p-[24px] w-[727px]  border-l-[1px] border-solid border-[hsl(210,8%,85%)] mb-4 ml-12">
 			<div className="flex flex-wrap mb-[12px] justify-between ">
 				<h1 className="select-auto text-[1.61538462rem]">All Questions</h1>

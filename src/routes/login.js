@@ -66,7 +66,7 @@ export default function Login() {
 					<div className="text-sm mt-10 ">
 						Don’t have an account?
 						<a
-							href="Sign up"
+							href="/signup"
 							className="ml-1 text-sm text-blue-500 hover:text-sky-500"
 						>
 							Sign up
@@ -75,7 +75,7 @@ export default function Login() {
 					<div className="mt-2 mb-7 text-sm">
 						Are you an employer?
 						<a
-							href="Sign up"
+							href="/signup"
 							className="ml-1 text-sm  text-blue-500 hover:text-sky-500"
 						>
 							Sign up on Talent

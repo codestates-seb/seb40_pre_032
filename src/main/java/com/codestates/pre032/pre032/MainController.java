@@ -41,4 +41,9 @@ public class MainController {
         List<QuestionDto.questionContentResponse> response = this.questionMapper.questionsToQuestionContentResponsesDto(questions);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
+
+    @GetMapping("/")
+    public ResponseEntity mainPage(){
+        return new ResponseEntity<>("welcome Ctrl C+V", HttpStatus.OK);
+    }
 }

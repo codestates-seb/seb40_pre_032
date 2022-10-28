@@ -4,9 +4,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/users")
@@ -24,7 +22,23 @@ public class UserController {
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
-    // 로그인
-    // 로그아웃
+    // 로그인 기능
+    @PostMapping("/login")
+    public ResponseEntity login(){
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+//    @GetMapping("{user_id}/myPage")
+//    public ResponseEntity getMyPage(@PathVariable Long id){
+//
+//        return new ResponseEntity<>(, HttpStatus.OK)
+//    }
+//    // 요청 거부
+//    @GetMapping("/access-denied")
+//    public String accessDenied() {
+//        return "access-denied";
+//    }
+
 
 }

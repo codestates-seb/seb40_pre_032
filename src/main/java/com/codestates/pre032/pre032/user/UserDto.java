@@ -13,6 +13,20 @@ public class UserDto {
         private String email;
 
         @NotBlank
+        private String displayName;
+
+        @NotBlank
         private String password;
     }
+
+//    @Getter
+//    @AllArgsConstructor
+//    public static class response{
+//        private Long userId;
+//        private String email;
+//        private String displayName;
+//        private String profileImage;
+//        private LocalDateTime creationDate;
+//        private int
+//    }
 }

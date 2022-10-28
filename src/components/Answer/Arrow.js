@@ -2,7 +2,7 @@ import React from 'react';
 
 function Arrow() {
 	return (
-		<>
+		<div className="flex-col">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"
 				fill="none"
@@ -31,7 +31,7 @@ function Arrow() {
 					d="M19.5 8.25l-7.5 7.5-7.5-7.5"
 				/>
 			</svg>
-		</>
+		</div>
 	);
 }
 

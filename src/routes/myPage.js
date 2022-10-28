@@ -2,7 +2,7 @@ import React from 'react';
 import EditUserProfile from '../components/EditUserProfile';
 import UserButtonCol from '../components/UserButtonCol';
 import UserButtonRow from '../components/UserButtonRow';
-import Header from '../components/Hedaer';
+import Header from '../components/Header';
 
 export default function MyPage() {
 	return (

@@ -1,63 +1,134 @@
 import React from 'react';
-import '../index.css';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-	faStackOverflow,
-	faGoogle,
-	faGithub,
-	faFacebook,
-} from '@fortawesome/free-brands-svg-icons';
+import { FcGoogle } from 'react-icons/fc';
+import { MdOutlineOpenInNew } from 'react-icons/md';
+import { AiOutlineGithub, AiFillFacebook } from 'react-icons/ai';
+import { FaQuestionCircle } from 'react-icons/fa';
+import Header from '../components/Header';
 
-export default function signUp() {
+export default function SignUp() {
 	return (
-		<div className="lg:w-full w-full  bg-gray-200">
-			<div className="flex flex-col my-auto items-center mx-2">
-				<div className="flex h-screen">
-					<div className="m-auto">
-						<div className="text-center mb-5">
-							<FontAwesomeIcon
-								icon={faStackOverflow}
-								className="text-4xl text-orange-500"
-							/>
+		<>
+			<Header />
+			<div className="lg:w-full w-full bg-gray-200 h-screen">
+				<div className="flex flex-col items-center bg-gray-200">
+					<div className="mt-20 mb-5 text-xl text-center">
+						<div>Create your Stack Overflow account. It’s free</div>
+						<div> and only takes a minute.</div>
+					</div>
+					<div>
+						<div className=" mx-auto">
+							<div className="rounded bg-white my-1 py-2 px-16  text-center text-base   hover:bg-gray-100 focus:outline-none focus:ring focus:ring-violet-300">
+								<FcGoogle className="inline text-xl mr-1" />
+								Sign up with Google
+							</div>
+							<div className="rounded  bg-grayblack-100 my-3 py-2 px-16 text-center text-white text-base  hover:bg-grayblack-200 focus:outline-none focus:ring focus:ring-violet-300">
+								<AiOutlineGithub className="inline text-xl mr-1" />
+								Sign up with GitHub
+							</div>
+							<div className="rounded bg-navy-100  my-3 py-2 px-16 text-center text-white text-base  hover:bg-navy-200 focus:outline-none focus:ring focus:ring-blue-300">
+								<AiFillFacebook className="inline text-xl mr-1" /> Sign up with
+								Facebook
+							</div>
+							<form className="lg:w-full bg-white p-5 mt-6 drop-shadow-md rounded-md">
+								<div className="font-medium mb-1 text-base">Display name</div>
+								<input
+									type="email"
+									className="rounded w-full border-solid  border-[1.5px] focus:outline-none focus:ring focus:ring-blue-200 py-1 pl-2"
+								/>
+								<div className="font-medium mb-1 mt-4 text-base">Email</div>
+								<input
+									type="email"
+									className="rounded w-full border-solid  border-[1.5px] focus:outline-none focus:ring focus:ring-blue-200 py-1 pl-2"
+								/>
+								{/* 이부분 커스텀 필요!! */}
+								<div className=" font-medium mb-1 mt-4 text-base">Password</div>
+								<input
+									type="password"
+									className="rounded-md w-full border-solid  border-[1.5px] focus:outline-none focus:ring focus:ring-blue-200 py-1 pl-2"
+								/>
+								<div className="mt-2 text-xs text-gray-500">
+									Passwords must contain at least eight characters,
+								</div>
+								<div className="mb-2 text-xs text-gray-500">
+									including at least 1 letter and 1 number.
+								</div>
+								{/* 캅차 */}
+								<div className="border py-3 bg-gray-200 rounded-sm border-solid border-gray-300">
+									{/* <div className="bg-gray-100 mx-4 my-2"> */}
+									<div className="py-3 text-center bg-gray-100 mx-14  border rounded-sm border-solid border-gray-300 shadow-md">
+										<div>
+											<div className="text-base mt-4 mb-8 flex items-center justify-center">
+												<input
+													type="checkbox"
+													className="border w-6 h-6 border-solid border-gray-300 focus:ring focus:ring-blue-200 rounded-md mt-1 mr-3"
+												/>
+												<div>I&apos;m not a robot</div>
+											</div>
+											<div className="text-xs text-gray-500  flex items-center justify-center">
+												<img
+													alt="recatcha"
+													src="/image/recaptcha.png"
+													className="w-6 mr-1"
+												/>
+												<span>reCAPCHA</span>
+											</div>
+											<div className="text-xs text-gray-500">
+												Privacy - Terms
+											</div>
+										</div>
+									</div>
+									{/* </div> */}
+								</div>
+								<div className="flex items-start my-4">
+									<input
+										type="checkbox"
+										className="border-solid  border-gray-300 focus:ring focus:ring-blue-200 rounded-md mt-1"
+									/>
+									<div className="text-xs ml-1 text-gray-700">
+										<div className="flex justify-between align-middle">
+											Opt-in to receive occasional product
+											<FaQuestionCircle className=" text-gray-500 text-sm" />
+										</div>
+										<div>updates, user research invitations, company </div>
+										<div>announcements, and digests.</div>
+									</div>
+								</div>
+								<button
+									className="bg-blue-500 rounded w-full mb-8 py-2 text-white text-sm  hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
+									type="submit"
+								>
+									Sign up
+								</button>
+								<div className="text-xs text-gray-500">
+									By clicking “Sign up”, you agree to our terms of
+								</div>
+								<div className="text-xs text-gray-500">
+									service, privacy policy and cookie policy
+								</div>
+							</form>
 						</div>
-						<div className="rounded  bg-white my-1 py-2 px-10  text-center">
-							<FontAwesomeIcon icon={faGoogle} /> Sign up with Google
-						</div>
-						<div className="rounded  bg-neutral-800  my-3 py-2 px-10 text-center text-white">
-							<FontAwesomeIcon icon={faGithub} /> Sign up with GitHub
-						</div>
-						<div className="rounded bg-blue-900  my-3 py-2 px-10 text-center text-white">
-							<FontAwesomeIcon icon={faFacebook} /> Sign up with Facebook
-						</div>
-						<form className="lg:w-full bg-white p-5 mt-6 drop-shadow-md">
-							<div className="font-bold">Display Name</div>
-							<input
-								type="email"
-								className="rounded w-full border-solid border-2 border-gray-500 py-1"
-							/>
-							<div className="font-bold mt-4">Email</div>
-							<input
-								type="email"
-								className="rounded w-full border-solid border-2 border-gray-500 py-1 "
-							/>
-							{/* 이부분 커스텀 필요!! */}
-							<div className="font-bold  mt-4">Password</div>
-							<input
-								type="password"
-								className="rounded w-full border-solid border-2 border-gray-500 py-1"
-							/>
-							<button
-								className="rounded w-full mt-3 bg-sky-500 text-white py-1"
-								type="submit"
-							>
-								Sign Up
-							</button>
-						</form>
+					</div>
+					<div className="text-sm mt-10 ">
+						Already have an account?
+						<a
+							href="Sign up"
+							className="ml-1 text-sm text-blue-500 hover:text-sky-500"
+						>
+							Log in
+						</a>
+					</div>
+					<div className="mt-2 mb-7 text-sm">
+						Are you an employer?
+						<a
+							href="Sign up"
+							className="ml-1 text-sm  text-blue-500 hover:text-sky-500"
+						>
+							Sign up on Talent
+							<MdOutlineOpenInNew className="inline ml-1" />
+						</a>
 					</div>
 				</div>
-				<div>Already have an account? Log in </div>
-				<div>Are you an employer? Sign up on Talent </div>
 			</div>
-		</div>
+		</>
 	);
 }

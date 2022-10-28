@@ -1,9 +1,29 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ButtonGroup from './ButtonGroup';
 import items from './Dummydata';
+import PageButton from './Pagination/PageButton';
 
 function Qlist() {
-	const questions = items;
+	const limit = 10;
+	const [page, setPage] = useState(1);
+	const offset = (page - 1) * limit;
+	const [questions, setQuestions] = useState([]);
+
+	// function onPrevClick() {
+	// 	setPage((prev) => prev - 1);
+	// 	console.log(page);
+	// }
+	// function onButtonClick(e) {
+	// 	setPage(e.target.value);
+	// 	console.log(page);
+	// }
+	// function onNextClick() {
+	// 	setPage((prev) => prev + 1);
+	// 	console.log(page);
+	// }
+	useEffect(() => {
+		setQuestions(items);
+	}, []);
 	return (
 		// ml 나중에 꼭 없앨것.
 		<div className="p-[24px] w-[727px]  border-l-[1px] border-solid border-[hsl(210,8%,85%)] mb-4 ml-12">
@@ -19,8 +39,11 @@ function Qlist() {
 				<div>{questions.length} questions</div>
 				<ButtonGroup />
 			</div>
-			{questions.map((question) => (
-				<div className="border-t-[1px] border-solid border-[hsl(210,8%,85%)] w-auto float-none clear-both ml-[-24px] ">
+			{questions.slice(offset, offset + limit).map((question) => (
+				<div
+					key={question.question_id}
+					className="border-t-[1px] border-solid border-[hsl(210,8%,85%)] w-auto float-none clear-both ml-[-24px] "
+				>
 					<div className="border-solid border-b-[1px] border-[hsl(210,8%,85%)] relative flex  p-[16px] align-baseline">
 						<div className="mr-4 mb-1 gap-[6px] w-[108px] flex shrink-0 flex-col flex-wrap items-end text-[13px] text-[hsl(210,8%,45%)] align-baseline text-left">
 							<div className=" inline-flex gap-[4px] items-center text-[#0C0D0E] justify-center whitespace-nowrap border-[1px] border-solid border-transparent">
@@ -70,6 +93,12 @@ function Qlist() {
 					</div>
 				</div>
 			))}
+			<PageButton
+				total={questions.length}
+				limit={limit}
+				page={page}
+				setPage={setPage}
+			/>
 		</div>
 	);
 }

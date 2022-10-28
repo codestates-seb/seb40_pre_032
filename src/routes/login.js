@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineGithub, AiFillFacebook } from 'react-icons/ai';
@@ -11,7 +12,7 @@ export default function Login() {
 			<div className="lg:w-full w-full bg-gray-200 h-screen">
 				<div className="flex flex-col items-center bg-gray-200">
 					<div className="flex ">
-						<div className="mt-20 mx-auto">
+						<div className="mt-24 mx-auto">
 							<div className="mb-5 flex items-center justify-center">
 								<svg
 									aria-hidden="true"
@@ -63,25 +64,25 @@ export default function Login() {
 							</form>
 						</div>
 					</div>
-				</div>
-				<div className="text-sm mt-10 ">
-					Don’t have an account?
-					<a
-						href="/signup"
-						className="ml-1 text-sm text-blue-500 hover:text-sky-500"
-					>
-						Sign up
-					</a>
-				</div>
-				<div className="mt-2 mb-7 text-sm">
-					Are you an employer?
-					<a
-						href="Sign up"
-						className="ml-1 text-sm  text-blue-500 hover:text-sky-500"
-					>
-						Sign up on Talent
-						<MdOutlineOpenInNew className="inline ml-1" />
-					</a>
+					<div className="text-sm mt-10 ">
+						Don’t have an account?
+						<Link
+							to="/signup"
+							className="ml-1 text-sm text-blue-500 hover:text-sky-500"
+						>
+							Sign up
+						</Link>
+					</div>
+					<div className="mt-2 mb-7 text-sm">
+						Are you an employer?
+						<Link
+							to="."
+							className="ml-1 text-sm  text-blue-500 hover:text-sky-500"
+						>
+							Sign up on Talent
+							<MdOutlineOpenInNew className="inline ml-1" />
+						</Link>
+					</div>
 				</div>
 			</div>
 		</>

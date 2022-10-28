@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Votebar() {
+function QuestionVotebar() {
 	return (
 		<div className="w-[40px] mr-4">
 			<div className="flex justify-center">
@@ -46,4 +46,4 @@ function Votebar() {
 	);
 }
 
-export default Votebar;
+export default QuestionVotebar;

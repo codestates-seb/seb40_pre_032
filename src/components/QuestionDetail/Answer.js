@@ -1,13 +1,13 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import AnswerContainer from './AnswerContainer';
-import Votebar from './Votebar';
+import AnswerVotebar from './AnswerVotebar';
 
 function Answer() {
 	return (
 		<div className="mr-6 py-6">
 			<div className="flex flex-row ">
-				<Votebar />
+				<AnswerVotebar />
 				<AnswerContainer />
 			</div>
 		</div>

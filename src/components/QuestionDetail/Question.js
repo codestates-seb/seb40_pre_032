@@ -1,14 +1,12 @@
 import React from 'react';
 import QuestionContainer from './QuestionContainer';
-import Votebar from './Votebar';
+import QuestionVotebar from './QuestionVotebar';
 
 function Question() {
 	return (
-		<div className="mr-6">
-			<div className="flex flex-row ">
-				<Votebar />
-				<QuestionContainer />
-			</div>
+		<div className="mr-6 flex flex-row">
+			<QuestionVotebar />
+			<QuestionContainer />
 		</div>
 	);
 }

@@ -3,7 +3,7 @@ import { SiAskubuntu, SiServerfault, SiSuperuser } from 'react-icons/si';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaStackExchange, FaStackOverflow } from 'react-icons/fa';
 import { GrStackOverflow } from 'react-icons/gr';
-import Header from '../components/Hedaer';
+import Header from '../components/Header';
 
 export default function Logout() {
 	return (

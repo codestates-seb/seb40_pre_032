@@ -3,7 +3,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineGithub, AiFillFacebook } from 'react-icons/ai';
 import { FaQuestionCircle } from 'react-icons/fa';
-import Header from '../components/Hedaer';
+import Header from '../components/Header';
 
 export default function SignUp() {
 	return (

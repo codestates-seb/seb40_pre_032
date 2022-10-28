@@ -2,7 +2,7 @@ import React from 'react';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineGithub, AiFillFacebook } from 'react-icons/ai';
-import Header from '../components/Hedaer';
+import Header from '../components/Header';
 
 export default function Login() {
 	return (
@@ -63,25 +63,25 @@ export default function Login() {
 							</form>
 						</div>
 					</div>
-					<div className="text-sm mt-10 ">
-						Don’t have an account?
-						<a
-							href="Sign up"
-							className="ml-1 text-sm text-blue-500 hover:text-sky-500"
-						>
-							Sign up
-						</a>
-					</div>
-					<div className="mt-2 mb-7 text-sm">
-						Are you an employer?
-						<a
-							href="Sign up"
-							className="ml-1 text-sm  text-blue-500 hover:text-sky-500"
-						>
-							Sign up on Talent
-							<MdOutlineOpenInNew className="inline ml-1" />
-						</a>
-					</div>
+				</div>
+				<div className="text-sm mt-10 ">
+					Don’t have an account?
+					<a
+						href="/signup"
+						className="ml-1 text-sm text-blue-500 hover:text-sky-500"
+					>
+						Sign up
+					</a>
+				</div>
+				<div className="mt-2 mb-7 text-sm">
+					Are you an employer?
+					<a
+						href="Sign up"
+						className="ml-1 text-sm  text-blue-500 hover:text-sky-500"
+					>
+						Sign up on Talent
+						<MdOutlineOpenInNew className="inline ml-1" />
+					</a>
 				</div>
 			</div>
 		</>

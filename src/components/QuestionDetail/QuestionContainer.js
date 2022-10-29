@@ -1,7 +1,7 @@
 import React from 'react';
 import QuestionContent from './QuestionContent';
 import TagContainer from './TagContainer';
-import QuestionInfo from './QuestionInfo';
+import QuestionUserInfo from './QuestionUserInfo';
 import QuestionVotebar from './QuestionVotebar';
 
 function QuestionContainer() {
@@ -11,7 +11,7 @@ function QuestionContainer() {
 			<div className="flex flex-col w-[660px]">
 				<QuestionContent />
 				<TagContainer />
-				<QuestionInfo />
+				<QuestionUserInfo />
 			</div>
 		</div>
 	);

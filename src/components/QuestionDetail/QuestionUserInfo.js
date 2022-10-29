@@ -1,8 +1,14 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
+// import axios from 'axios';
+// import { useParams } from 'react-router-dom';
+// import { useQuery } from 'react-query';
 
-function AnswerInfo({ answerId }) {
-	console.log(answerId);
+function QuestionUserInfo() {
+	// const { id } = useParams();
+	// const { data } = useQuery(['question', id], () => {
+	// 	return axios.get(`http://localhost:4000/questions/${id}`);
+	// });
+
 	return (
 		<div className="flex flex-row h-[50px]">
 			<div className="w-[260px]">
@@ -23,11 +29,11 @@ function AnswerInfo({ answerId }) {
 				</button>
 			</div>
 			<div className="w-[190px] bg-sky-100 px-2 py-1">
-				<div className="text-gray-500 text-sm">asked (created) ago</div>
+				<div className="text-gray-500 text-sm">asked (createdAt) ago</div>
 				<div className="text-blue-500 text-sm">(author)</div>
 			</div>
 		</div>
 	);
 }
 
-export default AnswerInfo;
+export default QuestionUserInfo;

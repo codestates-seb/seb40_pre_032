@@ -2,7 +2,7 @@
 import React from 'react';
 import AnswerVotebar from './AnswerVotebar';
 import AnswerContent from './AnswerContent';
-import AnswerInfo from './AnswerInfo';
+import AnswerUserInfo from './AnswerUserInfo';
 
 function AnswerContainer({ answerId }) {
 	return (
@@ -10,7 +10,7 @@ function AnswerContainer({ answerId }) {
 			<AnswerVotebar answerId={answerId} />
 			<div className="flex flex-col w-[660px]">
 				<AnswerContent answerId={answerId} />
-				<AnswerInfo answerId={answerId} />
+				<AnswerUserInfo />
 			</div>
 		</div>
 	);

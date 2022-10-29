@@ -5,8 +5,6 @@ function QuestionHeader({ isLoading, data, isError, error }) {
 	if (isLoading) return <h2>Loading...</h2>;
 	if (isError) return <h2>{error.message}</h2>;
 
-	console.log(data?.creationDate);
-
 	function elapsed(string) {
 		const today = new Date();
 		const targetDate = new Date(string);
@@ -33,8 +31,7 @@ function QuestionHeader({ isLoading, data, isError, error }) {
 			}
 			return `${Math.round(elapsedTime / 365)} years ago`;
 		}
-
-		return elapsedTime;
+		return null;
 	}
 
 	return (

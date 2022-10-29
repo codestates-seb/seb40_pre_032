@@ -2,14 +2,14 @@ import React from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
-import Question from '../components/QuestionDetail/Question';
+import QuestionContainer from '../components/QuestionDetail/QuestionContainer';
 import QuestionHeader from '../components/QuestionDetail/QuestionHeader';
 import Header from '../components/Header';
 import LeftSidebar from '../components/LeftSidebar';
 import RightSidebar from '../components/RightSidebar';
 import Footer from '../components/Footer';
-import Answer from '../components/QuestionDetail/Answer';
 import AnswerHeader from '../components/QuestionDetail/AnswerHeader';
+import AnswerContainer from '../components/QuestionDetail/AnswerContainer';
 
 function QuestionDetail() {
 	const { id } = useParams();
@@ -34,9 +34,9 @@ function QuestionDetail() {
 						/>
 						<div className="flex flex-row">
 							<div>
-								<Question />
+								<QuestionContainer />
 								<AnswerHeader />
-								<Answer />
+								<AnswerContainer />
 							</div>
 							<RightSidebar />
 						</div>

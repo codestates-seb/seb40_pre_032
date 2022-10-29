@@ -1,6 +1,10 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
 
-function Votebar() {
+function QuestionVotebar({ isLoading, data, isError, error }) {
+	if (isLoading) return <h2>Loading...</h2>;
+	if (isError) return <h2>{error.message}</h2>;
+
 	return (
 		<div className="w-[40px] mr-4">
 			<div className="flex justify-center">
@@ -9,7 +13,9 @@ function Votebar() {
 					<path fill="lightgrey" d="M2 25h32L18 9 2 25Z" />
 				</svg>
 			</div>
-			<div className="flex justify-center text-gray-700">(score)</div>
+			<div className="flex justify-center text-gray-700">
+				{data?.score === undefined ? '0' : data?.score}
+			</div>
 			<div className="flex justify-center mb-2">
 				{/* down button */}
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
@@ -46,4 +52,4 @@ function Votebar() {
 	);
 }
 
-export default Votebar;
+export default QuestionVotebar;

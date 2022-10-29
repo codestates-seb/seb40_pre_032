@@ -2,7 +2,11 @@
 import React from 'react';
 
 function QuestionContent() {
-	return <p className="mb-4 break-all">(questionContent)</p>;
+	return (
+		<div>
+			<p className="mb-4 break-all">(data?.questionContent)</p>
+		</div>
+	);
 }
 
 export default QuestionContent;

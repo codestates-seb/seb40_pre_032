@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ButtonGroup from './ButtonGroup';
 import items from './Dummydata';
 import PageButton from './Pagination/PageButton';
@@ -8,24 +8,12 @@ function Qlist() {
 	const [limit, setLimit] = useState(15);
 	const [page, setPage] = useState(1);
 	const offset = (page - 1) * limit;
-	const questions = items;
-	// const [questions, setQuestions] = useState([]);
+	// const questions = items;
+	const [questions, setQuestions] = useState([]);
 
-	// function onPrevClick() {
-	// 	setPage((prev) => prev - 1);
-	// 	console.log(page);
-	// }
-	// function onButtonClick(e) {
-	// 	setPage(e.target.value);
-	// 	console.log(page);
-	// }
-	// function onNextClick() {
-	// 	setPage((prev) => prev + 1);
-	// 	console.log(page);
-	// }
-	// useEffect(() => {
-	// 	setQuestions(items);
-	// }, []);
+	useEffect(() => {
+		setQuestions(items);
+	}, []);
 	return (
 		// ml 나중에 꼭 없앨것.
 		<div className="p-[24px] w-[727px]  border-l-[1px] border-solid border-[hsl(210,8%,85%)] mb-4 ml-12">

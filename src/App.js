@@ -1,6 +1,6 @@
 import React from 'react';
-import Qlist from './components/Qlist';
+import LoginHeader from './components/LoginHedaer';
 
 export default function App() {
-	return <Qlist />;
+	return <LoginHeader />;
 }

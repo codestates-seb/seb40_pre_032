@@ -1,4 +1,7 @@
 import React from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 import Question from '../components/QuestionDetail/Question';
 import QuestionHeader from '../components/QuestionDetail/QuestionHeader';
 import Header from '../components/Header';
@@ -9,6 +12,13 @@ import Answer from '../components/QuestionDetail/Answer';
 import AnswerHeader from '../components/QuestionDetail/AnswerHeader';
 
 function QuestionDetail() {
+	const { id } = useParams();
+	const { isLoading, data, isError, error } = useQuery(['question', id], () => {
+		return axios.get(`http://localhost:4000/questions/${id}`);
+	});
+	if (isLoading) return <h2>Loading...</h2>;
+	if (isError) return <h2>{error.message}</h2>;
+
 	return (
 		<div>
 			<Header />
@@ -16,7 +26,12 @@ function QuestionDetail() {
 				<LeftSidebar />
 				<div className="flex flex-row">
 					<div className="border-l-2 border-gray-200 px-4">
-						<QuestionHeader />
+						<QuestionHeader
+							data={data?.data}
+							isLoading={isLoading}
+							isError={isError}
+							error={error}
+						/>
 						<div className="flex flex-row">
 							<div>
 								<Question />

@@ -1,9 +1,13 @@
-/* eslint react/prop-types: 0 */
 import React from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
-function QuestionVotebar({ isLoading, data, isError, error }) {
-	if (isLoading) return <h2>Loading...</h2>;
-	if (isError) return <h2>{error.message}</h2>;
+function QuestionVotebar() {
+	const { id } = useParams();
+	const { data } = useQuery(['question', id], () => {
+		return axios.get(`http://localhost:4000/questions/${id}`);
+	});
 
 	return (
 		<div className="w-[40px] mr-4">
@@ -14,7 +18,7 @@ function QuestionVotebar({ isLoading, data, isError, error }) {
 				</svg>
 			</div>
 			<div className="flex justify-center text-gray-700">
-				{data?.score === undefined ? '0' : data?.score}
+				{data?.data.score === undefined ? '0' : data?.data.score}
 			</div>
 			<div className="flex justify-center mb-2">
 				{/* down button */}

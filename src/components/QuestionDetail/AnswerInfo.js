@@ -1,6 +1,8 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
 
-function ContentInfo() {
+function AnswerInfo({ answerId }) {
+	console.log(answerId);
 	return (
 		<div className="flex flex-row h-[50px]">
 			<div className="w-[260px]">
@@ -28,4 +30,4 @@ function ContentInfo() {
 	);
 }
 
-export default ContentInfo;
+export default AnswerInfo;

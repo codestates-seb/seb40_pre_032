@@ -1,7 +1,8 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 
-function AnswerVotebar() {
+function AnswerVotebar({ answerId }) {
+	console.log(answerId);
 	return (
 		<div className="w-[40px] mr-4">
 			<div className="flex justify-center">

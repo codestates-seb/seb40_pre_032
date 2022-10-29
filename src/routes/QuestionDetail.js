@@ -13,11 +13,9 @@ import AnswerContainer from '../components/QuestionDetail/AnswerContainer';
 
 function QuestionDetail() {
 	const { id } = useParams();
-	const { isLoading, data, isError, error } = useQuery(['question', id], () => {
+	const { data } = useQuery(['question', id], () => {
 		return axios.get(`http://localhost:4000/questions/${id}`);
 	});
-	if (isLoading) return <h2>Loading...</h2>;
-	if (isError) return <h2>{error.message}</h2>;
 
 	return (
 		<div>
@@ -26,17 +24,19 @@ function QuestionDetail() {
 				<LeftSidebar />
 				<div className="flex flex-row">
 					<div className="border-l-2 border-gray-200 px-4">
-						<QuestionHeader
-							data={data?.data}
-							isLoading={isLoading}
-							isError={isError}
-							error={error}
-						/>
+						<QuestionHeader data={data?.data} />
 						<div className="flex flex-row">
 							<div>
 								<QuestionContainer />
 								<AnswerHeader />
-								<AnswerContainer />
+								{data?.data.answers.map((answer) => {
+									return (
+										<AnswerContainer
+											key={answer.answerId}
+											answerId={answer.answerId}
+										/>
+									);
+								})}
 							</div>
 							<RightSidebar />
 						</div>

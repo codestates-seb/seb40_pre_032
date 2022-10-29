@@ -1,20 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
 
 function LeftSidebar() {
 	return (
 		<div className="p-2 w-48">
-			<Link
+			<div
 				className="group text-lg font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
 				to="/questions"
 			>
 				<div className="p-1 h-8 flex items-center mb-4 group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
 					Home
 				</div>
-			</Link>
+			</div>
 			<div className="p-1 text-sm font-normal text-gray-500 mb-1.5">PUBLIC</div>
 			<ul className="mb-3">
-				<Link
+				<div
 					className="group text-sm text-gray-500 hover:text-black focus:font-bold focus:text-black"
 					to="/questions"
 				>
@@ -36,8 +36,8 @@ function LeftSidebar() {
 							<span>Questions</span>
 						</div>
 					</li>
-				</Link>
-				<Link
+				</div>
+				<div
 					className="group text-sm font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
 					to="/tags"
 				>
@@ -46,8 +46,8 @@ function LeftSidebar() {
 							<span className="ml-6">Tags</span>
 						</div>
 					</li>
-				</Link>
-				<Link
+				</div>
+				<div
 					className="group text-sm font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
 					to="/users"
 				>
@@ -56,7 +56,7 @@ function LeftSidebar() {
 							<span className="ml-6">Users</span>
 						</div>
 					</li>
-				</Link>
+				</div>
 			</ul>
 			<div className="flex flex-row">
 				<span className="p-1 text-sm font-normal text-gray-500">
@@ -76,7 +76,7 @@ function LeftSidebar() {
 				</svg>
 			</div>
 			<ul>
-				<Link
+				<div
 					className="group text-sm font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
 					to="/questions"
 				>
@@ -97,7 +97,7 @@ function LeftSidebar() {
 							<span>Explore Collectives</span>
 						</li>
 					</div>
-				</Link>
+				</div>
 			</ul>
 			<div className="flex flex-row">
 				<span className="p-1 flex items-center text-sm font-normal text-gray-500">
@@ -117,7 +117,7 @@ function LeftSidebar() {
 				</svg>
 			</div>
 			<ul>
-				<Link
+				<div
 					className="group text-sm font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
 					to="/questions"
 				>
@@ -138,7 +138,7 @@ function LeftSidebar() {
 							<span>Explore Collectives</span>
 						</li>
 					</div>
-				</Link>
+				</div>
 			</ul>
 		</div>
 	);

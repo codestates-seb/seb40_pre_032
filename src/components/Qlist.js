@@ -83,13 +83,15 @@ function Qlist() {
 					</div>
 				</div>
 			))}
-			<PageButton
-				total={questions.length}
-				limit={limit}
-				page={page}
-				setPage={setPage}
-			/>
-			<PerPageBtn setLimit={setLimit} limit={limit} setPage={setPage} />
+			<div className="flex justify-between ">
+				<PageButton
+					total={questions.length}
+					limit={limit}
+					page={page}
+					setPage={setPage}
+				/>
+				<PerPageBtn setLimit={setLimit} limit={limit} setPage={setPage} />
+			</div>
 		</div>
 	);
 }

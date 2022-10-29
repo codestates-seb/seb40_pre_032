@@ -1,6 +1,6 @@
 import React from 'react';
-import LoginHeader from './components/LoginHedaer';
+import Header from './components/Hedaer';
 
 export default function App() {
-	return <LoginHeader />;
+	return <Header />;
 }

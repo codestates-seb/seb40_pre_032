@@ -1,3 +1,4 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
 import QuestionContainer from './QuestionContainer';
 import QuestionVotebar from './QuestionVotebar';

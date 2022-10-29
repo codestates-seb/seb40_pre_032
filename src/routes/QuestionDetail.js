@@ -1,7 +1,4 @@
 import React from 'react';
-import { useQuery } from 'react-query';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import Question from '../components/QuestionDetail/Question';
 import QuestionHeader from '../components/QuestionDetail/QuestionHeader';
 import Header from '../components/Header';
@@ -13,12 +10,6 @@ import AnswerHeader from '../components/QuestionDetail/AnswerHeader';
 import AnswerEditor from '../components/QuestionDetail/AnswerEditor';
 
 function QuestionDetail() {
-	const { questionId } = useParams;
-	const { status, data, error } = useQuery('question', () => {
-		return axios.get(`http://localhost:4000/${questionId}`);
-	});
-
-	console.log(status, data, error);
 	return (
 		<div>
 			<Header />

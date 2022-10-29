@@ -89,7 +89,7 @@ function Qlist() {
 				page={page}
 				setPage={setPage}
 			/>
-			<PerPageBtn setLimit={setLimit} limit={limit} />
+			<PerPageBtn setLimit={setLimit} limit={limit} setPage={setPage} />
 		</div>
 	);
 }

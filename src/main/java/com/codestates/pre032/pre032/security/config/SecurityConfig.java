@@ -1,18 +1,18 @@
-package com.codestates.pre032.pre032.security;
+package com.codestates.pre032.pre032.security.config;
 
-import com.codestates.pre032.pre032.security.Handler.LoginFailureHandler;
-import com.codestates.pre032.pre032.security.Handler.LoginSuccessHandler;
-import com.codestates.pre032.pre032.security.Services.JwtTokenizer;
 import com.codestates.pre032.pre032.security.filter.CustomSecurityFilter;
 import com.codestates.pre032.pre032.security.filter.VerificationFilter;
+import com.codestates.pre032.pre032.security.handler.*;
+import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
+import com.codestates.pre032.pre032.user.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
@@ -24,12 +24,15 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig {
-
     private final JwtTokenizer jwtTokenizer;
 
-    public SecurityConfig(JwtTokenizer jwtTokenizer) {
+    private final UserService userService;
+
+    public SecurityConfig(JwtTokenizer jwtTokenizer, UserService userService) {
         this.jwtTokenizer = jwtTokenizer;
+        this.userService = userService;
     }
 
     @Bean
@@ -42,13 +45,34 @@ public class SecurityConfig {
                 .csrf().disable()
                 // cors를 허용하는 기본 설정으로 적용
                 .cors(withDefaults())
-                // 로그인 설정
+                // 우리 학습과정에선 배우지 않은 내용 : 그냥 disable 하자
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
                 .formLogin()
-                //로그인양식 완성되면 disable 하기
-                .disable()
-//                .loginPage("/users/login-form")
-//                .loginProcessingUrl("/users/login")
-//                .loginProcessingUrl("/process_login")
+                .loginPage("/loginPage")
+//                .disable()
+                .defaultSuccessUrl("/")
+                .and()
+                .httpBasic().disable()
+                .exceptionHandling()
+                .authenticationEntryPoint(new UserAuthenticationEntryPoint())
+                .accessDeniedHandler(new UserAccessDeniedHandler())
+                .and()
+                // 필터 적용
+                .apply(new CustomFilterConfigure())
+                .and()
+                .authorizeHttpRequests(authorize -> authorize
+//                         권한 설정
+                                .antMatchers("/").authenticated()
+                                .anyRequest().permitAll()
+                )
+                .oauth2Login(oauth2 -> oauth2
+                        .successHandler(new OAuth2SuccessHandler(jwtTokenizer, userService))  // (1)
+                )
+
+                // 로그인 설정
+//                .loginPage("/users/loginPage")
+//                .defaultSuccessUrl("/")
 //                .failureUrl("로그인 실패시 url")
 //                .exceptionHandling().accessDeniedPage("/users/access-denied")
 //                .and()
@@ -56,17 +80,6 @@ public class SecurityConfig {
                 .logout()
                 .logoutUrl("/users/logout")
                 .logoutSuccessUrl("/")
-                .and()
-                // 우리 학습과정에선 배우지 않은 내용 : 그냥 diable 하자
-                .httpBasic().disable()
-                // 필터 적용
-                .apply(new CustomFilterConfigure())
-                .and()
-                .authorizeHttpRequests(authorize -> authorize
-//                         권한 설정
-                                .anyRequest().permitAll()
-                ).oauth2Login(withDefaults())
-
         ;
 
         return http.build();
@@ -86,10 +99,6 @@ public class SecurityConfig {
             builder.addFilter(jwtAuthenticationFilter)
                     .addFilterAfter(verificationFilter, CustomSecurityFilter.class);  // (2-6)
         }
-    }
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
     }
 
     @Bean

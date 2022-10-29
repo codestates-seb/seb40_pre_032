@@ -1,4 +1,4 @@
-package com.codestates.pre032.pre032.security.Services;
+package com.codestates.pre032.pre032.security.jwt;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;

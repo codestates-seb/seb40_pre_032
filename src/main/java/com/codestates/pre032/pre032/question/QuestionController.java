@@ -28,6 +28,7 @@ public class QuestionController {
 
     // 작성 기능
     @PostMapping("/add")
+//    @PreAuthorize("isAuthenticated()")
     public ResponseEntity addQuestion(@Validated @RequestBody QuestionDto.Post requestBody) {
         Question question = questionService.create(questionMapper.questionPostDtoToQuestion(requestBody),
                 requestBody.getTags());

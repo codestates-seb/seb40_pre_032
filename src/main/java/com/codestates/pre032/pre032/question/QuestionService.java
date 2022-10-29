@@ -2,6 +2,7 @@ package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
 import com.codestates.pre032.pre032.tag.*;
+import com.codestates.pre032.pre032.user.UserService;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -11,10 +12,13 @@ import java.util.*;
 public class QuestionService {
     private final QuestionRepository questionRepository;
 
+    private final UserService userService;
     private final TagService tagService;
 
-    public QuestionService(QuestionRepository questionRepository, TagService tagService) {
+    public QuestionService(QuestionRepository questionRepository, UserService userService, TagService tagService) {
         this.questionRepository = questionRepository;
+        this.userService = userService;
+
         this.tagService = tagService;
     }
 

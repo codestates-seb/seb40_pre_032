@@ -1,7 +1,7 @@
 package com.codestates.pre032.pre032.security.filter;
 
 import com.codestates.pre032.pre032.security.Dto.LoginDto;
-import com.codestates.pre032.pre032.security.Services.JwtTokenizer;
+import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
 import com.codestates.pre032.pre032.user.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
@@ -62,7 +62,7 @@ public class CustomSecurityFilter extends UsernamePasswordAuthenticationFilter {
     // 엑세스토큰 생성 로직
     private String delegateAccessToken(User user) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("username", user.getEmail());
+        claims.put("email", user.getEmail());
         claims.put("userId",user.getUserId());
 
         String subject = user.getEmail();

@@ -1,4 +1,4 @@
-package com.codestates.pre032.pre032.security.Handler;
+package com.codestates.pre032.pre032.security.handler;
 
 import com.codestates.pre032.pre032.exception.ErrorResponse;
 import com.google.gson.Gson;

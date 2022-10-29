@@ -1,5 +1,7 @@
 package com.codestates.pre032.pre032.user;
 
+import com.codestates.pre032.pre032.answer.Answer;
+import com.codestates.pre032.pre032.question.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -7,12 +9,22 @@ import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class User {
+    public User(String email, String password, String displayName, String profileImage, LocalDateTime creationDate, String provider, String providerId) {
+        this.email = email;
+        this.password = password;
+        this.displayName = displayName;
+        this.profileImage = profileImage;
+        this.creationDate = creationDate;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
@@ -32,4 +44,10 @@ public class User {
 
     @Column
     private LocalDateTime creationDate;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Question> questions = new ArrayList<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Answer> answers;
 }

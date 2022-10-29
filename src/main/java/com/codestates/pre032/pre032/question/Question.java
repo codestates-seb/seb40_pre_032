@@ -2,6 +2,7 @@ package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.answer.Answer;
 import com.codestates.pre032.pre032.tag.QuestionTag;
+import com.codestates.pre032.pre032.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -53,6 +54,10 @@ public class Question {
     // todo: answer 연관관계 설정
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Answer> answers = new ArrayList<>();
+
+    @ManyToOne
+    @JoinColumn(name = "user_userId")
+    private User user;
 
     @Column
     private int answerCount;

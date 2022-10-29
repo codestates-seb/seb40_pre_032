@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    include: oauth
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/pre032?serverTimezone=Asia/Seoul
@@ -11,16 +13,18 @@ spring:
     properties:
       hibernate:
         format_sql: true;
-  oauth2:
-    client:
-      registration:
-        google: # /oauth2/authorization/google ? ??? ???? ??.
-          client-id: 651205845903-qai6o7d9i09suejmtb77pdhp8gr2dde1.apps.googleusercontent.com
-          client-secret: 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
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 651205845903-ijvbcuiaa7sfn9q0tr7i78h4301ggomp.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
           scope:
-            - email
-            - profile
-            - profile_image
+             - email
+             - profile
 server:
   servlet:
     encoding:

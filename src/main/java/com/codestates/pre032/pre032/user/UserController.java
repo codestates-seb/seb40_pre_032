@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    private final UserMapper userMapper;
+
+    public UserController(UserService userService, UserMapper userMapper) {
         this.userService = userService;
+        this.userMapper = userMapper;
     }
 
     // 회원가입
@@ -22,23 +25,24 @@ public class UserController {
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
-    // 로그인 기능
-    @PostMapping("/login")
-    public ResponseEntity login(){
-
-        return new ResponseEntity(HttpStatus.OK);
-    }
-
-//    @GetMapping("{user_id}/myPage")
-//    public ResponseEntity getMyPage(@PathVariable Long id){
+//    // 로그인 기능
+//    @PostMapping("/login")
+//    public ResponseEntity login(){
 //
-//        return new ResponseEntity<>(, HttpStatus.OK)
+//        return new ResponseEntity(HttpStatus.OK);
 //    }
+
+    @GetMapping("{user_id}/myPage")
+    public ResponseEntity getMyPage(@PathVariable Long id){
+        User user = this.userService.find(id);
+        UserDto.response response = this.userMapper.userToUserResponseDto(user);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 //    // 요청 거부
 //    @GetMapping("/access-denied")
 //    public String accessDenied() {
 //        return "access-denied";
 //    }
-
 
 }

@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import javax.validation.constraints.NotBlank;
+import java.time.LocalDateTime;
 
 public class UserDto {
     @Getter
@@ -19,14 +20,15 @@ public class UserDto {
         private String password;
     }
 
-//    @Getter
-//    @AllArgsConstructor
-//    public static class response{
-//        private Long userId;
-//        private String email;
-//        private String displayName;
-//        private String profileImage;
-//        private LocalDateTime creationDate;
-//        private int
-//    }
+    @Getter
+    @AllArgsConstructor
+    public static class response{
+        private Long userId;
+        private String email;
+        private String displayName;
+        private String profileImage;
+        private LocalDateTime creationDate;
+        private int questionsLength;
+        private int answersLength;
+    }
 }

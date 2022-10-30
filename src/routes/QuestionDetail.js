@@ -21,10 +21,10 @@ function QuestionDetail() {
 	return (
 		<div>
 			<Header />
-			<div className="flex justify-center">
+			<div>
 				<LeftSidebar />
-				<div className="flex flex-row">
-					<div className="border-l-2 border-gray-200 px-4">
+				<div className="ml-[250px]">
+					<div className="w-[1075px] border-l-2 border-gray-200 px-4">
 						<QuestionHeader data={data?.data} />
 						<div className="flex flex-row">
 							<div>

@@ -24,20 +24,22 @@ function QuestionDetail() {
 			<div>
 				<LeftSidebar />
 				<div className="ml-[250px]">
-					<div className="w-[1075px] border-l-2 border-gray-200 px-4">
+					<div className="w-[1165px] border-l-2 border-gray-200 px-4">
 						<QuestionHeader data={data?.data} />
 						<div className="flex flex-row">
 							<div>
 								<QuestionContainer />
 								<AnswerHeader />
-								{data?.data.answers.map((answer) => {
-									return (
-										<AnswerContainer
-											key={answer.answerId}
-											answerId={answer.answerId}
-										/>
-									);
-								})}
+								{data?.data.answers.length
+									? data?.data.answers.map((answer) => {
+											return (
+												<AnswerContainer
+													key={answer.answerId}
+													answerId={answer.answerId}
+												/>
+											);
+									  })
+									: null}
 								<AnswerEditor />
 							</div>
 							<RightSidebar />

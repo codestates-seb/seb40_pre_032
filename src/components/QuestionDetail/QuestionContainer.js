@@ -8,7 +8,7 @@ function QuestionContainer() {
 	return (
 		<div className="mr-6 flex flex-row">
 			<QuestionVotebar />
-			<div className="flex flex-col w-[660px]">
+			<div className="flex flex-col w-[750px]">
 				<QuestionContent />
 				<TagContainer />
 				<QuestionUserInfo />

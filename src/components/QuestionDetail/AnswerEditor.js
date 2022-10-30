@@ -30,11 +30,7 @@ function AnswerEditor() {
 	return (
 		<main>
 			<article>
-				<section className="h-[500px] w-[710px]">
-					<span>
-						Know someone who can answer? Share a link to this question via
-						email, Twitter, or Facebook.
-					</span>
+				<section className="h-[500px] w-[810px] mt-4">
 					<h3 className="text-xl mb-4">Your Answer</h3>
 					<form onSubmit={handleSubmit(onSubmit)}>
 						<ReactQuill

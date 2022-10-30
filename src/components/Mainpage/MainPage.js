@@ -9,8 +9,8 @@ export default function MainPage() {
 	return (
 		<div className="flex flex-col items-center">
 			<Header />
-			<div className="flex">
-				<LeftSidebar />
+			<div className="flex pt-[51px]">
+				<LeftSidebar className="float-left" />
 				<Qlist />
 				<RightSidebar />
 			</div>

@@ -17,6 +17,9 @@ module.exports = {
 				sidebar:
 					'0 1px 2px hsla(0,0%,0%,0.05), 0 1px 4px hsla(0, 0%, 0%, 0.05), 0 2px 8px hsla(0, 0%, 0%, 0.05)',
 			},
+			flex: {
+				test: '1 0 auto',
+			},
 		},
 	},
 	variants: {},

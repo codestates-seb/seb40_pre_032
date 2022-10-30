@@ -2,7 +2,7 @@ import React from 'react';
 
 function Header() {
 	return (
-		<div className="fixed top-0 inset-x-0 flex flex-col">
+		<div className="fixed top-0 inset-x-0 flex flex-col z-10">
 			<div className="w-full bg-[#f38227] h-[3px]" />
 			<header className="h-[47px] bg-[#f7faf9] flex flex-row items-center shadow-1top text-[13px] ">
 				<div className="w-[1350px] h-full flex items-center mx-auto my-0 max-w-full">

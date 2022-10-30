@@ -21,30 +21,26 @@ function QuestionDetail() {
 	return (
 		<div>
 			<Header />
-			<div>
-				<LeftSidebar />
-				<div className="ml-[250px]">
-					<div className="w-[1165px] border-l-2 border-gray-200 px-4">
-						<QuestionHeader data={data?.data} />
-						<div className="flex flex-row">
-							<div>
-								<QuestionContainer />
-								<AnswerHeader />
-								{data?.data.answers.length
-									? data?.data.answers.map((answer) => {
-											return (
-												<AnswerContainer
-													key={answer.answerId}
-													answerId={answer.answerId}
-												/>
-											);
-									  })
-									: null}
-								<AnswerEditor />
-							</div>
-							<RightSidebar />
-						</div>
+			<LeftSidebar />
+			<div className="w-[1160px] border-l-2 border-gray-200 px-4 ml-[460px]">
+				<QuestionHeader data={data?.data} />
+				<div className="flex flex-row">
+					<div>
+						<QuestionContainer />
+						<AnswerHeader />
+						{data?.data.answers.length
+							? data?.data.answers.map((answer) => {
+									return (
+										<AnswerContainer
+											key={answer.answerId}
+											answerId={answer.answerId}
+										/>
+									);
+							  })
+							: null}
+						<AnswerEditor />
 					</div>
+					<RightSidebar />
 				</div>
 			</div>
 			<Footer />

@@ -11,21 +11,21 @@ function QuestionVotebar() {
 
 	return (
 		<div className="w-[40px] mr-4">
-			<div className="flex justify-center">
+			<button type="button" className="flex justify-center">
 				{/* up button */}
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 					<path fill="lightgrey" d="M2 25h32L18 9 2 25Z" />
 				</svg>
-			</div>
+			</button>
 			<div className="flex justify-center text-gray-700">
 				{data?.data.score === undefined ? '0' : data?.data.score}
 			</div>
-			<div className="flex justify-center mb-2">
+			<button type="button" className="flex justify-center mb-2">
 				{/* down button */}
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 					<path fill="lightgrey" d="M2 11h32L18 27 2 11Z" />
 				</svg>
-			</div>
+			</button>
 			<div className="flex justify-center mb-3">
 				<button type="button">
 					{/* bookmark icon */}

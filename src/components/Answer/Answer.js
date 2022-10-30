@@ -6,9 +6,7 @@ import Date from './Date';
 function Answer() {
 	return (
 		<div className="flex mx-auto justify-center">
-			<div className="flex-col">
-				<Arrow />
-			</div>
+			<Arrow />
 			<div className="px-4 ">
 				Can you explain what were you expecting to happen when clicking on the
 				Edit button? With your current code editData is the exact same as data,

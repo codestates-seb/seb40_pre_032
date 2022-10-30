@@ -1,20 +1,33 @@
-import React from 'react';
-import Header from './components/Header';
-import LeftSidebar from './components/LeftSidebar';
-import Qlist from './components/Qlist';
-import RightSidebar from './components/RightSidebar';
-import Footer from './components/Footer';
+import React, { Suspense } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
+import NotFound from './components/NotFound';
+import Login from './routes/login';
+import Logout from './routes/logout';
+import SignUp from './routes/signUp';
+import MyPage from './routes/myPage';
+import QuestionDetail from './routes/QuestionDetail';
+import Loading from './components/Loading';
+
+const queryClient = new QueryClient();
 
 export default function App() {
 	return (
-		<div className="flex flex-col items-center">
-			<Header />
-			<div className="flex">
-				<LeftSidebar />
-				<Qlist />
-				<RightSidebar />
-			</div>
-			<Footer />
-		</div>
+		<QueryClientProvider client={queryClient}>
+			<BrowserRouter>
+				<Suspense fallback={<Loading />}>
+					<Routes>
+						<Route path="mypage" element={<MyPage />} />
+						<Route path="login" element={<Login />} />
+						<Route path="logout" element={<Logout />} />
+						<Route path="signup" element={<SignUp />} />
+						<Route path="questions/:id" element={<QuestionDetail />} />
+						<Route path="*" element={<NotFound />} />
+					</Routes>
+				</Suspense>
+			</BrowserRouter>
+			<ReactQueryDevtools />
+		</QueryClientProvider>
 	);
 }

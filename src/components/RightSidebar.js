@@ -3,7 +3,7 @@ import { IoPencilSharp } from 'react-icons/io5';
 import { FcAbout } from 'react-icons/fc';
 import { DiStackoverflow } from 'react-icons/di';
 
-function Sidebar() {
+function RightSidebar() {
 	return (
 		<div>
 			<div className="shadow-sidebar w-[300px] mb-4 mt-5">
@@ -149,7 +149,7 @@ function Sidebar() {
 					</li>
 				</ul>
 			</div>
-			<div className="shadow-sidebar w-[300px] mb-[16px]">
+			<div className="w-[300px] mb-[16px] shadow-sidebar">
 				<ul>
 					<li className="px-[15px] py-[12px] bg-[#f7faf9] border-b-[1px] text-[14px] text-[#5c6067]">
 						<div>Custom Filters</div>
@@ -165,4 +165,4 @@ function Sidebar() {
 	);
 }
 
-export default Sidebar;
+export default RightSidebar;

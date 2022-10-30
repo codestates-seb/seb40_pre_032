@@ -10,6 +10,7 @@ import RightSidebar from '../components/RightSidebar';
 import Footer from '../components/Footer';
 import AnswerHeader from '../components/QuestionDetail/AnswerHeader';
 import AnswerContainer from '../components/QuestionDetail/AnswerContainer';
+import AnswerEditor from '../components/QuestionDetail/AnswerEditor';
 
 function QuestionDetail() {
 	const { id } = useParams();
@@ -37,7 +38,9 @@ function QuestionDetail() {
 										/>
 									);
 								})}
+								<AnswerEditor />
 							</div>
+
 							<RightSidebar />
 						</div>
 					</div>

@@ -1,6 +1,19 @@
+/* eslint react/prop-types: 0 */
 import React from 'react';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
 
-function Votebar() {
+function AnswerVotebar({ answerId }) {
+	const { id } = useParams();
+	const { data } = useQuery(['question', id], () => {
+		return axios.get(`http://localhost:4000/questions/${id}`);
+	});
+
+	const answerData = data?.data.answers.find(
+		(answer) => answer.answerId === answerId,
+	);
+
 	return (
 		<div className="w-[40px] mr-4">
 			<div className="flex justify-center">
@@ -9,7 +22,9 @@ function Votebar() {
 					<path fill="lightgrey" d="M2 25h32L18 9 2 25Z" />
 				</svg>
 			</div>
-			<div className="flex justify-center text-gray-700">(score)</div>
+			<div className="flex justify-center text-gray-700">
+				{answerData.score}
+			</div>
 			<div className="flex justify-center mb-2">
 				{/* down button */}
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
@@ -46,4 +61,4 @@ function Votebar() {
 	);
 }
 
-export default Votebar;
+export default AnswerVotebar;

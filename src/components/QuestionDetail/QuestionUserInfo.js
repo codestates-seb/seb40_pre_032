@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
-function QuestionHeader() {
+function QuestionUserInfo() {
 	const { id } = useParams();
 	const { data } = useQuery(['question', id], () => {
 		return axios.get(`http://localhost:4000/questions/${id}`);
@@ -39,36 +39,32 @@ function QuestionHeader() {
 	}
 
 	return (
-		<div className="mt-[47px] py-[20px]">
-			<div className="flex flex-row justify-between">
-				<h1 className="text-2xl">{data?.data.title}</h1>
-				<button
-					className="rounded-sm text-sm p-2 text-white bg-[#0a94ff] hover:bg-[#0074CC]"
-					type="button"
-				>
-					Ask Question
+		<div className="flex flex-row h-[50px]">
+			<div className="w-[260px]">
+				<button className="mr-2 text-sm text-gray-500" type="button">
+					Share
+				</button>
+				<button className="mr-2 text-sm text-gray-500" type="button">
+					Edit
+				</button>
+				<button className="mr-2 text-sm text-gray-500" type="button">
+					Follow
 				</button>
 			</div>
-			<div className="border-gray-200 flex border-b-2 flex-row mb-4">
-				<div>
-					<span className="text-sm py-2 mr-3 text-gray-500">Asked</span>
-					<span className="text-sm py-2 mr-3">
-						{elapsed(data?.data.creationDate)}
-					</span>
+			{/* 수정된 적 없으면 빈칸 */}
+			<div className="w-[200px]">
+				<button type="button" className="text-blue-500 text-sm">
+					edited (editedAt) ago
+				</button>
+			</div>
+			<div className="w-[190px] bg-sky-100 px-2 py-1">
+				<div className="text-gray-500 text-sm">
+					asked {elapsed(data?.data.creationDate)}
 				</div>
-				<div>
-					<span className="text-sm py-2 mr-3 text-gray-500">Modified</span>
-					<span className="text-sm py-2 mr-3">
-						{elapsed(data?.data.modifiedAt)}
-					</span>
-				</div>
-				<div>
-					<span className="text-sm py-2 mr-3 text-gray-500">Viewed</span>
-					<span className="text-sm py-2 mr-3">{data?.data.viewCount}</span>
-				</div>
+				<div className="text-blue-500 text-sm">{data?.data.displayName}</div>
 			</div>
 		</div>
 	);
 }
 
-export default QuestionHeader;
+export default QuestionUserInfo;

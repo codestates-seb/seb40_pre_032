@@ -9,6 +9,8 @@ import SignUp from './routes/signUp';
 import MyPage from './routes/myPage';
 import QuestionDetail from './routes/QuestionDetail';
 import Loading from './components/Loading';
+import MainPage from './components/Mainpage/MainPage';
+import Editor from './components/Editor';
 
 const queryClient = new QueryClient();
 
@@ -18,6 +20,9 @@ export default function App() {
 			<BrowserRouter>
 				<Suspense fallback={<Loading />}>
 					<Routes>
+						<Route path="/" element={<MainPage />} />
+						<Route path="/ask" element={<Editor />} />
+						<Route path="/questions" element={<MainPage />} />
 						<Route path="mypage" element={<MyPage />} />
 						<Route path="login" element={<Login />} />
 						<Route path="logout" element={<Logout />} />

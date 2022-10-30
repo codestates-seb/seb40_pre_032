@@ -10,12 +10,17 @@ function AnswerHeader() {
 	});
 
 	return (
+<<<<<<< HEAD
 		<div className="flex flex-row justify-between mr-6 align-middle mt-6">
 			<h2 className="text-xl">
 				{data?.data.answers.length > 1
 					? `${data?.data.answers.length} Answers`
 					: `${data?.data.answers.length} Answer`}
 			</h2>
+=======
+		<div className="flex flex-row justify-between mr-8 align-middle mt-6">
+			<h2 className="text-xl">(answers.length) Answer</h2>
+>>>>>>> f11a74ef23cab0a919f60a0e44645f9e83308ded
 			<div>
 				{/* 기능 구현 없는 목업 드롭다운 */}
 				<span className="text-xs">Sorted by: </span>

@@ -29,7 +29,7 @@ function Editor() {
 	const editorContent = watch('content');
 
 	return (
-		<main className="flex items-center h-screen bg-[#F1F2F3]">
+		<main className="flex items-center bg-[#F1F2F3]">
 			<article>
 				<h1 className="font-bold ml-12 mt-4 text-2xl">Ask a Question</h1>
 				<section className="shadow w-[1000px] h-[800px] px-2 mx-10 mt-10 border border-gray-600 bg-white">

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 function Header() {
 	return (
@@ -6,8 +7,8 @@ function Header() {
 			<div className="w-full bg-[#f38227] h-[3px]" />
 			<header className="h-[47px] bg-[#f7faf9] flex flex-row items-center shadow-1top text-[13px] ">
 				<div className="w-[1350px] h-full flex items-center mx-auto my-0 max-w-full">
-					<a
-						href="https://stackoverflow.com/"
+					<Link
+						to="/"
 						className="cursor-pointer pb-[6px] px-2 flex items-center bg-transparent w-[166px] h-[47px] hover:bg-[hsl(210,8%,90%)]"
 					>
 						<img
@@ -15,7 +16,7 @@ function Header() {
 							src="/img/stack.png"
 							className="w-[150px] h-[30px]"
 						/>
-					</a>
+					</Link>
 					<div className="w-[82px] h-[33px] cursor-pointer flex items-center justify-center rounded-[30px] hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
 						<span>About</span>
 					</div>
@@ -37,22 +38,22 @@ function Header() {
 					<nav>
 						<ol className="list-none">
 							<li className="border-solid float-left flex  h-[34px]  ">
-								<a
-									href="https://www.naver.com"
+								<Link
+									to="/login"
 									type="button"
 									className="w-[60px] flex items-center justify-center border-[#37739c] hover:bg-[#b3d3e9] text-[#37739c] bg-[#e0ecf3] text-[13px] border-[0.5px] rounded-[3px] "
 								>
 									Log in
-								</a>
+								</Link>
 							</li>
 							<li className=" ml-[4px] float-left flex h-[34px]  text-[13px] ">
-								<a
-									href="https://www.naver.com"
+								<Link
+									to="/signup"
 									type="button"
 									className=" flex items-center w-[68px] justify-center  text-white  border-[0.5px] rounded-[3px] hover:bg-[#0074CC] bg-[#0a94ff]"
 								>
 									Sign up
-								</a>
+								</Link>
 							</li>
 						</ol>
 					</nav>

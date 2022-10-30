@@ -1,25 +1,25 @@
 import React from 'react';
-// import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function LeftSidebar() {
 	return (
 		<div className="p-2 w-48 pt-[28px]">
 			<div className="fixed">
-				<div
+				<Link
 					className="group text-lg font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
-					to="/questions"
+					to="/"
 				>
 					<div className="p-1 h-8 flex items-center mb-4 group-focus:bg-gray-100 group-focus:border-r-4 group-focus:border-orange-400">
 						Home
 					</div>
-				</div>
+				</Link>
 				<div className="p-1 text-sm font-normal text-gray-500 mb-1.5">
 					PUBLIC
 				</div>
 				<ul className="mb-3">
-					<div
+					<Link
 						className="group text-sm text-gray-500 hover:text-black focus:font-bold focus:text-black"
-						to="/questions"
+						to="/"
 					>
 						<li>
 							{' '}
@@ -39,7 +39,7 @@ function LeftSidebar() {
 								<span>Questions</span>
 							</div>
 						</li>
-					</div>
+					</Link>
 					<div
 						className="group text-sm font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black"
 						to="/tags"

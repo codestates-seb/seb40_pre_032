@@ -10,7 +10,7 @@ export default function MainPage() {
 		<div className="flex flex-col items-center">
 			<Header />
 			<div className="flex pt-[51px]">
-				<LeftSidebar className="float-left" />
+				<LeftSidebar />
 				<Qlist />
 				<RightSidebar />
 			</div>

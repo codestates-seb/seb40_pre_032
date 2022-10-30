@@ -10,7 +10,7 @@ function AnswerContainer({ answerId }) {
 			<AnswerVotebar answerId={answerId} />
 			<div className="flex flex-col w-[660px]">
 				<AnswerContent answerId={answerId} />
-				<AnswerUserInfo />
+				<AnswerUserInfo answerId={answerId} />
 			</div>
 		</div>
 	);

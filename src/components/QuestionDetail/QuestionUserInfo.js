@@ -29,7 +29,7 @@ function QuestionUserInfo() {
 			}
 			return `${Math.round(elapsedTime / 30)} months ago`;
 		}
-		if (elapsedTime > 365) {
+		if (elapsedTime >= 365) {
 			if (Math.round(elapsedTime / 365) === 1) {
 				return '1 year ago';
 			}

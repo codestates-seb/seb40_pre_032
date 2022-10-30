@@ -40,7 +40,6 @@ function QuestionDetail() {
 								})}
 								<AnswerEditor />
 							</div>
-
 							<RightSidebar />
 						</div>
 					</div>

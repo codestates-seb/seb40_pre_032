@@ -21,7 +21,7 @@ function AnswerUserInfo() {
 					edited (editedAt) ago
 				</button>
 			</div>
-			<div className="w-[190px] bg-sky-100 px-2 py-1">
+			<div className="w-[190px] px-2 py-1">
 				<div className="text-gray-500 text-sm">asked (created) ago</div>
 				<div className="text-blue-500 text-sm">(author)</div>
 			</div>

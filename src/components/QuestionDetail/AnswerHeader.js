@@ -3,7 +3,7 @@ import React from 'react';
 
 function AnswerHeader() {
 	return (
-		<div className="flex flex-row justify-between mr-6 align-middle mt-6">
+		<div className="flex flex-row justify-between mr-8 align-middle mt-6">
 			<h2 className="text-xl">(answers.length) Answer</h2>
 			<div>
 				{/* 기능 구현 없는 목업 드롭다운 */}

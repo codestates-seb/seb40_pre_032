@@ -1,15 +1,22 @@
 import React from 'react';
-import Question from '../components/QuestionDetail/Question';
+import axios from 'axios';
+import { useParams } from 'react-router-dom';
+import { useQuery } from 'react-query';
+import QuestionContainer from '../components/QuestionDetail/QuestionContainer';
 import QuestionHeader from '../components/QuestionDetail/QuestionHeader';
 import Header from '../components/Header';
 import LeftSidebar from '../components/LeftSidebar';
 import RightSidebar from '../components/RightSidebar';
 import Footer from '../components/Footer';
-import Answer from '../components/QuestionDetail/Answer';
 import AnswerHeader from '../components/QuestionDetail/AnswerHeader';
-import AnswerEditor from '../components/QuestionDetail/AnswerEditor';
+import AnswerContainer from '../components/QuestionDetail/AnswerContainer';
 
 function QuestionDetail() {
+	const { id } = useParams();
+	const { data } = useQuery(['question', id], () => {
+		return axios.get(`http://localhost:4000/questions/${id}`);
+	});
+
 	return (
 		<div>
 			<Header />
@@ -17,13 +24,19 @@ function QuestionDetail() {
 				<LeftSidebar />
 				<div className="flex flex-row">
 					<div className="border-l-2 border-gray-200 px-4">
-						<QuestionHeader />
+						<QuestionHeader data={data?.data} />
 						<div className="flex flex-row">
 							<div>
-								<Question />
+								<QuestionContainer />
 								<AnswerHeader />
-								<Answer />
-								<AnswerEditor />
+								{data?.data.answers.map((answer) => {
+									return (
+										<AnswerContainer
+											key={answer.answerId}
+											answerId={answer.answerId}
+										/>
+									);
+								})}
 							</div>
 							<RightSidebar />
 						</div>

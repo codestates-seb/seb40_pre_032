@@ -2,6 +2,7 @@ package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.answer.*;
 import com.codestates.pre032.pre032.tag.QuestionTag;
+import com.codestates.pre032.pre032.tag.Tag;
 import com.google.gson.Gson;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -227,21 +228,15 @@ public class QuestionControllerTest {
     @DisplayName("question 데이터 상세조회 테스트")
     void getQuestionTest() throws Exception {
         Long questionId = 1L;
+
         tags.add("스프링");
         tags.add("자바");
-
+        //given
         List<AnswerDto.Response> answerResponse = new ArrayList<>();
         answerResponse.add(new AnswerDto.Response(true,1 ,LocalDateTime.now(),1L,"자바",1L));
 
-        //given
-        Question question = new Question();
-        question.setQuestionId(questionId);
-        question.setTitle("스프링");
-        question.setQuestionContent("spring");
 
-
-        List<QuestionDto.questionContentResponse> response = new ArrayList<>();
-        response.add(new QuestionDto.questionContentResponse(
+        QuestionDto.questionContentResponse response = new QuestionDto.questionContentResponse(
                 tags,
                 true,
                 1,
@@ -253,12 +248,11 @@ public class QuestionControllerTest {
                 "스프링",
                 "spring",
                 answerResponse
-        ));
+        );
 
         //given
-        given(questionService.getDetail(eq(questionId))).willReturn(question);
-        given(mapper.questionsToQuestionContentResponsesDto(Mockito.anyList())).willReturn(response);
-//        given(mapper.answerToAnswerResponseDto(Mockito.any(Answer.class))).willReturn(answerResponseDto);
+        given(questionService.getDetail(eq(questionId))).willReturn(new Question());
+        given(mapper.questionToQuestionContentResponseDto(Mockito.any(Question.class))).willReturn(response);
 
         //when
         ResultActions actions =
@@ -271,6 +265,7 @@ public class QuestionControllerTest {
         //then
         actions
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.questionId").value(questionId))
                 .andDo(document(
                         "get-question",
                         preprocessRequest(prettyPrint()),
@@ -280,15 +275,24 @@ public class QuestionControllerTest {
                         ),
                         responseFields(
                                 Arrays.asList(
-                                        fieldWithPath(".answered").type(JsonFieldType.BOOLEAN).description("질문 답변 여부"),
-                                        fieldWithPath(".viewCount").type(JsonFieldType.NUMBER).description("질문 조회수"),
-                                        fieldWithPath(".answerCount").type(JsonFieldType.NUMBER).description("질문 답변수"),
-                                        fieldWithPath(".score").type(JsonFieldType.NUMBER).description("질문 추천수"),
-                                        fieldWithPath(".creationDate").type(JsonFieldType.STRING).description("질문 생성일자"),
-                                        fieldWithPath(".questionId").type(JsonFieldType.NUMBER).description("질문Id"),
-                                        fieldWithPath(".questionContent").type(JsonFieldType.STRING).description("질문 내용"),
-                                        fieldWithPath(".title").type(JsonFieldType.STRING).description("질문 제목"),
-                                        fieldWithPath(".accessToken").type(JsonFieldType.STRING).description("액세스 토큰")
+                                        fieldWithPath("tags").type(JsonFieldType.ARRAY).description("태그"),
+                                        fieldWithPath("answered").type(JsonFieldType.BOOLEAN).description("질문 답변 여부"),
+                                        fieldWithPath("viewCount").type(JsonFieldType.NUMBER).description("질문 조회수"),
+                                        fieldWithPath("answerCount").type(JsonFieldType.NUMBER).description("질문 답변수"),
+                                        fieldWithPath("score").type(JsonFieldType.NUMBER).description("질문 추천수"),
+                                        fieldWithPath("creationDate").type(JsonFieldType.STRING).description("질문 생성일자"),
+                                        fieldWithPath("modifiedAt").type(JsonFieldType.STRING).description("질문 수정일자"),
+                                        fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 번호"),
+                                        fieldWithPath("questionContent").type(JsonFieldType.STRING).description("질문 내용"),
+                                        fieldWithPath("title").type(JsonFieldType.STRING).description("질문 제목"),
+                                        fieldWithPath("answers").type(JsonFieldType.ARRAY).description("답변"),
+                                        fieldWithPath("answers[].score").type(JsonFieldType.NUMBER).description("답변 추천수"),
+                                        fieldWithPath("answers[].creationDate").type(JsonFieldType.STRING).description("답변 생성일자"),
+                                        fieldWithPath("answers[].answerId").type(JsonFieldType.NUMBER).description("답변 번호"),
+                                        fieldWithPath("answers[].answerContent").type(JsonFieldType.STRING).description("답변 내용"),
+                                        fieldWithPath("answers[].questionId").type(JsonFieldType.NUMBER).description("질문 번호"),
+                                        fieldWithPath("answers[].accepted").type(JsonFieldType.BOOLEAN).description("답변 채택여부")
+
                                 )
                         )
                 ));

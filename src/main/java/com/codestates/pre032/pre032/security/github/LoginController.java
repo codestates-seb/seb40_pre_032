@@ -19,7 +19,7 @@ public class LoginController {
     public ResponseEntity<String> githubLogin(@PathParam("code") String code, HttpServletResponse response) {
         GithubToken githubToken = loginService.getAccessToken(code);
         response.setHeader("Authorization", githubToken.getAuthorizationValue());
-        loginService.getUserName(githubToken.getAccessToken());
+        loginService.getLogin(githubToken.getAccessToken());
 
         return ResponseEntity.ok("logined");
     }

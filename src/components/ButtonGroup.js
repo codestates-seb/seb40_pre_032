@@ -3,20 +3,20 @@ import { IoFilterSharp } from 'react-icons/io5';
 
 function ButtonGroup() {
 	return (
-		<div className="w-[394px] flex">
+		<div className="w-[363px] flex">
 			<div className="flex  h-[34px] items-center mr-4">
 				<a
 					href="https://stackoverflow.com/questions"
 					aria-current="page"
 					className="rounded-l-[3px] py-[5px] px-4 text-[13px]  h-full text-[#64686e] bg-white border border-[hsl(210,8%,65%)] hover:bg-gray-100  hover:text-gray-900 focus:z-10   focus:text-[#64686e]  "
 				>
-					<div>Newest</div>
+					<div>ViewCount</div>
 				</a>
 				<a
 					href="https://stackoverflow.com/questions"
 					className=" py-[5px] px-4 text-[13px] h-full text-[#64686e] bg-white border-y border-[hsl(210,8%,65%)] hover:bg-gray-100  hover:text-gray-900 focus:z-10  focus:text-[#64686e]"
 				>
-					<div>Active</div>
+					<div>Score</div>
 				</a>
 				<a
 					href="https://stackoverflow.com/questions"

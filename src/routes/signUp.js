@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineGithub, AiFillFacebook } from 'react-icons/ai';
@@ -6,6 +7,24 @@ import { FaQuestionCircle } from 'react-icons/fa';
 import Header from '../components/Header';
 
 export default function SignUp() {
+	const [dpName, setDpName] = useState();
+	const onChangeName = (event) => {
+		setDpName(event.target.value);
+		console.log(dpName);
+	};
+
+	const [email, setEmail] = useState();
+	const onChangeEmail = (event) => {
+		setEmail(event.target.value);
+		console.log(email);
+	};
+
+	const [passWord, setPassWord] = useState();
+	const onChangePassWord = (event) => {
+		setPassWord(event.target.value);
+		console.log(passWord);
+	};
+
 	return (
 		<>
 			<Header />
@@ -33,10 +52,12 @@ export default function SignUp() {
 								<div className="font-medium mb-1 text-base">Display name</div>
 								<input
 									type="email"
+									onChange={onChangeName}
 									className="rounded w-full border-solid  border-[1.5px] focus:outline-none focus:ring focus:ring-blue-200 py-1 pl-2"
 								/>
 								<div className="font-medium mb-1 mt-4 text-base">Email</div>
 								<input
+									onChange={onChangeEmail}
 									type="email"
 									className="rounded w-full border-solid  border-[1.5px] focus:outline-none focus:ring focus:ring-blue-200 py-1 pl-2"
 								/>
@@ -44,6 +65,7 @@ export default function SignUp() {
 								<div className=" font-medium mb-1 mt-4 text-base">Password</div>
 								<input
 									type="password"
+									onChange={onChangePassWord}
 									className="rounded-md w-full border-solid  border-[1.5px] focus:outline-none focus:ring focus:ring-blue-200 py-1 pl-2"
 								/>
 								<div className="mt-2 text-xs text-gray-500">
@@ -110,22 +132,19 @@ export default function SignUp() {
 					</div>
 					<div className="text-sm mt-10 ">
 						Already have an account?
-						<a
-							href="Sign up"
+						<Link
+							to="/login"
 							className="ml-1 text-sm text-blue-500 hover:text-sky-500"
 						>
 							Log in
-						</a>
+						</Link>
 					</div>
 					<div className="mt-2 mb-7 text-sm">
 						Are you an employer?
-						<a
-							href="Sign up"
-							className="ml-1 text-sm  text-blue-500 hover:text-sky-500"
-						>
+						<span className="ml-1 text-sm  text-blue-500 hover:text-sky-500">
 							Sign up on Talent
 							<MdOutlineOpenInNew className="inline ml-1" />
-						</a>
+						</span>
 					</div>
 				</div>
 			</div>

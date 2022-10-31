@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom';
 
 function LeftSidebar() {
 	return (
-		<div className="p-2 w-48 pt-[28px] ">
-			<div className="fixed">
+		<div className="p-2 w-[156px] pt-[28px] ">
+			<div className="fixed ">
 				<Link
 					className="group font-normal text-gray-500 hover:text-black focus:font-bold focus:text-black text-[13px]"
 					to="/"

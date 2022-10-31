@@ -1,6 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
+import { ReactQueryDevtools } from 'react-query/devtools';
 import MainPage from './components/MainPage/MainPage';
 import Login from './routes/login';
 import SignUp from './routes/signUp';
@@ -19,6 +20,7 @@ export default function App() {
 					<Route path="/ask" element={<Editor />} />
 				</Routes>
 			</BrowserRouter>
+			<ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
 		</QueryClientProvider>
 	);
 }

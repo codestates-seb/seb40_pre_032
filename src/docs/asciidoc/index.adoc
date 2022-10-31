@@ -1,0 +1,40 @@
+= StackOverFlow 클론코딩
+:sectnums:
+:toc: left
+:toclevels: 4
+:toc-title: Table of Contents
+:source-highlighter: prettify
+
+
+
+v1.0.0, 2022.10.31
+
+// (4)
+***
+== AnswerController
+=== 답변 수정
+.curl-request
+include::{snippets}/patch-answer/curl-request.adoc[]
+
+.http-request
+include::{snippets}/patch-answer/http-request.adoc[]
+
+.request-fields
+include::{snippets}/patch-answer/request-fields.adoc[]
+
+.http-response
+include::{snippets}/patch-answer/http-response.adoc[]
+
+.response-fields
+include::{snippets}/patch-answer/response-fields.adoc[]
+
+=== 답변 삭제
+.curl-request
+include::{snippets}/delete-answer/curl-request.adoc[]
+
+.http-request
+include::{snippets}/delete-answer/http-request.adoc[]
+
+.http-response
+include::{snippets}/delete-answer/http-response.adoc[]
+

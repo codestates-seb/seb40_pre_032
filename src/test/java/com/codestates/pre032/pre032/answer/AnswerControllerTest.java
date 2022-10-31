@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -114,6 +115,7 @@ public class AnswerControllerTest {
 
     @Test
     @DisplayName("Answer 데이터 수정 테스트")
+
     @WithMockUser
 //    @WithAnonymousUser
     void patchAnswerTest() throws Exception {
@@ -127,6 +129,7 @@ public class AnswerControllerTest {
 
         given(mapper.answerPatchDtoAnswer(Mockito.any(AnswerDto.PatchDto.class))).willReturn(new Answer());
         given(answerService.updateAnswer(eq(answerId),Mockito.any(Answer.class))).willReturn(new Answer());
+
         given(mapper.answerToAnswerResponseDto(Mockito.any(Answer.class))).willReturn(answerResponseDto);
 
         //when
@@ -142,7 +145,6 @@ public class AnswerControllerTest {
         //then
         actions
                 .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.answerContent").value(answerPatch.getAnswerContent()))
                 .andDo(document(
                         "patch-answer",
                         preprocessRequest(prettyPrint()),

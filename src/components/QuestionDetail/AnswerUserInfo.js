@@ -66,7 +66,9 @@ function AnswerUserInfo({ answerId }) {
 				<div className="text-gray-500 text-sm">
 					asked {elapsed(answerData.creationDate)}
 				</div>
-				<div className="text-blue-500 text-sm">(author)</div>
+				<div className="text-blue-500 text-sm">
+					{answerData.owner.displayName}
+				</div>
 			</div>
 		</div>
 	);

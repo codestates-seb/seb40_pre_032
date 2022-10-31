@@ -63,7 +63,9 @@ function QuestionUserInfo() {
 				<div className="text-gray-500 text-sm">
 					asked {elapsed(data?.data.creationDate)}
 				</div>
-				<div className="text-blue-500 text-sm">{data?.data.displayName}</div>
+				<div className="text-blue-500 text-sm">
+					{data?.data.owner.displayName}
+				</div>
 			</div>
 		</div>
 	);

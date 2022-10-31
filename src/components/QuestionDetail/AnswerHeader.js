@@ -10,7 +10,7 @@ function AnswerHeader() {
 	});
 
 	return (
-		<div className="flex flex-row justify-between mr-6 align-middle mt-6 w-[805px]">
+		<div className="flex flex-row justify-between mr-6 align-middle mt-6">
 			<h2 className="text-xl">
 				{data?.data.answers.length > 1
 					? `${data?.data.answers.length} Answers`

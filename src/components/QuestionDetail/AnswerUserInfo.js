@@ -45,7 +45,7 @@ function AnswerUserInfo({ answerId }) {
 
 	return (
 		<div className="flex flex-row h-[50px]">
-			<div className="w-[300px]">
+			<div className="w-[280px]">
 				<button className="mr-2 text-sm text-gray-500" type="button">
 					Share
 				</button>
@@ -57,7 +57,7 @@ function AnswerUserInfo({ answerId }) {
 				</button>
 			</div>
 			{/* 수정된 적 없으면 빈칸 */}
-			<div className="w-[300px]">
+			<div className="w-[280px]">
 				<button type="button" className="text-blue-500 text-sm">
 					{/* edited (editedAt) ago */}
 				</button>

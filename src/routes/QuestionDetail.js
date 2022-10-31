@@ -23,9 +23,8 @@ function QuestionDetail() {
 			<Header />
 			<div className="flex justify-center ">
 				<LeftSidebar />
-				<div className="border-l-2 border-gray-200 px-4">
+				<div className="border-l-2 border-gray-200 px-4 w-[1120px]">
 					<QuestionHeader data={data?.data} />
-
 					<div className="flex flex-row">
 						<div>
 							<QuestionContainer />

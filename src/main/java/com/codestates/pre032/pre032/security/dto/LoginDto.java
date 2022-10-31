@@ -1,4 +1,4 @@
-package com.codestates.pre032.pre032.security.Dto;
+package com.codestates.pre032.pre032.security.dto;
 
 import lombok.Getter;
 

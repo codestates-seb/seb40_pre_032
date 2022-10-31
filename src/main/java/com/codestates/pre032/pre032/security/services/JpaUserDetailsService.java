@@ -1,4 +1,4 @@
-package com.codestates.pre032.pre032.security.Services;
+package com.codestates.pre032.pre032.security.services;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
 import com.codestates.pre032.pre032.user.User;
@@ -12,11 +12,9 @@ import org.springframework.stereotype.Component;
 import java.util.Collection;
 import java.util.Optional;
 
-public class JpaUserDetailsService implements UserDetailsService
-{
+public class JpaUserDetailsService implements UserDetailsService {
     @Override
-    public UserDetails loadUserByUsername(String Email) throws UsernameNotFoundException
-    {
+    public UserDetails loadUserByUsername(String Email) throws UsernameNotFoundException {
         return null;
     }
 
@@ -36,7 +34,6 @@ public class JpaUserDetailsService implements UserDetailsService
             return new MemberDetails(findUser);
         }
         private final class MemberDetails extends User implements UserDetails {
-            // (1)
             MemberDetails(User user) {
                 setUserId(user.getUserId());
                 setEmail(user.getEmail());

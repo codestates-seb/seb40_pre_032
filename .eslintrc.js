@@ -38,5 +38,6 @@ module.exports = {
 				labelAttributes: ['htmlFor'],
 			},
 		],
+		'no-param-reassign': 0,
 	},
 };

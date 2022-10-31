@@ -66,7 +66,6 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
 //                         권한 설정
-                                .antMatchers("/").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2

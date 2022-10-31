@@ -7,5 +7,5 @@ import org.mapstruct.ReportingPolicy;
 public interface AnswerMapper {
     Answer answerPostDtoAnswer(AnswerDto.PostDto answerPostDto);
     Answer answerPatchDtoAnswer(AnswerDto.PatchDto answerPatchDto);
-//    AnswerDto.ResponseDto answerToAnswerResponseDto(Answer answer);
+    AnswerDto.ResponseDto answerToAnswerResponseDto(Answer answer);
 }

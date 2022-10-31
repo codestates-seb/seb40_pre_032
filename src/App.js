@@ -22,6 +22,7 @@ export default function App() {
 					<Routes>
 						<Route path="/" element={<MainPage />} />
 						<Route path="/ask" element={<Editor />} />
+						<Route path="/edit" element={<Editor />} />
 						<Route path="/questions" element={<MainPage />} />
 						<Route path="mypage" element={<MyPage />} />
 						<Route path="login" element={<Login />} />

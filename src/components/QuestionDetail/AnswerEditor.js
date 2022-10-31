@@ -11,9 +11,9 @@ function AnswerEditor() {
 	const handleTextChange = (e) => {
 		setQuillText(e);
 	};
-	const { id } = useParams();
+	const { questionId } = useParams();
 	const mutation = useMutation((formData) => {
-		return axios.post(`http://localhost:4000/questions/${id}`);
+		return axios.post(`http://localhost:4000/questions/${questionId}`);
 	});
 
 	return (

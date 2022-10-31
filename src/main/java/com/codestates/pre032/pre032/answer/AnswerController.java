@@ -27,7 +27,7 @@ public class AnswerController {
 
     // 답변 등록
     public void postAnswer(Long questionId,
-                                     @Valid @RequestBody AnswerDto.Post postDto){
+                                     @Valid @RequestBody AnswerDto.PostDto postDto){
         Answer answer = mapper.answerPostDtoAnswer(postDto);
         answerService.create(questionId, answer);
     }
@@ -39,9 +39,7 @@ public class AnswerController {
                                       @Valid @RequestBody AnswerDto.PatchDto patchDto){
         Answer updateAnswer = answerService.updateAnswer(answerId,mapper.answerPatchDtoAnswer(patchDto));
 
-
-
-        return new ResponseEntity<>(response,HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //답변 삭제

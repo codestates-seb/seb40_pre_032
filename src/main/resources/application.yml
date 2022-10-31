@@ -28,11 +28,12 @@ spring:
 
           github:
             client-id: bb0d7862c04e3967a361
+#            client-id: Iv1.804e1d1d9bcd73d4
             client-secret: ed674a520e58843f2ba5d878639163b09fb13434
-            redirect-uri: http://localhost:8080/login/oauth2/code/github/
+#            client-secret: 97470da91476251f7608f69a24c4f74c51199e96
+            redirect-uri: http://localhost:8080/login/oauth2/code/github
             scope:
-              - email
-              - profile
+              - user
 
           naver:
             client-id: 6t4rOk6C5GLccx8Uk0vT

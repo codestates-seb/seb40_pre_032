@@ -63,6 +63,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             profileImage = String.valueOf(oAuth2User.getAttributes().get("picture"));
         }
 
+        //todo: profileImage ==null 일경우 기본 이미지로 설정하는 것
 
         System.out.println(oAuth2User.getAttributes().toString());
 

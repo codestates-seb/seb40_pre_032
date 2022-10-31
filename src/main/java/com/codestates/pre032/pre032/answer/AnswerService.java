@@ -31,7 +31,7 @@ public class AnswerService {
         return answerRepository.save(answer);
     }
 
-    public Answer update(Long answerId, Answer answer){
+    public Answer updateAnswer(Long answerId, Answer answer){
         Answer findAnswer = findVerifiedAnswer(answerId);
         findAnswer.setAnswerContent(answer.getAnswerContent());
         findAnswer.setModifiedAt(LocalDateTime.now());

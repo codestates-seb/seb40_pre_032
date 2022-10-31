@@ -13,9 +13,9 @@ import AnswerContainer from '../components/QuestionDetail/AnswerContainer';
 import AnswerEditor from '../components/QuestionDetail/AnswerEditor';
 
 function QuestionDetail() {
-	const { id } = useParams();
-	const { data } = useQuery(['question', id], () => {
-		return axios.get(`http://localhost:4000/questions/${id}`);
+	const { questionId } = useParams();
+	const { data } = useQuery(['question', questionId], () => {
+		return axios.get(`http://localhost:4000/questions/${questionId}`);
 	});
 
 	return (

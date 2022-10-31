@@ -27,7 +27,7 @@ export default function App() {
 						<Route path="login" element={<Login />} />
 						<Route path="logout" element={<Logout />} />
 						<Route path="signup" element={<SignUp />} />
-						<Route path="questions/:id" element={<QuestionDetail />} />
+						<Route path="questions/:questionId" element={<QuestionDetail />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Suspense>

@@ -4,11 +4,10 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
 function QuestionVotebar() {
-	const { id } = useParams();
-	const { data } = useQuery(['question', id], () => {
-		return axios.get(`http://localhost:4000/questions/${id}`);
+	const { questionId } = useParams();
+	const { data } = useQuery(['question', questionId], () => {
+		return axios.get(`http://localhost:4000/questions/${questionId}`);
 	});
-
 	return (
 		<div className="w-[40px] mr-4">
 			<button type="button" className="flex justify-center">

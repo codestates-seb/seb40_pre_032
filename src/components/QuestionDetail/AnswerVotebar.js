@@ -5,11 +5,10 @@ import { useParams } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
 function AnswerVotebar({ answerId }) {
-	const { id } = useParams();
-	const { data } = useQuery(['question', id], () => {
-		return axios.get(`http://localhost:4000/questions/${id}`);
+	const { questionId } = useParams();
+	const { data } = useQuery(['question', questionId], () => {
+		return axios.get(`http://localhost:4000/questions/${questionId}`);
 	});
-
 	const answerData = data?.data.answers.find(
 		(answer) => answer.answerId === answerId,
 	);

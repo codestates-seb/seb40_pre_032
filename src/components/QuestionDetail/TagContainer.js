@@ -8,7 +8,7 @@ import Tag from './Tag';
 function TagContainer() {
 	const { id } = useParams();
 	const { data } = useQuery(['question', id], () => {
-		return axios.get(`http://localhost:4000/questions/${id}`);
+		return axios.get(`https://2af2-59-16-130-226.jp.ngrok.io/questions/${id}`);
 	});
 
 	return (

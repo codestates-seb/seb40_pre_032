@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.answer;
 
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -10,19 +11,20 @@ import java.time.LocalDateTime;
 public class AnswerDto {
 
     @Getter
-    public static class PostDto{
+    public static class Post{
         @NotBlank
         private String answerContent;
     }
 
     @Getter
-    public static class PatchDto{
+    @AllArgsConstructor
+    public static class Patch{
         private String answerContent;
     }
 
     @Builder
     @Getter
-    public static class ResponseDto{
+    public static class Response{
 
         private boolean isAccepted;
         private int score;

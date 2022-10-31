@@ -27,24 +27,26 @@ public class AnswerController {
 
     // 답변 등록
     public void postAnswer(Long questionId,
-                                     @Valid @RequestBody AnswerDto.PostDto postDto){
+                                     @Valid @RequestBody AnswerDto.Post postDto){
         Answer answer = mapper.answerPostDtoAnswer(postDto);
-        answerService.createAnswer(questionId, answer);
+        answerService.create(questionId, answer);
     }
 
     //답변 수정
-    @PatchMapping("/{id}/edit")
-    public ResponseEntity patchAnswer(@PathVariable("id") @Positive long answerId,
-                                      @Valid @RequestBody AnswerDto.PatchDto patchDto){
-        answerService.updateAnswer(answerId,mapper.answerPatchDtoAnswer(patchDto));
+    @PatchMapping("/{answerId}/edit")
+    public ResponseEntity patchAnswer(@PathVariable("answerId") @Positive long answerId,
+                                      @Valid @RequestBody AnswerDto.Patch patchDto){
+        Answer answer = answerService.update(answerId,mapper.answerPatchDtoAnswer(patchDto));
+        AnswerDto.Response response = mapper.answerToAnswerResponseDto(answer);
 
-        return new ResponseEntity<>(HttpStatus.OK);
+
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 
     //답변 삭제
     @DeleteMapping("/{id}/delete")
     public ResponseEntity deleteAnswer(@PathVariable("id") @Positive long answerId){
-        answerService.deleteAnswer(answerId);
+        answerService.delete(answerId);
 
         return new ResponseEntity<>(HttpStatus.OK);
     }

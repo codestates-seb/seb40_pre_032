@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import items from './Dummydata';
-import QuestionHeading from './MainPage/QuestionHeading';
-import NumNBtn from './MainPage/NumNBtn';
-import AllQuestions from './MainPage/AllQuestions';
-import Pagination from './MainPage/Pagination';
+import QuestionHeading from './Mainpage/QuestionHeading';
+import NumNBtn from './Mainpage/NumNBtn';
+import AllQuestions from './Mainpage/AllQuestions';
+import Pagination from './Mainpage/Pagination';
 
 function Qlist() {
 	const [limit, setLimit] = useState(15);

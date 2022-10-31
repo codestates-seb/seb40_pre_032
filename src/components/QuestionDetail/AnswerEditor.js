@@ -12,9 +12,9 @@ function AnswerEditor() {
 		setQuillText(e);
 	};
 	const { questionId } = useParams();
-	const mutation = useMutation((formData) => {
-		return axios.post(`http://localhost:4000/questions/${questionId}`);
-	});
+	// const mutation = useMutation((formData) => {
+	// 	return axios.post(`http://localhost:4000/questions/${questionId}`);
+	// });
 
 	return (
 		<main>
@@ -25,7 +25,7 @@ function AnswerEditor() {
 					<form
 						onSubmit={(event) => {
 							event.preventDefault();
-							mutation.mutate(quillText);
+							// mutation.mutate(quillText);
 						}}
 					>
 						<ReactQuill

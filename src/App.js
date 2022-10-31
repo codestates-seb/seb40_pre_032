@@ -22,7 +22,9 @@ export default function App() {
 					<Routes>
 						<Route path="/" element={<MainPage />} />
 						<Route path="/ask" element={<Editor />} />
-						<Route path="/edit" element={<Editor />} />
+						{/* 임시로 질문 수정, 답변 수정 페이지 연결해두었습니다 */}
+						<Route path="/questions/:questionId/edit" element={<Editor />} />
+						<Route path="/answers/:answerId/edit" element={<Editor />} />
 						<Route path="/questions" element={<MainPage />} />
 						<Route path="mypage" element={<MyPage />} />
 						<Route path="login" element={<Login />} />

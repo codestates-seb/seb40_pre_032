@@ -49,7 +49,7 @@ function QuestionUserInfo() {
 					className="mr-2 text-sm text-gray-500"
 					type="button"
 					onClick={() => {
-						navigate('/edit');
+						navigate(`/questions/${questionId}/edit`);
 					}}
 				>
 					Edit

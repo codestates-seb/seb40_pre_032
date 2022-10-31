@@ -1,10 +1,11 @@
 /* eslint react/prop-types: 0 */
 import React from 'react';
 import axios from 'axios';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from 'react-query';
 
 function AnswerUserInfo({ answerId }) {
+	const navigate = useNavigate();
 	const { questionId } = useParams();
 	const { data } = useQuery(['question', questionId], () => {
 		return axios.get(`http://localhost:4000/questions/${questionId}`);
@@ -49,7 +50,13 @@ function AnswerUserInfo({ answerId }) {
 				<button className="mr-2 text-sm text-gray-500" type="button">
 					Share
 				</button>
-				<button className="mr-2 text-sm text-gray-500" type="button">
+				<button
+					className="mr-2 text-sm text-gray-500"
+					type="button"
+					onClick={() => {
+						navigate(`/answers/${answerId}/edit`);
+					}}
+				>
 					Edit
 				</button>
 				<button className="mr-2 text-sm text-gray-500" type="button">

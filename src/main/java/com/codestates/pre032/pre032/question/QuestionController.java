@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@CrossOrigin()
 @RequestMapping("/questions")
 public class QuestionController {
     private final QuestionService questionService;

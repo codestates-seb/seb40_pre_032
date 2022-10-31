@@ -6,6 +6,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
+import javax.websocket.server.PathParam;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -20,7 +23,7 @@ public class UserController {
 
     // 회원가입
     @PostMapping("/signup")
-    public ResponseEntity signup(@Validated @RequestBody UserDto.signUp dto){
+    public ResponseEntity signup(@Validated @RequestBody UserDto.signUp dto) {
         userService.create(dto);
 
         return new ResponseEntity(HttpStatus.CREATED);
@@ -33,16 +36,22 @@ public class UserController {
 //    }
 
     @GetMapping("{user_id}/myPage")
-    public ResponseEntity getMyPage(@PathVariable Long id){
+    public ResponseEntity getMyPage(@PathVariable Long id) {
         User user = this.userService.find(id);
         UserDto.response response = this.userMapper.userToUserResponseDto(user);
 
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
-//    // 요청 거부
+
+    //    // 요청 거부
 //    @GetMapping("/access-denied")
 //    public String accessDenied() {
 //        return "access-denied";
 //    }
+    @GetMapping("/githublogin")
+    public ResponseEntity<String> githubLogin(@PathParam("code") String code, HttpServletResponse response) {
+
+        return ResponseEntity.ok("logined");
+    }
 
 }

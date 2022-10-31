@@ -20,7 +20,7 @@ public class AnswerService {
         this.questionService = questionService;
     }
 
-    public Answer createAnswer(Long id, Answer answer){
+    public Answer create(Long id, Answer answer){
         Question question = questionService.find(id);
         question.setAnswerCount(question.getAnswerCount()+1);
         question.setAnswered(true);
@@ -31,7 +31,7 @@ public class AnswerService {
         return answerRepository.save(answer);
     }
 
-    public Answer updateAnswer(Long answerId, Answer answer){
+    public Answer update(Long answerId, Answer answer){
         Answer findAnswer = findVerifiedAnswer(answerId);
         findAnswer.setAnswerContent(answer.getAnswerContent());
         findAnswer.setModifiedAt(LocalDateTime.now());
@@ -48,7 +48,7 @@ public class AnswerService {
 
     }
 
-    public void deleteAnswer(Long answerId){
+    public void delete(Long answerId){
         Answer answer = findVerifiedAnswer(answerId);
         Question question = answer.getQuestion();
         question.setAnswerCount(answer.getQuestion().getAnswerCount()-1);

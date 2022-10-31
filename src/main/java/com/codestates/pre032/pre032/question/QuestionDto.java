@@ -59,7 +59,7 @@ public class QuestionDto {
         private String title;
 
         //질문 답변
-        private List<AnswerDto.ResponseDto> answers;
+        private List<AnswerDto.Response> answers;
 
     }
 

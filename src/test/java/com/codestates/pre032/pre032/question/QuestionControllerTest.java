@@ -259,7 +259,6 @@ public class QuestionControllerTest {
                 mockMvc.perform(
                         RestDocumentationRequestBuilders.get("/questions/{questionId}", questionId)
                                 .accept(MediaType.APPLICATION_JSON)
-                                .with(csrf())
                 );
 
         //then
@@ -305,16 +304,19 @@ public class QuestionControllerTest {
         tags.add("스프링");
         tags.add("자바");
 
+        Question question1 = new Question();
+        question1.setTitle("spring");
+        question1.setQuestionContent("스프링");
+
+        Question question2 = new Question();
+        question2.setTitle("java 질문입니다.");
+        question2.setQuestionContent("질문 답변입니다.");
+
+
         List<AnswerDto.Response> answerResponse = new ArrayList<>();
         answerResponse.add(new AnswerDto.Response(true,1 ,LocalDateTime.now(),1L,"자바",1L));
 
         //given
-        Question question = new Question();
-        question.setQuestionId(questionId);
-        question.setTitle("스프링");
-        question.setQuestionContent("spring");
-
-
         List<QuestionDto.questionContentResponse> response = new ArrayList<>();
         response.add(new QuestionDto.questionContentResponse(
                 tags,
@@ -329,41 +331,60 @@ public class QuestionControllerTest {
                 "spring",
                 answerResponse
         ));
+        response.add(new QuestionDto.questionContentResponse(
+                tags,
+                true,
+                1,
+                1,
+                1,
+                LocalDateTime.now(),
+                LocalDateTime.now(),
+                1L,
+                "질문 답변입니다.",
+                "java 질문입니다.",
+                answerResponse
+        ));
 
         //given
-        given(questionService.getDetail(eq(questionId))).willReturn(question);
+        given(questionService.getQuestions()).willReturn(List.of(question1,question2));
         given(mapper.questionsToQuestionContentResponsesDto(Mockito.anyList())).willReturn(response);
-//        given(mapper.answerToAnswerResponseDto(Mockito.any(Answer.class))).willReturn(answerResponseDto);
+
 
         //when
         ResultActions actions =
                 mockMvc.perform(
-                        MockMvcRequestBuilders.get("/questions/{questionId}", questionId)
+                        MockMvcRequestBuilders.get("/questions/")
                                 .accept(MediaType.APPLICATION_JSON)
-                                .with(csrf())
                 );
 
         //then
         actions
                 .andExpect(status().isOk())
                 .andDo(document(
-                        "get-question",
+                        "All-questions",
                         preprocessRequest(prettyPrint()),
                         preprocessResponse(prettyPrint()),
-                        pathParameters(
-                                parameterWithName("questionId").description("질문 식별자 ID")
-                        ),
                         responseFields(
                                 Arrays.asList(
-                                        fieldWithPath(".answered").type(JsonFieldType.BOOLEAN).description("질문 답변 여부"),
-                                        fieldWithPath(".viewCount").type(JsonFieldType.NUMBER).description("질문 조회수"),
-                                        fieldWithPath(".answerCount").type(JsonFieldType.NUMBER).description("질문 답변수"),
-                                        fieldWithPath(".score").type(JsonFieldType.NUMBER).description("질문 추천수"),
-                                        fieldWithPath(".creationDate").type(JsonFieldType.STRING).description("질문 생성일자"),
-                                        fieldWithPath(".questionId").type(JsonFieldType.NUMBER).description("질문Id"),
-                                        fieldWithPath(".questionContent").type(JsonFieldType.STRING).description("질문 내용"),
-                                        fieldWithPath(".title").type(JsonFieldType.STRING).description("질문 제목"),
-                                        fieldWithPath(".accessToken").type(JsonFieldType.STRING).description("액세스 토큰")
+                                        fieldWithPath("items").type(JsonFieldType.ARRAY).description("질문"),
+                                        fieldWithPath("items[].tags").type(JsonFieldType.ARRAY).description("태그"),
+                                        fieldWithPath("items[].answered").type(JsonFieldType.BOOLEAN).description("질문 답변 여부"),
+                                        fieldWithPath("items[].viewCount").type(JsonFieldType.NUMBER).description("질문 조회수"),
+                                        fieldWithPath("items[].answerCount").type(JsonFieldType.NUMBER).description("질문 답변수"),
+                                        fieldWithPath("items[].score").type(JsonFieldType.NUMBER).description("질문 추천수"),
+                                        fieldWithPath("items[].creationDate").type(JsonFieldType.STRING).description("질문 생성일자"),
+                                        fieldWithPath("items[].modifiedAt").type(JsonFieldType.STRING).description("질문 수정일자"),
+                                        fieldWithPath("items[].questionId").type(JsonFieldType.NUMBER).description("질문Id"),
+                                        fieldWithPath("items[].questionContent").type(JsonFieldType.STRING).description("질문 내용"),
+                                        fieldWithPath("items[].title").type(JsonFieldType.STRING).description("질문 제목"),
+                                        fieldWithPath("items[].answers").type(JsonFieldType.ARRAY).description("답변").ignored(),
+                                        fieldWithPath("items[].answers[].score").type(JsonFieldType.NUMBER).description("답변 추천수").ignored(),
+                                        fieldWithPath("items[].answers[].creationDate").type(JsonFieldType.STRING).description("답변 생성일자").ignored(),
+                                        fieldWithPath("items[].answers[].answerId").type(JsonFieldType.NUMBER).description("답변 번호").ignored(),
+                                        fieldWithPath("items[].answers[].answerContent").type(JsonFieldType.STRING).description("답변 내용").ignored(),
+                                        fieldWithPath("items[].answers[].questionId").type(JsonFieldType.NUMBER).description("질문 번호").ignored(),
+                                        fieldWithPath("items[].answers[].accepted").type(JsonFieldType.BOOLEAN).description("답변 채택여부").ignored()
+
                                 )
                         )
                 ));

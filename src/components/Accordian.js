@@ -3,7 +3,7 @@ import React from 'react';
 
 function Accordian() {
 	return (
-		<div className="w-full px-4 pt-16">
+		<div className="w-full px-4 pt-16 ">
 			<div className="rounded-md mx-auto w-full h-3/6 max-w-md stroke-slate-600 border border-slate-500 shadow-xl p-2">
 				<Disclosure>
 					{({ open }) => (

@@ -30,9 +30,12 @@ public class SecurityConfig {
 
     private final UserService userService;
 
+//    private final JpaUserDetailsService jpaUserDetailsService;
+
     public SecurityConfig(JwtTokenizer jwtTokenizer, UserService userService) {
         this.jwtTokenizer = jwtTokenizer;
         this.userService = userService;
+//        this.jpaUserDetailsService = jpaUserDetailsService;
     }
 
     @Bean
@@ -63,7 +66,6 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
 //                         권한 설정
-                                .antMatchers("/").authenticated()
                                 .anyRequest().permitAll()
                 )
                 .oauth2Login(oauth2 -> oauth2
@@ -85,6 +87,11 @@ public class SecurityConfig {
         return http.build();
     }
 
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(jpaUserDetailsService);
+//
+//    }
     public class CustomFilterConfigure extends AbstractHttpConfigurer<CustomFilterConfigure, HttpSecurity> {  // (2-1)
         @Override
         public void configure(HttpSecurity builder) throws Exception {  // (2-2)

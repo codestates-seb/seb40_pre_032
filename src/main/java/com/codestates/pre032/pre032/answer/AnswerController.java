@@ -33,11 +33,12 @@ public class AnswerController {
     }
 
     //답변 수정
-    @PatchMapping("/{answerId}/edit")
-    public ResponseEntity patchAnswer(@PathVariable("answerId") @Positive long answerId,
-                                      @Valid @RequestBody AnswerDto.Patch patchDto){
-        Answer answer = answerService.update(answerId,mapper.answerPatchDtoAnswer(patchDto));
-        AnswerDto.Response response = mapper.answerToAnswerResponseDto(answer);
+
+    @PatchMapping("/{id}/edit")
+    public ResponseEntity patchAnswer(@PathVariable("id") @Positive long answerId,
+                                      @Valid @RequestBody AnswerDto.PatchDto patchDto){
+        Answer updateAnswer = answerService.updateAnswer(answerId,mapper.answerPatchDtoAnswer(patchDto));
+
 
 
         return new ResponseEntity<>(response,HttpStatus.OK);

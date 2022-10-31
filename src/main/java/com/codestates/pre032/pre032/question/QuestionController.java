@@ -5,6 +5,7 @@ import com.codestates.pre032.pre032.answer.AnswerDto;
 import com.codestates.pre032.pre032.dto.MainResponseDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -28,11 +29,10 @@ public class QuestionController {
 
     // 작성 기능
     @PostMapping("/add")
-//    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity addQuestion(@Validated @RequestBody QuestionDto.Post requestBody) {
         Question question = questionService.create(questionMapper.questionPostDtoToQuestion(requestBody),
                 requestBody.getTags());
-
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 

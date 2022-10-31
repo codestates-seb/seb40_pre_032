@@ -13,12 +13,13 @@ import org.springframework.data.jpa.mapping.JpaMetamodelMappingContext;
 import org.springframework.http.MediaType;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.restdocs.payload.JsonFieldType;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
 import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.mockito.ArgumentMatchers.eq;
@@ -26,13 +27,12 @@ import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.doNothing;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.patch;
-import static org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders.post;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
-import static org.springframework.restdocs.payload.PayloadDocumentation.*;
+import static org.springframework.restdocs.payload.PayloadDocumentation.fieldWithPath;
+import static org.springframework.restdocs.payload.PayloadDocumentation.requestFields;
 import static org.springframework.restdocs.request.RequestDocumentation.parameterWithName;
 import static org.springframework.restdocs.request.RequestDocumentation.pathParameters;
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(AnswerController.class) //대상 클래스만 로드해 테스트를 수행
@@ -56,6 +56,9 @@ public class AnswerControllerTest {
     @MockBean
     private QuestionService questionService;
 
+    private UserDetails createUserDetails() {
+        return null;
+    }
 
 
 //    @Test
@@ -112,16 +115,21 @@ public class AnswerControllerTest {
 
     @Test
     @DisplayName("Answer 데이터 수정 테스트")
+
+    @WithMockUser
+//    @WithAnonymousUser
     void patchAnswerTest() throws Exception {
         long answerId = 1L;
         //given
-        AnswerDto.Patch answerPatch = new AnswerDto.Patch("ㅇㅇㅇㅇㅇ");
+        AnswerDto.PatchDto answerPatch = new AnswerDto.PatchDto();
+        answerPatch.setAnswerContent("ㅇㅇㅇㅇㅇ");
         String content = gson.toJson(answerPatch);
 
-        AnswerDto.Response answerResponseDto = new AnswerDto.Response(true,1, LocalDateTime.now(),1L,"ㅇㅇㅇㅇㅇ");
+        AnswerDto.ResponseDto answerResponseDto = new AnswerDto.ResponseDto(true,1, LocalDateTime.now(),1L,"ㅇㅇㅇㅇㅇ");
 
-        given(mapper.answerPatchDtoAnswer(Mockito.any(AnswerDto.Patch.class))).willReturn(new Answer());
-        given(answerService.update(eq(answerId),Mockito.any(Answer.class))).willReturn(new Answer());
+        given(mapper.answerPatchDtoAnswer(Mockito.any(AnswerDto.PatchDto.class))).willReturn(new Answer());
+        given(answerService.updateAnswer(eq(answerId),Mockito.any(Answer.class))).willReturn(new Answer());
+
         given(mapper.answerToAnswerResponseDto(Mockito.any(Answer.class))).willReturn(answerResponseDto);
 
         //when
@@ -137,7 +145,6 @@ public class AnswerControllerTest {
         //then
         actions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.answerContent").value(answerPatch.getAnswerContent()))
                 .andDo(document(
                         "patch-answer",
                         preprocessRequest(prettyPrint()),
@@ -149,16 +156,6 @@ public class AnswerControllerTest {
                                 List.of(
                                         fieldWithPath("answerContent").type(JsonFieldType.STRING).description("답변 본문")
                                )
-                        ),
-                        responseFields(
-                                Arrays.asList(
-                                        fieldWithPath("accepted").type(JsonFieldType.BOOLEAN).description("답변 채택 여부"),
-                                        fieldWithPath("score").type(JsonFieldType.NUMBER).description("답변 추천수"),
-                                        fieldWithPath("creationDate").type(JsonFieldType.STRING).description("답변 생성일자"),
-                                        fieldWithPath("answerId").type(JsonFieldType.NUMBER).description("답변 id"),
-                                        fieldWithPath("answerContent").type(JsonFieldType.STRING).description("답변 본문"),
-                                        fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 id")
-                                )
                         )
                 ));
     }
@@ -168,7 +165,7 @@ public class AnswerControllerTest {
     void deleteAnswerTest() throws Exception {
         //given
         long answerId = 1L;
-        doNothing().when(answerService).delete(Mockito.anyLong());
+        doNothing().when(answerService).deleteAnswer(Mockito.anyLong());
 
         //when
         ResultActions actions =

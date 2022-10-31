@@ -4,6 +4,7 @@ package com.codestates.pre032.pre032.answer;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
@@ -17,8 +18,9 @@ public class AnswerDto {
     }
 
     @Getter
-    @AllArgsConstructor
-    public static class Patch{
+    @Setter
+    public static class PatchDto{
+
         private String answerContent;
     }
 

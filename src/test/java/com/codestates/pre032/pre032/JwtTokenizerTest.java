@@ -1,6 +1,6 @@
 package com.codestates.pre032.pre032;
 
-import com.codestates.pre032.pre032.test.JwtTokenizer;
+import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.io.Decoders;
 import org.junit.jupiter.api.BeforeAll;

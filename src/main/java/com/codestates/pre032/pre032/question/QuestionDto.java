@@ -12,7 +12,8 @@ import java.util.List;
 
 public class QuestionDto {
     @Getter
-    @AllArgsConstructor
+    @Setter
+    @NoArgsConstructor
     public static class Post {
         @NotBlank
         private String title;
@@ -24,7 +25,8 @@ public class QuestionDto {
     }
 
     @Getter
-    @AllArgsConstructor
+    @Setter
+    @NoArgsConstructor
     public static class Patch {
         private String title;
 
@@ -60,6 +62,36 @@ public class QuestionDto {
 
         //질문 답변
         private List<AnswerDto.Response> answers;
+
+    }
+
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class Response {
+        private List<String> tags;
+
+//        private User owner;
+
+        private boolean isAnswered;
+
+        private int viewCount;
+
+        private int answerCount;
+
+        private int score;
+
+        private LocalDateTime creationDate;
+
+        private LocalDateTime modifiedAt;
+
+        private Long questionId;
+
+        private String questionContent;
+
+        private String title;
+
 
     }
 

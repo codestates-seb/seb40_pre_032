@@ -76,6 +76,8 @@ public interface QuestionMapper {
         }
     };
 
+    QuestionDto.Response questionToQuestionResponse(Question question);
+
 
 //    default List<QuestionDto.questionResponse> questionToQuestionResponseDto(List<Question> questions) {
 //        List<QuestionDto.questionResponse> answer = new ArrayList<>();

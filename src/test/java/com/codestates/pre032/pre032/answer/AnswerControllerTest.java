@@ -61,58 +61,6 @@ public class AnswerControllerTest {
     }
 
 
-//    @Test
-//    @DisplayName("Answer 데이터 생성 테스트")
-//    void postAnswerTest() throws Exception {
-//        Long questionId = 1L;
-//        //given
-//        AnswerDto.Post answerPost = new AnswerDto.Post("너무 어렵다");
-//        String content = gson.toJson(answerPost);
-//
-//        AnswerDto.Response answerResponseDto = new AnswerDto.Response(true,1, LocalDateTime.now(),1L,"너무 어렵다");
-//
-//        //given: 어떤 메서드가 호출되고 어떤 파라미터를 주입받는지 가정한 후
-//        //willReturn 메서드를 통해 어떤 결과를 리턴할 것인지 정의하는 구조
-//        given(mapper.answerPostDtoAnswer(Mockito.any(AnswerDto.Post.class))).willReturn(new Answer());
-//        given(answerService.create(eq(questionId),Mockito.any(Answer.class))).willReturn(new Answer());
-//        given(mapper.answerToAnswerResponseDto(Mockito.any(Answer.class))).willReturn(answerResponseDto);
-//
-//        //when
-//        ResultActions actions =
-//                mockMvc.perform(
-//                        post("/answers")
-//                                .accept(MediaType.APPLICATION_JSON)
-//                                .contentType(MediaType.APPLICATION_JSON)
-//                                .content(content)
-//                                .with(csrf())
-//                );
-
-        //then
-//        actions
-//                .andExpect(status().isCreated())
-//                .andExpect(jsonPath("$.answerContent").value(answerPost.getAnswerContent()))
-//                .andDo(document(
-//                        "post-answer",
-//                        preprocessRequest(prettyPrint()),
-//                        preprocessResponse(prettyPrint()),
-//                        requestFields(
-//                                List.of(
-//                                        fieldWithPath("answerContent").type(JsonFieldType.STRING).description("답변 내용")
-//                                )
-//                        ),
-//                        responseFields(
-//                                List.of(
-//                                        fieldWithPath("accepted").type(JsonFieldType.BOOLEAN).description("답변 채택 여부"),
-//                                        fieldWithPath("score").type(JsonFieldType.NUMBER).description("답변 추천수"),
-//                                        fieldWithPath("creationDate").type(JsonFieldType.STRING).description("답변 생성일자"),
-//                                        fieldWithPath("answerId").type(JsonFieldType.NUMBER).description("답변 id"),
-//                                        fieldWithPath("answerContent").type(JsonFieldType.STRING).description("답변 본문"),
-//                                        fieldWithPath("questionId").type(JsonFieldType.NUMBER).description("질문 id")
-//                                )
-//                        )
-//                ));
-//    }
-
     @Test
     @DisplayName("Answer 데이터 수정 테스트")
 
@@ -121,16 +69,14 @@ public class AnswerControllerTest {
     void patchAnswerTest() throws Exception {
         long answerId = 1L;
         //given
-        AnswerDto.PatchDto answerPatch = new AnswerDto.PatchDto();
+        AnswerDto.Patch answerPatch = new AnswerDto.Patch();
         answerPatch.setAnswerContent("ㅇㅇㅇㅇㅇ");
         String content = gson.toJson(answerPatch);
 
-        AnswerDto.ResponseDto answerResponseDto = new AnswerDto.ResponseDto(true,1, LocalDateTime.now(),1L,"ㅇㅇㅇㅇㅇ");
 
-        given(mapper.answerPatchDtoAnswer(Mockito.any(AnswerDto.PatchDto.class))).willReturn(new Answer());
-        given(answerService.updateAnswer(eq(answerId),Mockito.any(Answer.class))).willReturn(new Answer());
-
-        given(mapper.answerToAnswerResponseDto(Mockito.any(Answer.class))).willReturn(answerResponseDto);
+        given(mapper.answerPatchDtoAnswer(Mockito.any(AnswerDto.Patch.class))).willReturn(new Answer());
+        given(answerService.update(eq(answerId),Mockito.any(Answer.class))).willReturn(new Answer());
+//        given(mapper.answerToAnswerResponseDto(Mockito.any(Answer.class))).willReturn(answerResponseDto);
 
         //when
         ResultActions actions =
@@ -165,7 +111,7 @@ public class AnswerControllerTest {
     void deleteAnswerTest() throws Exception {
         //given
         long answerId = 1L;
-        doNothing().when(answerService).deleteAnswer(Mockito.anyLong());
+        doNothing().when(answerService).delete(Mockito.anyLong());
 
         //when
         ResultActions actions =

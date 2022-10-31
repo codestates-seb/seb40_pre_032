@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 public class AnswerDto {
 
     @Getter
+    @Setter
     public static class Post{
         @NotBlank
         private String answerContent;
@@ -19,13 +20,14 @@ public class AnswerDto {
 
     @Getter
     @Setter
-    public static class PatchDto{
+    public static class Patch{
 
         private String answerContent;
     }
 
-    @Builder
+    @AllArgsConstructor
     @Getter
+    @Builder
     public static class Response{
 
         private boolean isAccepted;
@@ -33,6 +35,7 @@ public class AnswerDto {
         private LocalDateTime creationDate;
         private Long answerId;
         private String answerContent;
+        private Long questionId;
 //        private LocalDateTime modifiedAt;
     }
 }

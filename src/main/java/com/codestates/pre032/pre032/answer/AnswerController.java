@@ -36,12 +36,12 @@ public class AnswerController {
 
     @PatchMapping("/{id}/edit")
     public ResponseEntity patchAnswer(@PathVariable("id") @Positive long answerId,
-                                      @Valid @RequestBody AnswerDto.PatchDto patchDto){
-        Answer updateAnswer = answerService.updateAnswer(answerId,mapper.answerPatchDtoAnswer(patchDto));
+                                      @Valid @RequestBody AnswerDto.Patch patchDto){
+        Answer updateAnswer = answerService.update(answerId,mapper.answerPatchDtoAnswer(patchDto));
 
 
 
-        return new ResponseEntity<>(response,HttpStatus.OK);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     //답변 삭제

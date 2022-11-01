@@ -64,7 +64,7 @@ function QuestionUserInfo() {
 					className="mr-2 text-sm text-gray-500"
 					type="button"
 					onClick={() => {
-						/* access token이 있으면 */
+						/* access token이 있으면 수정 페이지로 이동 */
 						navigate(`/questions/${questionId}/edit`);
 					}}
 				>

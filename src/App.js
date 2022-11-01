@@ -8,7 +8,13 @@ import SignUp from './routes/signUp';
 import Editor from './components/Editor';
 import Loading from './components/Loading';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			suspense: true,
+		},
+	},
+});
 
 export default function App() {
 	return (

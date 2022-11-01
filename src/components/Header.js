@@ -1,22 +1,43 @@
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useQuery } from 'react-query';
 import { Link } from 'react-router-dom';
+import Logo from './Logo';
 
 function Header() {
+	const [value, setValue] = useState('');
+	const { refetch } = useQuery(
+		[`questions`],
+		() => {
+			return axios.get(`http://localhost:4000/search`);
+		},
+		{
+			enabled: false,
+			staleTime: 5000,
+			cacheTime: Infinity,
+			suspense: true,
+			refetchOnWindowFocus: false,
+		},
+	);
+	useEffect(() => {
+		setValue(value);
+		console.log(value);
+	}, [value]);
+
+	const onChange = (e) => {
+		setValue(e.target.value);
+	};
+
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		refetch();
+	};
 	return (
 		<div className="fixed top-0 inset-x-0 flex flex-col z-10">
 			<div className="w-full bg-[#f38227] h-[3px]" />
 			<header className="h-[47px] bg-[#f7faf9] flex flex-row items-center shadow-1top text-[13px] ">
 				<div className="w-[1350px] h-full flex items-center mx-auto my-0 max-w-full">
-					<Link
-						to="/"
-						className="cursor-pointer pb-[6px] px-2 flex items-center bg-transparent w-[166px] h-[47px] hover:bg-[hsl(210,8%,90%)]"
-					>
-						<img
-							alt="stackoverflow logo"
-							src="/img/stack.png"
-							className="w-[150px] h-[30px]"
-						/>
-					</Link>
+					<Logo />
 					<div className="w-[82px] h-[33px] cursor-pointer flex items-center justify-center rounded-[30px] hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
 						<span>About</span>
 					</div>
@@ -26,11 +47,21 @@ function Header() {
 					<div className="w-[82px] h-[33px] cursor-pointer flex items-center justify-center rounded-[30px] hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
 						<span>For Teams</span>
 					</div>
-					<form className="align-baseline relative text-[100%] flex px-2 w-[773px] items-center">
+					<form
+						className="align-baseline relative text-[100%] flex px-2 w-[773px] items-center"
+						onSubmit={handleSubmit}
+					>
 						<svg className="w-[20px] h-[18px] absolute left-[15px] fill-[hsl(210,8%,55%)] ">
 							<path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z" />
 						</svg>
 						<input
+							// onKeyPress={(e) => {
+							// 	if (e.key === 'Enter') {
+							// 		refetch();
+							// 	}
+							// }}
+							onChange={onChange}
+							value={value}
 							placeholder="Search..."
 							className="focus: cursor-text border border-[#babec4] focus:ring-[5px]  focus:ring-blue-500/[.10] focus:outline focus:border-[0.5px] focus:outline-[hsl(206,90%,69.5%)] rounded-[3px] border-solid truncate w-full pl-[30px] h-[33px] "
 						/>

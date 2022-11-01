@@ -1,9 +1,12 @@
+/* eslint-disable */
 import React from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery, useMutation } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 function QuestionVotebar() {
+	const queryClient = useQueryClient();
+
 	const { questionId } = useParams();
 	const { data } = useQuery(['question', questionId], () => {
 		return axios.get(`http://localhost:4000/questions/${questionId}`);
@@ -24,11 +27,23 @@ function QuestionVotebar() {
 	});
 
 	const handleUpClick = () => {
-		upVote.mutate({ score: data.data.score + 1 });
+		upVote.mutate(
+			{ score: data.data.score + 1 },
+			{
+				onSuccess: () =>
+					queryClient.invalidateQueries(['question', questionId]),
+			},
+		);
 	};
 
 	const handleDownClick = () => {
-		downVote.mutate({ score: data.data.score - 1 });
+		downVote.mutate(
+			{ score: data.data.score - 1 },
+			{
+				onSuccess: () =>
+					queryClient.invalidateQueries(['question', questionId]),
+			},
+		);
 	};
 
 	return (

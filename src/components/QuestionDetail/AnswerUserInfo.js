@@ -15,6 +15,8 @@ function AnswerUserInfo({ answerId }) {
 		(answer) => answer.answerId === answerId,
 	);
 
+	const handleDelete = () => {};
+
 	function elapsed(string) {
 		const minute = 1000 * 60;
 		const hour = minute * 60;
@@ -83,6 +85,13 @@ function AnswerUserInfo({ answerId }) {
 				</button>
 				<button className="mr-2 text-sm text-gray-500" type="button">
 					Follow
+				</button>
+				<button
+					className="mr-2 text-sm text-gray-500"
+					type="button"
+					onClick={handleDelete}
+				>
+					Delete
 				</button>
 			</div>
 			{/* 수정된 적 없으면 빈칸 */}

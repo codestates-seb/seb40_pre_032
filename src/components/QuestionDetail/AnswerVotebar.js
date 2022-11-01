@@ -16,6 +16,7 @@ function AnswerVotebar({ answerId }) {
 
 	const handleUpClick = () => {};
 	const handleDownClick = () => {};
+	const handleAcceptClick = () => {};
 
 	return (
 		<div className="w-[40px] mr-4">
@@ -55,19 +56,18 @@ function AnswerVotebar({ answerId }) {
 			</div>
 			<div className="flex justify-center">
 				{/* history icon */}
-				<svg
-					aria-hidden="true"
-					className=""
-					width="19"
-					height="18"
-					viewBox="0 0 19 18"
-				>
+				<svg aria-hidden="true" width="19" height="18" viewBox="0 0 19 18">
 					<path
 						fill="lightgrey"
 						d="M3 9a8 8 0 1 1 3.73 6.77L8.2 14.3A6 6 0 1 0 5 9l3.01-.01-4 4-4-4h3L3 9Zm7-4h1.01L11 9.36l3.22 2.1-.6.93L10 10V5Z"
 					/>
 				</svg>
 			</div>
+			<button type="button" onClick={handleAcceptClick}>
+				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
+					<path fill="lightgrey" d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z" />
+				</svg>
+			</button>
 		</div>
 	);
 }

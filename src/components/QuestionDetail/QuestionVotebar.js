@@ -10,15 +10,27 @@ function QuestionVotebar() {
 	});
 
 	const upVote = useMutation((updatedVote) => {
-		return axios.post(
+		return axios.patch(
+			`http://localhost:4000/questions/${questionId}`,
+			updatedVote,
+		);
+	});
+
+	const downVote = useMutation((updatedVote) => {
+		return axios.patch(
 			`http://localhost:4000/questions/${questionId}`,
 			updatedVote,
 		);
 	});
 
 	const handleUpClick = () => {
-		upVote.mutate({});
+		upVote.mutate({ score: data.data.score + 1 });
 	};
+
+	const handleDownClick = () => {
+		downVote.mutate({ score: data.data.score - 1 });
+	};
+
 	return (
 		<div className="w-[40px] mr-4">
 			<button
@@ -34,7 +46,11 @@ function QuestionVotebar() {
 			<div className="flex justify-center text-gray-700">
 				{data?.data.score === undefined ? '0' : data?.data.score}
 			</div>
-			<button type="button" className="flex justify-center mb-2">
+			<button
+				type="button"
+				className="flex justify-center mb-2"
+				onClick={handleDownClick}
+			>
 				{/* down button */}
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 					<path fill="lightgrey" d="M2 11h32L18 27 2 11Z" />

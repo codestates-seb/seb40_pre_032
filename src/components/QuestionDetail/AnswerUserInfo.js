@@ -70,7 +70,11 @@ function AnswerUserInfo({ answerId }) {
 					type="button"
 					onClick={() => {
 						/* access token이 있으면 수정 페이지로 이동 */
-						navigate(`/answers/${answerId}/edit`);
+						navigate(`/answers/${answerId}/edit`, {
+							state: {
+								questionId,
+							},
+						});
 						/* 없으면 로그인 페이지로 이동 */
 						// navigate('/login');
 					}}

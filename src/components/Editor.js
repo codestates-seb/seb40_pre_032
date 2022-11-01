@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
-
+import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
+import { useMutation } from 'react-query';
 import 'react-quill/dist/quill.snow.css';
 import { useForm } from 'react-hook-form';
-import Accordian from './Accordian';
 import TagInput from './TagInput';
+import Accordian from './Accordian';
 
 function Editor() {
+	const navigate = useNavigate();
+	const [isPending, setIsPending] = useState(false);
 	const {
 		register,
 		handleSubmit,
@@ -16,19 +19,31 @@ function Editor() {
 	} = useForm({ mode: 'onChange' });
 
 	useEffect(() => {
-		register('content', { required: true, minLength: 11 });
-	}, [register]);
+		register('question_content', { required: true, minLength: 11 });
+	}, []);
 
 	const onEditorStateChange = (editorState) => {
-		setValue('content', editorState);
+		setValue('question_content', editorState);
 	};
 
-	const onSubmit = (data) => {
-		// eslint-disable-next-line
-		console.log(data);
+	const postData = (data) => {
+		fetch('http://localhost:4000/data', {
+			method: 'POST',
+			headers: { 'Content-Type': 'application/json' },
+			body: JSON.stringify(data),
+		}).then(() => {
+			setIsPending(false);
+			navigate('/');
+		});
+	};
+	const { mutate } = useMutation(postData);
+
+	const onSubmit = () => {
+		setIsPending(true);
+		mutate(postData);
 	};
 
-	const editorContent = watch('content');
+	const editorContent = watch('question_content');
 
 	return (
 		<main className="flex items-center mx-auto">
@@ -53,23 +68,38 @@ function Editor() {
 						question
 					</span>
 					<form onSubmit={handleSubmit(onSubmit)}>
+						<div dangerouslySetInnerHTML={{ __html: editorContent }} />
 						<ReactQuill
-							{...register('content', { required: true })}
+							{...register('question_content', { required: true })}
 							theme="snow"
 							value={editorContent}
 							onChange={onEditorStateChange}
 							className="h-96 px-2 mt-3 relative right-2 shadow-gray-700"
 						/>
-						<p className="px-10">{errors.content?.message && '입력해주세요'}</p>
+						<p className="px-10">
+							{errors.question_content?.message && '입력해주세요'}
+						</p>
 						<TagInput />
-						<button
-							className="text-white h-10 mt-10 ml-3 items-center cursor-pointer w-1/6 flex justify-center bg-blue-400 mx-auto hover:bg-blue-500"
-							type="submit"
-							value="Review Your Question"
-							onClick={handleSubmit(onSubmit)}
-						>
-							Review Your Question
-						</button>
+						{!isPending ? (
+							<button
+								className="text-white h-10 mt-10 ml-3 items-center cursor-pointer w-1/6 flex justify-center bg-blue-400 mx-auto hover:bg-blue-500"
+								type="submit"
+								value="Review Your Question"
+								onClick={handleSubmit(onSubmit)}
+							>
+								Review Your Question
+							</button>
+						) : (
+							<button
+								className="text-white h-10 mt-10 ml-3 items-center cursor-pointer w-1/6 flex justify-center bg-blue-400 mx-auto hover:bg-blue-500"
+								type="submit"
+								value="Review Your Question"
+								onClick={handleSubmit(onSubmit)}
+								disabled
+							>
+								Review Your Question
+							</button>
+						)}
 					</form>
 				</section>
 			</article>

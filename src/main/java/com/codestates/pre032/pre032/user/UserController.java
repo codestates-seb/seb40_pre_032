@@ -28,12 +28,12 @@ public class UserController {
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
-//    // 로그인 기능
-//    @PostMapping("/login")
-//    public ResponseEntity login(){
-//
-//        return new ResponseEntity(HttpStatus.OK);
-//    }
+    // 로그인 기능
+    @PostMapping("/login")
+    public ResponseEntity login(){
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
 
     @GetMapping("{user_id}/myPage")
     public ResponseEntity getMyPage(@PathVariable Long id) {

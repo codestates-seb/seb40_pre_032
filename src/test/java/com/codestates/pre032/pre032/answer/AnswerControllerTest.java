@@ -165,7 +165,7 @@ public class AnswerControllerTest {
     void deleteAnswerTest() throws Exception {
         //given
         long answerId = 1L;
-        doNothing().when(answerService).deleteAnswer(Mockito.anyLong());
+        doNothing().when(answerService).delete(Mockito.anyLong());
 
         //when
         ResultActions actions =

@@ -4,8 +4,16 @@ import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaStackExchange, FaStackOverflow } from 'react-icons/fa';
 import { GrStackOverflow } from 'react-icons/gr';
 import Header from '../components/Header';
+import useUserActions from '../_actions/useUserActions';
 
 export default function Logout() {
+	const userActions = useUserActions();
+	const logoutState = () => {
+		alert('logout');
+		return userActions.logout.catch((error) => {
+			alert(error);
+		});
+	};
 	return (
 		<>
 			<Header />
@@ -99,6 +107,7 @@ export default function Logout() {
 									<button
 										className="text-sm rounded bg-sky-500 text-white p-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
 										type="submit"
+										onClick={logoutState}
 									>
 										Log out
 									</button>

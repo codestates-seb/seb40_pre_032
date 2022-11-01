@@ -28,9 +28,6 @@ function AnswerEditor() {
 					<form
 						onSubmit={(event) => {
 							event.preventDefault();
-							const newAnswer = new FormData();
-							newAnswer.append('answerContent', quillText);
-							addAnswer.mutate(newAnswer);
 						}}
 					>
 						<ReactQuill

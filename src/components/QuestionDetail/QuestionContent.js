@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -9,9 +10,7 @@ function QuestionContent() {
 		return axios.get(`http://localhost:4000/questions/${questionId}`);
 	});
 	return (
-		<div>
-			<p className="mb-4 break-all">{data?.data.questionContent}</p>
-		</div>
+		<div dangerouslySetInnerHTML={{ __html: data?.data.questionContent }} />
 	);
 }
 

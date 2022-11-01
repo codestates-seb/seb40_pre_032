@@ -71,6 +71,8 @@ function AnswerUserInfo({ answerId }) {
 					onClick={() => {
 						/* access token이 있으면 수정 페이지로 이동 */
 						navigate(`/answers/${answerId}/edit`);
+						/* 없으면 로그인 페이지로 이동 */
+						// navigate('/login');
 					}}
 				>
 					Edit

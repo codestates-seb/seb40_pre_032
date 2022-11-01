@@ -1,19 +1,35 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SiAskubuntu, SiServerfault, SiSuperuser } from 'react-icons/si';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaStackExchange, FaStackOverflow } from 'react-icons/fa';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { GrStackOverflow } from 'react-icons/gr';
+import axios from 'axios';
 import Header from '../components/Header';
-import useUserActions from '../_actions/useUserActions';
+import authAtom from '../_state/auth';
 
 export default function Logout() {
-	const userActions = useUserActions();
-	const logoutState = () => {
-		alert('logout');
-		return userActions.logout.catch((error) => {
-			alert(error);
-		});
-	};
+	const auth = useRecoilValue(authAtom);
+	const baseUrl = `http://localhost:8080`;
+	const userEmail = auth?.user.email;
+	const navigate = useNavigate();
+	const setAuth = useSetRecoilState(authAtom);
+
+	function logout(email) {
+		console.log('email', email);
+		const config = { headers: { Authorization: `Bearer${auth.accessToken}` } };
+		localStorage.removeItem('user');
+
+		return axios
+			.post(`${baseUrl}/user`, { email }, { withCredentials: true }, config)
+			.then((response) => {
+				console.log(response);
+				localStorage.removeItem('user');
+				setAuth(null);
+				navigate('/login');
+			});
+	}
 	return (
 		<>
 			<Header />
@@ -24,10 +40,7 @@ export default function Logout() {
 							<div className="text-center text-xl">
 								Clicking “Log out” will log you out of the following
 							</div>
-							<div className="text-center text-xl">
-								{' '}
-								domains on this device:
-							</div>
+							<div className="text-center text-xl">domains on this device:</div>
 							<div className="rounded-md w-3/4 bg-white p-7 mt-6 mx-auto drop-shadow-2xl">
 								<div className="mb-1">
 									<SiAskubuntu className="inline mr-2  text-orange-600" />
@@ -107,7 +120,7 @@ export default function Logout() {
 									<button
 										className="text-sm rounded bg-sky-500 text-white p-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
 										type="submit"
-										onClick={logoutState}
+										onClick={() => logout(userEmail)}
 									>
 										Log out
 									</button>

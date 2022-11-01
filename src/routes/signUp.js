@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineGithub } from 'react-icons/ai';
@@ -7,12 +8,20 @@ import { FaQuestionCircle } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 import axios from 'axios';
 import Header from '../components/Header';
+import useUserActions from '../_actions/useUserActions';
+import authAtom from '../_state/auth';
 
 export default function SignUp() {
-	const googleClientId = process.env.REACT_APP_GOOGLE_LOGIN;
+	const userActions = useUserActions();
+	const auth = useRecoilValue(authAtom); // 토큰 정보
+	const setAuth = useSetRecoilState(authAtom);
+	const navigate = useNavigate();
+	// const googleClientId = process.env.REACT_APP_GOOGLE_LOGIN;
 	const googleLoginHandler = () => {
-		const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=http://localhost:3000/loading&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
+		// const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=http://localhost:3000/loading&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
+		const GOOGLE_LOGIN_URL = `oauth2/authorization/google`;
 		window.location.href = GOOGLE_LOGIN_URL;
+		userActions.naverLogin();
 	};
 
 	// useForm을 사용하여 변경하자
@@ -21,39 +30,41 @@ export default function SignUp() {
 		setDpName(event.target.value);
 		console.log(dpName);
 	};
-
 	const [email, setEmail] = useState();
 	const onChangeEmail = (event) => {
 		setEmail(event.target.value);
 		console.log(email);
 	};
-
 	const [passWord, setPassWord] = useState();
 	const onChangePassWord = (event) => {
 		setPassWord(event.target.value);
 		console.log(passWord);
 	};
 
-	const clickRegister = async () => {
-		await axios({
-			method: 'post',
-			url: '',
-			data: {
-				email,
-				nickname: dpName,
-				password: passWord,
-				oauthProvider: 'naver',
-				agreed: 'true',
-			},
-			dataType: 'application/json',
-		})
-			.then(function (response) {
-				console.log(response);
+	function clickRegister(e) {
+		e.preventDefault();
+		return axios
+			.post(
+				`http://localhost:8080/register`,
+				{
+					email,
+					nickname: dpName,
+					password: passWord,
+					is_robot: 'false',
+				},
+				{ withCredentials: true },
+			)
+			.then((response) => {
+				localStorage.setItem('user', JSON.stringify(response.data)); // 로컬에 저장
+				setAuth(response.data); // 토큰 저장
+				console.log('auth확인', auth);
+				navigate('/');
 			})
-			.catch(function (error) {
-				console.log(error);
+			.catch((error) => {
+				alert(error);
+				navigate(`/signup`);
 			});
-	};
+	}
 
 	return (
 		<>

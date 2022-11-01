@@ -33,32 +33,36 @@ export default function Login() {
 	}, []);
 
 	const onSubmit = (email, password) => {
-		// alert(email, password);
-		return userActions.login(email, password).catch((error) => {
-			alert(error);
-		});
+		userActions.login(email, password);
 	};
 
 	// 여기 아래는 소셜입니다
 
 	// const serverURL = '';
-	const googleClientId = process.env.REACT_APP_GOOGLE_LOGIN;
-	const naverClientId = process.env.REACT_APP_NAVER_LOGIN;
+	//	const googleClientId = process.env.REACT_APP_GOOGLE_LOGIN;
+	//	const naverClientId = process.env.REACT_APP_NAVER_LOGIN;
 
 	const googleLoginHandler = () => {
-		const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=http://rebon.s3-website.ap-northeast-2.amazonaws.com/loading&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
+		// const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=http://rebon.s3-website.ap-northeast-2.amazonaws.com/loading&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
+		const GOOGLE_LOGIN_URL = `oauth2/authorization/google`;
 		window.location.href = GOOGLE_LOGIN_URL;
+		userActions.googleLogin();
 	};
 
 	const gitHubLoginHandler = () => {
-		const GITHUB_LOGIN_URL = `https://github.com/login/oauth/authorize`;
+		// (깃헙 내앱 등록 시 설정해두었던 callback url)으로 돌아오게 되고(리디렉트),
+		// 어떤 일시적으로 사용할 수 있는 코드가 code 파라미터로 주어지게 된다.
+		// const GITHUB_LOGIN_URL = `https://github.com/login/oauth/authorize`;
+		const GITHUB_LOGIN_URL = `https://github.com/login/oauth/authorize?client_id=82422b0d46b1255e9450`;
 		window.location.href = GITHUB_LOGIN_URL;
+		userActions.githubLogin();
 	};
 
 	const naverLoginHandler = () => {
-		const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=http://rebon.s3-website.ap-northeast-2.amazonaws.com/loading`;
+		const NAVER_LOGIN_URL = `/oauth2/authorization/naver`;
 		// const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=http://localhost:3000/loading`;
 		window.location.href = NAVER_LOGIN_URL;
+		userActions.naverLogin();
 	};
 
 	// const [token, setToken] = useState(window.sessionStorage.getItem('token'));

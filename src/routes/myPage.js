@@ -1,11 +1,19 @@
 import React from 'react';
+
+import { useRecoilValue } from 'recoil'; // 전역 상태값 불러오는 함수
 import EditUserProfile from '../components/EditUserProfile';
 import UserButtonCol from '../components/UserButtonCol';
 import UserButtonRow from '../components/UserButtonRow';
 import Header from '../components/Header';
 import LeftSidebar from '../components/LeftSidebar';
+import authAtom from '../_state/auth'; // 토큰과 사용자 정보가 들어있는 장소
 
 export default function MyPage() {
+	const auth = useRecoilValue(authAtom);
+	console.log('auth', auth);
+	// accessToken:"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InRlc3Q2QGVtYWlsLmNvbSIsImlhdCI6MTY2NzI5MTIxOSwiZXhwIjoxNjY3Mjk0ODE5LCJzdWIiOiI0In0.472WnksyKD3KSk6oDuFPT0GUX4syV2MauK_qYsMxqjc"
+	// user: {email: 'test6@email.com', nickname: 'test6', is_robot: 'false', id: 4}
+
 	return (
 		<>
 			<Header />

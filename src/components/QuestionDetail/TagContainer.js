@@ -12,11 +12,11 @@ function TagContainer() {
 	});
 
 	return (
-		<div className="mb-4">
+		<ul className="mb-4 flex flex-row">
 			{data?.data.tags.map((tag) => (
 				<Tag key={tag} tag={tag} />
 			))}
-		</div>
+		</ul>
 	);
 }
 

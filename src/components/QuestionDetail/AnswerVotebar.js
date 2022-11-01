@@ -7,16 +7,24 @@ import { useQuery } from 'react-query';
 function AnswerVotebar({ answerId }) {
 	const { questionId } = useParams();
 	const { data } = useQuery(['question', questionId], () => {
-		return axios.get(`http://localhost:4000/questions/${questionId}`);
+		return axios.patch(`http://localhost:4000/questions/${questionId}`);
 	});
+
 	const answerData = data?.data.answers.find(
 		(answer) => answer.answerId === answerId,
 	);
 
+	const handleUpClick = () => {};
+	const handleDownClick = () => {};
+
 	return (
 		<div className="w-[40px] mr-4">
 			{/* up button */}
-			<button type="button" className="flex justify-center">
+			<button
+				type="button"
+				className="flex justify-center"
+				onClick={handleUpClick}
+			>
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 					<path fill="lightgrey" d="M2 25h32L18 9 2 25Z" />
 				</svg>
@@ -24,7 +32,11 @@ function AnswerVotebar({ answerId }) {
 			<div className="flex justify-center text-gray-700">
 				{answerData.score}
 			</div>
-			<button type="button" className="flex justify-center mb-2">
+			<button
+				type="button"
+				className="flex justify-center mb-2"
+				onClick={handleDownClick}
+			>
 				{/* down button */}
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 					<path fill="lightgrey" d="M2 11h32L18 27 2 11Z" />

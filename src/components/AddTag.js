@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 function AddTag() {
-	const initialTags = ['CodeStates', 'kimcoding'];
+	const initialTags = [];
 
 	const [tags, setTags] = useState(initialTags);
 	const [inputValue, setInputValue] = useState('');

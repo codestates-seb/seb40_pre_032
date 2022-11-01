@@ -44,6 +44,25 @@ public class AnswerController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    //답변 채택
+    @GetMapping("/{id}/accept")
+    public ResponseEntity getAccept(@PathVariable("id") @Positive long answerId){
+
+        Answer getAccept = answerService.get(answerId);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+    //답변 채택 취소
+    @GetMapping("/{id}/accept/undo")
+    public ResponseEntity getAcceptUndo(@PathVariable("id") @Positive long answerId){
+
+        Answer getAccept = answerService.get(answerId);
+
+        return new ResponseEntity(HttpStatus.OK);
+    }
+
+
     //답변 삭제
     @DeleteMapping("/{id}/delete")
     public ResponseEntity deleteAnswer(@PathVariable("id") @Positive long answerId){

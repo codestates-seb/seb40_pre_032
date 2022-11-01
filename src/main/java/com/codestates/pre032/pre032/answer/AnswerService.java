@@ -57,4 +57,16 @@ public class AnswerService {
         }
         answerRepository.delete(answer);
     }
+
+    //답변 채택
+    public Answer get(long answerId) {
+        Answer answer = findVerifiedAnswer(answerId);
+        if(answer.isAccepted() == false){
+            answer.setAccepted(true);
+        }
+        else{
+            answer.setAccepted(false);
+        }
+        return answerRepository.save(answer);
+    }
 }

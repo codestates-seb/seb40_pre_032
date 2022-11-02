@@ -31,7 +31,7 @@ public class QuestionController {
     }
 
     // 작성 기능
-    @PostMapping(path = "/add", produces = "MediaType.APPLICATION_JSON_VALUE")
+    @PostMapping("/add")
 //    @PreAuthorize("isAuthenticated()")
     public ResponseEntity addQuestion(@Validated @RequestBody QuestionDto.Post requestBody) {
         Question question = questionService.create(questionMapper.questionPostDtoToQuestion(requestBody),

@@ -1,4 +1,4 @@
-/* eslint react/prop-types: 0 */
+/* eslint-disable */
 import React from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
@@ -16,11 +16,7 @@ function AnswerContent({ answerId }) {
 		(answer) => answer.answerId === answerId,
 	);
 
-	return (
-		<div>
-			<p className="mb-4 break-all">{answerData.answerContent}</p>
-		</div>
-	);
+	return <div dangerouslySetInnerHTML={{ __html: answerData.answerContent }} />;
 }
 
 export default AnswerContent;

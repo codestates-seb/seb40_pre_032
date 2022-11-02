@@ -75,7 +75,7 @@ function AnswerUserInfo({ answerId }) {
 	}
 
 	return (
-		<div className="flex flex-row h-[50px]">
+		<div className="mt-6 flex flex-row h-[50px]">
 			<div className="w-[280px]">
 				<button className="mr-2 text-sm text-gray-500" type="button">
 					Share

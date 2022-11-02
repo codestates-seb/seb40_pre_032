@@ -13,7 +13,7 @@ import javax.validation.constraints.Positive;
 @RestController
 @RequestMapping("/answers")
 @Validated
-@CrossOrigin
+//@CrossOrigin
 public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
@@ -27,11 +27,6 @@ public class AnswerController {
     }
 
     // 답변 등록
-    public void postAnswer(Long questionId,
-                                     @Valid @RequestBody AnswerDto.Post postDto){
-        Answer answer = mapper.answerPostDtoAnswer(postDto);
-        answerService.create(questionId, answer);
-    }
 
     //답변 수정
 
@@ -72,4 +67,14 @@ public class AnswerController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // id번의 질문에 답변추가
+    @PostMapping("/{id}/add")
+    public ResponseEntity addAnswer(@PathVariable Long id,
+                                    @RequestBody AnswerDto.Post requestBody) {
+        Answer answer = mapper.answerPostDtoAnswer(requestBody);
+        answerService.create(id, answer);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
+
 }

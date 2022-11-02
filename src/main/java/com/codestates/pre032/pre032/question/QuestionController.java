@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-@CrossOrigin()
+//@CrossOrigin()
 @RequestMapping("/questions")
 public class QuestionController {
     private final QuestionService questionService;
@@ -70,7 +70,6 @@ public class QuestionController {
     }
 
     // 질문 삭제 기능
-    // todo: accessToken
     @DeleteMapping("/{questionId}/delete")
     public ResponseEntity deleteQuestion(@PathVariable("questionId") Long id) {
         Question question = this.questionService.find(id);
@@ -78,14 +77,6 @@ public class QuestionController {
         return new ResponseEntity(HttpStatus.OK);
     }
 
-    // 질문 - 답변기능으로 연동
-    @PostMapping("/{id}/answer/add")
-    public ResponseEntity addAnswer(@PathVariable Long id,
-                                    @RequestBody AnswerDto.Post requestBody) {
-        answerController.postAnswer(id, requestBody);
-
-        return new ResponseEntity(HttpStatus.CREATED);
-    }
 
     //답변이 없는 질문들
     @GetMapping("/sortByUnanswered")

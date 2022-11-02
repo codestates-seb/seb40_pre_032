@@ -14,14 +14,17 @@ function AnswerEditor() {
 	};
 	const { questionId } = useParams();
 	const addAnswer = useMutation((newAnswer) => {
-		return axios.post(`/api/answers/${questionId}/add`, newAnswer);
+		return axios.post(
+			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${questionId}/add`,
+			newAnswer,
+		);
 	});
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+	const handleSubmit = () => {
 		// const newAnswer = new FormData();
 		// newAnswer.append('answerContent', quillText);
 		const newAnswer = {
+			questionId,
 			answerContent: quillText,
 		};
 		addAnswer.mutate(newAnswer, {

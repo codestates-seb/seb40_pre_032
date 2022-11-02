@@ -41,11 +41,11 @@ function AnswerUserInfo({ answerId }) {
 		const targetDate = new Date(string);
 		const elapsedSec = today.getTime() - targetDate.getTime();
 
-		const elapsedMin = Math.round(elapsedSec / minute);
-		const elapsedHour = Math.round(elapsedSec / hour);
-		const elapsedDay = Math.round(elapsedSec / day);
-		const elapsedMonth = Math.round(elapsedSec / month);
-		const elapsedYear = Math.round(elapsedSec / year);
+		const elapsedMin = Math.floor(elapsedSec / minute);
+		const elapsedHour = Math.floor(elapsedSec / hour);
+		const elapsedDay = Math.floor(elapsedSec / day);
+		const elapsedMonth = Math.floor(elapsedSec / month);
+		const elapsedYear = Math.floor(elapsedSec / year);
 
 		if (elapsedYear > 0) {
 			if (elapsedYear > 1) return `${elapsedYear} years ago`;

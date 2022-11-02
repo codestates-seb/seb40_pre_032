@@ -79,7 +79,9 @@ function QuestionHeader() {
 				</div>
 				<div>
 					<span className="text-sm py-2 mr-3 text-gray-500">Viewed</span>
-					<span className="text-sm py-2 mr-3">{data?.data.viewCount}</span>
+					<span className="text-sm py-2 mr-3">
+						{data?.data.viewCount} times
+					</span>
 				</div>
 			</div>
 		</div>

@@ -1,16 +1,34 @@
 import React from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 function QuestionUserInfo() {
+	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 	const { questionId } = useParams();
 	const { data } = useQuery(['question', questionId], () => {
 		return axios.get(`http://localhost:4000/questions/${questionId}`);
 	});
 
-	const handleDelete = () => {};
+	const deleteQuestion = useMutation((deleteId) => {
+		return axios.delete(
+			`http://localhost:4000/questions/${questionId}`,
+			deleteId,
+		);
+	});
+
+	const handleDelete = () => {
+		deleteQuestion.mutate(
+			{ id: questionId },
+			{
+				onSuccess: () => {
+					console.log('delete');
+					return queryClient.invalidateQueries(['question', questionId]);
+				},
+			},
+		);
+	};
 
 	function elapsed(string) {
 		const minute = 1000 * 60;

@@ -76,5 +76,20 @@ public interface QuestionMapper {
         }
     }
 
-    QuestionDto.Response questionToQuestionResponse(Question question);
+    default QuestionDto.Response questionToQuestionResponse(Question question){
+        QuestionDto.Response response = QuestionDto.Response
+                .builder()
+                .questionId(question.getQuestionId())
+                .answerCount(question.getAnswerCount())
+                .questionContent(question.getQuestionContent())
+                .title(question.getTitle())
+                .viewCount(question.getViewCount())
+                .creationDate(question.getCreationDate())
+                .isAnswered(question.isAnswered())
+                .modifiedAt(question.getModifiedAt())
+                .tags(question.getTagstr())
+                .score(question.getScore())
+                .build();
+        return response;
+    }
 }

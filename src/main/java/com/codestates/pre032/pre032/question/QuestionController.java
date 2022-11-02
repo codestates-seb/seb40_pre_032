@@ -37,6 +37,7 @@ public class QuestionController {
         Question question = questionService.create(questionMapper.questionPostDtoToQuestion(requestBody),
                 requestBody.getTags());
         QuestionDto.Response response = questionMapper.questionToQuestionResponse(question);
+
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 

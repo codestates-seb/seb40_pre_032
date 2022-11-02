@@ -3,9 +3,11 @@ package com.codestates.pre032.pre032.question;
 import com.codestates.pre032.pre032.answer.AnswerController;
 import com.codestates.pre032.pre032.answer.AnswerDto;
 import com.codestates.pre032.pre032.dto.MainResponseDto;
+import com.codestates.pre032.pre032.tag.QuestionTag;
+import com.codestates.pre032.pre032.tag.Tag;
+import com.codestates.pre032.pre032.tag.TagService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -21,10 +23,13 @@ public class QuestionController {
 
     private final AnswerController answerController;
 
-    public QuestionController(QuestionService questionService, QuestionMapper questionMapper, AnswerController answerController) {
+    private final TagService tagService;
+
+    public QuestionController(QuestionService questionService, QuestionMapper questionMapper, AnswerController answerController, TagService tagService) {
         this.questionService = questionService;
         this.questionMapper = questionMapper;
         this.answerController = answerController;
+        this.tagService = tagService;
     }
 
     // 작성 기능
@@ -65,11 +70,10 @@ public class QuestionController {
 
     // 질문 삭제 기능
     // todo: accessToken
-    @DeleteMapping("/{id}/delete")
-    public ResponseEntity deleteQuestion(@PathVariable Long id,
-                                         String accessToken) {
-        this.questionService.delete(id, accessToken);
-
+    @DeleteMapping("/{questionId}/delete")
+    public ResponseEntity deleteQuestion(@PathVariable("questionId") Long id) {
+        Question question = this.questionService.find(id);
+        this.questionService.delete(id);
         return new ResponseEntity(HttpStatus.OK);
     }
 

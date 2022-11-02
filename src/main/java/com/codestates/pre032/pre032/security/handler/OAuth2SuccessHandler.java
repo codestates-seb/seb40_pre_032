@@ -35,13 +35,41 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
         var oAuth2User = (OAuth2User) authentication.getPrincipal();
-        String sub = String.valueOf(oAuth2User.getAttributes().get("sub"));
-        String email = String.valueOf(oAuth2User.getAttributes().get("email"));
-        String displayName = String.valueOf(oAuth2User.getAttributes().get("name"));
-        String profileImage = String.valueOf(oAuth2User.getAttributes().get("picture"));
 
+
+        System.out.println(oAuth2User.getAttributes().get("response"));
+        String sub = "";
+        String email = "";
+        String displayName = "";
+        String profileImage= "";
+
+        if (oAuth2User.getAttributes().containsKey("response")){
+            String temp = oAuth2User.getAttributes().get("response").toString().replaceAll("\\{","").replaceAll("}","").replaceAll(", ","=");
+            String[] tempArr = temp.split("=");
+            for (int i = 0; i < tempArr.length; i++) {
+                if (tempArr[i].equals("id")){
+                    sub = tempArr[i+1];
+                }else if (tempArr[i].equals("email")){
+                    email = tempArr[i + 1];
+                } else if (tempArr[i].equals("name")) {
+                    displayName = tempArr[i+1];
+                } else if (tempArr[i].equals("profile_image")){
+                    profileImage = tempArr[i+1];
+                }
+            }
+        }else {
+            sub = String.valueOf(oAuth2User.getAttributes().get("sub"));
+            email = String.valueOf(oAuth2User.getAttributes().get("email"));
+            displayName = String.valueOf(oAuth2User.getAttributes().get("name"));
+            profileImage = String.valueOf(oAuth2User.getAttributes().get("picture"));
+        }
+
+        if (profileImage.equals(null)) {
+            profileImage = "https://bucket-seb40.s3.ap-northeast-2.amazonaws.com/default_profile.png";
+        }
 
         System.out.println(oAuth2User.getAttributes().toString());
+
         saveUser(sub, email, displayName, profileImage);  // (5)
         redirect(request, response, email);  // (6)
     }

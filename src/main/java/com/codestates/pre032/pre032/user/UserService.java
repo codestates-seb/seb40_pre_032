@@ -21,7 +21,7 @@ public class UserService {
         User user = new User();
         user.setDisplayName(dto.getDisplayName());
         user.setEmail(dto.getEmail());
-
+        user.setProfileImage("https://bucket-seb40.s3.ap-northeast-2.amazonaws.com/default_profile.png");
         String encryptedPassword = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(dto.getPassword());
         user.setPassword(encryptedPassword);
 

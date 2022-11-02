@@ -48,11 +48,11 @@ public class Question {
     @Column
     private LocalDateTime modifiedAt;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<QuestionTag> tags = new ArrayList<>();
 
     // todo: answer 연관관계 설정
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Answer> answers = new ArrayList<>();
 
     @ManyToOne

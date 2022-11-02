@@ -397,7 +397,7 @@ public class QuestionControllerTest {
 
         //given
         long questionId = 1L;
-        doNothing().when(questionService).delete(Mockito.anyLong(), Mockito.anyString());
+        doNothing().when(questionService).delete(Mockito.anyLong());
 
         //when
         ResultActions actions =

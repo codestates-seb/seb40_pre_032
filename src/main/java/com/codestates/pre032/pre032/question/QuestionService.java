@@ -132,7 +132,7 @@ public class QuestionService {
         return this.tagService.findQuestionsTagByString(tag);
     }
 
-    public void delete(Long id, String accessToken) {
+    public void delete(Long id) {
         Optional<Question> findQuestion = this.questionRepository.findById(id);
         if (findQuestion.isPresent()) {
             this.questionRepository.deleteById(id);

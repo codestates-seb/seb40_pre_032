@@ -1,10 +1,7 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.answer.AnswerController;
-import com.codestates.pre032.pre032.answer.AnswerDto;
 import com.codestates.pre032.pre032.dto.MainResponseDto;
-import com.codestates.pre032.pre032.tag.QuestionTag;
-import com.codestates.pre032.pre032.tag.Tag;
 import com.codestates.pre032.pre032.tag.TagService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -26,7 +26,7 @@ public interface QuestionMapper {
         List<Answer> answers = question.getAnswers();
 
         QuestionDto.questionContentResponse questionResponse = new QuestionDto.questionContentResponse();
-        questionResponse.setTags(question.getTags());
+        questionResponse.setTags(question.getTagstr());
         questionResponse.setAnswered(question.isAnswered());
         questionResponse.setViewCount(question.getViewCount());
         questionResponse.setAnswerCount(question.getAnswerCount());
@@ -74,10 +74,7 @@ public interface QuestionMapper {
 
             return list;
         }
-    };
-
-    QuestionDto.Response questionToQuestionResponse(Question question);
-
+    }
 
 //    default List<QuestionDto.questionResponse> questionToQuestionResponseDto(List<Question> questions) {
 //        List<QuestionDto.questionResponse> answer = new ArrayList<>();

@@ -1,11 +1,12 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
+import com.codestates.pre032.pre032.tag.Tag;
 import com.codestates.pre032.pre032.tag.TagService;
 import com.codestates.pre032.pre032.user.UserService;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.*;
 
@@ -15,6 +16,7 @@ public class QuestionService {
 
     private final UserService userService;
     private final TagService tagService;
+
 
     public QuestionService(QuestionRepository questionRepository, UserService userService, TagService tagService) {
         this.questionRepository = questionRepository;
@@ -32,7 +34,9 @@ public class QuestionService {
         question.setAnswered(false);
         question.setCreationDate(LocalDateTime.now());
         question.setModifiedAt(LocalDateTime.now());
-        tagService.stringToTag(question, tags);
+        List<Tag> tagList = tagService.stringToTags(question, tags);
+        question.setTags(tagList);
+
         //todo : user 정보 입력
 
         return this.questionRepository.save(question);
@@ -131,14 +135,18 @@ public class QuestionService {
         return this.questionRepository.findAll();
     }
 
-    public List<Question> getQuestionsByTag(String tag) {
-        return this.tagService.findQuestionsTagByString(tag);
+    public List<Question> getQuestionsByTag(String tagStr) {
+        Tag tag = this.tagService.stringToTag(tagStr);
+        return tag.getQuestions();
     }
 
+    @Transactional
     public void delete(Long id) {
         Optional<Question> findQuestion = this.questionRepository.findById(id);
         if (findQuestion.isPresent()) {
             this.questionRepository.deleteById(id);
+            tagService.deleteTagByQuestion(findQuestion.get());
+
         } else {
             throw new DataNotFoundException("question not found");
         }

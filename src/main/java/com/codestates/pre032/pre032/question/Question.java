@@ -1,7 +1,7 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.answer.Answer;
-import com.codestates.pre032.pre032.tag.QuestionTag;
+import com.codestates.pre032.pre032.tag.Tag;
 import com.codestates.pre032.pre032.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 public class Question {
-    public Question(String title, String questionContent, List<QuestionTag> tags) {
+    public Question(String title, String questionContent, List<Tag> tags) {
         this.title = title;
         this.questionContent = questionContent;
         this.tags = tags;
@@ -48,24 +48,27 @@ public class Question {
     @Column
     private LocalDateTime modifiedAt;
 
-    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE, orphanRemoval = true)
-    private List<QuestionTag> tags = new ArrayList<>();
+//    @OneToMany(mappedBy = "question")
+//    private List<QuestionTag> tags = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(name = "question_tag")
+    private List<Tag> tags = new ArrayList<>();
 
     // todo: answer 연관관계 설정
     @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER, orphanRemoval = true)
     private List<Answer> answers = new ArrayList<>();
 
     @ManyToOne
-    @JoinColumn(name = "user_userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column
     private int answerCount;
 
-    public List<String> getTags() {
+    public List<String> getTagstr() {
         List<String> tags = new ArrayList<>();
         for (int i = 0; i < this.tags.size(); i++) {
-            tags.add(this.tags.get(i).getTag().getTag());
+            tags.add(this.tags.get(i).getTag());
         }
         return tags;
     }

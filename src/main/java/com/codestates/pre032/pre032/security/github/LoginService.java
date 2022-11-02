@@ -36,7 +36,7 @@ public class LoginService {
     public GithubToken getAccessToken(String code) {
         MultiValueMap<String, String> headers = new LinkedMultiValueMap<>();
         Map<String, String> header = new HashMap<>();
-        header.put("Accept", "application/json"); //json 형식으로 응답 받음
+        header.put("Accept", "application.yml/json"); //json 형식으로 응답 받음
         headers.setAll(header);
 
         MultiValueMap<String, String> requestPayloads = new LinkedMultiValueMap<>();

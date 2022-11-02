@@ -1,5 +1,6 @@
 package com.codestates.pre032.pre032.question;
 
+import com.codestates.pre032.pre032.tag.Tag;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -10,7 +11,7 @@ import javax.persistence.TypedQuery;
 import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-
+    Integer countByTags(Tag tag);
     //완전히 일치
 //    @Query("select case q.title = :title when title = :title " +
 //            "when q.title <> :title then like %:title" +

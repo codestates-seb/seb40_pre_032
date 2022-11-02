@@ -1,5 +1,6 @@
 package com.codestates.pre032.pre032.tag;
 
+import com.codestates.pre032.pre032.question.Question;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -13,8 +14,9 @@ import java.util.List;
 @Entity
 @NoArgsConstructor
 public class Tag {
-    public Tag(String tag) {
+    public Tag(String tag,Question question) {
         this.tag = tag;
+        this.questions.add(question);
     }
 
     @Id
@@ -24,6 +26,9 @@ public class Tag {
     @Column
     private String tag;
 
-    @OneToMany(mappedBy = "tag")
-    private List<QuestionTag> questions = new ArrayList<>();
+//    @OneToMany(mappedBy = "tag", cascade = CascadeType.REMOVE)
+//    private List<QuestionTag> questions = new ArrayList<>();
+
+    @ManyToMany(mappedBy = "tags")
+    private List<Question> questions = new ArrayList<>();
 }

@@ -24,11 +24,11 @@ public class Answer {
     private String answerContent;
 
     @ManyToOne
-    @JoinColumn(name="question_questionId")
+    @JoinColumn(name="question_id")
     private Question question;
 
     @ManyToOne
-    @JoinColumn(name = "user_userId")
+    @JoinColumn(name = "user_id")
     private User user;
 
     @Column

@@ -61,10 +61,28 @@ public class QuestionService {
         }
     }
 
+    //Viewcount 내림차순 정렬
+    public List<Question> sortCount(){
+        List<Question> answer = this.questionRepository.sortViewCount();
+        return answer;
+    }
+    //답변 없는 질문 조회
+    public List<Question> selectUnanswer(){
+        List<Question> answer = this.questionRepository.selectUnanswered();
+        return answer;
+    }
+    //추천 수 기준 정렬
+    public List<Question>  sortScore(){
+        List<Question> answer = this.questionRepository.sortScore();
+        return answer;
+    }
+
     //todo: 검색기능
     public List<Question> search(String text) {
         // text가 전부 일치하는 결과 담기
         List<Question> answer = this.questionRepository.findByQuestionContentContaining(text);
+
+
         // 날짜순으로 정렬
         Collections.sort(answer, new Comparator<Question>() {
             @Override

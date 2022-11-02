@@ -29,7 +29,7 @@ public class QuestionController {
 
     // 작성 기능
     @PostMapping("/add")
-    @PreAuthorize("isAuthenticated()")
+//    @PreAuthorize("isAuthenticated()")
     public ResponseEntity addQuestion(@Validated @RequestBody QuestionDto.Post requestBody) {
         Question question = questionService.create(questionMapper.questionPostDtoToQuestion(requestBody),
                 requestBody.getTags());
@@ -81,6 +81,38 @@ public class QuestionController {
 
         return new ResponseEntity(HttpStatus.CREATED);
     }
+
+    //답변이 없는 질문들
+    @GetMapping("/sortByUnanswered")
+    public ResponseEntity selectUnanswer(){
+        List<Question> questions = questionService.selectUnanswer();
+        return new ResponseEntity<>(
+                new MainResponseDto(questionMapper.questionsToQuestionContentResponsesDto(questions)), HttpStatus.OK);
+    }
+
+    //추천 수 기준으로 정렬
+    @GetMapping("/sortByScore")
+    public ResponseEntity sortScore(){
+        List<Question> questions = questionService.sortScore();
+        return new ResponseEntity<>(
+                new MainResponseDto(questionMapper.questionsToQuestionContentResponsesDto(questions)), HttpStatus.OK);
+    }
+
+    @GetMapping("/sortByViewCount")
+    public ResponseEntity sortViewCount(){
+        List<Question> questions = questionService.sortCount();
+        return new ResponseEntity<>(
+                new MainResponseDto(questionMapper.questionsToQuestionContentResponsesDto(questions)), HttpStatus.OK);
+    }
+
+//    @GetMapping("/sortByViewCount")
+//    public ResponseEntity findTitle(){
+//        List<Question> questions = questionService.findTitle("스프링 에러입니다");
+//        return new ResponseEntity<>(
+//                new MainResponseDto(questionMapper.questionsToQuestionContentResponsesDto(questions)), HttpStatus.OK);
+//    }
+
+
 
     // 테스트용 메서드 모든 질문 삭제
     @PostMapping("/deleteAll")

@@ -3,9 +3,9 @@ spring:
     include: oauth
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:3306/pre032?serverTimezone=Asia/Seoul
-    username: user
-    password: 1234
+    url: jdbc:mysql://pre032-database.cssqpsefshei.ap-northeast-2.rds.amazonaws.com:3306/pre032?serverTimezone=Asia/Seoul
+    username: admin
+    password: pre032032
   jpa:
     hibernate:
       ddl-auto: update

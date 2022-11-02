@@ -16,32 +16,33 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public Users create(UserDto.signUp dto) {
+    public User create(UserDto.signUp dto) {
         verifyExistsEmail(dto.getEmail());
-        Users user = new Users();
+
+        User user = new User();
         user.setDisplayName(dto.getDisplayName());
         user.setEmail(dto.getEmail());
         user.setProfileImage("https://bucket-seb40.s3.ap-northeast-2.amazonaws.com/default_profile.png");
         String encryptedPassword = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(dto.getPassword());
         user.setPassword(encryptedPassword);
-
         user.setCreationDate(LocalDateTime.now());
+
         return this.userRepository.save(user);
     }
 
-    public Users createUser(Users user) {
+    public User createUser(User user) {
         return this.userRepository.save(user);
     }
 
 
     private void verifyExistsEmail(String email) {
-        Optional<Users> user = userRepository.findByEmail(email);
+        Optional<User> user = userRepository.findByEmail(email);
         if (user.isPresent())
             throw new UserExistsException("이미 등록된 이메일입니다.");
     }
 
-    public Users find(Long id) {
-        Optional<Users> findUser = this.userRepository.findById(id);
+    public User find(Long id) {
+        Optional<User> findUser = this.userRepository.findById(id);
         if (findUser.isPresent()) {
             return findUser.get();
         } else {
@@ -49,8 +50,8 @@ public class UserService {
         }
     }
 
-    public Users findByEmail(String email) {
-        Optional<Users> findUser = this.userRepository.findByEmail(email);
+    public User findByEmail(String email) {
+        Optional<User> findUser = this.userRepository.findByEmail(email);
         if (findUser.isPresent()) {
             return findUser.get();
         } else {
@@ -58,8 +59,8 @@ public class UserService {
         }
     }
 
-    public Users findByEmailOrCreate(String email) {
-        Optional<Users> findUser = this.userRepository.findByEmail(email);
+    public User findByEmailOrCreate(String email) {
+        Optional<User> findUser = this.userRepository.findByEmail(email);
         if (findUser.isPresent()) {
             return findUser.get();
         } else {

@@ -2,7 +2,7 @@ package com.codestates.pre032.pre032.security.filter;
 
 import com.codestates.pre032.pre032.security.dto.LoginDto;
 import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
-import com.codestates.pre032.pre032.user.Users;
+import com.codestates.pre032.pre032.user.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -49,7 +49,7 @@ public class CustomSecurityFilter extends UsernamePasswordAuthenticationFilter {
                                             FilterChain chain,
                                             Authentication authResult) throws ServletException, IOException {
         // principal로부터 User정보 호출
-        Users user = (Users) authResult.getPrincipal();
+        User user = (User) authResult.getPrincipal();
 
         // 토큰 생성
         String accessToken = delegateAccessToken(user);
@@ -60,7 +60,7 @@ public class CustomSecurityFilter extends UsernamePasswordAuthenticationFilter {
     }
 
     // 엑세스토큰 생성 로직
-    private String delegateAccessToken(Users user) {
+    private String delegateAccessToken(User user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put("email", user.getEmail());
         claims.put("userId",user.getUserId());

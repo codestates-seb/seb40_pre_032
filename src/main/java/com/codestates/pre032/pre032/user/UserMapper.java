@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    default UserDto.response userToUserResponseDto(Users user){
+    default UserDto.response userToUserResponseDto(User user){
         UserDto.response response = new UserDto.response(
                 user.getUserId(),
                 user.getEmail(),

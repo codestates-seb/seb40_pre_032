@@ -1,7 +1,7 @@
 package com.codestates.pre032.pre032.security.handler;
 
 import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
-import com.codestates.pre032.pre032.user.Users;
+import com.codestates.pre032.pre032.user.User;
 import com.codestates.pre032.pre032.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -75,9 +75,9 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     }
 
     private void saveUser(String sub, String email, String displayName, String profileImage) {
-        Users user = userService.findByEmailOrCreate(email);
+        User user = userService.findByEmailOrCreate(email);
         if (user == null) {
-            user = new Users();
+            user = new User();
             user.setEmail(email);
             user.setDisplayName(displayName);
             user.setProfileImage(profileImage);

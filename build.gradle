@@ -9,25 +9,13 @@ group = 'com.codestates.pre032'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
-configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
-	asciidoctorExtensions
-}
-
 repositories {
 	mavenCentral()
 }
 
-ext {
-	set('snippetsDir', file("build/generated-snippets"))
-}
 dependencies {
 	implementation 'org.junit.jupiter:junit-jupiter:5.9.0'
 	testImplementation 'org.springframework.restdocs:spring-restdocs-mockmvc'
-
-	asciidoctorExtensions 'org.springframework.restdocs:spring-restdocs-asciidoctor'
 
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -56,32 +44,4 @@ dependencies {
 	testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
 	testImplementation 'org.springframework.security:spring-security-test'
 
-}
-
-tasks.named('test') {
-	outputs.dir snippetsDir
-	useJUnitPlatform()
-}
-
-tasks.named('asciidoctor') {
-	configurations "asciidoctorExtensions"
-	inputs.dir snippetsDir
-	dependsOn test
-}
-
-task copyDocument(type: Copy) {
-	dependsOn asciidoctor
-	from file("${asciidoctor.outputDir}")
-	into file("src/main/resources/static/docs")
-}
-
-build {
-	dependsOn copyDocument
-}
-
-bootJar {
-	dependsOn copyDocument
-	from ("${asciidoctor.outputDir}") {
-		into 'static/docs'
-	}
 }

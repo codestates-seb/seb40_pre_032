@@ -6,9 +6,9 @@ import { useQuery } from 'react-query';
 import Tag from './Tag';
 
 function TagContainer() {
-	const { id } = useParams();
-	const { data } = useQuery(['question', id], () => {
-		return axios.get(`http://localhost:4000/questions/${id}`);
+	const { questionId } = useParams();
+	const { data } = useQuery(['question', questionId], () => {
+		return axios.get(`http://localhost:4000/questions/${questionId}`);
 	});
 
 	return (

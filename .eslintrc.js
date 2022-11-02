@@ -40,6 +40,6 @@ module.exports = {
 				labelAttributes: ['htmlFor'],
 			},
 		],
-		// 'import/prefer-default-export': off,
+		'no-param-reassign': 0,
 	},
 };

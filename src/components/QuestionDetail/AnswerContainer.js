@@ -8,7 +8,7 @@ function AnswerContainer({ answerId }) {
 	return (
 		<div className="mr-6 py-6 flex flex-row ">
 			<AnswerVotebar answerId={answerId} />
-			<div className="flex flex-col w-[660px]">
+			<div className="flex flex-col">
 				<AnswerContent answerId={answerId} />
 				<AnswerUserInfo answerId={answerId} />
 			</div>

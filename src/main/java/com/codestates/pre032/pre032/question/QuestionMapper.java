@@ -76,26 +76,5 @@ public interface QuestionMapper {
         }
     }
 
-//    default List<QuestionDto.questionResponse> questionToQuestionResponseDto(List<Question> questions) {
-//        List<QuestionDto.questionResponse> answer = new ArrayList<>();
-//        if (questions.size() == 0) {
-//            return null;
-//        } else {
-//            for (Question question : questions) {
-//                QuestionDto.questionResponse response = new QuestionDto.questionResponse(
-//                        question.getTags(),
-//                        question.isAnswered(),
-//                        question.getViewCount(),
-//                        question.getAnswerCount(),
-//                        question.getScore(),
-//                        question.getCreationDate(),
-//                        question.getModifiedAt(),
-//                        question.getQuestionId(),
-//                        question.getTitle()
-//                );
-//                answer.add(response);
-//            }
-//            return answer;
-//        }
-//    }
+    QuestionDto.Response questionToQuestionResponse(Question question);
 }

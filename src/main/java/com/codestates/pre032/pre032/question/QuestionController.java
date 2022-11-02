@@ -36,7 +36,8 @@ public class QuestionController {
     public ResponseEntity addQuestion(@Validated @RequestBody QuestionDto.Post requestBody) {
         Question question = questionService.create(questionMapper.questionPostDtoToQuestion(requestBody),
                 requestBody.getTags());
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        QuestionDto.Response response = questionMapper.questionToQuestionResponse(question);
+        return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
 
     // 수정 기능

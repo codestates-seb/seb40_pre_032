@@ -1,6 +1,6 @@
 package com.codestates.pre032.pre032.security.github;
 
-import com.codestates.pre032.pre032.user.User;
+import com.codestates.pre032.pre032.user.Users;
 import com.codestates.pre032.pre032.user.UserService;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
@@ -66,10 +66,13 @@ public class LoginService {
         String displayName = response.getName();
         String profileImage= response.getProfileImage();
         //todo: 프로필 이미지가 없을 때 기본 이미지 설정 로직
+        if (profileImage.equals(null)) {
+            profileImage = "https://bucket-seb40.s3.ap-northeast-2.amazonaws.com/default_profile.png";
+        }
 
-        User user = userService.findByEmailOrCreate(email);
+        Users user = userService.findByEmailOrCreate(email);
         if (user == null) {
-            user = new User();
+            user = new Users();
             user.setEmail(email);
             user.setDisplayName(displayName);
             user.setProfileImage(profileImage);

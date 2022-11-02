@@ -4,8 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-   Optional<User> findByEmail(String Email);
+public interface UserRepository extends JpaRepository<Users, Long> {
+   Optional<Users> findByEmail(String Email);
 
    //finBy: 규칙 -> Username: 문법
    // select * from user where username = ?

@@ -1,8 +1,9 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
-import com.codestates.pre032.pre032.tag.*;
+import com.codestates.pre032.pre032.tag.TagService;
 import com.codestates.pre032.pre032.user.UserService;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -22,7 +23,9 @@ public class QuestionService {
         this.tagService = tagService;
     }
 
-    public Question create(Question question, List<String> tags) {
+    public Question create(Question question, List<String> tags, User userDetails) {
+        String email = userDetails.getUsername();
+        question.setUser(userService.findByEmail(email));
         question.setScore(0);
         question.setViewCount(0);
         question.setAnswerCount(0);

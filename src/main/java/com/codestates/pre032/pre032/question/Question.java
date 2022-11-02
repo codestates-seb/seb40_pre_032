@@ -2,7 +2,7 @@ package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.answer.Answer;
 import com.codestates.pre032.pre032.tag.QuestionTag;
-import com.codestates.pre032.pre032.user.User;
+import com.codestates.pre032.pre032.user.Users;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -57,7 +57,7 @@ public class Question {
 
     @ManyToOne
     @JoinColumn(name = "user_userId")
-    private User user;
+    private Users user;
 
     @Column
     private int answerCount;

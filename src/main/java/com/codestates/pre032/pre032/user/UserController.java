@@ -37,7 +37,7 @@ public class UserController {
 
     @GetMapping("{user_id}/myPage")
     public ResponseEntity getMyPage(@PathVariable Long id) {
-        User user = this.userService.find(id);
+        Users user = this.userService.find(id);
         UserDto.response response = this.userMapper.userToUserResponseDto(user);
 
         return new ResponseEntity<>(response, HttpStatus.OK);

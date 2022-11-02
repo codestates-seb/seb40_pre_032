@@ -1,7 +1,7 @@
 package com.codestates.pre032.pre032.security.services;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
-import com.codestates.pre032.pre032.user.User;
+import com.codestates.pre032.pre032.user.Users;
 import com.codestates.pre032.pre032.user.UserRepository;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -30,13 +30,13 @@ public class JpaUserDetailsService implements UserDetailsService {
 
         @Override
         public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-            Optional<User> optionalUser = userRepository.findByEmail(email);
-            User findUser = optionalUser.orElseThrow(() -> new DataNotFoundException("MEMBER_NOT_FOUND"));
+            Optional<Users> optionalUser = userRepository.findByEmail(email);
+            Users findUser = optionalUser.orElseThrow(() -> new DataNotFoundException("MEMBER_NOT_FOUND"));
 
             return new MemberDetails(findUser);
         }
-        private final class MemberDetails extends User implements UserDetails {
-            MemberDetails(User user) {
+        private final class MemberDetails extends Users implements UserDetails {
+            MemberDetails(Users user) {
                 setUserId(user.getUserId());
                 setEmail(user.getEmail());
                 setPassword(user.getPassword());

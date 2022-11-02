@@ -1,7 +1,7 @@
 package com.codestates.pre032.pre032.security.handler;
 
 import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
-import com.codestates.pre032.pre032.user.User;
+import com.codestates.pre032.pre032.user.Users;
 import com.codestates.pre032.pre032.user.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
@@ -63,7 +63,9 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
             profileImage = String.valueOf(oAuth2User.getAttributes().get("picture"));
         }
 
-        //todo: profileImage ==null 일경우 기본 이미지로 설정하는 것
+        if (profileImage.equals(null)) {
+            profileImage = "https://bucket-seb40.s3.ap-northeast-2.amazonaws.com/default_profile.png";
+        }
 
         System.out.println(oAuth2User.getAttributes().toString());
 
@@ -72,9 +74,9 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
     }
 
     private void saveUser(String sub, String email, String displayName, String profileImage) {
-        User user = userService.findByEmailOrCreate(email);
+        Users user = userService.findByEmailOrCreate(email);
         if (user == null) {
-            user = new User();
+            user = new Users();
             user.setEmail(email);
             user.setDisplayName(displayName);
             user.setProfileImage(profileImage);

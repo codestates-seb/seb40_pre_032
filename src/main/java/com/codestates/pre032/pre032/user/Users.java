@@ -16,8 +16,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class User {
-    public User(String email, String password, String displayName, String profileImage, LocalDateTime creationDate, String provider, String providerId) {
+public class Users {
+    public Users(String email, String password, String displayName, String profileImage, LocalDateTime creationDate, String provider, String providerId) {
         this.email = email;
         this.password = password;
         this.displayName = displayName;

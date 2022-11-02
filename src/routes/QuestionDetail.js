@@ -16,11 +16,9 @@ function QuestionDetail() {
 	const { questionId } = useParams();
 	const { data } = useQuery(['question', questionId], () => {
 		return axios.get(
-			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
 		);
 	});
-
-	console.log(data?.data);
 
 	return (
 		<div>

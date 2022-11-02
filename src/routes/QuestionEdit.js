@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 
 function QuestionEdit() {
 	return (
-		<>
+		<div>
 			<Header />
 			<div className="flex justify-center ">
 				<LeftSidebar />
@@ -15,7 +15,7 @@ function QuestionEdit() {
 				</div>
 			</div>
 			<Footer />
-		</>
+		</div>
 	);
 }
 

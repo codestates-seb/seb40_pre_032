@@ -1,15 +1,16 @@
-/* eslint react/prop-types: 0 */
+/* eslint-disable */
 import React from 'react';
 import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 function AnswerUserInfo({ answerId }) {
+	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 	const { questionId } = useParams();
 	const { data } = useQuery(['question', questionId], () => {
 		return axios.get(
-			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
 		);
 	});
 
@@ -17,7 +18,17 @@ function AnswerUserInfo({ answerId }) {
 		(answer) => answer.answerId === answerId,
 	);
 
-	const handleDelete = () => {};
+	const deleteAnswer = useMutation((deleteId) => {
+		return axios.delete(
+			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/delete`,
+			deleteId,
+		);
+	});
+	const handleDelete = () => {
+		deleteAnswer.mutate(answerId, {
+			onSuccess: () => queryClient.invalidateQueries(['question', questionId]),
+		});
+	};
 
 	function elapsed(string) {
 		const minute = 1000 * 60;

@@ -67,10 +67,7 @@ function QuestionEditor() {
 	});
 
 	const editQuestion = useMutation((editedQuestion) => {
-		return axios.patch(
-			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/edit`,
-			editedQuestion,
-		);
+		return axios.patch(`/api/questions/${questionId}/edit`, editedQuestion);
 	});
 
 	const [titleValue, setTitleValue] = useState(data?.data.title);
@@ -90,7 +87,7 @@ function QuestionEditor() {
 		const editedQuestion = {
 			title: titleValue,
 			questionContent: quillText,
-			// tags: tags,
+			tags: tags,
 		};
 
 		editQuestion.mutate(editedQuestion, {

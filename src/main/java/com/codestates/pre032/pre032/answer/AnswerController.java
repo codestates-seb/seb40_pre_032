@@ -27,7 +27,7 @@ public class AnswerController {
 
     // 답변 등록
     public void postAnswer(Long questionId,
-                                     @Valid @RequestBody AnswerDto.Post postDto){
+                                     @Valid @RequestBody AnswerDto.PostDto postDto){
         Answer answer = mapper.answerPostDtoAnswer(postDto);
         answerService.create(questionId, answer);
     }
@@ -51,7 +51,7 @@ public class AnswerController {
         Answer getAccept = answerService.get(answerId);
 
         return new ResponseEntity(HttpStatus.OK);
-    }
+
 
     //답변 채택 취소
     @GetMapping("/{id}/accept/undo")

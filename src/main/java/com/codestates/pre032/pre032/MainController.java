@@ -43,7 +43,14 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public ResponseEntity mainPage(){
+    public ResponseEntity mainPage() {
         return new ResponseEntity<>("welcome Ctrl C+V", HttpStatus.OK);
     }
+
+
+//    @GetMapping("/login/oauth2/code/github/")
+//    public ResponseEntity githubLogin(@PathParam("code") String code) {
+//
+//        return new ResponseEntity<>(HttpStatus.OK);
+//    }
 }

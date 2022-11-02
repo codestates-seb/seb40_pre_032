@@ -49,8 +49,9 @@ public class SecurityConfig {
                 // cors를 허용하는 기본 설정으로 적용
                 .cors(withDefaults())
                 // 우리 학습과정에선 배우지 않은 내용 : 그냥 disable 하자
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        http
                 .formLogin()
                 .loginPage("/loginPage")
 //                .disable()
@@ -68,10 +69,11 @@ public class SecurityConfig {
 //                         권한 설정
                                 .anyRequest().permitAll()
                 )
-                .oauth2Login(oauth2 -> oauth2
+                .oauth2Login(oauth2 ->
+
+                        oauth2
                         .successHandler(new OAuth2SuccessHandler(jwtTokenizer, userService))  // (1)
                 )
-
                 // 로그인 설정
 //                .loginPage("/users/loginPage")
 //                .defaultSuccessUrl("/")
@@ -95,10 +97,11 @@ public class SecurityConfig {
     public class CustomFilterConfigure extends AbstractHttpConfigurer<CustomFilterConfigure, HttpSecurity> {  // (2-1)
         @Override
         public void configure(HttpSecurity builder) throws Exception {  // (2-2)
+
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);  // (2-3)
 
             CustomSecurityFilter jwtAuthenticationFilter = new CustomSecurityFilter(authenticationManager, jwtTokenizer);  // (2-4)
-            jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");
+            jwtAuthenticationFilter.setFilterProcessesUrl("users/login");
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new LoginFailureHandler());
 

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@CrossOrigin()
 @RequestMapping("/questions")
 public class QuestionController {
     private final QuestionService questionService;
@@ -37,7 +38,7 @@ public class QuestionController {
 //    @PreAuthorize("isAuthenticated()")
     public ResponseEntity addQuestion(@Validated @RequestBody QuestionDto.Post requestBody) {
         Question question = questionService.create(questionMapper.questionPostDtoToQuestion(requestBody),
-                requestBody.getTags());
+                requestBody.getTags(),userDetails);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -80,7 +81,7 @@ public class QuestionController {
     // 질문 - 답변기능으로 연동
     @PostMapping("/{id}/answer/add")
     public ResponseEntity addAnswer(@PathVariable Long id,
-                                    @RequestBody AnswerDto.Post requestBody) {
+                                    @RequestBody AnswerDto.PostDto requestBody) {
         answerController.postAnswer(id, requestBody);
 
         return new ResponseEntity(HttpStatus.CREATED);

@@ -1,7 +1,6 @@
 package com.codestates.pre032.pre032.answer;
 
 
-import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +28,7 @@ public class AnswerDto {
     @Getter
     @Builder
     public static class Response{
+
 
         private boolean isAccepted;
         private int score;

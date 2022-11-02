@@ -16,9 +16,9 @@ public class UserService {
         this.userRepository = userRepository;
     }
 
-    public User create(UserDto.signUp dto) {
+    public Users create(UserDto.signUp dto) {
         verifyExistsEmail(dto.getEmail());
-        User user = new User();
+        Users user = new Users();
         user.setDisplayName(dto.getDisplayName());
         user.setEmail(dto.getEmail());
         user.setProfileImage("https://bucket-seb40.s3.ap-northeast-2.amazonaws.com/default_profile.png");
@@ -29,19 +29,19 @@ public class UserService {
         return this.userRepository.save(user);
     }
 
-    public User createUser(User user) {
+    public Users createUser(Users user) {
         return this.userRepository.save(user);
     }
 
 
     private void verifyExistsEmail(String email) {
-        Optional<User> user = userRepository.findByEmail(email);
+        Optional<Users> user = userRepository.findByEmail(email);
         if (user.isPresent())
             throw new UserExistsException("이미 등록된 이메일입니다.");
     }
 
-    public User find(Long id) {
-        Optional<User> findUser = this.userRepository.findById(id);
+    public Users find(Long id) {
+        Optional<Users> findUser = this.userRepository.findById(id);
         if (findUser.isPresent()) {
             return findUser.get();
         } else {
@@ -49,8 +49,8 @@ public class UserService {
         }
     }
 
-    public User findByEmail(String email) {
-        Optional<User> findUser = this.userRepository.findByEmail(email);
+    public Users findByEmail(String email) {
+        Optional<Users> findUser = this.userRepository.findByEmail(email);
         if (findUser.isPresent()) {
             return findUser.get();
         } else {
@@ -58,8 +58,8 @@ public class UserService {
         }
     }
 
-    public User findByEmailOrCreate(String email) {
-        Optional<User> findUser = this.userRepository.findByEmail(email);
+    public Users findByEmailOrCreate(String email) {
+        Optional<Users> findUser = this.userRepository.findByEmail(email);
         if (findUser.isPresent()) {
             return findUser.get();
         } else {

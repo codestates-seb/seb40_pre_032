@@ -74,6 +74,7 @@ public class SecurityConfig {
 
                         oauth2
                         .successHandler(new OAuth2SuccessHandler(jwtTokenizer, userService))  // (1)
+                                .defaultSuccessUrl("/")
                 )
                 // 로그인 설정
 //                .loginPage("/users/loginPage")

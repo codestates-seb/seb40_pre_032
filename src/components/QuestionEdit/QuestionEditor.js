@@ -61,12 +61,14 @@ function QuestionEditor() {
 	const { questionId } = useParams();
 
 	const { data } = useQuery(['question', questionId], () => {
-		return axios.get(`http://localhost:4000/questions/${questionId}`);
+		return axios.get(
+			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+		);
 	});
 
 	const editQuestion = useMutation((editedQuestion) => {
 		return axios.patch(
-			`http://localhost:4000/questions/${questionId}`,
+			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/edit`,
 			editedQuestion,
 		);
 	});
@@ -88,7 +90,7 @@ function QuestionEditor() {
 		const editedQuestion = {
 			title: titleValue,
 			questionContent: quillText,
-			tags: tags,
+			// tags: tags,
 		};
 
 		editQuestion.mutate(editedQuestion, {

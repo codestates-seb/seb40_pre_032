@@ -15,7 +15,7 @@ function AnswerEditor() {
 	const { questionId } = useParams();
 	const addAnswer = useMutation((newAnswer) => {
 		return axios.post(
-			`http://localhost:4000/questions/${questionId}/answers/`,
+			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/answers/add`,
 			newAnswer,
 		);
 	});
@@ -23,7 +23,7 @@ function AnswerEditor() {
 	const handleSubmit = (event) => {
 		event.preventDefault();
 		const newAnser = {
-			questionContent: quillText,
+			answerContent: quillText,
 		};
 		addAnswer.mutate(newAnser, {
 			onSuccess: () => {

@@ -14,16 +14,15 @@ function QuestionVotebar() {
 		);
 	});
 
-	const upVote = useMutation((updatedVote) => {
+	const upVote = useMutation(() => {
 		return axios.post(
-			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
-			updatedVote,
+			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/upvote`,
 		);
 	});
 
 	const downVote = useMutation(() => {
 		return axios.post(
-			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/downvote`,
 		);
 	});
 

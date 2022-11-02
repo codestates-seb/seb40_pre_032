@@ -43,10 +43,10 @@ public interface QuestionMapper {
     }
 
     //질문에 대한 답변
-    default List<AnswerDto.ResponseDto> questionAnswersToQuestionAnswerResponse(List<Answer> answers) {
+    default List<AnswerDto.Response> questionAnswersToQuestionAnswerResponse(List<Answer> answers) {
         return answers
                 .stream()
-                .map(questionAnswer -> AnswerDto.ResponseDto
+                .map(questionAnswer -> AnswerDto.Response
                         .builder()
                         .isAccepted(questionAnswer.isAccepted())
                         .score(questionAnswer.getScore())

@@ -1,7 +1,7 @@
 package com.codestates.pre032.pre032.security.github;
 
 import com.codestates.pre032.pre032.user.UserService;
-import com.codestates.pre032.pre032.user.User;
+import com.codestates.pre032.pre032.user.Users;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -70,9 +70,9 @@ public class LoginService {
             profileImage = "https://bucket-seb40.s3.ap-northeast-2.amazonaws.com/default_profile.png";
         }
 
-        User user = userService.findByEmailOrCreate(email);
+        Users user = userService.findByEmailOrCreate(email);
         if (user == null) {
-            user = new User();
+            user = new Users();
             user.setEmail(email);
             user.setDisplayName(displayName);
             user.setProfileImage(profileImage);

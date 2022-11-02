@@ -13,6 +13,7 @@ import javax.validation.constraints.Positive;
 @RestController
 @RequestMapping("/answers")
 @Validated
+@CrossOrigin
 public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;
@@ -27,7 +28,7 @@ public class AnswerController {
 
     // 답변 등록
     public void postAnswer(Long questionId,
-                                     @Valid @RequestBody AnswerDto.PostDto postDto){
+                                     @Valid @RequestBody AnswerDto.Post postDto){
         Answer answer = mapper.answerPostDtoAnswer(postDto);
         answerService.create(questionId, answer);
     }
@@ -37,7 +38,7 @@ public class AnswerController {
     @PatchMapping("/{id}/edit")
     public ResponseEntity patchAnswer(@PathVariable("id") @Positive long answerId,
                                       @Valid @RequestBody AnswerDto.Patch patchDto){
-        Answer updateAnswer = answerService.update(answerId,mapper.answerPatchDtoAnswer(patchDto));
+        Answer updateAnswer = answerService.updateAnswer(answerId,mapper.answerPatchDtoAnswer(patchDto));
 
 
 
@@ -46,12 +47,13 @@ public class AnswerController {
 
     //답변 채택
     @GetMapping("/{id}/accept")
-    public ResponseEntity getAccept(@PathVariable("id") @Positive long answerId){
+    public ResponseEntity getAccept(@PathVariable("id") @Positive long answerId) {
 
         Answer getAccept = answerService.get(answerId);
 
         return new ResponseEntity(HttpStatus.OK);
 
+    }
 
     //답변 채택 취소
     @GetMapping("/{id}/accept/undo")

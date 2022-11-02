@@ -23,9 +23,9 @@ public class QuestionService {
         this.tagService = tagService;
     }
 
-    public Question create(Question question, List<String> tags, User userDetails) {
-        String email = userDetails.getUsername();
-        question.setUser(userService.findByEmail(email));
+    public Question create(Question question, List<String> tags) {
+//        String email = userDetails.getUsername();
+//        question.setUser(userService.findByEmail(email));
         question.setScore(0);
         question.setViewCount(0);
         question.setAnswerCount(0);

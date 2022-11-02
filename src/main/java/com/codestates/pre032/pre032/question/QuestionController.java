@@ -38,7 +38,7 @@ public class QuestionController {
 //    @PreAuthorize("isAuthenticated()")
     public ResponseEntity addQuestion(@Validated @RequestBody QuestionDto.Post requestBody) {
         Question question = questionService.create(questionMapper.questionPostDtoToQuestion(requestBody),
-                requestBody.getTags(),userDetails);
+                requestBody.getTags());
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -81,7 +81,7 @@ public class QuestionController {
     // 질문 - 답변기능으로 연동
     @PostMapping("/{id}/answer/add")
     public ResponseEntity addAnswer(@PathVariable Long id,
-                                    @RequestBody AnswerDto.PostDto requestBody) {
+                                    @RequestBody AnswerDto.Post requestBody) {
         answerController.postAnswer(id, requestBody);
 
         return new ResponseEntity(HttpStatus.CREATED);

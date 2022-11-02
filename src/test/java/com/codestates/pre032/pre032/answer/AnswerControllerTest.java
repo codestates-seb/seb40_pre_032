@@ -75,7 +75,7 @@ public class AnswerControllerTest {
 
 
         given(mapper.answerPatchDtoAnswer(Mockito.any(AnswerDto.Patch.class))).willReturn(new Answer());
-        given(answerService.update(eq(answerId),Mockito.any(Answer.class))).willReturn(new Answer());
+        given(answerService.updateAnswer(eq(answerId),Mockito.any(Answer.class))).willReturn(new Answer());
 //        given(mapper.answerToAnswerResponseDto(Mockito.any(Answer.class))).willReturn(answerResponseDto);
 
         //when

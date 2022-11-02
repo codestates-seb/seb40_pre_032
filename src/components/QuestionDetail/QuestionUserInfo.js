@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -116,7 +117,7 @@ function QuestionUserInfo() {
 					asked {elapsed(data?.data.creationDate)}
 				</div>
 				<div className="text-blue-500 text-sm">
-					{data?.data.owner.displayName}
+					{/* {data?.data.owner.displayName} */}
 				</div>
 			</div>
 		</div>

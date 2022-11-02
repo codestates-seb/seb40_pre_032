@@ -7,11 +7,14 @@ import Login from './routes/login';
 import SignUp from './routes/signUp';
 import Editor from './components/Editor';
 import Loading from './components/Loading';
+import Logout from './routes/logout';
+import Mypage from './routes/myPage';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
 			suspense: true,
+			refetchOnWindowFocus: false,
 		},
 	},
 });
@@ -24,7 +27,9 @@ export default function App() {
 					<Routes>
 						<Route path="/" element={<MainPage />} />
 						<Route path="/login" element={<Login />} />
+						<Route path="/logout" element={<Logout />} />
 						<Route path="/signup" element={<SignUp />} />
+						<Route path="/mypage" element={<Mypage />} />
 						<Route path="/ask" element={<Editor />} />
 					</Routes>
 				</Suspense>

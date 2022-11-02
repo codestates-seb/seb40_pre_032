@@ -9,7 +9,9 @@ function Header() {
 	const { refetch } = useQuery(
 		[`questions`],
 		() => {
-			return axios.get(`http://localhost:4000/search`);
+			return axios.get(
+				`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/`,
+			);
 		},
 		{
 			enabled: false,
@@ -55,11 +57,6 @@ function Header() {
 							<path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z" />
 						</svg>
 						<input
-							// onKeyPress={(e) => {
-							// 	if (e.key === 'Enter') {
-							// 		refetch();
-							// 	}
-							// }}
 							onChange={onChange}
 							value={value}
 							placeholder="Search..."

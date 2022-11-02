@@ -6,7 +6,9 @@ function ViewCountBtn() {
 	const { refetch } = useQuery(
 		['questions'],
 		() => {
-			return axios.get('http://localhost:4000/items/sort_by_viewcount');
+			return axios.get(
+				'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/sortByViewCount',
+			);
 		},
 		{
 			enabled: false,

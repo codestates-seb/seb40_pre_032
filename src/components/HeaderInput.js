@@ -15,13 +15,13 @@ function HeaderInput() {
 		// 그냥 빈 저거일때
 		if (matched === null) {
 			return axios.get(
-				`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/search?q=${encodeURIComponent(
+				`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/search?q=${encodeURIComponent(
 					value,
 				)}`,
 			);
 		}
 		return axios.get(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/search/tag?tag=${encodeURIComponent(
+			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/search/tag?tag=${encodeURIComponent(
 				matched[1],
 			)}`,
 		);

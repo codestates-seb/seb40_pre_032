@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
 
 function AllQuestions({ questions, offset, limit }) {
@@ -26,11 +27,11 @@ function AllQuestions({ questions, offset, limit }) {
 							</div>
 						</div>
 						<div className="grow max-w-full">
-							<h3 className="font-normal block text-[18px] text-[#1f7ad1] mt-[-0.15rem] mb-[0.4rem] pr-[24px] leading-snug break-all">
-								<a href="https://www.naver.com" className="">
+							<Link to={`/questions/${question.questionId}`}>
+								<h3 className="font-normal block text-[18px] text-[#1f7ad1] mt-[-0.15rem] mb-[0.4rem] pr-[24px] leading-snug break-all">
 									{question.title}
-								</a>
-							</h3>
+								</h3>
+							</Link>
 							<div className="mt-[-2px] mb-[8px] text-[13px] text-[hsl(210,8%,25%)] break-all">
 								{question.questionContent}...
 							</div>

@@ -8,7 +8,7 @@ function Logo() {
 		[`questions`],
 		() => {
 			return axios.get(
-				`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/`,
+				`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/`,
 			);
 		},
 		{

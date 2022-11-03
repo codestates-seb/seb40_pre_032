@@ -28,7 +28,6 @@ export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<BrowserRouter>
-				<Editor />
 				<Suspense fallback={<Loading />}>
 					<Routes>
 						<Route path="/" element={<MainPage />} />

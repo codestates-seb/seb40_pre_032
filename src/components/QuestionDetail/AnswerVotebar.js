@@ -1,6 +1,6 @@
 /* eslint-disable */
-import React from 'react';
-import { useParams, useState } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
 import {

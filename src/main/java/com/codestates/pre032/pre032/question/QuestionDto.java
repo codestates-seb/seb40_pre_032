@@ -19,6 +19,8 @@ public class QuestionDto {
         private String questionContent;
 
         private List<String> tags;
+        //액세스토큰
+        private String accessToken;
     }
 
     @Getter
@@ -26,8 +28,9 @@ public class QuestionDto {
     @NoArgsConstructor
     public static class Patch {
         private String title;
-
         String questionContent;
+        //액세스토큰
+        private String accessToken;
     }
 
     @Getter

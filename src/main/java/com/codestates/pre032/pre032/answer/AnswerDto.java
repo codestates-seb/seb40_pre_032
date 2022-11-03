@@ -16,6 +16,8 @@ public class AnswerDto {
     public static class Post{
         @NotBlank
         private String answerContent;
+        //액세스토큰
+        private String accessToken;
     }
 
     @Getter
@@ -23,6 +25,9 @@ public class AnswerDto {
     public static class Patch{
 
         private String answerContent;
+
+        //액세스토큰
+        private String accessToken;
     }
 
     @AllArgsConstructor

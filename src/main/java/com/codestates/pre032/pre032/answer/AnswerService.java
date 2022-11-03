@@ -3,6 +3,7 @@ package com.codestates.pre032.pre032.answer;
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
 import com.codestates.pre032.pre032.question.Question;
 import com.codestates.pre032.pre032.question.QuestionService;
+import com.codestates.pre032.pre032.user.User;
 import org.springframework.stereotype.Service;
 
 
@@ -20,15 +21,20 @@ public class AnswerService {
         this.questionService = questionService;
     }
 
-    public Answer create(Long id, Answer answer){
+    public Answer create(Long id, Answer answer, User user){
         Question question = questionService.find(id);
         question.setAnswerCount(question.getAnswerCount()+1);
         question.setAnswered(true);
         answer.setQuestion(question);
         answer.setAccepted(false);
         answer.setScore(0);
+        answer.setUser(user);
 
         return answerRepository.save(answer);
+    }
+
+    public Answer findById(Long id){
+       return this.answerRepository.findById(id).get();
     }
 
     public Answer updateAnswer(Long answerId, Answer answer){
@@ -61,12 +67,20 @@ public class AnswerService {
     //답변 채택
     public Answer get(long answerId) {
         Answer answer = findVerifiedAnswer(answerId);
-        if(answer.isAccepted() == false){
+        if(!answer.isAccepted()){
             answer.setAccepted(true);
         }
         else{
             answer.setAccepted(false);
         }
         return answerRepository.save(answer);
+    }
+
+    public boolean hasAnswer(Long answerId, User user){
+        Answer answer = answerRepository.findById(answerId).get();
+        if (answer.getUser()==user){
+            return true;
+        }
+        return false;
     }
 }

@@ -1,14 +1,13 @@
 package com.codestates.pre032.pre032.user;
 
 import com.codestates.pre032.pre032.exception.InvalidPasswordException;
+import com.codestates.pre032.pre032.exception.UnauthorizedException;
+import com.codestates.pre032.pre032.security.dto.TokenDto;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletResponse;
-import javax.websocket.server.PathParam;
 
 @Controller
 @RequestMapping("/users")
@@ -37,7 +36,7 @@ public class UserController {
     // 로그인 기능
     @PostMapping("/login")
     public ResponseEntity login(@Validated @RequestBody UserDto.login dto){
-        String accessToken = userService.makeAccessToken(dto);
+        String accessToken = "bearer "+ userService.makeAccessToken(dto);
         User user = userService.findByEmail(dto.getEmail());
 
         if (accessToken==null){
@@ -48,9 +47,13 @@ public class UserController {
         }
     }
 
-    @GetMapping("{user_id}/myPage")
-    public ResponseEntity getMyPage(@PathVariable Long id) {
-        User user = this.userService.find(id);
+    @GetMapping("/myPage")
+    public ResponseEntity getMyPage(@RequestBody TokenDto tokenDto) {
+        if (tokenDto.getAccessToken()==null){
+            throw new UnauthorizedException("로그인이 필요합니다.");
+        }
+
+        User user = this.userService.findByAccessToken(tokenDto.getAccessToken());
         UserDto.response response = this.userMapper.userToUserResponseDto(user);
 
         return new ResponseEntity<>(response, HttpStatus.OK);

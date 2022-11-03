@@ -3,6 +3,7 @@ package com.codestates.pre032.pre032.question;
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
 import com.codestates.pre032.pre032.tag.Tag;
 import com.codestates.pre032.pre032.tag.TagService;
+import com.codestates.pre032.pre032.user.User;
 import com.codestates.pre032.pre032.user.UserService;
 import org.springframework.stereotype.Service;
 
@@ -25,9 +26,7 @@ public class QuestionService {
         this.tagService = tagService;
     }
 
-    public Question create(Question question, List<String> tags) {
-//        String email = userDetails.getUsername();
-//        question.setUser(userService.findByEmail(email));
+    public Question create(Question question, List<String> tags, User user) {
         question.setScore(0);
         question.setViewCount(0);
         question.setAnswerCount(0);
@@ -35,6 +34,7 @@ public class QuestionService {
         question.setCreationDate(LocalDateTime.now());
         question.setModifiedAt(LocalDateTime.now());
         List<Tag> tagList = tagService.stringToTags(question, tags);
+        question.setUser(user);
         question.setTags(tagList);
 
         //todo : user 정보 입력
@@ -121,7 +121,7 @@ public class QuestionService {
 
         return answer;
     }
-
+    // 검색기능에 병합되는 메서드 (검색결과를 합친다).
     public List<Question> sumQuestions(List<Question> questionList1, List<Question> questionList2) {
         for (int i = 0; i < questionList2.size(); i++) {
             if (!questionList1.contains(questionList2.get(i))) {
@@ -131,10 +131,12 @@ public class QuestionService {
         return questionList1;
     }
 
+    // 모든 질문을 날짜순으로
     public List<Question> getQuestions() {
         return this.questionRepository.findAllOrder();
     }
 
+    // 태그 검색 기능
     public List<Question> getQuestionsByTag(String tagStr) {
         Tag tag = this.tagService.stringToTag(tagStr);
         List<Question> questions = tag.getQuestions();
@@ -148,6 +150,7 @@ public class QuestionService {
         return questions;
     }
 
+    // 삭제
     @Transactional
     public void delete(Long id) {
         Optional<Question> findQuestion = this.questionRepository.findById(id);
@@ -156,12 +159,15 @@ public class QuestionService {
             tagService.deleteTagByQuestion(findQuestion.get());
 
         } else {
-            throw new DataNotFoundException("question not found");
+            throw new DataNotFoundException("삭제된 질문입니다");
         }
     }
 
-    //테스트용 메서드 모든 질문 삭제
-    public void deleteAll() {
-        this.questionRepository.deleteAll();
+    public boolean hasQuestion(Long questionId, User user){
+        Question question = questionRepository.findById(questionId).get();
+        if (question.getUser()==user){
+            return true;
+        }
+        return false;
     }
 }

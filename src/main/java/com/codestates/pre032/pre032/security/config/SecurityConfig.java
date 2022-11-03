@@ -96,7 +96,7 @@ public class SecurityConfig {
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);  // (2-3)
 
             CustomSecurityFilter jwtAuthenticationFilter = new CustomSecurityFilter(authenticationManager, jwtTokenizer);  // (2-4)
-            jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");
+            jwtAuthenticationFilter.setFilterProcessesUrl("/user/login");
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new LoginFailureHandler());
 

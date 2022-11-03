@@ -1,5 +1,6 @@
 package com.codestates.pre032.pre032.user;
 
+import com.codestates.pre032.pre032.exception.InvalidPasswordException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -34,6 +35,18 @@ public class UserController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
     // 로그인 기능
+    @PostMapping("/login")
+    public ResponseEntity login(@Validated @RequestBody UserDto.login dto){
+        String accessToken = userService.makeAccessToken(dto);
+        User user = userService.findByEmail(dto.getEmail());
+
+        if (accessToken==null){
+            throw new InvalidPasswordException("비밀번호가 틀렸습니다");
+        } else {
+            UserDto.accessTokenResponse response = userMapper.accessTokenToUserResponseDto(user, accessToken);
+            return new ResponseEntity(response, HttpStatus.OK);
+        }
+    }
 
     @GetMapping("{user_id}/myPage")
     public ResponseEntity getMyPage(@PathVariable Long id) {

@@ -3,6 +3,7 @@ package com.codestates.pre032.pre032.user;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
@@ -29,6 +30,17 @@ public class UserDto {
     }
 
     @Getter
+    public static class login{
+        @Email
+        @NotBlank
+        private String email;
+
+        @NotBlank
+        private String password;
+    }
+
+
+    @Getter
     @AllArgsConstructor
     public static class response{
         private Long userId;
@@ -38,5 +50,14 @@ public class UserDto {
         private LocalDateTime creationDate;
         private int questionsLength;
         private int answersLength;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    public static class accessTokenResponse{
+        private String accessToken;
+        private Long userId;
+        private String displayName;
+        private String profileImage;
     }
 }

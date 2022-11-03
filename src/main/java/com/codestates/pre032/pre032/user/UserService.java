@@ -4,9 +4,12 @@ import com.codestates.pre032.pre032.exception.DataNotFoundException;
 import com.codestates.pre032.pre032.exception.UserExistsException;
 import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 
@@ -15,6 +18,8 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final JwtTokenizer jwtTokenizer;
+
+    private PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
 
     public UserService(UserRepository userRepository, JwtTokenizer jwtTokenizer) {
         this.userRepository = userRepository;
@@ -28,7 +33,7 @@ public class UserService {
         user.setDisplayName(dto.getDisplayName());
         user.setEmail(dto.getEmail());
         user.setProfileImage("https://bucket-seb40.s3.ap-northeast-2.amazonaws.com/default_profile.png");
-        String encryptedPassword = PasswordEncoderFactories.createDelegatingPasswordEncoder().encode(dto.getPassword());
+        String encryptedPassword = passwordEncoder.encode(dto.getPassword());
         user.setPassword(encryptedPassword);
         user.setCreationDate(LocalDateTime.now());
 
@@ -72,7 +77,7 @@ public class UserService {
             return null;
         }
     }
-
+    //액세스 토큰으로 사용자 찾기
     public User findByAccessToken(String AccessToken){
         String jws = AccessToken.replace("bearer ", "");
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
@@ -80,5 +85,39 @@ public class UserService {
         String email = (String) claims.get("email");
         User user = findByEmail(email);
         return user;
+    }
+
+    // 사용자 정보가 등록된 액세스토큰 생성
+    public String makeAccessToken(UserDto.login dto){
+        String accessToken = "";
+
+        if (verifyPassword(dto)){
+            Map<String, Object> claims = new HashMap<>();
+            claims.put("email", dto.getEmail());
+            claims.put("userId",dto.getPassword());
+
+            String subject = dto.getEmail();
+
+            Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
+
+            String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+
+            accessToken = jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
+
+        }else{
+            accessToken = null;
+        }
+        return accessToken;
+    }
+
+    public boolean verifyPassword(UserDto.login dto){
+        String email = dto.getEmail();
+        String password = dto.getPassword();
+        User user = findByEmail(email);
+
+        if (passwordEncoder.matches(password, user.getPassword())){
+            return true;
+        }
+        return false;
     }
 }

@@ -4,7 +4,7 @@ import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")
 public interface UserMapper {
-    default UserDto.response userToUserResponseDto(User user){
+    default UserDto.response userToUserResponseDto(User user) {
         UserDto.response response = new UserDto.response(
                 user.getUserId(),
                 user.getEmail(),
@@ -14,6 +14,17 @@ public interface UserMapper {
                 user.getQuestions().size(),
                 user.getAnswers().size()
         );
+        return response;
+    }
+
+    default UserDto.accessTokenResponse accessTokenToUserResponseDto(User user, String accessToken) {
+        UserDto.accessTokenResponse response =
+                new UserDto.accessTokenResponse(
+                        accessToken,
+                        user.getUserId(),
+                        user.getDisplayName(),
+                        user.getProfileImage()
+                        );
         return response;
     }
 }

@@ -12,6 +12,7 @@ import QuestionDetail from './routes/QuestionDetail';
 import Loading from './components/Loading';
 import MainPage from './components/Mainpage/MainPage';
 import Editor from './components/Editor';
+import Callback from './routes/callback';
 import AnswerEdit from './routes/AnswerEdit';
 import QuestionEdit from './routes/QuestionEdit';
 
@@ -43,6 +44,7 @@ export default function App() {
 						<Route path="logout" element={<Logout />} />
 						<Route path="signup" element={<SignUp />} />
 						<Route path="questions/:questionId" element={<QuestionDetail />} />
+						<Route path="callback/:params" element={<Callback />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Suspense>

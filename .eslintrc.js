@@ -19,7 +19,10 @@ module.exports = {
 	},
 	plugins: ['react', 'prettier', 'tailwindcss'],
 	rules: {
-		'react/jsx-filename-extension': [2, { extensions: ['.js', '.jsx'] }],
+		'react/jsx-filename-extension': [
+			2,
+			{ extensions: ['', '.js', '.jsx', '.gif'] },
+		],
 		'tailwindcss/classnames-order': 'warn',
 		'tailwindcss/enforces-negative-arbitrary-values': 'warn',
 		'tailwindcss/enforces-shorthand': 'warn',

@@ -39,7 +39,7 @@ function Header() {
 						<ol className="list-none">
 							<li className="border-solid float-left flex  h-[34px]  ">
 								<Link
-									to="/"
+									to="/login"
 									type="button"
 									className="w-[60px] flex items-center justify-center border-[#37739c] hover:bg-[#b3d3e9] text-[#37739c] bg-[#e0ecf3] text-[13px] border-[0.5px] rounded-[3px] "
 								>
@@ -48,7 +48,7 @@ function Header() {
 							</li>
 							<li className=" ml-[4px] float-left flex h-[34px]  text-[13px] ">
 								<a
-									href="https://www.naver.com"
+									href="/signup"
 									type="button"
 									className=" flex items-center w-[68px] justify-center  text-white  border-[0.5px] rounded-[3px] hover:bg-[#0074CC] bg-[#0a94ff]"
 								>

@@ -20,8 +20,6 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
-import static org.springframework.security.config.Customizer.withDefaults;
-
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
@@ -54,10 +52,10 @@ public class SecurityConfig {
 
         http
                 .formLogin()
-                .loginPage("/loginPage")
-//                .disable()
-                .defaultSuccessUrl("/")
-                .and()
+//                .loginPage("/loginPage")
+                .disable()
+//                .defaultSuccessUrl("/")
+//                .and()
                 .httpBasic().disable()
                 .exceptionHandling()
                 .authenticationEntryPoint(new UserAuthenticationEntryPoint())
@@ -91,23 +89,19 @@ public class SecurityConfig {
         return http.build();
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.userDetailsService(jpaUserDetailsService);
-//
-//    }
+
     public class CustomFilterConfigure extends AbstractHttpConfigurer<CustomFilterConfigure, HttpSecurity> {  // (2-1)
         @Override
         public void configure(HttpSecurity builder) throws Exception {  // (2-2)
-
             AuthenticationManager authenticationManager = builder.getSharedObject(AuthenticationManager.class);  // (2-3)
 
             CustomSecurityFilter jwtAuthenticationFilter = new CustomSecurityFilter(authenticationManager, jwtTokenizer);  // (2-4)
-            jwtAuthenticationFilter.setFilterProcessesUrl("users/login");
+            jwtAuthenticationFilter.setFilterProcessesUrl("/users/login");
             jwtAuthenticationFilter.setAuthenticationSuccessHandler(new LoginSuccessHandler());
             jwtAuthenticationFilter.setAuthenticationFailureHandler(new LoginFailureHandler());
 
             VerificationFilter verificationFilter = new VerificationFilter(jwtTokenizer);
+
             builder.addFilter(jwtAuthenticationFilter)
                     .addFilterAfter(verificationFilter, CustomSecurityFilter.class);  // (2-6)
         }

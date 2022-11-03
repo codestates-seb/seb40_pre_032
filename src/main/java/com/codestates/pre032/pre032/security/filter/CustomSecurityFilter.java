@@ -24,7 +24,7 @@ public class CustomSecurityFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenizer jwtTokenizer;
 
-    public CustomSecurityFilter(AuthenticationManager authenticationManager, JwtTokenizer jwtTokenizer, UserService userService) {
+    public CustomSecurityFilter(AuthenticationManager authenticationManager, JwtTokenizer jwtTokenizer) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenizer = jwtTokenizer;
     }

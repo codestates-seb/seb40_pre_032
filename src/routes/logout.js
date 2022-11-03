@@ -1,11 +1,36 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { SiAskubuntu, SiServerfault, SiSuperuser } from 'react-icons/si';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaStackExchange, FaStackOverflow } from 'react-icons/fa';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { GrStackOverflow } from 'react-icons/gr';
+// import axios from 'axios';
 import Header from '../components/Header';
+import authAtom from '../_state/auth';
 
 export default function Logout() {
+	const auth = useRecoilValue(authAtom);
+	// const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
+	// const userEmail = '전역에 저장해놓은 email';
+	const navigate = useNavigate();
+	const setAuth = useSetRecoilState(authAtom);
+	useEffect(() => {
+		if (auth === null) navigate('/login');
+	});
+	const logout = () => {
+		// email
+		// const config = { headers: { Authorization: `Bearer${auth.accessToken}` } };
+		localStorage.removeItem('user');
+		setAuth(null);
+		// axios.post(`${baseUrl}/user`, { email }, config).then((response) => {
+		// 	console.log(response);
+		// 	localStorage.removeItem('user');
+		// 	setAuth(null);
+
+		// });
+	};
+	console.log(auth);
 	return (
 		<>
 			<Header />
@@ -16,10 +41,7 @@ export default function Logout() {
 							<div className="text-center text-xl">
 								Clicking “Log out” will log you out of the following
 							</div>
-							<div className="text-center text-xl">
-								{' '}
-								domains on this device:
-							</div>
+							<div className="text-center text-xl">domains on this device:</div>
 							<div className="rounded-md w-3/4 bg-white p-7 mt-6 mx-auto drop-shadow-2xl">
 								<div className="mb-1">
 									<SiAskubuntu className="inline mr-2  text-orange-600" />
@@ -99,6 +121,7 @@ export default function Logout() {
 									<button
 										className="text-sm rounded bg-sky-500 text-white p-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
 										type="submit"
+										onClick={() => logout()} // userEmail
 									>
 										Log out
 									</button>

@@ -1,17 +1,72 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineOpenInNew } from 'react-icons/md';
-import { AiOutlineGithub, AiFillFacebook } from 'react-icons/ai';
+import { AiOutlineGithub } from 'react-icons/ai';
+import { SiNaver } from 'react-icons/si';
+import axios from 'axios';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Header from '../components/Header';
+import authAtom from '../_state/auth';
+// import useUserActions from '../_actions/useUserActions';
 
 export default function Login() {
+	const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
+	const [userEmail, setUserEmail] = useState();
+	const [userPassword, setUserPassword] = useState();
+	const navigate = useNavigate();
+	const auth = useRecoilValue(authAtom);
+	const setAuth = useSetRecoilState(authAtom); // set함수 반환
+
+	const onEmailChange = (e) => {
+		setUserEmail(e.target.value);
+	};
+	const onPasswordChange = (e) => {
+		setUserPassword(e.target.value);
+	};
+
+	// console.log('auth', auth);
+	useEffect(() => {
+		if (auth !== null) navigate('/');
+	}, []);
+
+	const onSubmit = (e, email, password) => {
+		// userActions.login(email, password);
+		e.preventDefault();
+		axios
+			.post(
+				`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/signup`,
+				{ email, password },
+			)
+			.then((response) => {
+				localStorage.setItem('user', JSON.stringify(response.data));
+				setAuth(123);
+				navigate('/');
+			})
+			.catch((error) => alert(error));
+	};
+
+	const googleLoginHandler = () => {
+		const GOOGLE_LOGIN_URL = `${baseUrl}/oauth2/authorization/google`;
+		window.location.href = GOOGLE_LOGIN_URL;
+	};
+
+	const gitHubLoginHandler = () => {
+		const GITHUB_LOGIN_URL = `https://github.com/login/oauth/authorize?client_id=82422b0d46b1255e9450`;
+		window.location.href = GITHUB_LOGIN_URL;
+	};
+
+	const naverLoginHandler = () => {
+		const NAVER_LOGIN_URL = `${baseUrl}/oauth2/authorization/naver`;
+		window.location.href = NAVER_LOGIN_URL;
+	};
+
 	return (
 		<>
 			<Header />
-			<div className="lg:w-full w-full bg-gray-200 h-screen">
-				<div className="flex flex-col items-center bg-gray-200">
-					<div className="flex ">
+			<div className="lg:w-full w-full bg-gray-200 h-screen flex justify-center items-center">
+				<div className="items-center flex flex-col  h-fit">
+					<div className="flex">
 						<div className="mt-24 mx-auto">
 							<div className="mb-5 flex items-center justify-center">
 								<svg
@@ -31,33 +86,55 @@ export default function Login() {
 								</svg>
 							</div>
 
-							<div className="rounded bg-white my-1 py-2 px-16  text-center text-base   hover:bg-gray-100 focus:outline-none focus:ring focus:ring-violet-300">
+							<button
+								type="button"
+								className="w-full rounded bg-white my-1 px-16 py-2  text-center text-base   hover:bg-gray-100 focus:outline-none focus:ring focus:ring-blue-300 block"
+								onClick={googleLoginHandler}
+							>
 								<FcGoogle className="inline text-xl mr-1" />
 								Log in with Google
-							</div>
-							<div className="rounded  bg-grayblack-100 my-3 py-2 px-16 text-center text-white text-base  hover:bg-grayblack-200 focus:outline-none focus:ring focus:ring-violet-300">
+							</button>
+
+							<button
+								type="button"
+								className="w-full rounded  bg-grayblack-100 my-3 py-2 text-center text-white text-base  hover:bg-grayblack-200 focus:outline-none focus:ring focus:ring-blue-300 block"
+								onClick={gitHubLoginHandler}
+							>
 								<AiOutlineGithub className="inline text-xl mr-1" />
 								Log in with GitHub
-							</div>
-							<div className="rounded bg-navy-100  my-3 py-2 px-16 text-center text-white text-base  hover:bg-navy-200 focus:outline-none focus:ring focus:ring-blue-300">
-								<AiFillFacebook className="inline text-xl mr-1" /> Log in with
-								Facebook
-							</div>
+							</button>
+
+							<button
+								type="button"
+								className="w-full rounded bg-green-500 my-3 py-2  text-center text-base text-white hover:bg-green-600 focus:outline-none focus:ring focus:ring-blue-300 block"
+							>
+								<SiNaver
+									className="inline text-xl mr-1"
+									onClick={naverLoginHandler}
+								/>
+								Log in with Naver
+							</button>
+
 							<form className="lg:w-full bg-white p-5 mt-6 drop-shadow-md rounded-md">
 								<div className="font-medium mb-1 text-base">Email</div>
 								<input
+									value={userEmail}
+									onChange={onEmailChange}
 									type="email"
 									className="rounded w-full border-solid  border-[1.5px] focus:outline-none focus:ring focus:ring-blue-200 py-1 pl-2"
 								/>
 								{/* 이부분 커스텀 필요!! */}
 								<div className=" font-medium mb-1 mt-4 text-base">Password</div>
 								<input
+									value={userPassword}
+									onChange={onPasswordChange}
 									type="password"
 									className="rounded-md w-full border-solid  border-[1.5px] focus:outline-none focus:ring focus:ring-blue-200 py-1 pl-2"
 								/>
 								<button
 									className="bg-blue-500 rounded w-full mt-5 mb-2 py-2 text-white text-sm  hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
 									type="submit"
+									onClick={() => onSubmit(userEmail, userPassword)}
 								>
 									Log in
 								</button>

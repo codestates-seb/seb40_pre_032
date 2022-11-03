@@ -15,7 +15,6 @@ function AnswerEditor() {
 	const { answerId } = useParams();
 
 	const data = getQuestionById(location.state.questionId);
-
 	const answerData = data?.data.answers.find(
 		(answer) => answer.answerId == answerId,
 	);

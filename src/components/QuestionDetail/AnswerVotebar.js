@@ -22,11 +22,8 @@ function AnswerVotebar({ answerId }) {
 	);
 
 	const upAnswerVote = upAnswerVoteById(answerId);
-
 	const downAnswerVote = downAnswerVoteById(answerId);
-
 	const acceptAnswer = acceptAnswerById(answerId);
-
 	const undoAcceptAnswer = undoAcceptAnswerById(answerId);
 
 	const handleUpClick = () => {

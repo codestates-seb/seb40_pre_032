@@ -7,9 +7,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
-import org.springframework.util.LinkedMultiValueMap;
-import org.springframework.util.MultiValueMap;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -87,40 +84,28 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         }
     }
 
-    private void redirect(HttpServletRequest request, HttpServletResponse response, String username) throws IOException {
-        String accessToken = delegateAccessToken(username);  // (6-1)
+    private void redirect(HttpServletRequest request, HttpServletResponse response, String email) throws IOException {
+        String accessToken = delegateAccessToken(email);  // (6-1)
 
-        String uri = createURI(accessToken).toString();   // (6-3)
-        getRedirectStrategy().sendRedirect(request, response, uri);   // (6-4)
+        response.setHeader("AccessToken", "bearer " + accessToken);
+        getRedirectStrategy().sendRedirect(request, response, "/");   // (6-4)
     }
 
     private String delegateAccessToken(String email) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put("email", email);
 
-        String subject = email;
+        User user = userService.findByEmail(email);
+
+        claims.put("email", user.getEmail());
+        claims.put("userId",user.getUserId());
+
+        String subject = user.getEmail();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());
 
         String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
 
-        String accessToken = "Bearer " + jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
+        String accessToken = jwtTokenizer.generateAccessToken(claims, subject, expiration, base64EncodedSecretKey);
 
         return accessToken;
     }
-
-    private URI createURI(String accessToken) {
-        MultiValueMap<String, String> queryParams = new LinkedMultiValueMap<>();
-        queryParams.add("access_token", accessToken);
-
-        return UriComponentsBuilder
-                .newInstance()
-                .scheme("http")
-                .host("localhost")
-//                .port(80)
-                .path("/receive-token.html")
-                .queryParams(queryParams)
-                .build()
-                .toUri();
-    }
-
 }

@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.security.github;
 
 import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ public class LoginController {
     private final LoginService loginService;
 
     private final JwtTokenizer jwtTokenizer;
+
     public LoginController(LoginService loginService, JwtTokenizer jwtTokenizer) {
         this.loginService = loginService;
         this.jwtTokenizer = jwtTokenizer;
@@ -21,12 +23,10 @@ public class LoginController {
     @GetMapping("/login/oauth2/code/github/")
     public ResponseEntity<String> githubLogin(@PathParam("code") String code, HttpServletResponse response) {
         GithubToken githubToken = loginService.getAccessToken(code);
-        response.setHeader("Authorization", githubToken.getAuthorizationValue());
+        response.setHeader("AccessToken", githubToken.getAuthorizationValue());
         loginService.getLogin(githubToken.getAccessToken());
 
-        String jws = githubToken.getAuthorizationValue().replace("bearer ","");
-        System.out.println(jws);
-        return ResponseEntity.ok("logined");
+        return new ResponseEntity (HttpStatus.OK);
     }
 
 

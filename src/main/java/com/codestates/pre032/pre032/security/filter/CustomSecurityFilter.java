@@ -3,6 +3,7 @@ package com.codestates.pre032.pre032.security.filter;
 import com.codestates.pre032.pre032.security.dto.LoginDto;
 import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
 import com.codestates.pre032.pre032.user.User;
+import com.codestates.pre032.pre032.user.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -23,7 +24,7 @@ public class CustomSecurityFilter extends UsernamePasswordAuthenticationFilter {
     private final AuthenticationManager authenticationManager;
     private final JwtTokenizer jwtTokenizer;
 
-    public CustomSecurityFilter(AuthenticationManager authenticationManager, JwtTokenizer jwtTokenizer) {
+    public CustomSecurityFilter(AuthenticationManager authenticationManager, JwtTokenizer jwtTokenizer, UserService userService) {
         this.authenticationManager = authenticationManager;
         this.jwtTokenizer = jwtTokenizer;
     }
@@ -54,7 +55,7 @@ public class CustomSecurityFilter extends UsernamePasswordAuthenticationFilter {
         // 토큰 생성
         String accessToken = delegateAccessToken(user);
 
-        response.setHeader("AccessToken", "Bearer " + accessToken);
+        response.setHeader("AccessToken", "bearer " + accessToken);
 
         this.getSuccessHandler().onAuthenticationSuccess(request,response,authResult);
     }

@@ -1,8 +1,7 @@
 /* eslint-disable */
 import React from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useMutation, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { downAnswerVoteById } from '../../utils/hooks/useAnswer';
 import {
 	getQuestionById,
@@ -15,19 +14,7 @@ function QuestionVotebar() {
 
 	const data = getQuestionById(questionId);
 
-	// const upVote = useMutation(() => {
-	// 	return axios.post(
-	// 		`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/upvote`,
-	// 	);
-	// });
-
 	const upQuestionVote = upQuestionVoteById(questionId);
-
-	// const downVote = useMutation(() => {
-	// 	return axios.post(
-	// 		`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/downvote`,
-	// 	);
-	// });
 
 	const downQuestionVote = downAnswerVoteById(questionId);
 

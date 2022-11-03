@@ -1,17 +1,19 @@
 /* eslint-disable */
 import React from 'react';
-import axios from 'axios';
-import { useParams } from 'react-router-dom';
-import { useMutation, useQueryClient } from 'react-query';
+import { useParams, useState } from 'react-router-dom';
+import { useQueryClient } from 'react-query';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
 import {
 	upAnswerVoteById,
 	downAnswerVoteById,
+	acceptAnswerById,
+	undoAcceptAnswerById,
 } from '../../utils/hooks/useAnswer';
 
 function AnswerVotebar({ answerId }) {
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
+	const [isAccepted, setIsAccepted] = useState(false);
 
 	const data = getQuestionById(questionId);
 
@@ -19,21 +21,13 @@ function AnswerVotebar({ answerId }) {
 		(answer) => answer.answerId === answerId,
 	);
 
-	// const upAnswerVote = useMutation(() => {
-	// 	return axios.post(
-	// 		`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/upvote`,
-	// 	);
-	// });
-
 	const upAnswerVote = upAnswerVoteById(answerId);
 
-	// const downAnswerVote = useMutation(() => {
-	// 	return axios.post(
-	// 		`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/downvote`,
-	// 	);
-	// });
-
 	const downAnswerVote = downAnswerVoteById(answerId);
+
+	const acceptAnswer = acceptAnswerById(answerId);
+
+	const undoAcceptAnswer = undoAcceptAnswerById(answerId);
 
 	const handleUpClick = () => {
 		upAnswerVote.mutate(
@@ -55,7 +49,26 @@ function AnswerVotebar({ answerId }) {
 		);
 	};
 
-	const handleAcceptClick = () => {};
+	const handleAcceptClick = () => {
+		setIsAccepted(!isAccepted);
+		if (isAccepted) {
+			acceptAnswer.mutate(
+				{},
+				{
+					onSuccess: () =>
+						queryClient.invalidateQueries(['question', questionId]),
+				},
+			);
+		} else {
+			undoAcceptAnswer.mutate(
+				{},
+				{
+					onSuccess: () =>
+						queryClient.invalidateQueries(['question', questionId]),
+				},
+			);
+		}
+	};
 
 	return (
 		<div className="w-[40px] mr-4">
@@ -104,7 +117,10 @@ function AnswerVotebar({ answerId }) {
 			</div>
 			<button type="button" onClick={handleAcceptClick}>
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
-					<path fill="lightgrey" d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z" />
+					<path
+						fill={isAccepted ? 'green' : 'lightgrey'}
+						d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"
+					/>
 				</svg>
 			</button>
 		</div>

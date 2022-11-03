@@ -45,3 +45,19 @@ export const downAnswerVoteById = (answerId) => {
 
 	return downAnswerVote;
 };
+
+export const acceptAnswerById = (answerId) => {
+	const acceptAnswer = useMutation(() => {
+		return axios.patch(`${BASE_URL}/answers/${answerId}/accept`);
+	});
+
+	return acceptAnswer;
+};
+
+export const undoAcceptAnswerById = (answerId) => {
+	const undoAcceptAnswer = useMutation(() => {
+		return axios.patch(`${BASE_URL}/answers/${answerId}/accept/undo`);
+	});
+
+	return undoAcceptAnswer;
+};

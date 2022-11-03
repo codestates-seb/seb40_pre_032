@@ -37,7 +37,7 @@ export default function elapsed(string) {
 		return '1 min ago';
 	}
 	if (elapsedSec > 0) {
-		if (elapsedSec > 1) return `${elapsedSec} seconds ago`;
+		if (elapsedSec > 1) return `${Math.round(elapsedSec / 1000)} seconds ago`;
 		return '1 second ago';
 	}
 	return null;

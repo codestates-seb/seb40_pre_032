@@ -24,6 +24,7 @@ function AnswerEditor() {
 		};
 		addAnswer.mutate(newAnswer, {
 			onSuccess: () => {
+				setQuillText('');
 				return queryClient.invalidateQueries(['question', questionId]);
 			},
 		});

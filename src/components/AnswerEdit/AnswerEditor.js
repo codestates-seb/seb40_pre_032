@@ -22,11 +22,11 @@ function AnswerEditor() {
 
 	const [quillText, setQuillText] = useState(answerData?.answerContent);
 
-	const editAnswer = editAnswerById(answerId);
-
 	const handleTextChange = (event) => {
 		setQuillText(event);
 	};
+
+	const editAnswer = editAnswerById(answerId);
 
 	const handleSubmit = () => {
 		const editedAnswer = {

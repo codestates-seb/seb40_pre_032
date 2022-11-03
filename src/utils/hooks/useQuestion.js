@@ -15,8 +15,8 @@ export const getQuestionById = (questionId) => {
 };
 
 export const deleteQuestionById = (questionId) => {
-	const deleteQuestion = useMutation((deleteId) => {
-		return axios.delete(`${BASE_URL}/questions/${questionId}/delete`, deleteId);
+	const deleteQuestion = useMutation(() => {
+		return axios.delete(`${BASE_URL}/questions/${questionId}/delete`);
 	});
 
 	return deleteQuestion;

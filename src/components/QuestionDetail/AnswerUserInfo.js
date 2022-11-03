@@ -20,9 +20,13 @@ function AnswerUserInfo({ answerId }) {
 	const deleteAnswer = deleteAnswerById(answerId);
 
 	const handleDelete = () => {
-		deleteAnswer.mutate(answerId, {
-			onSuccess: () => queryClient.invalidateQueries(['question', questionId]),
-		});
+		deleteAnswer.mutate(
+			{},
+			{
+				onSuccess: () =>
+					queryClient.invalidateQueries(['question', questionId]),
+			},
+		);
 	};
 
 	return (

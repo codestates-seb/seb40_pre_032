@@ -1,8 +1,8 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil'; // 전역 상태값 불러오는 함수
-// import Header from '../Header';
+import Header from '../Header';
 import LeftSidebar from '../LeftSidebar';
-import Qlist from '../Qlist';
+// import Qlist from '../Qlist';
 import RightSidebar from '../RightSidebar';
 import Footer from '../Footer';
 import LoginHeader from '../LoginHeader';
@@ -13,10 +13,10 @@ export default function MainPage() {
 	console.log(auth);
 	return (
 		<div className="flex flex-col items-center">
-			<LoginHeader />
+			{auth === null ? <Header /> : <LoginHeader />}
 			<div className="flex pt-[51px] justify-center">
 				<LeftSidebar />
-				<Qlist />
+				{/* <Qlist /> */}
 				<RightSidebar />
 			</div>
 			<Footer />

@@ -4,7 +4,7 @@ import { useRecoilValue } from 'recoil';
 import ViewCountBtn from './ViewCountBtn';
 import ScoreBtn from './ScoreBtn';
 import UnansweredBtn from './UnansweredBtn';
-import api from './_state/api';
+import api from '../_state/api';
 
 function ButtonGroup() {
 	const address = useRecoilValue(api);

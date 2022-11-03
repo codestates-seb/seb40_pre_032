@@ -9,7 +9,15 @@ import Accordian from './Accordian';
 import axios from 'axios';
 
 function Editor() {
-	const queryClient = useQueryClient();
+	const queryClient = useQueryClient({
+		defaultOptions: {
+			queries: {
+				suspense: true,
+				refetchOnWindowFocus: false,
+			},
+		},
+	});
+
 	const navigate = useNavigate();
 
 	const [title, setTitle] = useState('');
@@ -33,9 +41,12 @@ function Editor() {
 		});
 	};
 
-	const addQuestion = useMutation((newQuestion) =>
-		axios.post('http://localhost:3001/data', newQuestion),
-	);
+	const addQuestion = useMutation((newQuestion) => {
+		axios.post(
+			'http://cors-anywhere.herokuapp.com/http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/add',
+			newQuestion,
+		);
+	});
 
 	return (
 		<main className="flex items-center mx-auto justify-center">
@@ -59,7 +70,6 @@ function Editor() {
 						Include all the information someone would need to answer your
 						question
 					</span>
-
 					<div dangerouslySetInnerHTML={{ __html: quillText }} />
 					<ReactQuill
 						theme="snow"
@@ -70,7 +80,7 @@ function Editor() {
 					<p className="px-10">{/*  */}</p>
 					<TagInput tags={tags} setTags={setTags} />
 					<button
-						className="text-white h-10 mt-10 ml-3 items-center cursor-pointer w-1/6 flex justify-center bg-blue-400 mx-auto hover:bg-blue-500"
+						className="text-white h-10 mt-7 ml-3 items-center cursor-pointer w-1/6 flex justify-center bg-blue-400 hover:bg-blue-500"
 						type="submit"
 						onClick={handleSubmit}
 					>

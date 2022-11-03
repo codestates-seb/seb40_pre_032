@@ -48,10 +48,6 @@ public class UserController {
 //    public String accessDenied() {
 //        return "access-denied";
 //    }
-    @GetMapping("/githublogin")
-    public ResponseEntity<String> githubLogin(@PathParam("code") String code, HttpServletResponse response) {
 
-        return ResponseEntity.ok("logined");
-    }
 
 }

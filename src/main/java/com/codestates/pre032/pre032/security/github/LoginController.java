@@ -26,8 +26,6 @@ public class LoginController {
 
         String jws = githubToken.getAuthorizationValue().replace("bearer ","");
         System.out.println(jws);
-//        System.out.println(jwtTokenizer.getClaims(jws, jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey())).getBody());
-//        System.out.println(jwtTokenizer.getClaims(jws, jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey())).getSignature());
         return ResponseEntity.ok("logined");
     }
 

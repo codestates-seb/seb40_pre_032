@@ -137,7 +137,15 @@ public class QuestionService {
 
     public List<Question> getQuestionsByTag(String tagStr) {
         Tag tag = this.tagService.stringToTag(tagStr);
-        return tag.getQuestions();
+        List<Question> questions = tag.getQuestions();
+        Collections.sort(questions, new Comparator<Question>() {
+            @Override
+            public int compare(Question q1, Question q2) {
+                return q2.getCreationDate().compareTo(q1.getCreationDate());
+            }
+        });
+
+        return questions;
     }
 
     @Transactional

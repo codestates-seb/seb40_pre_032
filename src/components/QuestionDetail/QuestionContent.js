@@ -1,18 +1,15 @@
+/* eslint-disable */
 import React from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { getQuestionById } from '../../utils/hooks/useQuestion';
 
 function QuestionContent() {
-	const { id } = useParams();
-	const { data } = useQuery(['question', id], () => {
-		return axios.get(`http://localhost:4000/questions/${id}`);
-	});
+	const { questionId } = useParams();
+
+	const data = getQuestionById(questionId);
 
 	return (
-		<div>
-			<p className="mb-4 break-all">{data?.data.questionContent}</p>
-		</div>
+		<div dangerouslySetInnerHTML={{ __html: data?.data.questionContent }} />
 	);
 }
 

@@ -1,56 +1,55 @@
-import React, { useEffect } from 'react';
-
+/* eslint-disable */
+import React, { useState } from 'react';
+import { useQueryClient } from 'react-query';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
+import { addAnswerToQuestion } from '../../utils/hooks/useAnswer';
 
 function AnswerEditor() {
-	const {
-		register,
-		handleSubmit,
-		setValue,
-		watch,
-		formState: { errors },
-	} = useForm();
+	const queryClient = useQueryClient();
+	const [quillText, setQuillText] = useState('');
+	const { questionId } = useParams();
 
-	useEffect(() => {
-		register('content', { required: true, minLength: 11 });
-	}, [register]);
+	const addAnswer = addAnswerToQuestion(questionId);
 
-	const onEditorStateChange = (editorState) => {
-		setValue('content', editorState);
+	const handleTextChange = (e) => {
+		setQuillText(e);
 	};
 
-	const onSubmit = (data) => {
-		console.log(data);
+	const handleSubmit = () => {
+		const newAnswer = {
+			questionId,
+			answerContent: quillText,
+		};
+		addAnswer.mutate(newAnswer, {
+			onSuccess: () => {
+				setQuillText('');
+				return queryClient.invalidateQueries(['question', questionId]);
+			},
+		});
 	};
-
-	const editorContent = watch('content');
 
 	return (
 		<main>
 			<article>
-				<section className="h-[500px] w-[710px]">
-					<span>
-						Know someone who can answer? Share a link to this question via
-						email, Twitter, or Facebook.
-					</span>
+				<section className="h-[500px] w-[770px] mt-4">
 					<h3 className="text-xl mb-4">Your Answer</h3>
-					<form onSubmit={handleSubmit(onSubmit)}>
+					<div>
 						<ReactQuill
 							theme="snow"
-							value={editorContent}
-							onChange={onEditorStateChange}
+							value={quillText}
+							onChange={handleTextChange}
 							className="h-[200px]"
 						/>
-						<p className="px-10">{errors.content && '입력해주세요'}</p>
 						<button
 							className="mt-16 rounded-sm text-sm p-2 text-white bg-[#0a94ff] hover:bg-[#0074CC]"
-							type="button"
+							type="submit"
+							onClick={handleSubmit}
 						>
 							Ask Question
 						</button>
-					</form>
+					</div>
 				</section>
 			</article>
 		</main>

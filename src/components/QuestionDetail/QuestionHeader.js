@@ -1,42 +1,13 @@
+/* eslint-disable */
 import React from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { getQuestionById } from '../../utils/hooks/useQuestion';
+import elapsed from '../../utils/hooks/elapsed';
 
 function QuestionHeader() {
-	const { id } = useParams();
-	const { data } = useQuery(['question', id], () => {
-		return axios.get(`http://localhost:4000/questions/${id}`);
-	});
+	const { questionId } = useParams();
 
-	function elapsed(string) {
-		const today = new Date();
-		const targetDate = new Date(string);
-		const elapsedTime = today.getDate() - targetDate.getDate();
-
-		if (elapsedTime === 0) {
-			return 'today';
-		}
-		if (elapsedTime <= 30) {
-			if (elapsedTime === 1) {
-				return '1 day ago';
-			}
-			return `${elapsedTime} days ago`;
-		}
-		if (elapsedTime > 30 && elapsedTime < 365) {
-			if (Math.round(elapsedTime / 30) === 1) {
-				return '1 month ago';
-			}
-			return `${Math.round(elapsedTime / 30)} months ago`;
-		}
-		if (elapsedTime > 365) {
-			if (Math.round(elapsedTime / 365) === 1) {
-				return '1 year ago';
-			}
-			return `${Math.round(elapsedTime / 365)} years ago`;
-		}
-		return null;
-	}
+	const data = getQuestionById(questionId);
 
 	return (
 		<div className="mt-[47px] py-[20px]">
@@ -64,7 +35,9 @@ function QuestionHeader() {
 				</div>
 				<div>
 					<span className="text-sm py-2 mr-3 text-gray-500">Viewed</span>
-					<span className="text-sm py-2 mr-3">{data?.data.viewCount}</span>
+					<span className="text-sm py-2 mr-3">
+						{data?.data.viewCount} times
+					</span>
 				</div>
 			</div>
 		</div>

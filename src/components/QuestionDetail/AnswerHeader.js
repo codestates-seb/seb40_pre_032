@@ -7,7 +7,7 @@ function AnswerHeader() {
 	const { questionId } = useParams();
 	const { data } = useQuery(['question', questionId], () => {
 		return axios.get(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
 		);
 	});
 

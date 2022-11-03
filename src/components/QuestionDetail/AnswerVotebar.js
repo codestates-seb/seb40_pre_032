@@ -2,13 +2,14 @@
 import React from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useQuery, useMutation, useQueryClient } from 'react-query';
 
 function AnswerVotebar({ answerId }) {
+	const queryClient = useQueryClient();
 	const { questionId } = useParams();
 	const { data } = useQuery(['question', questionId], () => {
-		return axios.patch(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+		return axios.get(
+			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
 		);
 	});
 
@@ -16,8 +17,38 @@ function AnswerVotebar({ answerId }) {
 		(answer) => answer.answerId === answerId,
 	);
 
-	const handleUpClick = () => {};
-	const handleDownClick = () => {};
+	const upAnswerVote = useMutation(() => {
+		return axios.post(
+			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/upvote`,
+		);
+	});
+
+	const downAnswerVote = useMutation(() => {
+		return axios.post(
+			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/downvote`,
+		);
+	});
+
+	const handleUpClick = () => {
+		upAnswerVote.mutate(
+			{},
+			{
+				onSuccess: () =>
+					queryClient.invalidateQueries(['question', questionId]),
+			},
+		);
+	};
+
+	const handleDownClick = () => {
+		downAnswerVote.mutate(
+			{},
+			{
+				onSuccess: () =>
+					queryClient.invalidateQueries(['question', questionId]),
+			},
+		);
+	};
+
 	const handleAcceptClick = () => {};
 
 	return (

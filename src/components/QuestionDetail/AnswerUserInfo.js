@@ -10,7 +10,7 @@ function AnswerUserInfo({ answerId }) {
 	const { questionId } = useParams();
 	const { data } = useQuery(['question', questionId], () => {
 		return axios.get(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
 		);
 	});
 
@@ -20,10 +20,11 @@ function AnswerUserInfo({ answerId }) {
 
 	const deleteAnswer = useMutation((deleteId) => {
 		return axios.delete(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/delete`,
+			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/delete`,
 			deleteId,
 		);
 	});
+
 	const handleDelete = () => {
 		deleteAnswer.mutate(answerId, {
 			onSuccess: () => queryClient.invalidateQueries(['question', questionId]),

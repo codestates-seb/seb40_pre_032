@@ -9,17 +9,18 @@ import { getQuestionById } from '../../utils/hooks/useQuestion';
 import { editAnswerById } from '../../utils/hooks/useAnswer';
 
 function AnswerEditor() {
-	const location = useLocation();
 	const navigate = useNavigate();
+	const location = useLocation();
 	const queryClient = useQueryClient();
 	const { answerId } = useParams();
+
+	const data = getQuestionById(location.state.questionId);
 
 	const answerData = data?.data.answers.find(
 		(answer) => answer.answerId == answerId,
 	);
 
 	const [quillText, setQuillText] = useState(answerData?.answerContent);
-	const data = getQuestionById(location.state.questionId);
 
 	const editAnswer = editAnswerById(answerId);
 

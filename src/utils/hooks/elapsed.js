@@ -1,5 +1,5 @@
 /* eslint-disable */
-export default elapsed = (string) => {
+export default function elapsed(string) {
 	const minute = 1000 * 60;
 	const hour = minute * 60;
 	const day = hour * 24;
@@ -41,4 +41,4 @@ export default elapsed = (string) => {
 		return '1 second ago';
 	}
 	return null;
-};
+}

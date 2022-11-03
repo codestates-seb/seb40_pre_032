@@ -1,7 +1,7 @@
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { ReactQueryDevtools } from 'react-query/devtools';
+// import { ReactQueryDevtools } from 'react-query/devtools';
 import NotFound from './components/NotFound';
 import Login from './routes/login';
 import Logout from './routes/logout';
@@ -48,7 +48,7 @@ export default function App() {
 					</Routes>
 				</Suspense>
 			</BrowserRouter>
-			<ReactQueryDevtools />
+			{/* <ReactQueryDevtools /> */}
 		</QueryClientProvider>
 	);
 }

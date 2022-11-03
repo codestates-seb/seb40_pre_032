@@ -1,33 +1,39 @@
-/* eslint react/prop-types: 0 */
+/* eslint-disable */
 import React from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import { getQuestionById } from '../../utils/hooks/useQuestion';
+import {
+	upAnswerVoteById,
+	downAnswerVoteById,
+} from '../../utils/hooks/useAnswer';
 
 function AnswerVotebar({ answerId }) {
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
-	const { data } = useQuery(['question', questionId], () => {
-		return axios.get(
-			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
-		);
-	});
+
+	const data = getQuestionById(questionId);
 
 	const answerData = data?.data.answers.find(
 		(answer) => answer.answerId === answerId,
 	);
 
-	const upAnswerVote = useMutation(() => {
-		return axios.post(
-			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/upvote`,
-		);
-	});
+	// const upAnswerVote = useMutation(() => {
+	// 	return axios.post(
+	// 		`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/upvote`,
+	// 	);
+	// });
 
-	const downAnswerVote = useMutation(() => {
-		return axios.post(
-			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/downvote`,
-		);
-	});
+	const upAnswerVote = upAnswerVoteById(answerId);
+
+	// const downAnswerVote = useMutation(() => {
+	// 	return axios.post(
+	// 		`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/downvote`,
+	// 	);
+	// });
+
+	const downAnswerVote = downAnswerVoteById(answerId);
 
 	const handleUpClick = () => {
 		upAnswerVote.mutate(

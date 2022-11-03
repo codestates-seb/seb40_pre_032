@@ -1,25 +1,21 @@
 /* eslint-disable */
 import React, { useState } from 'react';
-import { useMutation, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import { addAnswerToQuestion } from '../../utils/hooks/useAnswer';
 
 function AnswerEditor() {
 	const queryClient = useQueryClient();
 	const [quillText, setQuillText] = useState('');
+	const { questionId } = useParams();
+
+	const addAnswer = addAnswerToQuestion(questionId);
+
 	const handleTextChange = (e) => {
 		setQuillText(e);
 	};
-
-	const { questionId } = useParams();
-	const addAnswer = useMutation((newAnswer) => {
-		return axios.post(
-			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${questionId}/add`,
-			newAnswer,
-		);
-	});
 
 	const handleSubmit = () => {
 		const newAnswer = {

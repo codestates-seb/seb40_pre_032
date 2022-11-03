@@ -1,7 +1,10 @@
 /* eslint-disable */
+import { useQuery, useMutation } from 'react-query';
+import axios from 'axios';
 
+// 프록시 서버 우회하는 성웅님 서버 URL
 const BASE_URL =
-	'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
+	'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
 
 export const getQuestionById = (questionId) => {
 	const { data } = useQuery(['question', questionId], () => {
@@ -32,9 +35,7 @@ export const editQuestionById = (questionId) => {
 
 export const upQuestionVoteById = (questionId) => {
 	const upQuestionVote = useMutation(() => {
-		return axios.post(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/upvote`,
-		);
+		return axios.post(`${BASE_URL}/questions/${questionId}/upvote`);
 	});
 
 	return upQuestionVote;
@@ -42,9 +43,7 @@ export const upQuestionVoteById = (questionId) => {
 
 export const downQuestionVoteById = (questionId) => {
 	const downQuestionVote = useMutation(() => {
-		return axios.post(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/downvote`,
-		);
+		return axios.post(`${BASE_URL}/questions/${questionId}/downvote`);
 	});
 
 	return downQuestionVote;

@@ -2,32 +2,37 @@
 import React from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import { downAnswerVoteById } from '../../utils/hooks/useAnswer';
+import {
+	getQuestionById,
+	upQuestionVoteById,
+} from '../../utils/hooks/useQuestion';
 
 function QuestionVotebar() {
 	const queryClient = useQueryClient();
-
 	const { questionId } = useParams();
-	const { data } = useQuery(['question', questionId], () => {
-		return axios.get(
-			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
-		);
-	});
 
-	const upVote = useMutation(() => {
-		return axios.post(
-			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/upvote`,
-		);
-	});
+	const data = getQuestionById(questionId);
 
-	const downVote = useMutation(() => {
-		return axios.post(
-			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/downvote`,
-		);
-	});
+	// const upVote = useMutation(() => {
+	// 	return axios.post(
+	// 		`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/upvote`,
+	// 	);
+	// });
+
+	const upQuestionVote = upQuestionVoteById(questionId);
+
+	// const downVote = useMutation(() => {
+	// 	return axios.post(
+	// 		`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/downvote`,
+	// 	);
+	// });
+
+	const downQuestionVote = downAnswerVoteById(questionId);
 
 	const handleUpClick = () => {
-		upVote.mutate(
+		upQuestionVote.mutate(
 			{},
 			{
 				onSuccess: () =>
@@ -37,7 +42,7 @@ function QuestionVotebar() {
 	};
 
 	const handleDownClick = () => {
-		downVote.mutate(
+		downQuestionVote.mutate(
 			{},
 			{
 				onSuccess: () =>

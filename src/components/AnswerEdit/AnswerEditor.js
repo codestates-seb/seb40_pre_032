@@ -2,36 +2,26 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
 import { useLocation, useParams, Link } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { getQuestionById } from '../../utils/hooks/useQuestion';
+import { editAnswerById } from '../../utils/hooks/useAnswer';
 
 function AnswerEditor() {
-	const { answerId } = useParams();
-
 	const location = useLocation();
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
-
-	const { data } = useQuery(['question', location.state.questionId], () => {
-		return axios.get(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${location.state.questionId}`,
-		);
-	});
+	const { answerId } = useParams();
 
 	const answerData = data?.data.answers.find(
 		(answer) => answer.answerId == answerId,
 	);
 
 	const [quillText, setQuillText] = useState(answerData?.answerContent);
+	const data = getQuestionById(location.state.questionId);
 
-	const editAnswer = useMutation((editedAnswer) => {
-		return axios.patch(
-			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/edit`,
-			editedAnswer,
-		);
-	});
+	const editAnswer = editAnswerById(answerId);
 
 	const handleTextChange = (event) => {
 		setQuillText(event);

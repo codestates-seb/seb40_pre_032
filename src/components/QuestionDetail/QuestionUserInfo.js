@@ -2,24 +2,20 @@
 import React from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import {
+	deleteQuestionById,
+	getQuestionById,
+} from '../../utils/hooks/useQuestion';
 
 function QuestionUserInfo() {
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 	const { questionId } = useParams();
-	const { data } = useQuery(['question', questionId], () => {
-		return axios.get(
-			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
-		);
-	});
 
-	const deleteQuestion = useMutation((deleteId) => {
-		return axios.delete(
-			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/delete`,
-			deleteId,
-		);
-	});
+	const data = getQuestionById(questionId);
+
+	const deleteQuestion = deleteQuestionById(questionId);
 
 	const handleDelete = () => {
 		deleteQuestion.mutate(

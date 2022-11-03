@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -12,21 +13,32 @@ import Loading from './components/Loading';
 import MainPage from './components/Mainpage/MainPage';
 import Editor from './components/Editor';
 import Callback from './routes/callback';
+import AnswerEdit from './routes/AnswerEdit';
+import QuestionEdit from './routes/QuestionEdit';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			suspense: true,
+			refetchOnWindowFocus: false,
+		},
+	},
+});
 
 export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<BrowserRouter>
+				<Editor />
 				<Suspense fallback={<Loading />}>
 					<Routes>
 						<Route path="/" element={<MainPage />} />
 						<Route path="/ask" element={<Editor />} />
-						{/* 임시로 질문 수정, 답변 수정 페이지 연결해두었습니다 */}
-						<Route path="/questions/:questionId/edit" element={<Editor />} />
-						<Route path="/answers/:answerId/edit" element={<Editor />} />
-						{/* 임시로 질문 수정, 답변 수정 페이지 연결해두었습니다 */}
+						<Route
+							path="/questions/:questionId/edit"
+							element={<QuestionEdit />}
+						/>
+						<Route path="/answers/:answerId/edit" element={<AnswerEdit />} />
 						<Route path="/questions" element={<MainPage />} />
 						<Route path="mypage" element={<MyPage />} />
 						<Route path="login" element={<Login />} />

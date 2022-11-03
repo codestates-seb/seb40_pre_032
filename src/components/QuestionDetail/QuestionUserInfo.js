@@ -1,58 +1,35 @@
+/* eslint-disable */
 import React from 'react';
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { useMutation, useQueryClient } from 'react-query';
+import {
+	deleteQuestionById,
+	getQuestionById,
+} from '../../utils/hooks/useQuestion';
+import elapsed from '../../utils/hooks/elapsed';
 
 function QuestionUserInfo() {
+	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 	const { questionId } = useParams();
-	const { data } = useQuery(['question', questionId], () => {
-		return axios.get(`http://localhost:4000/questions/${questionId}`);
-	});
 
-	function elapsed(string) {
-		const minute = 1000 * 60;
-		const hour = minute * 60;
-		const day = hour * 24;
-		const month = day * 30;
-		const year = day * 365;
+	const data = getQuestionById(questionId);
 
-		const today = new Date();
-		const targetDate = new Date(string);
-		const elapsedSec = today.getTime() - targetDate.getTime();
+	const deleteQuestion = deleteQuestionById(questionId);
 
-		const elapsedMin = Math.round(elapsedSec / minute);
-		const elapsedHour = Math.round(elapsedSec / hour);
-		const elapsedDay = Math.round(elapsedSec / day);
-		const elapsedMonth = Math.round(elapsedSec / month);
-		const elapsedYear = Math.round(elapsedSec / year);
-
-		if (elapsedYear > 0) {
-			if (elapsedYear > 1) return `${elapsedYear} years ago`;
-			return '1 year ago';
-		}
-		if (elapsedMonth > 0) {
-			if (elapsedMonth > 1) return `${elapsedMonth} months ago`;
-			return '1 month ago';
-		}
-		if (elapsedDay > 0) {
-			if (elapsedDay > 1) return `${elapsedDay} days ago`;
-			return '1 day ago';
-		}
-		if (elapsedHour > 0) {
-			if (elapsedHour > 1) return `${elapsedHour} hours ago`;
-			return '1 hour ago';
-		}
-		if (elapsedMin > 0) {
-			if (elapsedMin > 1) return `${elapsedMin} mins ago`;
-			return '1 min ago';
-		}
-		if (elapsedSec > 0) {
-			if (elapsedSec > 1) return `${elapsedSec} seconds ago`;
-			return '1 second ago';
-		}
-		return null;
-	}
+	const handleDelete = () => {
+		deleteQuestion.mutate(
+			{},
+			{
+				onSuccess: () => {
+					console.log('delete');
+					navigate('/');
+					return queryClient.invalidateQueries(['question', questionId]);
+				},
+			},
+		);
+	};
 
 	return (
 		<div className="flex flex-row h-[50px]">
@@ -66,12 +43,21 @@ function QuestionUserInfo() {
 					onClick={() => {
 						/* access token이 있으면 수정 페이지로 이동 */
 						navigate(`/questions/${questionId}/edit`);
+						/* 없으면 로그인 페이지로 이동 */
+						// navigate('/login');
 					}}
 				>
 					Edit
 				</button>
 				<button className="mr-2 text-sm text-gray-500" type="button">
 					Follow
+				</button>
+				<button
+					className="mr-2 text-sm text-gray-500"
+					type="button"
+					onClick={handleDelete}
+				>
+					Delete
 				</button>
 			</div>
 			{/* 수정된 적 없으면 빈칸 */}
@@ -87,7 +73,7 @@ function QuestionUserInfo() {
 					asked {elapsed(data?.data.creationDate)}
 				</div>
 				<div className="text-blue-500 text-sm">
-					{data?.data.owner.displayName}
+					{/* {data?.data.owner.displayName} */}
 				</div>
 			</div>
 		</div>

@@ -1,4 +1,4 @@
-/* eslint react/prop-types: 0 */
+/* eslint-disable */
 import React from 'react';
 import AnswerVotebar from './AnswerVotebar';
 import AnswerContent from './AnswerContent';

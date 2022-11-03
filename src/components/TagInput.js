@@ -1,20 +1,15 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-function TagInput() {
-	const initialTags = ['CodeStates', 'kimcoding'];
-	const [tags, setTags] = useState(initialTags);
-
+function TagInput({ tags, setTags }) {
 	const removeTags = (indexToRemove) => {
 		setTags(tags.filter((_, index) => index !== indexToRemove));
 	};
 
 	const addTags = (event) => {
-		const filtered = tags.filter((tag) => tag === event.target.value);
-		if (event.target.value !== '' && filtered.length === 0) {
-			setTags([...tags, event.target.value]);
-			event.target.value = '';
-		}
+		setTags([...tags, event.target.value]);
+		event.target.value = '';
 	};
 
 	return (
@@ -36,7 +31,9 @@ function TagInput() {
 			<input
 				type="text"
 				className="ml-2 mt-2 pr-36 rounded-sm shadow-md focus:ring-offset-2 ring-blue-400 ring-2"
-				onKeyUp={(event) => (event.key === 'Enter' ? addTags(event) : null)}
+				onKeyUp={(event) => {
+					event.key === 'Enter' && addTags(event);
+				}}
 				placeholder="Press enter to add tags"
 			/>
 		</div>

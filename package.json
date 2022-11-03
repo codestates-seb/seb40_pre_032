@@ -91,5 +91,6 @@
 		"postcss-preset-env": "^7.8.2",
 		"prettier": "^2.7.1",
 		"tailwindcss": "^3.2.1"
-	}
+	},
+	"proxy": "http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/"
 }

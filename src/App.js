@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -27,6 +28,7 @@ export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<BrowserRouter>
+				<Editor />
 				<Suspense fallback={<Loading />}>
 					<Routes>
 						<Route path="/" element={<MainPage />} />

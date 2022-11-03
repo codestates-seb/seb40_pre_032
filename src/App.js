@@ -12,8 +12,8 @@ import QuestionDetail from './routes/QuestionDetail';
 import Loading from './components/Loading';
 import MainPage from './components/Mainpage/MainPage';
 import Editor from './components/Editor';
-
-import Editor from './components/Editor';
+import AnswerEdit from './routes/AnswerEdit';
+import QuestionEdit from './routes/QuestionEdit';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -33,10 +33,11 @@ export default function App() {
 					<Routes>
 						<Route path="/" element={<MainPage />} />
 						<Route path="/ask" element={<Editor />} />
-						{/* 임시로 질문 수정, 답변 수정 페이지 연결해두었습니다 */}
-						<Route path="/questions/:questionId/edit" element={<Editor />} />
-						<Route path="/answers/:answerId/edit" element={<Editor />} />
-						{/* 임시로 질문 수정, 답변 수정 페이지 연결해두었습니다 */}
+						<Route
+							path="/questions/:questionId/edit"
+							element={<QuestionEdit />}
+						/>
+						<Route path="/answers/:answerId/edit" element={<AnswerEdit />} />
 						<Route path="/questions" element={<MainPage />} />
 						<Route path="mypage" element={<MyPage />} />
 						<Route path="login" element={<Login />} />

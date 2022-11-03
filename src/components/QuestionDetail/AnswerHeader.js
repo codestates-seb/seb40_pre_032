@@ -1,13 +1,11 @@
 import React from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery } from 'react-query';
+import { getQuestionById } from '../../utils/hooks/useQuestion';
 
 function AnswerHeader() {
 	const { questionId } = useParams();
-	const { data } = useQuery(['question', questionId], () => {
-		return axios.get(`http://localhost:4000/questions/${questionId}`);
-	});
+
+	const data = getQuestionById(questionId);
 
 	return (
 		<div className="flex flex-row justify-between mr-6 align-middle mt-6">

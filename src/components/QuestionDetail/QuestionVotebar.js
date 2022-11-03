@@ -1,34 +1,41 @@
+/* eslint-disable */
 import React from 'react';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery, useMutation } from 'react-query';
+import { useQueryClient } from 'react-query';
+import { downAnswerVoteById } from '../../utils/hooks/useAnswer';
+import {
+	getQuestionById,
+	upQuestionVoteById,
+} from '../../utils/hooks/useQuestion';
 
 function QuestionVotebar() {
+	const queryClient = useQueryClient();
 	const { questionId } = useParams();
-	const { data } = useQuery(['question', questionId], () => {
-		return axios.get(`http://localhost:4000/questions/${questionId}`);
-	});
 
-	const upVote = useMutation((updatedVote) => {
-		return axios.patch(
-			`http://localhost:4000/questions/${questionId}`,
-			updatedVote,
-		);
-	});
+	const data = getQuestionById(questionId);
 
-	const downVote = useMutation((updatedVote) => {
-		return axios.patch(
-			`http://localhost:4000/questions/${questionId}`,
-			updatedVote,
-		);
-	});
+	const upQuestionVote = upQuestionVoteById(questionId);
+
+	const downQuestionVote = downAnswerVoteById(questionId);
 
 	const handleUpClick = () => {
-		upVote.mutate({ score: data.data.score + 1 });
+		upQuestionVote.mutate(
+			{},
+			{
+				onSuccess: () =>
+					queryClient.invalidateQueries(['question', questionId]),
+			},
+		);
 	};
 
 	const handleDownClick = () => {
-		downVote.mutate({ score: data.data.score - 1 });
+		downQuestionVote.mutate(
+			{},
+			{
+				onSuccess: () =>
+					queryClient.invalidateQueries(['question', questionId]),
+			},
+		);
 	};
 
 	return (

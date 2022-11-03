@@ -26,11 +26,9 @@ public class LoginController {
         GithubToken githubToken = loginService.getAccessToken(code);
 //        response.setHeader("AccessToken", githubToken.getAuthorizationValue());
 
-        String AccessToken  = loginService.getLogin(githubToken.getAccessToken());
+        String accessToken  = loginService.getLogin(githubToken.getAccessToken());
 
         //todo: 배포시 변경
-        response.sendRedirect("http://localhost:3030/callback/access_token="+AccessToken);
+        response.sendRedirect("http://localhost:3000/callback/access_token=bearer "+accessToken);
     }
-
-
 }

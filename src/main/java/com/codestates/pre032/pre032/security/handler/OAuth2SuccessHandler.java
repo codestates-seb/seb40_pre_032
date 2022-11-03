@@ -88,7 +88,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String accessToken = delegateAccessToken(email);  // (6-1)
 
         response.setHeader("AccessToken", "bearer " + accessToken);
-        getRedirectStrategy().sendRedirect(request, response, "/");   // (6-4)
+        getRedirectStrategy().sendRedirect(request, response, "http://localhost:3000/callback/access_token="+"bearer " + accessToken);   // (6-4)
     }
 
     private String delegateAccessToken(String email) {

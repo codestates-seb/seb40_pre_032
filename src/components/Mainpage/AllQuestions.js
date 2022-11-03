@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 function AllQuestions({ questions, offset, limit }) {
 	return (
@@ -37,7 +38,10 @@ function AllQuestions({ questions, offset, limit }) {
 								<div className="flex gap-[4px] leading-[18px] float-left flex-wrap">
 									<ul className="inline list-none m-0 p-0">
 										{question.tags.map((tag) => (
-											<li className="inline mr-[4px] text-[12px]">
+											<li
+												className="inline mr-[4px] text-[12px]"
+												key={uuidv4()}
+											>
 												<span
 													href="https://www.naver.com"
 													className=" hover: rounded-[3px] bg-[hsl(205,53%,88%);] bg-[#e0ecf3] py-[0.4rem] px-[0.5rem] my-[2px] mr-[2px] ml-0 text-[hsl(205,47%,42%)]"

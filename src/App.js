@@ -2,6 +2,7 @@ import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
+import { RecoilRoot } from 'recoil';
 import MainPage from './components/MainPage/MainPage';
 import Login from './routes/login';
 import SignUp from './routes/signUp';
@@ -22,18 +23,20 @@ const queryClient = new QueryClient({
 export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
-				<Suspense fallback={<Loading />}>
-					<Routes>
-						<Route path="/" element={<MainPage />} />
-						<Route path="/login" element={<Login />} />
-						<Route path="/logout" element={<Logout />} />
-						<Route path="/signup" element={<SignUp />} />
-						<Route path="/mypage" element={<Mypage />} />
-						<Route path="/ask" element={<Editor />} />
-					</Routes>
-				</Suspense>
-			</BrowserRouter>
+			<RecoilRoot>
+				<BrowserRouter>
+					<Suspense fallback={<Loading />}>
+						<Routes>
+							<Route path="/" element={<MainPage />} />
+							<Route path="/login" element={<Login />} />
+							<Route path="/logout" element={<Logout />} />
+							<Route path="/signup" element={<SignUp />} />
+							<Route path="/mypage" element={<Mypage />} />
+							<Route path="/ask" element={<Editor />} />
+						</Routes>
+					</Suspense>
+				</BrowserRouter>
+			</RecoilRoot>
 			<ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
 		</QueryClientProvider>
 	);

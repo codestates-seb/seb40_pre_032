@@ -1,21 +1,29 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useQuery } from 'react-query';
+// import { useRecoilValue } from 'recoil';
+// import api from './_state/api';
 
 function HeaderInput() {
+	// const address = useRecoilValue(api);
 	const [value, setValue] = useState('');
+	const matched = value.match(/\[(.*?)\]/);
 	function fetchSearch() {
 		// 조건이 3개여야 함
 		// 문자열일때,
 		// 태그일때
 		// 그냥 빈 저거일때
-		if (typeof value === 'string') {
+		if (matched === null) {
 			return axios.get(
-				`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/`,
+				`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/search?q=${encodeURIComponent(
+					value,
+				)}`,
 			);
 		}
 		return axios.get(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/`,
+			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/search/tag?tag=${encodeURIComponent(
+				matched[1],
+			)}`,
 		);
 	}
 	const { refetch } = useQuery([`questions`], fetchSearch, {
@@ -28,6 +36,7 @@ function HeaderInput() {
 	useEffect(() => {
 		setValue(value);
 		console.log(value);
+		console.log(matched);
 	}, [value]);
 
 	const onChange = (e) => {

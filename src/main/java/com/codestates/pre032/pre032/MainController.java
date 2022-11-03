@@ -42,12 +42,12 @@ public class MainController {
     public ResponseEntity tagQuestion(@RequestParam(value = "tag") String tag) {
         List<Question> questions = questionService.getQuestionsByTag(tag);
         List<QuestionDto.questionContentResponse> response = this.questionMapper.questionsToQuestionContentResponsesDto(questions);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(new MainResponseDto(response), HttpStatus.OK);
     }
 
     @GetMapping("/")
     public ResponseEntity mainPage() {
-        return new ResponseEntity<>("welcome Ctrl C+V", HttpStatus.OK);
+        return new ResponseEntity<>("다들 힘냅시다 거의 다왔습니다!", HttpStatus.OK);
     }
 
 }

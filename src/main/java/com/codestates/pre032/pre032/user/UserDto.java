@@ -24,8 +24,8 @@ public class UserDto {
         @NotBlank
         private String password;
 
-        @AssertTrue(message = "체크박스를 클릭해 주세요")
-        private boolean isRobot;
+//        @AssertTrue(message = "체크박스를 클릭해 주세요")
+//        private boolean isRobot;
     }
 
     @Getter

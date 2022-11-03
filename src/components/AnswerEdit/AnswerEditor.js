@@ -16,7 +16,7 @@ function AnswerEditor() {
 
 	const { data } = useQuery(['question', location.state.questionId], () => {
 		return axios.get(
-			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${location.state.questionId}`,
+			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${location.state.questionId}`,
 		);
 	});
 
@@ -24,11 +24,11 @@ function AnswerEditor() {
 		(answer) => answer.answerId == answerId,
 	);
 
-	const [quillText, setQuillText] = useState(answerData.answerContent);
+	const [quillText, setQuillText] = useState(answerData?.answerContent);
 
 	const editAnswer = useMutation((editedAnswer) => {
 		return axios.patch(
-			`http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}`,
+			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/answers/${answerId}/edit`,
 			editedAnswer,
 		);
 	});
@@ -37,8 +37,7 @@ function AnswerEditor() {
 		setQuillText(event);
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
+	const handleSubmit = () => {
 		const editedAnswer = {
 			answerContent: quillText,
 		};

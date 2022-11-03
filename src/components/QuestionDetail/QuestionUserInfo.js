@@ -10,13 +10,13 @@ function QuestionUserInfo() {
 	const { questionId } = useParams();
 	const { data } = useQuery(['question', questionId], () => {
 		return axios.get(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
+			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
 		);
 	});
 
 	const deleteQuestion = useMutation((deleteId) => {
 		return axios.delete(
-			`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/delete`,
+			`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/delete`,
 			deleteId,
 		);
 	});
@@ -72,7 +72,7 @@ function QuestionUserInfo() {
 			return '1 min ago';
 		}
 		if (elapsedSec > 0) {
-			if (elapsedSec > 1) return `${elapsedSec} seconds ago`;
+			if (elapsedSec > 1) return `${Math.round(elapsedSec / 1000)} seconds ago`;
 			return '1 second ago';
 		}
 		return null;

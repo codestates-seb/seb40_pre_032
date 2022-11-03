@@ -1,3 +1,10 @@
-// import React, { useState } from 'react';
+import axios from 'axios';
+import useQuery from 'react-query';
 
-// export default function () {}
+function fetchQuestionById(api, id) {
+	return axios.get(`${api}/${id}`);
+}
+
+export default function getQuestionById(id) {
+	return useQuery(['question', id], fetchQuestionById);
+}

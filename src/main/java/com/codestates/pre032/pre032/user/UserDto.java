@@ -3,7 +3,6 @@ package com.codestates.pre032.pre032.user;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
@@ -25,8 +24,8 @@ public class UserDto {
         @NotBlank
         private String password;
 
-//        @AssertTrue(message = "체크박스를 클릭해 주세요")
-//        private boolean isRobot;
+        @AssertTrue(message = "체크박스를 클릭해 주세요")
+        private boolean robot;
     }
 
     @Getter

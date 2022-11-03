@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.websocket.server.PathParam;
+import java.io.IOException;
 
 @RestController
 public class LoginController {
@@ -21,12 +22,14 @@ public class LoginController {
     }
 
     @GetMapping("/login/oauth2/code/github/")
-    public ResponseEntity<String> githubLogin(@PathParam("code") String code, HttpServletResponse response) {
+    public void githubLogin(@PathParam("code") String code, HttpServletResponse response) throws IOException {
         GithubToken githubToken = loginService.getAccessToken(code);
-        response.setHeader("AccessToken", githubToken.getAuthorizationValue());
-        loginService.getLogin(githubToken.getAccessToken());
+//        response.setHeader("AccessToken", githubToken.getAuthorizationValue());
 
-        return new ResponseEntity (HttpStatus.OK);
+        String AccessToken  = loginService.getLogin(githubToken.getAccessToken());
+
+        //todo: 배포시 변경
+        response.sendRedirect("http://localhost:3030/callback/access_token="+AccessToken);
     }
 
 

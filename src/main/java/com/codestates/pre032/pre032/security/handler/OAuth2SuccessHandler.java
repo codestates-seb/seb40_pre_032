@@ -88,6 +88,8 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String accessToken = delegateAccessToken(email);  // (6-1)
 
         response.setHeader("AccessToken", "bearer " + accessToken);
+//        todo: 배포시에는 아마존으로 수정
+//        getRedirectStrategy().sendRedirect(request, response, "http://http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/callback/access_token="+"bearer " + accessToken);   // (6-4)
         getRedirectStrategy().sendRedirect(request, response, "http://localhost:3000/callback/access_token="+"bearer " + accessToken);   // (6-4)
     }
 

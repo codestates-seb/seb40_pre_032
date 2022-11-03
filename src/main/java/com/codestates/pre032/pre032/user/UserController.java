@@ -20,7 +20,12 @@ public class UserController {
         this.userService = userService;
         this.userMapper = userMapper;
     }
+    @GetMapping("/get")
+    public ResponseEntity get(@Validated @RequestBody String accessToken){
+        User user = userService.findByAccessToken(accessToken);
 
+        return new ResponseEntity(userMapper.userToUserResponseDto(user), HttpStatus.OK);
+    }
     // 회원가입
     @PostMapping("/signup")
     public ResponseEntity signup(@Validated @RequestBody UserDto.signUp dto) {

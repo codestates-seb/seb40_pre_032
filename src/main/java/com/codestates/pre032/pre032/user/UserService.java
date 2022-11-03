@@ -2,18 +2,23 @@ package com.codestates.pre032.pre032.user;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
 import com.codestates.pre032.pre032.exception.UserExistsException;
+import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class UserService {
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    private final JwtTokenizer jwtTokenizer;
+
+    public UserService(UserRepository userRepository, JwtTokenizer jwtTokenizer) {
         this.userRepository = userRepository;
+        this.jwtTokenizer = jwtTokenizer;
     }
 
     public User create(UserDto.signUp dto) {
@@ -66,5 +71,14 @@ public class UserService {
         } else {
             return null;
         }
+    }
+
+    public User findByAccessToken(String AccessToken){
+        String jws = AccessToken.replace("bearer ", "");
+        String base64EncodedSecretKey = jwtTokenizer.encodeBase64SecretKey(jwtTokenizer.getSecretKey());
+        Map<String, Object> claims = jwtTokenizer.getClaims(jws, base64EncodedSecretKey).getBody();
+        String email = (String) claims.get("email");
+        User user = findByEmail(email);
+        return user;
     }
 }

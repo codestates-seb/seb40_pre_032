@@ -1,33 +1,14 @@
 #################################################
 ## 로컬 ##
 
-#spring:
-#  profiles:
-#    include: oauth
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://localhost:3306/pre032?serverTimezone=Asia/Seoul
-#    username: user
-#    password: 1234
-#  jpa:
-#    hibernate:
-#      ddl-auto: update
-#    show-sql: true
-#    properties:
-#      hibernate:
-#        format_sql: true;
-
-#################################################
-# 서버 ##
-
 spring:
   profiles:
     include: oauth
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://pre032-database.cssqpsefshei.ap-northeast-2.rds.amazonaws.com:3306/pre032?serverTimezone=Asia/Seoul
-    username: admin
-    password: pre032032
+    url: jdbc:mysql://localhost:3306/pre032?serverTimezone=Asia/Seoul
+    username: user
+    password: 1234
   jpa:
     hibernate:
       ddl-auto: update
@@ -35,6 +16,25 @@ spring:
     properties:
       hibernate:
         format_sql: true;
+
+#################################################
+# 서버 ##
+
+#spring:
+#  profiles:
+#    include: oauth
+#  datasource:
+#    driver-class-name: com.mysql.cj.jdbc.Driver
+#    url: jdbc:mysql://pre032-database.cssqpsefshei.ap-northeast-2.rds.amazonaws.com:3306/pre032?serverTimezone=Asia/Seoul
+#    username: admin
+#    password: pre032032
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true;
 
 
 #################################################
@@ -49,6 +49,7 @@ spring:
           google:
             client-id: 651205845903-ijvbcuiaa7sfn9q0tr7i78h4301ggomp.apps.googleusercontent.com
             client-secret: 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
+#            redirect-uri: http://localhost:8080/login/oauth2/code/google
             redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/google
           scope:
             - email
@@ -57,6 +58,7 @@ spring:
           github:
             client-id: bb0d7862c04e3967a361
             client-secret: ed674a520e58843f2ba5d878639163b09fb13434
+#            redirect-uri: http://localhost:8080/login/oauth2/code/github
             redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/github
             scope:
               - user

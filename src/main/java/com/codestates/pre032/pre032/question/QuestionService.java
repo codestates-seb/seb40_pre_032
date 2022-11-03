@@ -132,7 +132,7 @@ public class QuestionService {
     }
 
     public List<Question> getQuestions() {
-        return this.questionRepository.findAll();
+        return this.questionRepository.findAllOrder();
     }
 
     public List<Question> getQuestionsByTag(String tagStr) {

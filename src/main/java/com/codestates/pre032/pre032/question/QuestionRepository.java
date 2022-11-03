@@ -12,6 +12,10 @@ import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     Integer countByTags(Tag tag);
+    
+    @Query("select q from Question q order by q.creationDate desc" )
+    List<Question> findAllOrder();
+
     //완전히 일치
 //    @Query("select case q.title = :title when title = :title " +
 //            "when q.title <> :title then like %:title" +

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -12,12 +13,22 @@ import Loading from './components/Loading';
 import MainPage from './components/Mainpage/MainPage';
 import Editor from './components/Editor';
 
-const queryClient = new QueryClient();
+import Editor from './components/Editor';
+
+const queryClient = new QueryClient({
+	defaultOptions: {
+		queries: {
+			suspense: true,
+			refetchOnWindowFocus: false,
+		},
+	},
+});
 
 export default function App() {
 	return (
 		<QueryClientProvider client={queryClient}>
 			<BrowserRouter>
+				<Editor />
 				<Suspense fallback={<Loading />}>
 					<Routes>
 						<Route path="/" element={<MainPage />} />

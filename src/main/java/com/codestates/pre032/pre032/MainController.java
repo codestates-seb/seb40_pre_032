@@ -1,5 +1,6 @@
 package com.codestates.pre032.pre032;
 
+import com.codestates.pre032.pre032.dto.MainResponseDto;
 import com.codestates.pre032.pre032.question.Question;
 import com.codestates.pre032.pre032.question.QuestionDto;
 import com.codestates.pre032.pre032.question.QuestionMapper;
@@ -33,7 +34,7 @@ public class MainController {
         List<Question> questions = questionService.search(q);
 
         List<QuestionDto.questionContentResponse> response = this.questionMapper.questionsToQuestionContentResponsesDto(questions);
-        return new ResponseEntity<>(response, HttpStatus.OK);
+        return new ResponseEntity<>(new MainResponseDto(response), HttpStatus.OK);
     }
 
     // Tag 검색 기능

@@ -13,7 +13,7 @@ import javax.validation.constraints.Positive;
 @RestController
 @RequestMapping("/answers")
 @Validated
-//@CrossOrigin
+@CrossOrigin
 public class AnswerController {
     private final AnswerService answerService;
     private final AnswerMapper mapper;

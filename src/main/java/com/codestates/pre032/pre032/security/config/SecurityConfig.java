@@ -74,7 +74,7 @@ public class SecurityConfig {
 
                         oauth2
                         .successHandler(new OAuth2SuccessHandler(jwtTokenizer, userService))  // (1)
-                                .defaultSuccessUrl("/")
+//                                .defaultSuccessUrl("/")
                 )
                 // 로그인 설정
 //                .loginPage("/users/loginPage")
@@ -119,7 +119,7 @@ public class SecurityConfig {
         // 모든 출처에 대해 스크립트기반의 HTTP 통신을 허용
         configuration.setAllowedOrigins(Arrays.asList("*"));
         // 파라미터로 지정한 HTTP Method에 대한 HTTP 통신을 허용
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE"));
+        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE", "OPTIONS"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         // 패턴에 해당하는 URL에 해당 CORS 정책을 적용한다.

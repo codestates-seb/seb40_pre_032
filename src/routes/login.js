@@ -1,110 +1,65 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { SiNaver } from 'react-icons/si';
-// import axios from 'axios';
-import { useRecoilValue } from 'recoil';
+import axios from 'axios';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import Header from '../components/Header';
 import authAtom from '../_state/auth';
-import useUserActions from '../_actions/useUserActions';
+// import useUserActions from '../_actions/useUserActions';
 
 export default function Login() {
+	const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
 	const [userEmail, setUserEmail] = useState();
 	const [userPassword, setUserPassword] = useState();
+	const navigate = useNavigate();
+	const auth = useRecoilValue(authAtom);
+	const setAuth = useSetRecoilState(authAtom); // set함수 반환
 
 	const onEmailChange = (e) => {
 		setUserEmail(e.target.value);
-		console.log(userEmail);
 	};
 	const onPasswordChange = (e) => {
 		setUserPassword(e.target.value);
-		console.log(userPassword);
 	};
 
-	const navigate = useNavigate();
-	const auth = useRecoilValue(authAtom);
-	console.log('auth', auth);
-	const userActions = useUserActions();
+	// console.log('auth', auth);
 	useEffect(() => {
-		// redirect to home if already logged in
-		if (auth) navigate('/');
+		if (auth !== null) navigate('/');
 	}, []);
 
-	const onSubmit = (email, password) => {
-		userActions.login(email, password);
+	const onSubmit = (e, email, password) => {
+		// userActions.login(email, password);
+		e.preventDefault();
+		axios
+			.post(
+				`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/signup`,
+				{ email, password },
+			)
+			.then((response) => {
+				localStorage.setItem('user', JSON.stringify(response.data));
+				setAuth(123);
+				navigate('/');
+			})
+			.catch((error) => alert(error));
 	};
 
-	// 여기 아래는 소셜입니다
-
-	// const serverURL = '';
-	//	const googleClientId = process.env.REACT_APP_GOOGLE_LOGIN;
-	//	const naverClientId = process.env.REACT_APP_NAVER_LOGIN;
-
 	const googleLoginHandler = () => {
-		// const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=http://rebon.s3-website.ap-northeast-2.amazonaws.com/loading&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
-		const GOOGLE_LOGIN_URL = `oauth2/authorization/google`;
+		const GOOGLE_LOGIN_URL = `${baseUrl}/oauth2/authorization/google`;
 		window.location.href = GOOGLE_LOGIN_URL;
-		userActions.googleLogin();
 	};
 
 	const gitHubLoginHandler = () => {
-		// (깃헙 내앱 등록 시 설정해두었던 callback url)으로 돌아오게 되고(리디렉트),
-		// 어떤 일시적으로 사용할 수 있는 코드가 code 파라미터로 주어지게 된다.
-		// const GITHUB_LOGIN_URL = `https://github.com/login/oauth/authorize`;
 		const GITHUB_LOGIN_URL = `https://github.com/login/oauth/authorize?client_id=82422b0d46b1255e9450`;
 		window.location.href = GITHUB_LOGIN_URL;
-		userActions.githubLogin();
 	};
 
 	const naverLoginHandler = () => {
-		const NAVER_LOGIN_URL = `/oauth2/authorization/naver`;
-		// const NAVER_LOGIN_URL = `https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=${naverClientId}&redirect_uri=http://localhost:3000/loading`;
+		const NAVER_LOGIN_URL = `${baseUrl}/oauth2/authorization/naver`;
 		window.location.href = NAVER_LOGIN_URL;
-		userActions.naverLogin();
 	};
-
-	// const [token, setToken] = useState(window.sessionStorage.getItem('token'));
-	// useEffect(() => {
-	// 	const config = {
-	// 		headers: { Authorization: `Bearer ${token}` },
-	// 	};
-	// 	if (token) {
-	// 		axios
-	// 			.get('http://3.34.139.61:8080/api/members', config)
-	// 			.then((response) => {
-	// 				setToken(response.data);
-	// 			})
-	// 			.catch((error) => {
-	// 				console.log(error);
-	// 			});
-	// 	}
-	// }, []);
-
-	// console.log(window.sessionStorage.getItem('token'));
-
-	// const requestLogin = async (email, pw) => {
-	// 	await axios
-	// 		.post(
-	// 			`${serverURL}/login/`,
-	// 			{
-	// 				email,
-	// 				password: pw,
-	// 			},
-	// 			{ withCredentials: true },
-	// 		)
-	// 		.then((response) => {
-	// 			/// token이 필요한 API 요청 시 header Authorization에 token 담아서 보내기
-	// 			axios.defaults.headers.common.Authorization = `Bearer ${response.data.access_token}`;
-	// 			localStorage.setItem('access_token', response.data.access_token);
-	// 			return response.data;
-	// 		})
-	// 		.catch((e) => {
-	// 			console.log(e.response.data);
-	// 			return '이메일 혹은 비밀번호를 확인하세요.';
-	// 		});
-	// };
 
 	return (
 		<>

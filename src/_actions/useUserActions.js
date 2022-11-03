@@ -3,29 +3,40 @@ import { useSetRecoilState } from 'recoil';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
 import authAtom from '../_state/auth';
+// import userAtom from '../_state/userAuth';
 
 export default function useUserActions() {
 	// const auth = useRecoilValue(authAtom);
+	// const userAuth = useRecoilValue(userAtom);
 	const navigate = useNavigate();
 	// const baseUrl = `${process.env.REACT_APP_API_URL}/users`;
-	const baseUrl = `http://localhost:8080`;
+	const baseUrl = `http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080`;
+	// const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
 	const setAuth = useSetRecoilState(authAtom); // set함수 반환
+	// const setUserAuth = useSetRecoilState(userAuth); // set함수 반환
 
 	function login(email, password) {
-		alert(email);
 		return axios
 			.post(
-				`${baseUrl}/authenticate`,
+				`${baseUrl}/users/signup`,
 				{ email, password },
 				{ withCredentials: true },
 			)
 			.then((response) => {
+				console.log(response);
 				// store user details and jwt token in local storage to keep user logged in between page refreshes
 				localStorage.setItem('user', JSON.stringify(response.data));
 				setAuth(response.data);
 				// get return url from location state or default to home page
 				navigate('/');
-			});
+			})
+			.catch((error) => alert(error));
+	}
+
+	function translateToken() {
+		// return axios.post(`url`, { token: auth }).then((response) => {
+		// setUserAuth(response.data);
+		// });
 	}
 
 	function naverLogin() {
@@ -146,5 +157,6 @@ export default function useUserActions() {
 		naverLogin,
 		githubLogin,
 		googleLogin,
+		translateToken,
 	};
 }

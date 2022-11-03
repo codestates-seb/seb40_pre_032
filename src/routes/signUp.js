@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSetRecoilState, useRecoilValue } from 'recoil';
+// useLocation
+// import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineGithub } from 'react-icons/ai';
@@ -8,20 +9,91 @@ import { FaQuestionCircle } from 'react-icons/fa';
 import { SiNaver } from 'react-icons/si';
 import axios from 'axios';
 import Header from '../components/Header';
-import useUserActions from '../_actions/useUserActions';
-import authAtom from '../_state/auth';
+// import useUserActions from '../_actions/useUserActions';
+// import authAtom from '../_state/auth';
 
 export default function SignUp() {
-	const userActions = useUserActions();
-	const auth = useRecoilValue(authAtom); // 토큰 정보
-	const setAuth = useSetRecoilState(authAtom);
+	// const baseUrl = `http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080`;
+	const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
+	// const userActions = useUserActions();
+	// const auth = useRecoilValue(authAtom); // 토큰 정보
+	// const setAuth = useSetRecoilState(authAtom);
 	const navigate = useNavigate();
+
 	// const googleClientId = process.env.REACT_APP_GOOGLE_LOGIN;
 	const googleLoginHandler = () => {
 		// const GOOGLE_LOGIN_URL = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${googleClientId}&redirect_uri=http://localhost:3000/loading&response_type=code&scope=https://www.googleapis.com/auth/userinfo.email`;
-		const GOOGLE_LOGIN_URL = `oauth2/authorization/google`;
+		const GOOGLE_LOGIN_URL = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google`;
+		// const GOOGLE_LOGIN_URL = `http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/oauth2/authorization/google`;
 		window.location.href = GOOGLE_LOGIN_URL;
-		userActions.naverLogin();
+		// const params = new URLSearchParams(window.location.search);
+		// alert('params', params);
+
+		// userActions.naverLogin();
+		// const params = new URLSearchParams(window.location.search);
+		// const location = useLocation();
+		// useEffect(() => {
+		// const code = params.get('code');
+		// 	const url = `https://oauth2.googleapis.com/token?code=${code}&client_id=${process.env.GOOGLE_CLIENT_ID}&client_secret=${process.env.GOOGLE_CLIENT_SECRET}&redirect_uri=${process.env.GOOGLE_REDIRECT_URI}&grant_type=${process.env.GOOGLE_GRANT_TYPE}`;
+		// console.log(code);
+		// console.log(location);
+
+		// 	if (code != null) {
+		// 		console.log('로그인 후');
+		// 		axios
+		// 			.get(url)
+		// 			.then((user) => {
+		// 				localStorage.setItem('user', JSON.stringify(user));
+		// 				console.log(url);
+		// 				setAuth(user);
+		// 			})
+		// 			.catch((error) => {
+		// 				if (error.response.data.email != null) {
+		// 					navigate('/signup', {
+		// 						state: {
+		// 							email: error.response.data.email,
+		// 							oauthProvider: 'google',
+		// 						},
+		// 					});
+		// 				}
+		// 			});
+		// 	}
+		// }, []);
+		// };
+	};
+
+	const naverLoginHandler = () => {
+		const GOOGLE_LOGIN_URL = `${baseUrl}/oauth2/authorization/naver`;
+		window.location.href = GOOGLE_LOGIN_URL;
+		// const params = new URLSearchParams(window.location.search);
+		// const location = useLocation();
+
+		// const callbackUrl = process.env.REACT_APP_REDIRECT_URI;
+		// useEffect(() => {
+		// 	const code = params.get('code');
+		// 	console.log(code);
+		// 	console.log(location);
+
+		// 	if (code != null) {
+		// 		console.log('로그인 후');
+		// 		axios
+		// 			.get(`${callbackUrl}`)
+		// 			.then((response) => {
+		// 				window.sessionStorage.setItem('token', response.data.token);
+		// 				navigate('/');
+		// 			})
+		// 			.catch((error) => {
+		// 				if (error.response.data.email != null) {
+		// 					navigate('/join/register', {
+		// 						state: {
+		// 							email: error.response.data.email,
+		// 							oauthProvider: 'naver',
+		// 						},
+		// 					});
+		// 				}
+		// 			});
+		// 	}
+		// }, []);
 	};
 
 	// useForm을 사용하여 변경하자
@@ -45,20 +117,16 @@ export default function SignUp() {
 		e.preventDefault();
 		return axios
 			.post(
-				`http://localhost:8080/register`,
+				`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/signup`,
 				{
 					email,
-					nickname: dpName,
+					displayName: dpName,
 					password: passWord,
-					is_robot: 'false',
 				},
-				{ withCredentials: true },
 			)
 			.then((response) => {
-				localStorage.setItem('user', JSON.stringify(response.data)); // 로컬에 저장
-				setAuth(response.data); // 토큰 저장
-				console.log('auth확인', auth);
-				navigate('/');
+				alert('test', response);
+				navigate('/login');
 			})
 			.catch((error) => {
 				alert(error);
@@ -95,6 +163,7 @@ export default function SignUp() {
 							<button
 								type="button"
 								className="w-full rounded bg-green-500  my-3 py-2 text-center text-white text-base  hover:bg-green-600 focus:outline-none focus:ring focus:ring-blue-300 block"
+								onClick={naverLoginHandler}
 							>
 								<SiNaver className="inline text-xl mr-1" /> Sign up with Naver
 							</button>

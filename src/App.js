@@ -11,6 +11,7 @@ import QuestionDetail from './routes/QuestionDetail';
 import Loading from './components/Loading';
 import MainPage from './components/Mainpage/MainPage';
 import Editor from './components/Editor';
+import Callback from './routes/callback';
 
 const queryClient = new QueryClient();
 
@@ -32,6 +33,7 @@ export default function App() {
 						<Route path="logout" element={<Logout />} />
 						<Route path="signup" element={<SignUp />} />
 						<Route path="questions/:questionId" element={<QuestionDetail />} />
+						<Route path="callback/:params" element={<Callback />} />
 						<Route path="*" element={<NotFound />} />
 					</Routes>
 				</Suspense>

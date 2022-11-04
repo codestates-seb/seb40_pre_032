@@ -15,6 +15,7 @@ import { getQuestionById } from '../utils/hooks/useQuestion';
 function QuestionDetail() {
 	const { questionId } = useParams();
 	const data = getQuestionById(questionId);
+	console.log(data);
 
 	return (
 		<div>

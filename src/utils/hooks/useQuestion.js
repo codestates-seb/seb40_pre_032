@@ -3,10 +3,11 @@ import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
 
 const auth = JSON.parse(localStorage.getItem('user'));
+console.log(auth);
 
 // 프록시 서버 우회하는 성웅님 서버 URL
 const BASE_URL =
-	'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
+	'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
 
 export const getQuestionById = (questionId) => {
 	const { data } = useQuery(['question', questionId], () => {

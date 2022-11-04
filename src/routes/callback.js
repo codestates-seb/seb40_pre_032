@@ -16,23 +16,24 @@ export default function Callback() {
 		const token = tokenInfo[1];
 		localStorage.setItem('user', JSON.stringify(token));
 		setAuth(token);
-		console.log(token);
 		axios
 			.get(
 				'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
 				{
-					accessToken: token,
+					headers: { accessToken: token },
 				},
 			)
 			.then((response) => {
-				localStorage.setItem('userInfo', JSON.stringify(response.data));
-				console.log(response.data);
-				setUserAuth(response.data);
+				localStorage.setItem('userInfo', JSON.stringify(response));
+				setUserAuth(response);
+			})
+			.then(() => {
+				navigate('/');
 			})
 			.catch((error) => {
 				alert(error);
+				navigate('/');
 			});
-		navigate('/');
 	}, []);
 
 	return (

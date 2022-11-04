@@ -1,4 +1,4 @@
-import React from 'react'; // useEffect
+import React, { useEffect } from 'react'; // useEffect
 import { useNavigate } from 'react-router-dom';
 import { SiAskubuntu, SiServerfault, SiSuperuser } from 'react-icons/si';
 import { AiTwotoneSetting } from 'react-icons/ai';
@@ -11,26 +11,17 @@ import authAtom from '../_state/auth';
 import userAtom from '../_state/userAuth';
 
 export default function Logout() {
-	// const baseUrl = `http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
-	const auth = useRecoilValue(authAtom);
-	// const userAuth = useRecoilValue(userAtom);
-	// const userEmail = userAuth.email;
-
+	const userAuth = useRecoilValue(userAtom);
 	const navigate = useNavigate();
 	const setAuth = useSetRecoilState(authAtom);
 	const setUserAuth = useSetRecoilState(userAtom); // set함수 반환
 
-	// useEffect(() => {
-	// 	if (auth === null) navigate('/');
-	// }, []);
-
-	// console.log('userEmail', userEmail);
 	const logout = (e) => {
 		e.preventDefault();
 		axios
 			.post(
 				`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/logout`,
-				{ email: '111@111' },
+				{ email: `${userAuth.email}` },
 			)
 			.then((response) => {
 				alert('로그아웃 되었습니다');
@@ -40,31 +31,15 @@ export default function Logout() {
 				setAuth(null);
 				setUserAuth(null);
 			})
-			.then(() => {
-				alert('로그아웃 되었습니다2');
-				navigate('/');
-			})
 			.catch((error) => {
 				alert(error);
 				navigate('/');
 			});
 	};
-	axios
-		.get(
-			'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
-			{
-				accessToken: auth,
-			},
-		)
-		.then((response) => {
-			localStorage.setItem('userInfo', JSON.stringify(response.data));
-			console.log(response.data);
-			setUserAuth(response.data);
-		})
-		.catch((error) => {
-			alert(error);
-		});
-	console.log('get왜 안돼', auth);
+
+	useEffect(() => {
+		if (userAuth === null) navigate('/');
+	});
 
 	return (
 		<>

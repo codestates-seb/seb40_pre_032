@@ -5,8 +5,11 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useParams } from 'react-router-dom';
 import { addAnswerToQuestion } from '../../utils/hooks/useAnswer';
+import { useRecoilValue } from 'recoil';
+import authAtom from '../../_state/auth';
 
 function AnswerEditor() {
+	const auth = useRecoilValue(authAtom);
 	const queryClient = useQueryClient();
 	const [quillText, setQuillText] = useState('');
 	const { questionId } = useParams();
@@ -45,10 +48,16 @@ function AnswerEditor() {
 						<button
 							className="mt-16 rounded-sm text-sm p-2 text-white bg-[#0a94ff] hover:bg-[#0074CC]"
 							type="submit"
+							disabled={auth === null ? true : false}
 							onClick={handleSubmit}
 						>
-							Ask Question
+							Post Your Answer
 						</button>
+						<span>
+							{auth === null ? (
+								<Link className="text-blue-500 font-normal textsm">login</Link>
+							) : null}
+						</span>
 					</div>
 				</section>
 			</article>

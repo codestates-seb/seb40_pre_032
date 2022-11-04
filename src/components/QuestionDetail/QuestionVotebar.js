@@ -13,9 +13,7 @@ function QuestionVotebar() {
 	const { questionId } = useParams();
 
 	const data = getQuestionById(questionId);
-
 	const upQuestionVote = upQuestionVoteById(questionId);
-
 	const downQuestionVote = downAnswerVoteById(questionId);
 
 	const handleUpClick = () => {

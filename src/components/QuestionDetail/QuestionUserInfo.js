@@ -1,15 +1,17 @@
 /* eslint-disable */
 import React from 'react';
-import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
-import { useMutation, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import {
 	deleteQuestionById,
 	getQuestionById,
 } from '../../utils/hooks/useQuestion';
 import elapsed from '../../utils/hooks/elapsed';
+import { useRecoilValue } from 'recoil';
+import authAtom from '../../_state/auth';
 
 function QuestionUserInfo() {
+	const auth = useRecoilValue(authAtom);
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 	const { questionId } = useParams();
@@ -18,17 +20,34 @@ function QuestionUserInfo() {
 
 	const deleteQuestion = deleteQuestionById(questionId);
 
-	const handleDelete = () => {
-		deleteQuestion.mutate(
-			{},
-			{
-				onSuccess: () => {
-					console.log('delete');
-					navigate('/');
-					return queryClient.invalidateQueries(['question', questionId]);
+	const handleEdit = () => {
+		if (auth === null) {
+			alert('로그인 후 다시 시도해주세요.');
+			navigate('/login');
+		} else {
+			navigate(`/questions/${questionId}/edit`, {
+				state: {
+					questionId,
 				},
-			},
-		);
+			});
+		}
+	};
+
+	const handleDelete = () => {
+		if (auth === null) {
+			alert('로그인 후 다시 시도해주세요.');
+			navigate('/login');
+		} else {
+			deleteQuestion.mutate(
+				{},
+				{
+					onSuccess: () => {
+						navigate('/');
+						return queryClient.invalidateQueries(['question', questionId]);
+					},
+				},
+			);
+		}
 	};
 
 	return (
@@ -40,12 +59,7 @@ function QuestionUserInfo() {
 				<button
 					className="mr-2 text-sm text-gray-500"
 					type="button"
-					onClick={() => {
-						/* access token이 있으면 수정 페이지로 이동 */
-						navigate(`/questions/${questionId}/edit`);
-						/* 없으면 로그인 페이지로 이동 */
-						// navigate('/login');
-					}}
+					onClick={handleEdit}
 				>
 					Edit
 				</button>

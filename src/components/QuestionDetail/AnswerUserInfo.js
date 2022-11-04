@@ -5,28 +5,47 @@ import { useQueryClient } from 'react-query';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
 import { deleteAnswerById } from '../../utils/hooks/useAnswer';
 import elapsed from '../../utils/hooks/elapsed';
+import { useRecoilValue } from 'recoil';
+import authAtom from '../../_state/auth';
 
 function AnswerUserInfo({ answerId }) {
+	const auth = useRecoilValue(authAtom);
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
 
 	const data = getQuestionById(questionId);
-
 	const answerData = data?.data.answers.find(
 		(answer) => answer.answerId === answerId,
 	);
-
 	const deleteAnswer = deleteAnswerById(answerId);
 
+	const handleEdit = () => {
+		if (auth === null) {
+			alert('로그인 후 다시 시도해주세요.');
+			navigate('/login');
+		} else {
+			navigate(`/answers/${answerId}/edit`, {
+				state: {
+					questionId,
+				},
+			});
+		}
+	};
+
 	const handleDelete = () => {
-		deleteAnswer.mutate(
-			{},
-			{
-				onSuccess: () =>
-					queryClient.invalidateQueries(['question', questionId]),
-			},
-		);
+		if (auth === null) {
+			alert('로그인 후 다시 시도해주세요.');
+			navigate('/login');
+		} else {
+			deleteAnswer.mutate(
+				{},
+				{
+					onSuccess: () =>
+						queryClient.invalidateQueries(['question', questionId]),
+				},
+			);
+		}
 	};
 
 	return (
@@ -38,16 +57,7 @@ function AnswerUserInfo({ answerId }) {
 				<button
 					className="mr-2 text-sm text-gray-500"
 					type="button"
-					onClick={() => {
-						/* access token이 있으면 수정 페이지로 이동 */
-						navigate(`/answers/${answerId}/edit`, {
-							state: {
-								questionId,
-							},
-						});
-						/* 없으면 로그인 페이지로 이동 */
-						// navigate('/login');
-					}}
+					onClick={handleEdit}
 				>
 					Edit
 				</button>

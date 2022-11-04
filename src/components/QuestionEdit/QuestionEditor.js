@@ -2,10 +2,11 @@
 import React, { useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
-import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import { useQuery, useMutation, useQueryClient } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
+import { getQuestionById } from '../../utils/hooks/useQuestion';
+import { editQuestionById } from '../../utils/hooks/useQuestion';
 
 function AddTag({ tags, setTags }) {
 	const [inputValue, setInputValue] = useState('');
@@ -60,18 +61,9 @@ function QuestionEditor() {
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
 
-	const { data } = useQuery(['question', questionId], () => {
-		return axios.get(
-			`http://cors-anywhere.herokuapp.com/http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}`,
-		);
-	});
+	const data = getQuestionById(questionId);
 
-	const editQuestion = useMutation((editedQuestion) => {
-		return axios.patch(
-			`http://cors-anywhere.herokuapp.com/http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/${questionId}/edit`,
-			editedQuestion,
-		);
-	});
+	const editQuestion = editQuestionById(questionId);
 
 	const [titleValue, setTitleValue] = useState(data?.data.title);
 	const [quillText, setQuillText] = useState(data?.data.questionContent);

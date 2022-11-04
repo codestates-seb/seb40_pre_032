@@ -1,10 +1,15 @@
 /* eslint-disable */
 import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import authAtom from '../../_state/auth';
 
 // 프록시 서버 우회하는 성웅님 서버 URL
 const BASE_URL =
 	'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
+
+const auth = useRecoilValue(authAtom);
+const config = { Authorization: `bearer ${auth}` };
 
 export const getQuestionById = (questionId) => {
 	const { data } = useQuery(['question', questionId], () => {
@@ -16,7 +21,7 @@ export const getQuestionById = (questionId) => {
 
 export const deleteQuestionById = (questionId) => {
 	const deleteQuestion = useMutation(() => {
-		return axios.delete(`${BASE_URL}/questions/${questionId}/delete`);
+		return axios.delete(`${BASE_URL}/questions/${questionId}/delete`, config);
 	});
 
 	return deleteQuestion;
@@ -27,6 +32,7 @@ export const editQuestionById = (questionId) => {
 		return axios.patch(
 			`${BASE_URL}/questions/${questionId}/edit`,
 			editedQuestion,
+			config,
 		);
 	});
 

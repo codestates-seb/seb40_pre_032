@@ -1,5 +1,4 @@
 /* eslint-disable */
-import axios from 'axios';
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
@@ -16,8 +15,6 @@ import Editor from './components/Editor';
 import Callback from './routes/callback';
 import AnswerEdit from './routes/AnswerEdit';
 import QuestionEdit from './routes/QuestionEdit';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../src/_state/auth';
 
 const queryClient = new QueryClient({
 	defaultOptions: {
@@ -27,9 +24,6 @@ const queryClient = new QueryClient({
 		},
 	},
 });
-
-const auth = useRecoilValue(authAtom);
-axios.defaults.headers.common['Authorization'] = auth;
 
 export default function App() {
 	return (

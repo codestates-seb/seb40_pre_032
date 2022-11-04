@@ -1,41 +1,28 @@
 import React from 'react';
 import { FaUserAlt } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
+import Logo from './Logo';
+import HeaderInput from './HeaderInput';
 
 function LoginHeader() {
 	return (
-		<div className="flex flex-col">
+		<div className="fixed top-0 inset-x-0 flex flex-col z-10">
 			<div className="w-full bg-[#f38227] h-[3px]" />
 			<header className="h-[47px] bg-[#f7faf9] flex flex-row items-center shadow-1top text-[13px]">
 				<div className=" h-full flex items-center mx-auto my-0 max-w-full">
-					<div>
-						<a
-							href="https://stackoverflow.com/"
-							className="cursor-pointer  pb-[6px] px-2 flex items-center bg-transparent w-[166px] h-[47px] hover:bg-[hsl(210,8%,90%)]"
-						>
-							<img
-								alt="stackoverflow logo"
-								src="/img/stack.png"
-								className="w-[150px] h-[30px]"
-							/>
-						</a>
-					</div>
+					<Logo />
 					<div className="rounded-[30px] w-[76px] h-[28px] cursor-pointer flex items-center justify-center hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
 						<span>Product</span>
 					</div>
-					<form className="align-baseline relative text-[100%] flex px-2 w-[773px] items-center">
-						<svg className="w-[20px] h-[18px] absolute left-[15px] fill-[hsl(210,8%,55%)] ">
-							<path d="m18 16.5-5.14-5.18h-.35a7 7 0 1 0-1.19 1.19v.35L16.5 18l1.5-1.5ZM12 7A5 5 0 1 1 2 7a5 5 0 0 1 10 0Z" />
-						</svg>
-						<input
-							placeholder="Search..."
-							className=" focus: cursor-text border border-[#babec4] focus:ring-[5px]  focus:ring-blue-500/[.10] focus:outline focus:border-[0.5px] focus:outline-[hsl(206,90%,69.5%)] rounded-[3px] border-solid truncate w-full pl-[30px] h-[33px] "
-						/>
-					</form>
+					<HeaderInput />
 					<nav className="flex items-center h-full">
-						<div className="flex items-center">
+						<Link
+							to="/mypage"
+							className="flex items-center hover:bg-[hsl(210,8%,90%)] cursor-pointer h-full"
+						>
 							<FaUserAlt />
-							<div className="mr-1 pl-[5px] pr-[10px]">ddhhss0603</div>
-						</div>
+							<div className="mr-1 pl-[5px] ">ddhhss0603</div>
+						</Link>
 						<div className="flex justify-center h-full items-center w-[40px] cursor-pointer px-[10px] hover:bg-[hsl(210,8%,90%)]">
 							<svg className="w-[20px] h-[18px]">
 								<path d="M4.63 1h10.56a2 2 0 0 1 1.94 1.35L20 10.79V15a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-4.21l2.78-8.44c.25-.8 1-1.36 1.85-1.35Zm8.28 12 2-2h2.95l-2.44-7.32a1 1 0 0 0-.95-.68H5.35a1 1 0 0 0-.95.68L1.96 11h2.95l2 2h6Z" />
@@ -57,12 +44,13 @@ function LoginHeader() {
 						</div>
 						<ol className="list-none px-[10]">
 							<li className=" ml-[4px] float-left flex h-[34px]  text-[13px] ">
-								<button
-									type="submit"
+								<Link
+									to="/logout"
+									type="botton"
 									className=" flex items-center w-[68px] justify-center  text-white border-[0.5px] rounded-[3px] hover:bg-[#0074CC] bg-[#0a94ff]"
 								>
 									Log out
-								</button>
+								</Link>
 							</li>
 						</ol>
 					</nav>

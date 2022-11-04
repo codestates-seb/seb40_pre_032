@@ -1,20 +1,19 @@
-/* eslint-disable */
 import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import NotFound from './components/NotFound';
-import Login from './routes/login';
-import Logout from './routes/logout';
-import SignUp from './routes/signUp';
-import MyPage from './routes/myPage';
-import QuestionDetail from './routes/QuestionDetail';
-import Loading from './components/Loading';
 import MainPage from './components/Mainpage/MainPage';
+import Login from './routes/login';
+import SignUp from './routes/signUp';
 import Editor from './components/Editor';
+import Loading from './components/Loading';
+import Logout from './routes/logout';
+import MyPage from './routes/myPage';
 import Callback from './routes/callback';
 import AnswerEdit from './routes/AnswerEdit';
 import QuestionEdit from './routes/QuestionEdit';
+import QuestionDetail from './routes/QuestionDetail';
+import NotFound from './components/NotFound';
 
 const queryClient = new QueryClient({
 	defaultOptions: {

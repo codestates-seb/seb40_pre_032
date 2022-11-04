@@ -1,5 +1,5 @@
 import React, { useState } from 'react'; // useEffect
-import { Link, useNavigate } from 'react-router-dom'; //
+import { Link } from 'react-router-dom'; // useNavigate
 import { FcGoogle } from 'react-icons/fc';
 import { MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineGithub } from 'react-icons/ai';
@@ -8,20 +8,18 @@ import axios from 'axios';
 import { useSetRecoilState } from 'recoil'; // useRecoilValue
 import Header from '../components/Header';
 import authAtom from '../_state/auth';
-import userAtom from '../_state/userAuth';
+// import userAtom from '../_state/userAuth';
 import useUserActions from '../utils/hooks/useUserActions';
 
 export default function Login() {
-	const navigate = useNavigate();
+	// const navigate = useNavigate();
 	const userActions = useUserActions();
-	// const auth = useRecoilValue(authAtom);
-	// const userAuth = useRecoilValue(userAtom);
 
 	const [userEmail, setUserEmail] = useState('');
 	const [userPassword, setUserPassword] = useState('');
 
 	const setAuth = useSetRecoilState(authAtom); // set함수 반환
-	const setUserAuth = useSetRecoilState(userAtom); // set함수 반환
+	// const setUserAuth = useSetRecoilState(userAtom); // set함수 반환
 
 	const onEmailChange = (e) => {
 		setUserEmail(e.target.value);
@@ -29,25 +27,6 @@ export default function Login() {
 	const onPasswordChange = (e) => {
 		setUserPassword(e.target.value);
 	};
-
-	// 유저 정보 해독 확인
-	// useEffect(() => {
-	// 	if (auth) {
-	// 		axios
-	// 			.get(
-	// 				'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
-	// 				{
-	// 					accessToken: "bearer eyJhbGciOiJIUzUxMiJ9eyJ1c2VySWQiOiIxMTEiLCJlbWFpbCI6IjExMUAxMTEiLCJzdWIiOiIxMTFAMTExIiwiaWF0IjoxNjY3NTI0MTY0LCJleHAiOjE2Njc1MjU5NjR9SSvmSW0puKtdXPw22DgZhfkuHsYNJ6t-T_dGEZpCaEYyyLiBtbvQ-lgZMUNTQP-RKmyT4ZZ1kZQ3UWB9krNaCg",
-	// 				},
-	// 			)
-	// 			.then((response) => {
-	// 				console.log(response.data);
-	// 			})
-	// 			.catch((error) => {
-	// 				console.log(error);
-	// 			});
-	// 	}
-	// }, []);
 
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -57,16 +36,31 @@ export default function Login() {
 				{ email: userEmail, password: userPassword },
 			)
 			.then((response) => {
-				alert('완료!');
+				alert('로그인 되었습니다');
 				const { data } = response;
 				localStorage.setItem('user', JSON.stringify(data.accessToken));
-				localStorage.setItem('userInfo', JSON.stringify(data));
+				// localStorage.setItem('userInfo', JSON.stringify(data));
 				setAuth(data.accessToken); // 전역 토큰 저장
-				setUserAuth(data);
+				// setUserAuth(data);
 			})
-			.then(() => {
-				navigate('/');
-			})
+			// .then(() => {
+			// 	const auth = useRecoilValue(authAtom);
+			// 	axios
+			// 		.get(
+			// 			'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
+			// 			{
+			// 				accessToken: auth,
+			// 			},
+			// 		)
+			// 		.then((response) => {
+			// 			localStorage.setItem('userInfo', JSON.stringify(response.data));
+			// 			console.log(response.data);
+			// 			setUserAuth(response.data);
+			// 		})
+			// 		.catch((error) => {
+			// 			alert(error);
+			// 		});
+			// })
 			.catch((error) => {
 				alert(error);
 				console.log(error);

@@ -1,43 +1,35 @@
-import { useSetRecoilState } from 'recoil';
+// import{ useEffect } from 'react'; // useEffect
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import authAtom from '../../_state/auth';
 import userAtom from '../../_state/userAuth';
-// import userAtom from '../_state/userAuth';
 
 export default function useUserActions() {
-	// const auth = useRecoilValue(authAtom);
-	// const userAuth = useRecoilValue(userAtom);
 	const navigate = useNavigate();
 	// const baseUrl = `http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080`;
 	const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
-	const setAuth = useSetRecoilState(authAtom);
-	const setUser = useSetRecoilState(userAtom);
-	// const setUserAuth = useSetRecoilState(userAuth); // set함수 반환
-
-	function login(email, password) {
-		return axios
-			.post(
-				`${baseUrl}/users/signup`,
-				{ email, password },
-				{ withCredentials: true },
-			)
-			.then((response) => {
-				console.log(response);
-				// store user details and jwt token in local storage to keep user logged in between page refreshes
-				localStorage.setItem('user', JSON.stringify(response.data));
-				setAuth(response.data);
-				setUser('get 한 후에 넣을 데이터');
-				// get return url from location state or default to home page
-				navigate('/');
-			})
-			.catch((error) => alert(error));
-	}
 
 	function translateToken() {
-		// return axios.post(`url`, { token: auth }).then((response) => {
-		// setUserAuth(response.data);
-		// });
+		const auth = useRecoilValue(authAtom);
+		const userAuth = useRecoilValue(userAtom);
+		const setUserAuth = useSetRecoilState(userAuth); // set함수 반환
+		axios
+			.get(
+				'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
+				{
+					accessToken: `${auth}`,
+				},
+			)
+			.then((response) => {
+				localStorage.setItem('userInfo', JSON.stringify(response.data));
+				console.log(response.data);
+				setUserAuth(response.data);
+			})
+			.then(() => navigate('/'))
+			.catch((error) => {
+				alert('error', error);
+			});
 	}
 
 	function naverLogin() {
@@ -56,7 +48,6 @@ export default function useUserActions() {
 	}
 
 	return {
-		login,
 		naverLogin,
 		githubLogin,
 		googleLogin,

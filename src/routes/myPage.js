@@ -1,21 +1,28 @@
 import React from 'react'; // { useEffect }
 // import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil';
+// import { useRecoilValue } from 'recoil';
 import EditUserProfile from '../components/EditUserProfile';
 import UserButtonCol from '../components/UserButtonCol';
 import UserButtonRow from '../components/UserButtonRow';
 import Header from '../components/Header';
 import LeftSidebar from '../components/LeftSidebar';
-import userAuth from '../_state/userAuth';
+// import userAuth from '../_state/userAuth';
 
 export default function MyPage() {
 	// const navigate = useNavigate();
-	const userInfo = useRecoilValue(userAuth); // 유저정보 저장한 데서 가져오기
-	console.log(userInfo);
+	// const userInfo = useRecoilValue(userAuth); // 유저정보 저장한 데서 가져오기
+	// console.log(userInfo);
 
 	// useEffect(() => {
 	// 	if (userInfo === null) navigate('/');
 	// });
+	// user_Id : ""
+	// user_email:""
+	// display_name:""
+	// profile_image:""
+	// creation_date:
+	// questions_length:
+	// answers-length
 
 	return (
 		<>
@@ -39,10 +46,10 @@ export default function MyPage() {
 									<div className="font-bold mt-10 mb-1">Display Name</div>
 									<input
 										type="name"
-										value="Name"
+										value="userInfo.displayName"
 										className="rounded w-3/4 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
 									/>
-									<div className="font-bold mt-4 mb-1">{userInfo}</div>
+									<div className="font-bold mt-4 mb-1">Email</div>
 									<input
 										type="email"
 										value="test@gmail.com"

@@ -30,7 +30,7 @@ export default function Login() {
 
 	useEffect(() => {
 		if (auth !== null) navigate('/');
-	});
+	}, []);
 
 	const onSubmit = (e) => {
 		e.preventDefault();

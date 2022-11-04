@@ -29,13 +29,12 @@ function AnswerUserInfo({ answerId }) {
 		);
 	});
 
-	console.log(currentUser?.data.data.userId);
-
 	const data = getQuestionById(questionId);
 	const answerData = data?.data.answers.find(
 		(answer) => answer.answerId === answerId,
 	);
 	const deleteAnswer = deleteAnswerById(answerId);
+	const currentUserId = currentUser.data.data.userId;
 
 	const handleEdit = () => {
 		if (auth === null) {
@@ -68,21 +67,24 @@ function AnswerUserInfo({ answerId }) {
 	return (
 		<div className="mt-6 flex flex-row h-[50px]">
 			<div className="w-[280px]">
-				{/* 지금 유저가 답변 작성자일 때만 렌더링 */}
-				<button
-					className="mr-2 text-sm text-gray-500"
-					type="button"
-					onClick={handleEdit}
-				>
-					Edit
-				</button>
-				<button
-					className="mr-2 text-sm text-gray-500"
-					type="button"
-					onClick={handleDelete}
-				>
-					Delete
-				</button>
+				{currentUserId === answerData.owner.userId ? (
+					<>
+						<button
+							className="mr-2 text-sm text-gray-500"
+							type="button"
+							onClick={handleEdit}
+						>
+							Edit
+						</button>
+						<button
+							className="mr-2 text-sm text-gray-500"
+							type="button"
+							onClick={handleDelete}
+						>
+							Delete
+						</button>
+					</>
+				) : null}
 			</div>
 			{/* 수정된 적 없으면 빈칸 */}
 			<div className="w-[280px]">
@@ -94,12 +96,12 @@ function AnswerUserInfo({ answerId }) {
 				<div className="text-gray-500 text-sm">
 					asked {elapsed(answerData.creationDate)}
 				</div>
-				<div>
+				<div className="flex flex-row">
 					<img
 						className="h-[20px] w-[20px]"
 						src={answerData.owner.profileImage}
 					/>
-					<span className="text-blue-500 text-sm">
+					<span className="text-blue-500 text-sm ml-2">
 						{answerData.owner.displayName}
 					</span>
 				</div>

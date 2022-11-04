@@ -84,12 +84,12 @@ function QuestionUserInfo() {
 				<div className="text-gray-500 text-sm">
 					asked {elapsed(data?.data.creationDate)}
 				</div>
-				<div>
+				<div className="flex flex-row">
 					<img
 						className="h-[20px] w-[20px]"
 						src={data?.data.owner.profileImage}
 					/>
-					<span className="text-blue-500 text-sm">
+					<span className="text-blue-500 text-sm ml-2">
 						{data?.data.owner.displayName}
 					</span>
 				</div>

@@ -32,9 +32,13 @@ function AllQuestions({ questions, offset, limit }) {
 									{question.title}
 								</h3>
 							</Link>
-							<div className="mt-[-2px] mb-[8px] text-[13px] text-[hsl(210,8%,25%)] break-all">
-								{question.questionContent}...
-							</div>
+							<div
+								className="mt-[-2px] mb-[8px] text-[13px] text-[hsl(210,8%,25%)] break-all"
+								dangerouslySetInnerHTML={{
+									__html: question.questionContent,
+								}}
+							/>
+
 							<div className="flex items-center justify-between flex-wrap">
 								<div className="flex gap-[4px] leading-[18px] float-left flex-wrap">
 									<ul className="inline list-none m-0 p-0">
@@ -43,10 +47,7 @@ function AllQuestions({ questions, offset, limit }) {
 												className="inline mr-[4px] text-[12px]"
 												key={uuidv4()}
 											>
-												<span
-													href="https://www.naver.com"
-													className=" hover: rounded-[3px] bg-[hsl(205,53%,88%);] bg-[#e0ecf3] py-[0.4rem] px-[0.5rem] my-[2px] mr-[2px] ml-0 text-[hsl(205,47%,42%)]"
-												>
+												<span className=" hover: rounded-[3px] bg-[hsl(205,53%,88%);] bg-[#e0ecf3] py-[0.4rem] px-[0.5rem] my-[2px] mr-[2px] ml-0 text-[hsl(205,47%,42%)]">
 													{tag}
 												</span>
 											</li>

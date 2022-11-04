@@ -1,10 +1,14 @@
 import React from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import Logo from './Logo';
 import HeaderInput from './HeaderInput';
+import authAtom from '../_state/auth';
 
 function LoginHeader() {
+	const auth = useRecoilValue(authAtom);
+	console.log(auth);
 	return (
 		<div className="fixed top-0 inset-x-0 flex flex-col z-10">
 			<div className="w-full bg-[#f38227] h-[3px]" />
@@ -21,7 +25,7 @@ function LoginHeader() {
 							className="flex items-center hover:bg-[hsl(210,8%,90%)] cursor-pointer h-full"
 						>
 							<FaUserAlt />
-							<div className="mr-1 pl-[5px] ">ddhhss0603</div>
+							<div className="mr-1 pl-[5px] ">{auth.user.nickname}</div>
 						</Link>
 						<div className="flex justify-center h-full items-center w-[40px] cursor-pointer px-[10px] hover:bg-[hsl(210,8%,90%)]">
 							<svg className="w-[20px] h-[18px]">

@@ -35,7 +35,7 @@ export default function Login() {
 		e.preventDefault();
 		axios
 			.post(
-				`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/signup`,
+				`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/signup`,
 				{ email, password },
 			)
 			.then((response) => {

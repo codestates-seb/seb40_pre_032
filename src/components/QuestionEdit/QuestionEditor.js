@@ -60,7 +60,6 @@ function AddTag({ tags, setTags }) {
 
 function QuestionEditor() {
 	const auth = useRecoilValue(authAtom);
-	console.log();
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();

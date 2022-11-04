@@ -47,10 +47,7 @@ function AllQuestions({ questions, offset, limit }) {
 												className="inline mr-[4px] text-[12px]"
 												key={uuidv4()}
 											>
-												<span
-													href="https://www.naver.com"
-													className=" hover: rounded-[3px] bg-[hsl(205,53%,88%);] bg-[#e0ecf3] py-[0.4rem] px-[0.5rem] my-[2px] mr-[2px] ml-0 text-[hsl(205,47%,42%)]"
-												>
+												<span className=" hover: rounded-[3px] bg-[hsl(205,53%,88%);] bg-[#e0ecf3] py-[0.4rem] px-[0.5rem] my-[2px] mr-[2px] ml-0 text-[hsl(205,47%,42%)]">
 													{tag}
 												</span>
 											</li>

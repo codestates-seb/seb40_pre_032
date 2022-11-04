@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-// import Logo from './Logo';
-// import HeaderInput from './HeaderInput';
+import Logo from './Logo';
+import HeaderInput from './HeaderInput';
 
 function Header() {
 	return (
@@ -9,7 +9,7 @@ function Header() {
 			<div className="w-full bg-[#f38227] h-[3px]" />
 			<header className="h-[47px] bg-[#f7faf9] flex flex-row items-center shadow-1top text-[13px] ">
 				<div className="w-[1350px] h-full flex items-center mx-auto my-0 max-w-full">
-					{/* <Logo /> */}
+					<Logo />
 					<div className="w-[82px] h-[33px] cursor-pointer flex items-center justify-center rounded-[30px] hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
 						<span>About</span>
 					</div>
@@ -19,7 +19,7 @@ function Header() {
 					<div className="w-[82px] h-[33px] cursor-pointer flex items-center justify-center rounded-[30px] hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
 						<span>For Teams</span>
 					</div>
-					{/* <HeaderInput /> */}
+					<HeaderInput />
 					<nav>
 						<ol className="list-none">
 							<li className="border-solid float-left flex  h-[34px]  ">

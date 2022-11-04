@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -54,7 +54,10 @@ function AllQuestions({ questions, offset, limit }) {
 										))}
 									</ul>
 								</div>
-								<div>
+								<div className="flex">
+									<div >
+										<img src={question.owner.profileImage} alt="userImage" className="w-4 mr-1" />
+									</div>
 									<div className="text-[#6aa1de] text-[12px]">
 										{question.owner.displayName}
 									</div>

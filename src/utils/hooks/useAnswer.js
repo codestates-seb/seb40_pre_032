@@ -15,8 +15,10 @@ export const addAnswerToQuestion = (questionId) => {
 };
 
 export const deleteAnswerById = (answerId) => {
-	const deleteAnswer = useMutation(() => {
-		return axios.delete(`${BASE_URL}/answers/${answerId}/delete`);
+	const deleteAnswer = useMutation((accessToken) => {
+		return axios.delete(`${BASE_URL}/answers/${answerId}/delete`, {
+			data: accessToken,
+		});
 	});
 
 	return deleteAnswer;
@@ -32,7 +34,7 @@ export const editAnswerById = (answerId) => {
 
 export const upAnswerVoteById = (answerId) => {
 	const upAnswerVote = useMutation(() => {
-		return axios.post(`${BASE_URL}/answers/${answerId}/upvote`);
+		return axios.post(`${BASE_URL}/answers/${answerId}/upvote`, {});
 	});
 
 	return upAnswerVote;

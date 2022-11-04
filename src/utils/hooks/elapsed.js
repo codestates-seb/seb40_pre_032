@@ -1,4 +1,5 @@
 /* eslint-disable */
+
 export default function elapsed(string) {
 	const minute = 1000 * 60;
 	const hour = minute * 60;
@@ -8,8 +9,8 @@ export default function elapsed(string) {
 
 	const today = new Date();
 	const targetDate = new Date(string);
-	const elapsedSec = today.getTime() - targetDate.getTime();
 
+	const elapsedSec = today.getTime() - targetDate.getTime();
 	const elapsedMin = Math.floor(elapsedSec / minute);
 	const elapsedHour = Math.floor(elapsedSec / hour);
 	const elapsedDay = Math.floor(elapsedSec / day);

@@ -1,6 +1,6 @@
 #################################################
 ## 로컬 ##
-
+#
 #spring:
 #  profiles:
 #    include: oauth
@@ -25,7 +25,7 @@ spring:
     include: oauth
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://pre032-database.cssqpsefshei.ap-northeast-2.rds.amazonaws.com:3306/pre032?serverTimezone=Asia/Seoul
+    url: jdbc:mysql://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:3306/pre032?serverTimezone=Asia/Seoul
     username: admin
     password: pre032032
   jpa:
@@ -49,8 +49,8 @@ spring:
           google:
             client-id: 651205845903-ijvbcuiaa7sfn9q0tr7i78h4301ggomp.apps.googleusercontent.com
             client-secret: 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
-#            redirect-uri: http://localhost:8080/login/oauth2/code/google
-            redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/google
+            redirect-uri: http://localhost:8080/login/oauth2/code/google
+#            redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/google
           scope:
             - email
             - profile
@@ -88,3 +88,6 @@ jwt:
   #  원래는 그냥 입력하면 안되는데 환경변수 설정 귀찮아서 그냥 입력함
   secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
   access-token-expiration-minutes: 30
+
+config:
+  domain: http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com

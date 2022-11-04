@@ -1,12 +1,13 @@
+/* eslint-disable */
 import React, { useState } from 'react';
 import { useQuery } from 'react-query';
 import axios from 'axios';
-// import { useRecoilValue } from 'recoil';
-import QuestionHeading from './MainPage/QuestionHeading';
-import NumNBtn from './MainPage/NumNBtn';
-import AllQuestions from './MainPage/AllQuestions';
-import Pagination from './MainPage/Pagination';
-// import api from './_state/api';
+import { useRecoilValue } from 'recoil';
+import QuestionHeading from './Mainpage/QuestionHeading';
+import NumNBtn from './Mainpage/NumNBtn';
+import AllQuestions from './Mainpage/AllQuestions';
+import Pagination from './Mainpage/Pagination';
+import api from '../_state/api';
 
 function Qlist() {
 	// const address = useRecoilValue(api);

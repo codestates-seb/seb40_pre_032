@@ -23,7 +23,8 @@ public interface UserMapper {
                         accessToken,
                         user.getUserId(),
                         user.getDisplayName(),
-                        user.getProfileImage()
+                        user.getProfileImage(),
+                        user.getEmail()
                         );
         return response;
     }

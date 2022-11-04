@@ -46,6 +46,7 @@ public class QuestionController {
         }
 
         User user = userService.findByAccessToken(requestBody.getAccessToken());
+        System.out.println(user.getEmail());
 
         Question question = questionService.create(questionMapper.questionPostDtoToQuestion(requestBody),
                 requestBody.getTags(),user);

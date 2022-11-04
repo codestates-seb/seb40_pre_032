@@ -51,9 +51,9 @@ public class SecurityConfig {
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
         http
-                .formLogin()
+//                .formLogin()
 //                .loginPage("/loginPage")
-                .disable()
+//                .disable()
 //                .defaultSuccessUrl("/")
 //                .and()
                 .httpBasic().disable()

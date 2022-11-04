@@ -58,5 +58,6 @@ public class UserDto {
         private Long userId;
         private String displayName;
         private String profileImage;
+        private String email;
     }
 }

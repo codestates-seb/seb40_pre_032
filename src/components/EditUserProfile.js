@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'; //
-import { useRecoilValue, useRecoilState } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { RiBrush3Fill } from 'react-icons/ri';
 import { BsCalendarCheck } from 'react-icons/bs';
@@ -9,7 +9,8 @@ import userAtom from '../_state/userAuth';
 
 export default function EditUserProfile() {
 	const auth = useRecoilValue(authAtom);
-	const [userAuth, setUserAuth] = useRecoilState(userAtom);
+	const userAuth = useRecoilValue(userAtom);
+	const setUserAuth = useSetRecoilState(userAtom);
 
 	useEffect(() => {
 		axios
@@ -20,7 +21,6 @@ export default function EditUserProfile() {
 				},
 			)
 			.then((response) => {
-				console.log(response.data);
 				localStorage.setItem('userInfo', JSON.stringify(response.data));
 				setUserAuth(response.data);
 			})
@@ -37,10 +37,13 @@ export default function EditUserProfile() {
 				className="w-20 h-20 text-gray-600 bg-gray-100 shadow p-1 mr-3"
 			/>
 			<div className="my-2">
-				<div className="text-2xl font-semibold">{userAuth?.displayName}</div>
+				<div className="text-2xl font-semibold">{userAuth.displayName}</div>
 				<div className="mt-2 text-sm">
 					<AiOutlineClockCircle className="inline" />
-					Creation: {userAuth?.creationDate.slice(0, 10)}
+					Creation:
+					{userAuth.creationDate === undefined
+						? userAuth?.creationDate
+						: userAuth?.creationDate.slice(0, 10)}
 					<RiBrush3Fill className="inline ml-2" />
 					Answers:{userAuth?.answersLength}
 					<BsCalendarCheck className="inline ml-2" /> Questions:

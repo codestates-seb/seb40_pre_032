@@ -1,28 +1,44 @@
-import React, { useState, useEffect } from 'react';
-import items from './Dummydata';
-import QuestionHeading from './Mainpage/QuestionHeading';
-import NumNBtn from './Mainpage/NumNBtn';
-import AllQuestions from './Mainpage/AllQuestions';
-import Pagination from './Mainpage/Pagination';
+import React, { useState } from 'react';
+import { useQuery } from 'react-query';
+import axios from 'axios';
+// import { useRecoilValue } from 'recoil';
+import QuestionHeading from './MainPage/QuestionHeading';
+import NumNBtn from './MainPage/NumNBtn';
+import AllQuestions from './MainPage/AllQuestions';
+import Pagination from './MainPage/Pagination';
+// import api from './_state/api';
 
 function Qlist() {
+	// const address = useRecoilValue(api);
 	const [limit, setLimit] = useState(15);
 	const [page, setPage] = useState(1);
 	const offset = (page - 1) * limit;
-	// const questions = items;
-	const [questions, setQuestions] = useState([]);
-
-	useEffect(() => {
-		setQuestions(items);
-	}, []);
+	const { data } = useQuery(
+		['questions'],
+		() => {
+			return axios.get(
+				'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/',
+			);
+		},
+		{
+			staleTime: 5000,
+			cacheTime: Infinity,
+			refetchOnWindowFocus: false,
+		},
+	);
+	console.log(data?.data.items);
 	return (
 		<div className="p-[24px] w-[727px]  border-l-[1px] border-solid border-[hsl(210,8%,85%)] mb-4">
 			<QuestionHeading />
-			<NumNBtn questions={questions} />
-			<AllQuestions questions={questions} offset={offset} limit={limit} />
+			<NumNBtn questions={data?.data.items} />
+			<AllQuestions
+				questions={data?.data.items}
+				offset={offset}
+				limit={limit}
+			/>
 			<Pagination
 				limit={limit}
-				questions={questions}
+				questions={data?.data.items}
 				page={page}
 				setPage={setPage}
 				setLimit={setLimit}

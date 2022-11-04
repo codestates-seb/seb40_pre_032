@@ -8,19 +8,17 @@ const BASE_URL =
 
 export const addAnswerToQuestion = (questionId) => {
 	const addAnswer = useMutation((newAnswer) => {
-		return axios.post(
-			`${BASE_URL}/answers/${questionId}/add`,
-			newAnswer,
-			config,
-		);
+		return axios.post(`${BASE_URL}/answers/${questionId}/add`, newAnswer);
 	});
 
 	return addAnswer;
 };
 
 export const deleteAnswerById = (answerId) => {
-	const deleteAnswer = useMutation(() => {
-		return axios.delete(`${BASE_URL}/answers/${answerId}/delete`, config);
+	const deleteAnswer = useMutation((accessToken) => {
+		return axios.delete(`${BASE_URL}/answers/${answerId}/delete`, {
+			data: accessToken,
+		});
 	});
 
 	return deleteAnswer;
@@ -28,11 +26,7 @@ export const deleteAnswerById = (answerId) => {
 
 export const editAnswerById = (answerId) => {
 	const editAnswer = useMutation((editedAnswer) => {
-		return axios.patch(
-			`${BASE_URL}/answers/${answerId}/edit`,
-			editedAnswer,
-			config,
-		);
+		return axios.patch(`${BASE_URL}/answers/${answerId}/edit`, editedAnswer);
 	});
 
 	return editAnswer;
@@ -40,7 +34,7 @@ export const editAnswerById = (answerId) => {
 
 export const upAnswerVoteById = (answerId) => {
 	const upAnswerVote = useMutation(() => {
-		return axios.post(`${BASE_URL}/answers/${answerId}/upvote`, {}, config);
+		return axios.post(`${BASE_URL}/answers/${answerId}/upvote`, {});
 	});
 
 	return upAnswerVote;

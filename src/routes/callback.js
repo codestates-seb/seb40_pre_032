@@ -7,7 +7,7 @@ export default function Callback() {
 	const navigate = useNavigate();
 	const setAuth = useSetRecoilState(authAtom);
 	const tokenPath = window.location.pathname;
-	const tokenInfo = tokenPath.split('%');
+	const tokenInfo = tokenPath.split('%20');
 	useEffect(() => {
 		const token = tokenInfo[1];
 		localStorage.setItem('user', JSON.stringify(token));

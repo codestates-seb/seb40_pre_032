@@ -35,8 +35,8 @@ function HeaderInput() {
 	});
 	useEffect(() => {
 		setValue(value);
-		console.log(value);
-		console.log(matched);
+		// console.log(value);
+		// console.log(matched);
 	}, [value]);
 
 	const onChange = (e) => {

@@ -7,8 +7,11 @@ import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
 import { editAnswerById } from '../../utils/hooks/useAnswer';
+import { useRecoilValue } from 'recoil';
+import authAtom from '../../_state/auth';
 
 function AnswerEditor() {
+	const auth = useRecoilValue(authAtom);
 	const navigate = useNavigate();
 	const location = useLocation();
 	const queryClient = useQueryClient();
@@ -30,6 +33,7 @@ function AnswerEditor() {
 	const handleSubmit = () => {
 		const editedAnswer = {
 			answerContent: quillText,
+			accessToken: auth,
 		};
 		editAnswer.mutate(editedAnswer, {
 			onSuccess: () => {

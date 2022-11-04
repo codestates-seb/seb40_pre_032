@@ -12,6 +12,7 @@ import authAtom from '../../_state/auth';
 
 function QuestionUserInfo() {
 	const auth = useRecoilValue(authAtom);
+
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 	const { questionId } = useParams();
@@ -39,7 +40,7 @@ function QuestionUserInfo() {
 			navigate('/login');
 		} else {
 			deleteQuestion.mutate(
-				{},
+				{ accessToken: auth },
 				{
 					onSuccess: () => {
 						navigate('/');

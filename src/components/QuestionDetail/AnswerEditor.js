@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import { addAnswerToQuestion } from '../../utils/hooks/useAnswer';
 import { useRecoilValue } from 'recoil';
 import authAtom from '../../_state/auth';
+import { Link } from 'react-router-dom';
 
 function AnswerEditor() {
 	const auth = useRecoilValue(authAtom);
@@ -22,8 +23,8 @@ function AnswerEditor() {
 
 	const handleSubmit = () => {
 		const newAnswer = {
-			questionId,
 			answerContent: quillText,
+			accessToken: auth,
 		};
 		addAnswer.mutate(newAnswer, {
 			onSuccess: () => {
@@ -46,18 +47,28 @@ function AnswerEditor() {
 							className="h-[200px]"
 						/>
 						<button
-							className="mt-16 rounded-sm text-sm p-2 text-white bg-[#0a94ff] hover:bg-[#0074CC]"
+							className={
+								auth === null
+									? 'mt-16 rounded-sm text-sm p-2 text-white bg-gray-300 hover:bg-[#0074CC]'
+									: 'mt-16 rounded-sm text-sm p-2 text-white bg-[#0a94ff] hover:bg-[#0074CC]'
+							}
 							type="submit"
 							disabled={auth === null ? true : false}
 							onClick={handleSubmit}
 						>
 							Post Your Answer
 						</button>
-						<span>
-							{auth === null ? (
-								<Link className="text-blue-500 font-normal textsm">login</Link>
-							) : null}
-						</span>
+						{auth === null ? (
+							<span className="font-normal text-sm">
+								<Link
+									className="text-blue-500 font-normal text-sm ml-5"
+									to="/login"
+								>
+									Login
+								</Link>{' '}
+								to post your answer
+							</span>
+						) : null}
 					</div>
 				</section>
 			</article>

@@ -39,7 +39,7 @@ function AnswerUserInfo({ answerId }) {
 			navigate('/login');
 		} else {
 			deleteAnswer.mutate(
-				{},
+				{ accessToken: auth },
 				{
 					onSuccess: () =>
 						queryClient.invalidateQueries(['question', questionId]),

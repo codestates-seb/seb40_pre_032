@@ -15,8 +15,10 @@ export const getQuestionById = (questionId) => {
 };
 
 export const deleteQuestionById = (questionId) => {
-	const deleteQuestion = useMutation(() => {
-		return axios.delete(`${BASE_URL}/questions/${questionId}/delete`, config);
+	const deleteQuestion = useMutation((accessToken) => {
+		return axios.delete(`${BASE_URL}/questions/${questionId}/delete`, {
+			data: accessToken,
+		});
 	});
 
 	return deleteQuestion;
@@ -27,7 +29,6 @@ export const editQuestionById = (questionId) => {
 		return axios.patch(
 			`${BASE_URL}/questions/${questionId}/edit`,
 			editedQuestion,
-			config,
 		);
 	});
 

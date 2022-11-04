@@ -18,6 +18,7 @@ import NotFound from './components/NotFound';
 const queryClient = new QueryClient({
 	defaultOptions: {
 		queries: {
+			retry: false,
 			suspense: true,
 			refetchOnWindowFocus: false,
 		},

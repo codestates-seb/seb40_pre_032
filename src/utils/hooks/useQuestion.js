@@ -3,7 +3,6 @@ import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
 
 const auth = JSON.parse(localStorage.getItem('user'));
-console.log(auth);
 
 // 프록시 서버 우회하는 성웅님 서버 URL
 const BASE_URL =

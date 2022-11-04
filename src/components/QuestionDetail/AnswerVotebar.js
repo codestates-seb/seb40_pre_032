@@ -112,14 +112,16 @@ function AnswerVotebar({ answerId }) {
 					/>
 				</svg>
 			</div>
-			<button type="button" onClick={handleAcceptClick}>
-				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
-					<path
-						fill={isAccepted ? 'green' : 'lightgrey'}
-						d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"
-					/>
-				</svg>
-			</button>
+			{data?.data.writer ? (
+				<button type="button" onClick={handleAcceptClick}>
+					<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
+						<path
+							fill={isAccepted ? 'green' : 'lightgrey'}
+							d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"
+						/>
+					</svg>
+				</button>
+			) : null}
 		</div>
 	);
 }

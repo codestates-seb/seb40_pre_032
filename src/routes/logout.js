@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react'; // useEffect
-import { useNavigate } from 'react-router-dom';
+import React from 'react'; // useEffect
+import { useNavigate, Link } from 'react-router-dom';
 import { SiAskubuntu, SiServerfault, SiSuperuser } from 'react-icons/si';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaStackExchange, FaStackOverflow } from 'react-icons/fa';
@@ -31,15 +31,15 @@ export default function Logout() {
 				setAuth(null);
 				setUserAuth(null);
 			})
+			.then(() => {
+				navigate('/');
+			})
 			.catch((error) => {
 				alert(error);
 				navigate('/');
 			});
 	};
-
-	useEffect(() => {
-		if (userAuth === null) navigate('/');
-	});
+	// useEffect(()=>{if(userAuth===null) 		navigate('/');})
 
 	return (
 		<>
@@ -139,7 +139,7 @@ export default function Logout() {
 										className="text-sm rounded text-blue-500 p-2 ml-3 hover:bg-sky-100 focus:outline-none focus:ring focus:ring-blue-200"
 										type="submit"
 									>
-										Cancel
+										<Link to="/">Cancel</Link>
 									</button>
 								</div>
 								<div className="w-64 text-xs mt-7 text-gray-600">

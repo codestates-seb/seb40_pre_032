@@ -44,11 +44,9 @@ public class SecurityConfig {
                 .and()
                 // 현재 : csrf 공격에 대한 설정 비활성화
                 .csrf().disable()
-                // cors를 허용하는 기본 설정으로 적용 -x
-                // cors 필터 적용
-//                .cors().configurationSource(corsConfigurationSource())
-//                .cors()
-//                .and()
+//                 cors 컨피그소스적용
+                .cors()
+                .and()
                 // 우리 학습과정에선 배우지 않은 내용 : 그냥 disable 하자
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
@@ -115,7 +113,9 @@ public class SecurityConfig {
         // 모든 출처에 대해 스크립트기반의 HTTP 통신을 허용
         configuration.setAllowedOrigins(Arrays.asList("*"));
         // 파라미터로 지정한 HTTP Method에 대한 HTTP 통신을 허용
-        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PATCH", "DELETE", "OPTIONS"));
+        configuration.setAllowedMethods(Arrays.asList("*"));
+        //헤더
+        configuration.setAllowedHeaders(Arrays.asList("*"));
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         // 패턴에 해당하는 URL에 해당 CORS 정책을 적용한다.

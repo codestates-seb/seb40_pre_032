@@ -6,6 +6,7 @@ import com.codestates.pre032.pre032.exception.UnauthorizedException;
 import com.codestates.pre032.pre032.security.dto.TokenDto;
 import com.codestates.pre032.pre032.tag.TagService;
 import com.codestates.pre032.pre032.user.User;
+import com.codestates.pre032.pre032.user.UserMapper;
 import com.codestates.pre032.pre032.user.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,12 +30,15 @@ public class QuestionController {
 
     private final TagService tagService;
 
-    public QuestionController(QuestionService questionService, QuestionMapper questionMapper, AnswerController answerController, UserService userService, TagService tagService) {
+    private final UserMapper userMapper;
+
+    public QuestionController(QuestionService questionService, QuestionMapper questionMapper, AnswerController answerController, UserService userService, TagService tagService, UserMapper userMapper) {
         this.questionService = questionService;
         this.questionMapper = questionMapper;
         this.answerController = answerController;
         this.userService = userService;
         this.tagService = tagService;
+        this.userMapper = userMapper;
     }
 
     // 작성 기능
@@ -77,19 +81,15 @@ public class QuestionController {
     }
 
     // 질문 상세 페이지
-//    @PostMapping("/{questionId}")
-//    public ResponseEntity questionDetail(@PathVariable("questionId") Long id,
-//                                         @RequestBody TokenDto tokenDto) {
-//        Question question = questionService.getDetail(id);
-//        QuestionDto.questionContentResponse response = questionMapper.questionToQuestionContentResponseDto(question);
-//
-//        return new ResponseEntity<>(response, HttpStatus.OK);
-//    }
     @GetMapping("/{questionId}")
-    public ResponseEntity questionDetail(@PathVariable("questionId") Long id ,@RequestBody TokenDto requestBody) {
+    public ResponseEntity questionDetail(@PathVariable("questionId") Long id,
+                                         @RequestHeader(value = "accessToken") String accessToken) {
         Question question = questionService.getDetail(id);
-        Boolean isWriter = questionService.getWriter(id,userService.findByAccessToken(requestBody.getAccessToken()));
+        Boolean isWriter = questionService.getWriter(id,userService.findByAccessToken(accessToken));
+        User user = question.getUser();
+
         QuestionDto.questionDetailsResponse response = questionMapper.questionToQuestionDetailsResponseDto(question, isWriter);
+
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

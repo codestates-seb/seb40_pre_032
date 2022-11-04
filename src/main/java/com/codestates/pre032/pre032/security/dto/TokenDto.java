@@ -6,6 +6,6 @@ import javax.validation.constraints.NotNull;
 
 @Getter
 public class TokenDto {
-    @NotNull
+//    @NotNull
     private String accessToken;
 }

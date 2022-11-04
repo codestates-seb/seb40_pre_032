@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.answer.AnswerDto;
+import com.codestates.pre032.pre032.user.UserDto;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -40,7 +41,7 @@ public class QuestionDto {
     public static class questionContentResponse {
         private List<String> tags;
 
-//        private User owner;
+        private UserDto.owner owner;
 
         private boolean isAnswered;
 
@@ -73,8 +74,6 @@ public class QuestionDto {
     public static class Response {
         private List<String> tags;
 
-//        private User owner;
-
         private boolean isAnswered;
 
         private int viewCount;
@@ -103,7 +102,7 @@ public class QuestionDto {
     public static class questionDetailsResponse {
         private List<String> tags;
 
-//        private User owner;
+        private UserDto.owner owner;
 
         private boolean isAnswered;
 
@@ -128,33 +127,5 @@ public class QuestionDto {
 
         private boolean isWriter;
 
-
     }
-
-//    // 콘텐트 없는 버전
-//    @Getter
-//    @AllArgsConstructor
-//    public static class questionResponse {
-//        private List<String> tags;
-//
-////        private User owner;
-//
-//        private boolean isAnswered;
-//
-//        private int viewCount;
-//
-//        private int answerCount;
-//
-//        private int score;
-//
-//        private LocalDateTime creationDate;
-//
-//        private LocalDateTime modifiedAt;
-//
-//        private Long questionId;
-//
-//        private String title;
-//
-////        private LocalDateTime modifiedAt;
-//    }
 }

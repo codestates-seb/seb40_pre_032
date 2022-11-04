@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Controller
 @RequestMapping("/users")
 public class UserController {
@@ -48,12 +50,12 @@ public class UserController {
     }
 
     @GetMapping("/myPage")
-    public ResponseEntity getMyPage(@RequestBody TokenDto tokenDto) {
-        if (tokenDto.getAccessToken()==null){
+    public ResponseEntity getMyPage(@RequestHeader(value = "accessToken") String accessToken) {
+        if (accessToken==null){
             throw new UnauthorizedException("로그인이 필요합니다.");
         }
 
-        User user = this.userService.findByAccessToken(tokenDto.getAccessToken());
+        User user = this.userService.findByAccessToken(accessToken);
         UserDto.response response = this.userMapper.userToUserResponseDto(user);
 
         return new ResponseEntity<>(response, HttpStatus.OK);

@@ -3,6 +3,7 @@ package com.codestates.pre032.pre032.question;
 import com.codestates.pre032.pre032.answer.Answer;
 import com.codestates.pre032.pre032.tag.Tag;
 import com.codestates.pre032.pre032.user.User;
+import com.codestates.pre032.pre032.user.UserDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -71,5 +72,11 @@ public class Question {
             tags.add(this.tags.get(i).getTag());
         }
         return tags;
+    }
+
+    public UserDto.owner getOwnerDto(){
+        User user = this.user;
+        UserDto.owner owner = new UserDto.owner(user.getUserId(), user.getDisplayName(), user.getProfileImage());
+        return owner;
     }
 }

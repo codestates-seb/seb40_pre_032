@@ -2,6 +2,7 @@ package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.answer.Answer;
 import com.codestates.pre032.pre032.answer.AnswerDto;
+import com.codestates.pre032.pre032.user.UserDto;
 import org.mapstruct.Mapper;
 
 import java.util.ArrayList;
@@ -27,6 +28,7 @@ public interface QuestionMapper {
 
         QuestionDto.questionContentResponse questionResponse = new QuestionDto.questionContentResponse();
         questionResponse.setTags(question.getTagstr());
+        questionResponse.setOwner(question.getOwnerDto());
         questionResponse.setAnswered(question.isAnswered());
         questionResponse.setViewCount(question.getViewCount());
         questionResponse.setAnswerCount(question.getAnswerCount());
@@ -62,6 +64,7 @@ public interface QuestionMapper {
         List<Answer> answers = question.getAnswers();
 
         QuestionDto.questionDetailsResponse questionResponse = new QuestionDto.questionDetailsResponse();
+        questionResponse.setOwner(question.getOwnerDto());
         questionResponse.setTags(question.getTagstr());
         questionResponse.setAnswered(question.isAnswered());
         questionResponse.setViewCount(question.getViewCount());

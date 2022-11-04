@@ -28,4 +28,11 @@ public interface UserMapper {
                         );
         return response;
     }
+
+    default UserDto.owner userToOwnerDto(User user){
+        UserDto.owner response =
+                new UserDto.owner(user.getUserId(), user.getDisplayName(), user.getProfileImage());
+
+        return response;
+    }
 }

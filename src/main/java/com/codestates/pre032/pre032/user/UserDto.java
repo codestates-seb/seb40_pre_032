@@ -9,6 +9,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.time.LocalDateTime;
 
+@NoArgsConstructor
 public class UserDto {
     @Getter
     @AllArgsConstructor
@@ -59,5 +60,18 @@ public class UserDto {
         private String displayName;
         private String profileImage;
         private String email;
+    }
+
+    @Getter
+    public static class owner{
+        private Long userId;
+        private String displayName;
+        private String profileImage;
+
+        public owner(Long userId, String displayName, String profileImage) {
+            this.userId = userId;
+            this.displayName = displayName;
+            this.profileImage = profileImage;
+        }
     }
 }

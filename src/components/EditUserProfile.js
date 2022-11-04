@@ -10,6 +10,7 @@ import userAtom from '../_state/userAuth';
 export default function EditUserProfile() {
 	const auth = useRecoilValue(authAtom);
 	const [userAuth, setUserAuth] = useRecoilState(userAtom);
+
 	useEffect(() => {
 		axios
 			.get(
@@ -19,29 +20,31 @@ export default function EditUserProfile() {
 				},
 			)
 			.then((response) => {
-				alert(response);
-				localStorage.setItem('userInfo', JSON.stringify(response));
-				setUserAuth(response);
+				console.log(response.data);
+				localStorage.setItem('userInfo', JSON.stringify(response.data));
+				setUserAuth(response.data);
 			})
 			.catch((error) => {
 				alert(error);
 			});
 	}, []);
-	console.log(userAuth);
 
 	return (
 		<div className="flex items-center">
 			<img
-				src={userAuth}
+				src={userAuth?.profileImage}
 				alt="userImg"
 				className="w-20 h-20 text-gray-600 bg-gray-100 shadow p-1 mr-3"
 			/>
 			<div className="my-2">
-				<div className="text-2xl font-semibold">{userAuth}</div>
+				<div className="text-2xl font-semibold">{userAuth?.displayName}</div>
 				<div className="mt-2 text-sm">
-					<AiOutlineClockCircle />
-					{`creation_date:${userAuth}`} <RiBrush3Fill /> <BsCalendarCheck />{' '}
-					Welcome to stack overflow! Try answering a question!
+					<AiOutlineClockCircle className="inline" />
+					Creation: {userAuth?.creationDate.slice(0, 10)}
+					<RiBrush3Fill className="inline ml-2" />
+					Answers:{userAuth?.answersLength}
+					<BsCalendarCheck className="inline ml-2" /> Questions:
+					{userAuth?.questionsLength}
 				</div>
 			</div>
 		</div>

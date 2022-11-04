@@ -15,7 +15,7 @@ export default function MyPage() {
 	useEffect(() => {
 		if (userInfo === null) navigate('/');
 	});
-
+	console.log(userInfo);
 	return (
 		<>
 			<Header />
@@ -38,13 +38,13 @@ export default function MyPage() {
 									<div className="font-bold mt-10 mb-1">Display Name</div>
 									<input
 										type="name"
-										value={userInfo.displayName}
+										value={userInfo?.displayName}
 										className="rounded w-3/4 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
 									/>
 									<div className="font-bold mt-4 mb-1">Email</div>
 									<input
 										type="email"
-										value={userInfo.email}
+										value={userInfo?.email}
 										className="rounded w-3/4 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
 									/>
 									{/* 이부분 커스텀 필요!! */}

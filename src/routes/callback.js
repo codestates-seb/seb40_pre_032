@@ -24,8 +24,8 @@ export default function Callback() {
 				},
 			)
 			.then((response) => {
-				localStorage.setItem('userInfo', JSON.stringify(response));
-				setUserAuth(response);
+				localStorage.setItem('userInfo', JSON.stringify(response.data));
+				setUserAuth(response.data);
 			})
 			.then(() => {
 				navigate('/');

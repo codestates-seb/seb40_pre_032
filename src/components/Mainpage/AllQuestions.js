@@ -55,7 +55,7 @@ function AllQuestions({ questions, offset, limit }) {
 								</div>
 								<div>
 									<div className="text-[#6aa1de] text-[12px]">
-										유저에 대한건 아직 완성 안됨
+										{question.owner.displayName}
 									</div>
 								</div>
 							</div>

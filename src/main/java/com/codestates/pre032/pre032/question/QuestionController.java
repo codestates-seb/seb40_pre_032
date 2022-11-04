@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
-//@CrossOrigin()
+@CrossOrigin()
 @RequestMapping("/questions")
 public class QuestionController {
     private final QuestionService questionService;
@@ -77,8 +77,9 @@ public class QuestionController {
     }
 
     // 질문 상세 페이지
-    @GetMapping("/{questionId}")
-    public ResponseEntity questionDetail(@PathVariable("questionId") Long id) {
+    @PostMapping("/{questionId}")
+    public ResponseEntity questionDetail(@PathVariable("questionId") Long id,
+                                         @RequestBody TokenDto tokenDto) {
         Question question = questionService.getDetail(id);
         QuestionDto.questionContentResponse response = questionMapper.questionToQuestionContentResponseDto(question);
 
@@ -124,10 +125,17 @@ public class QuestionController {
                 new MainResponseDto(questionMapper.questionsToQuestionContentResponsesDto(questions)), HttpStatus.OK);
     }
 
+    //조회 수 기준으로 정렬
     @GetMapping("/sortByViewCount")
     public ResponseEntity sortViewCount(){
         List<Question> questions = questionService.sortCount();
         return new ResponseEntity<>(
                 new MainResponseDto(questionMapper.questionsToQuestionContentResponsesDto(questions)), HttpStatus.OK);
     }
+
+    // 추천기능
+//    @PostMapping("{question_id}/upVote")
+//    public ResponseEntity upVote(){
+//
+//    }
 }

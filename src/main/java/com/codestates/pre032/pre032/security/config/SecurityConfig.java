@@ -44,8 +44,10 @@ public class SecurityConfig {
                 .and()
                 // 현재 : csrf 공격에 대한 설정 비활성화
                 .csrf().disable()
-                // cors를 허용하는 기본 설정으로 적용
-                .cors().configurationSource(corsConfigurationSource())
+                // cors를 허용하는 기본 설정으로 적용 -x
+                // cors 필터 적용
+//                .cors().configurationSource(corsConfigurationSource())
+                .cors()
                 .and()
                 // 우리 학습과정에선 배우지 않은 내용 : 그냥 disable 하자
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

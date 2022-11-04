@@ -3,6 +3,7 @@ package com.codestates.pre032.pre032.security.github;
 import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,6 +12,7 @@ import javax.websocket.server.PathParam;
 import java.io.IOException;
 
 @RestController
+@CrossOrigin
 public class LoginController {
     private final LoginService loginService;
 

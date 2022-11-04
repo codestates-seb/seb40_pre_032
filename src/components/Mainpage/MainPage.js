@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { useRecoilValue } from 'recoil'; // 전역 상태값 불러오는 함수
 import Header from '../Header';
@@ -10,7 +11,7 @@ import authAtom from '../../_state/auth'; // 토큰과 사용자 정보가 들�
 
 export default function MainPage() {
 	const auth = useRecoilValue(authAtom);
-	console.log(auth);
+	// console.log(auth);
 	return (
 		<div className="flex flex-col items-center">
 			{auth === null ? <Header /> : <LoginHeader />}

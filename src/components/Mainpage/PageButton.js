@@ -27,7 +27,7 @@ function PageButton({ total, limit, page, setPage }) {
 					disabled={page === num}
 					// eslint-disable-next-line no-unused-vars
 					onClick={() => {
-						setPage(() => setPage(i + 1));
+						setPage(i + 1);
 					}}
 					value={num}
 				>

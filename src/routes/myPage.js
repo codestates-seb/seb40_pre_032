@@ -1,32 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil'; // 전역 상태값 불러오는 함수
-import axios from 'axios';
+import React from 'react'; // { useEffect }
+// import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
 import EditUserProfile from '../components/EditUserProfile';
 import UserButtonCol from '../components/UserButtonCol';
 import UserButtonRow from '../components/UserButtonRow';
 import Header from '../components/Header';
 import LeftSidebar from '../components/LeftSidebar';
-import authAtom from '../_state/auth'; // 토큰과 사용자 정보가 들어있는 장소
+import userAuth from '../_state/userAuth';
 
 export default function MyPage() {
-	const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
-	const auth = useRecoilValue(authAtom);
-	const navigate = useNavigate();
-	const [userInfo, setUserInfo] = useState();
+	// const navigate = useNavigate();
+	const userInfo = useRecoilValue(userAuth); // 유저정보 저장한 데서 가져오기
+	console.log(userInfo);
 
-	console.log(auth);
-
-	useEffect(() => {
-		if (auth === null) navigate('/');
-		axios
-			.post(`${baseUrl}/users/info`, { auth })
-			.then((response) => {
-				setUserInfo(response.data);
-				navigate('/');
-			})
-			.catch((error) => alert(error));
-	});
+	// useEffect(() => {
+	// 	if (userInfo === null) navigate('/');
+	// });
 
 	return (
 		<>

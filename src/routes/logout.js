@@ -23,11 +23,11 @@ export default function Logout() {
 		// const config = { headers: { Authorization: `Bearer${auth.accessToken}` } };
 		localStorage.removeItem('user');
 		setAuth(null);
-		// axios.post(`${baseUrl}/user`, { email }, config).then((response) => {
+		// axios.post(`${baseUrl}/user`, { email }, config).then((response) => { //url로 이메일 보내기
 		// 	console.log(response);
 		// 	localStorage.removeItem('user');
 		// 	setAuth(null);
-
+		// 전역 사용자 정보도 null로 제거
 		// });
 	};
 	console.log(auth);

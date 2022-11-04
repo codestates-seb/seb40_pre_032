@@ -15,26 +15,26 @@ function AnswerUserInfo({ answerId }) {
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
 
-	const currentUser = useQuery(['user'], () => {
-		return axios.get(
-			'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
-			{
-				headers: {
-					accessToken: auth,
-				},
-			},
-			{
-				select: (data) => data.userId,
-			},
-		);
-	});
+	// const currentUser = useQuery(['user'], () => {
+	// 	return axios.get(
+	// 		'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
+	// 		{
+	// 			headers: {
+	// 				accessToken: auth,
+	// 			},
+	// 		},
+	// 		{
+	// 			select: (data) => data.userId,
+	// 		},
+	// 	);
+	// });
 
 	const data = getQuestionById(questionId);
 	const answerData = data?.data.answers.find(
 		(answer) => answer.answerId === answerId,
 	);
 	const deleteAnswer = deleteAnswerById(answerId);
-	const currentUserId = currentUser.data.data.userId;
+	// const currentUserId = currentUser.data.data.userId;
 
 	const handleEdit = () => {
 		if (auth === null) {
@@ -67,24 +67,20 @@ function AnswerUserInfo({ answerId }) {
 	return (
 		<div className="mt-6 flex flex-row h-[50px]">
 			<div className="w-[280px]">
-				{currentUserId === answerData.owner.userId ? (
-					<>
-						<button
-							className="mr-2 text-sm text-gray-500"
-							type="button"
-							onClick={handleEdit}
-						>
-							Edit
-						</button>
-						<button
-							className="mr-2 text-sm text-gray-500"
-							type="button"
-							onClick={handleDelete}
-						>
-							Delete
-						</button>
-					</>
-				) : null}
+				<button
+					className="mr-2 text-sm text-gray-500"
+					type="button"
+					onClick={handleEdit}
+				>
+					Edit
+				</button>
+				<button
+					className="mr-2 text-sm text-gray-500"
+					type="button"
+					onClick={handleDelete}
+				>
+					Delete
+				</button>
 			</div>
 			{/* 수정된 적 없으면 빈칸 */}
 			<div className="w-[280px]">

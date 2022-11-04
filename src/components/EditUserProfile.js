@@ -1,27 +1,46 @@
-import React from 'react';
-import { useRecoilValue } from 'recoil';
-import userAuth from '../_state/userAuth';
+import React, { useEffect } from 'react'; //
+import { useRecoilValue, useRecoilState } from 'recoil';
+import { AiOutlineClockCircle } from 'react-icons/ai';
+import { RiBrush3Fill } from 'react-icons/ri';
+import { BsCalendarCheck } from 'react-icons/bs';
+import axios from 'axios';
+import authAtom from '../_state/auth';
+import userAtom from '../_state/userAuth';
 
 export default function EditUserProfile() {
-	const userInfo = useRecoilValue(userAuth);
-	// user_Id : ""
-	// user_email:""
-	// display_name:""
-	// profile_image:""
-	// creation_date:
-	// questions_length:
-	// answers-length
-	const userImg = userInfo.profileImage;
+	const auth = useRecoilValue(authAtom);
+	const [userAuth, setUserAuth] = useRecoilState(userAtom);
+	useEffect(() => {
+		axios
+			.get(
+				'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
+				{
+					headers: { accessToken: auth },
+				},
+			)
+			.then((response) => {
+				alert(response);
+				localStorage.setItem('userInfo', JSON.stringify(response));
+				setUserAuth(response);
+			})
+			.catch((error) => {
+				alert(error);
+			});
+	}, []);
+	console.log(userAuth);
+
 	return (
 		<div className="flex items-center">
 			<img
-				src={userImg}
+				src={userAuth}
 				alt="userImg"
 				className="w-20 h-20 text-gray-600 bg-gray-100 shadow p-1 mr-3"
 			/>
 			<div className="my-2">
-				<div className="text-2xl font-semibold">{userInfo.displayName}</div>
+				<div className="text-2xl font-semibold">{userAuth}</div>
 				<div className="mt-2 text-sm">
+					<AiOutlineClockCircle />
+					{`creation_date:${userAuth}`} <RiBrush3Fill /> <BsCalendarCheck />{' '}
 					Welcome to stack overflow! Try answering a question!
 				</div>
 			</div>

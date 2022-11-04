@@ -55,6 +55,7 @@ public interface QuestionMapper {
                         .creationDate(questionAnswer.getCreationDate())
                         .answerId(questionAnswer.getAnswerId())
                         .answerContent(questionAnswer.getAnswerContent())
+                        .owner(questionAnswer.getOwnerDto())
                         .build())
                 .collect(Collectors.toList());
     }

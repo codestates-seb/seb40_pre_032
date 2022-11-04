@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.answer;
 
 
+import com.codestates.pre032.pre032.user.UserDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -42,6 +43,7 @@ public class AnswerDto {
         private Long answerId;
         private String answerContent;
         private Long questionId;
+        private UserDto.owner owner;
 //        private LocalDateTime modifiedAt;
     }
 }

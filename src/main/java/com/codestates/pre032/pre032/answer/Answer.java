@@ -3,6 +3,7 @@ package com.codestates.pre032.pre032.answer;
 
 import com.codestates.pre032.pre032.question.Question;
 import com.codestates.pre032.pre032.user.User;
+import com.codestates.pre032.pre032.user.UserDto;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -43,4 +44,9 @@ public class Answer {
     @Column(nullable = false)
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
+    public UserDto.owner getOwnerDto(){
+        User user = this.user;
+        UserDto.owner owner = new UserDto.owner(user.getUserId(), user.getDisplayName(), user.getProfileImage());
+        return owner;
+    }
 }

@@ -7,5 +7,16 @@ import org.mapstruct.ReportingPolicy;
 public interface AnswerMapper {
     Answer answerPostDtoAnswer(AnswerDto.Post answerPostDto);
     Answer answerPatchDtoAnswer(AnswerDto.Patch answerPatchDto);
-    AnswerDto.Response answerToAnswerResponseDto(Answer answer);
+    default AnswerDto.Response answerToAnswerResponseDto(Answer answer){
+        AnswerDto.Response response = new AnswerDto.Response(
+                answer.isAccepted(),
+                answer.getScore(),
+                answer.getCreationDate(),
+                answer.getAnswerId(),
+                answer.getAnswerContent(),
+                answer.getQuestion().getQuestionId(),
+                answer.getOwnerDto()
+        );
+        return response;
+    };
 }

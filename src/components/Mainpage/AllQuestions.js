@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+/* eslint-disable */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
@@ -32,9 +32,13 @@ function AllQuestions({ questions, offset, limit }) {
 									{question.title}
 								</h3>
 							</Link>
-							<div className="mt-[-2px] mb-[8px] text-[13px] text-[hsl(210,8%,25%)] break-all">
-								{question.questionContent}...
-							</div>
+							<div
+								className="mt-[-2px] mb-[8px] text-[13px] text-[hsl(210,8%,25%)] break-all"
+								dangerouslySetInnerHTML={{
+									__html: question.questionContent,
+								}}
+							/>
+
 							<div className="flex items-center justify-between flex-wrap">
 								<div className="flex gap-[4px] leading-[18px] float-left flex-wrap">
 									<ul className="inline list-none m-0 p-0">

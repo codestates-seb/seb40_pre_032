@@ -1,8 +1,8 @@
 import React from 'react';
 import { FaUserAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-// import Logo from './Logo';
-// import HeaderInput from './HeaderInput';
+import Logo from './Logo';
+import HeaderInput from './HeaderInput';
 
 function LoginHeader() {
 	return (
@@ -10,11 +10,11 @@ function LoginHeader() {
 			<div className="w-full bg-[#f38227] h-[3px]" />
 			<header className="h-[47px] bg-[#f7faf9] flex flex-row items-center shadow-1top text-[13px]">
 				<div className=" h-full flex items-center mx-auto my-0 max-w-full">
-					{/* <Logo /> */}
+					<Logo />
 					<div className="rounded-[30px] w-[76px] h-[28px] cursor-pointer flex items-center justify-center hover:bg-[hsl(210,8%,90%)] whitespace-nowrap">
 						<span>Product</span>
 					</div>
-					{/* <HeaderInput /> */}
+					<HeaderInput />
 					<nav className="flex items-center h-full">
 						<Link
 							to="/mypage"

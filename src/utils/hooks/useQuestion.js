@@ -4,9 +4,9 @@ import axios from 'axios';
 
 // 프록시 서버 우회하는 성웅님 서버 URL
 const BASE_URL =
-	'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
+	'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
 
-export const getQuestionById = (questionId) => {
+export const getQuestionById = (questionId, auth) => {
 	const { data } = useQuery(['question', questionId], () => {
 		return axios.get(`${BASE_URL}/questions/${questionId}`);
 	});

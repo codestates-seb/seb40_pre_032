@@ -57,6 +57,28 @@ public interface QuestionMapper {
                 .collect(Collectors.toList());
     }
 
+    //질문 상세 페이지
+    default QuestionDto.questionDetailsResponse questionToQuestionDetailsResponseDto(Question question, Boolean writer) {
+        List<Answer> answers = question.getAnswers();
+
+        QuestionDto.questionDetailsResponse questionResponse = new QuestionDto.questionDetailsResponse();
+        questionResponse.setTags(question.getTagstr());
+        questionResponse.setAnswered(question.isAnswered());
+        questionResponse.setViewCount(question.getViewCount());
+        questionResponse.setAnswerCount(question.getAnswerCount());
+        questionResponse.setScore(question.getScore());
+        questionResponse.setCreationDate(question.getCreationDate());
+        questionResponse.setModifiedAt(question.getModifiedAt());
+        questionResponse.setQuestionId(question.getQuestionId());
+        questionResponse.setTitle(question.getTitle());
+        questionResponse.setQuestionContent(question.getQuestionContent());
+        questionResponse.setWriter(writer);
+        questionResponse.setAnswers(questionAnswersToQuestionAnswerResponse(answers));
+
+        return questionResponse;
+
+    }
+
     default List<QuestionDto.questionContentResponse> questionsToQuestionContentResponsesDto(List<Question> questions){
         if (questions == null) {
             return null;

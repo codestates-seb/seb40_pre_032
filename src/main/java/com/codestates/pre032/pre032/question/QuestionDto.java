@@ -96,6 +96,41 @@ public class QuestionDto {
 
     }
 
+    @Getter
+    @Setter
+    @AllArgsConstructor
+    @NoArgsConstructor
+    public static class questionDetailsResponse {
+        private List<String> tags;
+
+//        private User owner;
+
+        private boolean isAnswered;
+
+        private int viewCount;
+
+        private int answerCount;
+
+        private int score;
+
+        private LocalDateTime creationDate;
+
+        private LocalDateTime modifiedAt;
+
+        private Long questionId;
+
+        private String questionContent;
+
+        private String title;
+
+        //질문 답변
+        private List<AnswerDto.Response> answers;
+
+        private boolean isWriter;
+
+
+    }
+
 //    // 콘텐트 없는 버전
 //    @Getter
 //    @AllArgsConstructor

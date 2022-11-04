@@ -77,12 +77,19 @@ public class QuestionController {
     }
 
     // 질문 상세 페이지
-    @PostMapping("/{questionId}")
-    public ResponseEntity questionDetail(@PathVariable("questionId") Long id,
-                                         @RequestBody TokenDto tokenDto) {
+//    @PostMapping("/{questionId}")
+//    public ResponseEntity questionDetail(@PathVariable("questionId") Long id,
+//                                         @RequestBody TokenDto tokenDto) {
+//        Question question = questionService.getDetail(id);
+//        QuestionDto.questionContentResponse response = questionMapper.questionToQuestionContentResponseDto(question);
+//
+//        return new ResponseEntity<>(response, HttpStatus.OK);
+//    }
+    @GetMapping("/{questionId}")
+    public ResponseEntity questionDetail(@PathVariable("questionId") Long id ,@RequestBody TokenDto requestBody) {
         Question question = questionService.getDetail(id);
-        QuestionDto.questionContentResponse response = questionMapper.questionToQuestionContentResponseDto(question);
-
+        Boolean isWriter = questionService.getWriter(id,userService.findByAccessToken(requestBody.getAccessToken()));
+        QuestionDto.questionDetailsResponse response = questionMapper.questionToQuestionDetailsResponseDto(question, isWriter);
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 

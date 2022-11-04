@@ -170,4 +170,14 @@ public class QuestionService {
         }
         return false;
     }
+
+    public Boolean getWriter(Long id, User user) {
+        Question question = find(id);
+        if (user.getUserId() != null) {
+            if (question.getUser() == user) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

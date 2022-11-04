@@ -9,6 +9,7 @@ import axios from 'axios';
 import Header from '../components/Header';
 import authAtom from '../_state/auth';
 import userAtom from '../_state/userAuth';
+import LoginHeader from '../components/LoginHeader';
 
 export default function Logout() {
 	const userAuth = useRecoilValue(userAtom);
@@ -43,7 +44,7 @@ export default function Logout() {
 
 	return (
 		<>
-			<Header />
+			{userAuth === null ? <Header /> : <LoginHeader />}
 			<div className="lg:w-full w-full  bg-gray-200">
 				<div className="flex flex-col">
 					<div className="flex h-screen bg-gray-200">

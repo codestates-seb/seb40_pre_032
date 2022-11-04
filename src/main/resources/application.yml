@@ -1,5 +1,5 @@
 #################################################
-## 로컬 ##
+# 로컬 ##
 #
 #spring:
 #  profiles:
@@ -26,8 +26,8 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:3306/pre032?serverTimezone=Asia/Seoul
-    username: admin
-    password: pre032032
+    username: user
+    password: 1234
   jpa:
     hibernate:
       ddl-auto: update
@@ -49,8 +49,8 @@ spring:
           google:
             client-id: 651205845903-ijvbcuiaa7sfn9q0tr7i78h4301ggomp.apps.googleusercontent.com
             client-secret: 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
-            redirect-uri: http://localhost:8080/login/oauth2/code/google
-#            redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/google
+#            redirect-uri: http://localhost:8080/login/oauth2/code/google
+            redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/google
           scope:
             - email
             - profile

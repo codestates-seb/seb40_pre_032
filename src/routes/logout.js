@@ -1,36 +1,46 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'; // useEffect
 import { useNavigate } from 'react-router-dom';
 import { SiAskubuntu, SiServerfault, SiSuperuser } from 'react-icons/si';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaStackExchange, FaStackOverflow } from 'react-icons/fa';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { GrStackOverflow } from 'react-icons/gr';
-// import axios from 'axios';
+import axios from 'axios';
 import Header from '../components/Header';
 import authAtom from '../_state/auth';
+import userAtom from '../_state/userAuth';
 
 export default function Logout() {
-	const auth = useRecoilValue(authAtom);
-	// const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
-	// const userEmail = '전역에 저장해놓은 email';
+	const userAuth = useRecoilValue(userAtom);
 	const navigate = useNavigate();
 	const setAuth = useSetRecoilState(authAtom);
-	useEffect(() => {
-		if (auth === null) navigate('/login');
-	});
-	const logout = () => {
-		// email
-		// const config = { headers: { Authorization: `Bearer${auth.accessToken}` } };
-		localStorage.removeItem('user');
-		setAuth(null);
-		// axios.post(`${baseUrl}/user`, { email }, config).then((response) => {
-		// 	console.log(response);
-		// 	localStorage.removeItem('user');
-		// 	setAuth(null);
+	const setUserAuth = useSetRecoilState(userAtom); // set함수 반환
 
-		// });
+	const logout = (e) => {
+		e.preventDefault();
+		axios
+			.post(
+				`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/logout`,
+				{ email: `${userAuth.email}` },
+			)
+			.then((response) => {
+				alert('로그아웃 되었습니다');
+				console.log(response);
+				localStorage.removeItem('user');
+				localStorage.removeItem('userInfo');
+				setAuth(null);
+				setUserAuth(null);
+			})
+			.catch((error) => {
+				alert(error);
+				navigate('/');
+			});
 	};
-	console.log(auth);
+
+	useEffect(() => {
+		if (userAuth === null) navigate('/');
+	});
+
 	return (
 		<>
 			<Header />
@@ -121,7 +131,7 @@ export default function Logout() {
 									<button
 										className="text-sm rounded bg-sky-500 text-white p-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
 										type="submit"
-										onClick={() => logout()} // userEmail
+										onClick={logout} // userEmail
 									>
 										Log out
 									</button>

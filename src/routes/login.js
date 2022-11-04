@@ -5,18 +5,21 @@ import { MdOutlineOpenInNew } from 'react-icons/md';
 import { AiOutlineGithub } from 'react-icons/ai';
 import { SiNaver } from 'react-icons/si';
 import axios from 'axios';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
+import { useSetRecoilState, useRecoilValue } from 'recoil';
 import Header from '../components/Header';
 import authAtom from '../_state/auth';
-// import useUserActions from '../_actions/useUserActions';
+import userAtom from '../_state/userAuth';
+import useUserActions from '../utils/hooks/useUserActions';
 
 export default function Login() {
-	const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
-	const [userEmail, setUserEmail] = useState();
-	const [userPassword, setUserPassword] = useState();
 	const navigate = useNavigate();
+	const userActions = useUserActions();
+	const [userEmail, setUserEmail] = useState('');
+	const [userPassword, setUserPassword] = useState('');
 	const auth = useRecoilValue(authAtom);
-	const setAuth = useSetRecoilState(authAtom); // set함수 반환
+
+	const setAuth = useSetRecoilState(authAtom);
+	const setUserAuth = useSetRecoilState(userAtom);
 
 	const onEmailChange = (e) => {
 		setUserEmail(e.target.value);
@@ -25,40 +28,29 @@ export default function Login() {
 		setUserPassword(e.target.value);
 	};
 
-	// console.log('auth', auth);
 	useEffect(() => {
 		if (auth !== null) navigate('/');
-	}, []);
+	});
 
-	const onSubmit = (e, email, password) => {
-		// userActions.login(email, password);
+	const onSubmit = (e) => {
 		e.preventDefault();
 		axios
 			.post(
-				`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/signup`,
-				{ email, password },
+				`http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/login`,
+				{ email: userEmail, password: userPassword },
 			)
 			.then((response) => {
-				localStorage.setItem('user', JSON.stringify(response.data));
-				setAuth(123);
-				navigate('/');
+				alert('로그인 되었습니다');
+				const { data } = response;
+				localStorage.setItem('user', JSON.stringify(data.accessToken));
+				localStorage.setItem('userInfo', JSON.stringify(data));
+				setAuth(data.accessToken); // 전역 토큰 저장
+				setUserAuth(data);
 			})
-			.catch((error) => alert(error));
-	};
-
-	const googleLoginHandler = () => {
-		const GOOGLE_LOGIN_URL = `${baseUrl}/oauth2/authorization/google`;
-		window.location.href = GOOGLE_LOGIN_URL;
-	};
-
-	const gitHubLoginHandler = () => {
-		const GITHUB_LOGIN_URL = `https://github.com/login/oauth/authorize?client_id=82422b0d46b1255e9450`;
-		window.location.href = GITHUB_LOGIN_URL;
-	};
-
-	const naverLoginHandler = () => {
-		const NAVER_LOGIN_URL = `${baseUrl}/oauth2/authorization/naver`;
-		window.location.href = NAVER_LOGIN_URL;
+			.then(() => navigate('/'))
+			.catch((error) => {
+				alert(error);
+			});
 	};
 
 	return (
@@ -89,7 +81,7 @@ export default function Login() {
 							<button
 								type="button"
 								className="w-full rounded bg-white my-1 px-16 py-2  text-center text-base   hover:bg-gray-100 focus:outline-none focus:ring focus:ring-blue-300 block"
-								onClick={googleLoginHandler}
+								onClick={userActions.googleLogin}
 							>
 								<FcGoogle className="inline text-xl mr-1" />
 								Log in with Google
@@ -98,7 +90,7 @@ export default function Login() {
 							<button
 								type="button"
 								className="w-full rounded  bg-grayblack-100 my-3 py-2 text-center text-white text-base  hover:bg-grayblack-200 focus:outline-none focus:ring focus:ring-blue-300 block"
-								onClick={gitHubLoginHandler}
+								onClick={userActions.githubLogin}
 							>
 								<AiOutlineGithub className="inline text-xl mr-1" />
 								Log in with GitHub
@@ -110,7 +102,7 @@ export default function Login() {
 							>
 								<SiNaver
 									className="inline text-xl mr-1"
-									onClick={naverLoginHandler}
+									onClick={userActions.naverLogin}
 								/>
 								Log in with Naver
 							</button>
@@ -134,7 +126,7 @@ export default function Login() {
 								<button
 									className="bg-blue-500 rounded w-full mt-5 mb-2 py-2 text-white text-sm  hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-300"
 									type="submit"
-									onClick={() => onSubmit(userEmail, userPassword)}
+									onClick={onSubmit}
 								>
 									Log in
 								</button>

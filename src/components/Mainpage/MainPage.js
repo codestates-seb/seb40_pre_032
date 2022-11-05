@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import { useRecoilValue } from 'recoil';
 import Header from '../Header';
@@ -12,7 +13,7 @@ export default function MainPage() {
 	const user = useRecoilValue(authAtom);
 	return (
 		<div className="flex flex-col items-center">
-			{user === null ? <Header /> : <LoginHeader />}
+			{user === '' ? <Header /> : <LoginHeader />}
 			<div className="flex pt-[51px] justify-center">
 				<LeftSidebar />
 				<Qlist />

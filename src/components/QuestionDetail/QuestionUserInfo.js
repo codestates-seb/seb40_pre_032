@@ -12,7 +12,6 @@ import authAtom from '../../_state/auth';
 
 function QuestionUserInfo() {
 	const auth = useRecoilValue(authAtom);
-
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 	const { questionId } = useParams();
@@ -54,28 +53,25 @@ function QuestionUserInfo() {
 	return (
 		<div className="flex flex-row h-[50px]">
 			<div className="w-[280px]">
-				<button className="mr-2 text-sm text-gray-500" type="button">
-					Share
-				</button>
-				<button
-					className="mr-2 text-sm text-gray-500"
-					type="button"
-					onClick={handleEdit}
-				>
-					Edit
-				</button>
-				<button className="mr-2 text-sm text-gray-500" type="button">
-					Follow
-				</button>
-				<button
-					className="mr-2 text-sm text-gray-500"
-					type="button"
-					onClick={handleDelete}
-				>
-					Delete
-				</button>
+				{data?.data.writer ? (
+					<>
+						<button
+							className="mr-2 text-sm text-gray-500"
+							type="button"
+							onClick={handleEdit}
+						>
+							Edit
+						</button>
+						<button
+							className="mr-2 text-sm text-gray-500"
+							type="button"
+							onClick={handleDelete}
+						>
+							Delete
+						</button>
+					</>
+				) : null}
 			</div>
-			{/* 수정된 적 없으면 빈칸 */}
 			<div className="w-[280px]">
 				<button type="button" className="text-blue-500 text-sm">
 					{data?.data.creationDate === data?.data.modifiedAt
@@ -87,8 +83,14 @@ function QuestionUserInfo() {
 				<div className="text-gray-500 text-sm">
 					asked {elapsed(data?.data.creationDate)}
 				</div>
-				<div className="text-blue-500 text-sm">
-					{/* {data?.data.owner.displayName} */}
+				<div className="flex flex-row">
+					<img
+						className="h-[20px] w-[20px]"
+						src={data?.data.owner.profileImage}
+					/>
+					<span className="text-blue-500 text-sm ml-2">
+						{data?.data.owner.displayName}
+					</span>
 				</div>
 			</div>
 		</div>

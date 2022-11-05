@@ -4,7 +4,7 @@ import axios from 'axios';
 
 // 프록시 서버 우회하는 성웅님 서버 URL
 const BASE_URL =
-	'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
+	'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
 
 export const addAnswerToQuestion = (questionId) => {
 	const addAnswer = useMutation((newAnswer) => {
@@ -33,8 +33,8 @@ export const editAnswerById = (answerId) => {
 };
 
 export const upAnswerVoteById = (answerId) => {
-	const upAnswerVote = useMutation(() => {
-		return axios.post(`${BASE_URL}/answers/${answerId}/upvote`, {});
+	const upAnswerVote = useMutation((accessToken) => {
+		return axios.post(`${BASE_URL}/answers/${answerId}/upVote`, accessToken);
 	});
 
 	return upAnswerVote;
@@ -42,7 +42,7 @@ export const upAnswerVoteById = (answerId) => {
 
 export const downAnswerVoteById = (answerId) => {
 	const downAnswerVote = useMutation(() => {
-		return axios.post(`${BASE_URL}/answers/${answerId}/downvote`);
+		return axios.post(`${BASE_URL}/answers/${answerId}/downVote`, accessToken);
 	});
 
 	return downAnswerVote;

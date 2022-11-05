@@ -3,6 +3,7 @@ import React from 'react';
 import { useParams } from 'react-router-dom';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
 import elapsed from '../../utils/hooks/elapsed';
+import { Link } from 'react-router-dom';
 
 function QuestionHeader() {
 	const { questionId } = useParams();
@@ -13,12 +14,12 @@ function QuestionHeader() {
 		<div className="mt-[47px] py-[20px]">
 			<div className="flex flex-row justify-between">
 				<h1 className="text-2xl">{data?.data.title}</h1>
-				<button
+				<Link
 					className="rounded-sm text-sm p-2 text-white bg-[#0a94ff] hover:bg-[#0074CC]"
-					type="button"
+					to="/ask"
 				>
 					Ask Question
-				</button>
+				</Link>
 			</div>
 			<div className="border-gray-200 flex border-b-2 flex-row mb-4">
 				<div>

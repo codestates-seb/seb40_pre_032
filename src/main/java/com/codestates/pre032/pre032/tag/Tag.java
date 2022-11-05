@@ -26,9 +26,6 @@ public class Tag {
     @Column
     private String tag;
 
-//    @OneToMany(mappedBy = "tag", cascade = CascadeType.REMOVE)
-//    private List<QuestionTag> questions = new ArrayList<>();
-
     @ManyToMany(mappedBy = "tags")
     private List<Question> questions = new ArrayList<>();
 }

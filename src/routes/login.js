@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
@@ -44,7 +45,7 @@ export default function Login() {
 				const { data } = response;
 				localStorage.setItem('user', JSON.stringify(data.accessToken));
 				localStorage.setItem('userInfo', JSON.stringify(data));
-				setAuth(data.accessToken); // 전역 토큰 저장
+				setAuth(data.accessToken);
 				setUserAuth(data);
 			})
 			.then(() => navigate('/'))

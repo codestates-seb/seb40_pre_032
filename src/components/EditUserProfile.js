@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react'; //
+/* eslint-disable */
+import React, { useEffect } from 'react';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { AiOutlineClockCircle } from 'react-icons/ai';
 import { RiBrush3Fill } from 'react-icons/ri';

@@ -49,8 +49,8 @@ spring:
           google:
             client-id: 651205845903-ijvbcuiaa7sfn9q0tr7i78h4301ggomp.apps.googleusercontent.com
             client-secret: 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
-#            redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/google
-            redirect-uri: http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com:8080/login/oauth2/code/google
+            redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/google
+#            redirect-uri: http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com:8080/login/oauth2/code/google
           scope:
             - email
             - profile
@@ -58,8 +58,8 @@ spring:
           github:
             client-id: bb0d7862c04e3967a361
             client-secret: ed674a520e58843f2ba5d878639163b09fb13434
-#            redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/github
-            redirect-uri: http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com:8080/login/oauth2/code/github
+            redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/github
+#            redirect-uri: http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com:8080/login/oauth2/code/github
             scope:
               - user
 
@@ -71,8 +71,8 @@ spring:
               - profile_image
             client-name: Naver
             authorization-grant-type: authorization_code
-#            redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/naver
-            redirect-uri: http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com:8080/login/oauth2/code/naver
+            redirect-uri: http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/login/oauth2/code/naver
+#            redirect-uri: http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com:8080/login/oauth2/code/naver
 
         provider:
           naver:

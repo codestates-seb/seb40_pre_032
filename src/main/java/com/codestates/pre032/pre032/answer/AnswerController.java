@@ -38,7 +38,7 @@ public class AnswerController {
     @PostMapping("/{id}/add")
     public ResponseEntity addAnswer(@PathVariable Long id,
                                     @RequestBody AnswerDto.Post requestBody) {
-        if (requestBody.getAccessToken().equals("_")) {
+        if (requestBody.getAccessToken().equals("not")) {
             throw new UnauthorizedException("로그인이 필요합니다.");
         }
         User user = userService.findByAccessToken(requestBody.getAccessToken());
@@ -65,7 +65,7 @@ public class AnswerController {
     @PostMapping("/{id}/accept")
     public ResponseEntity getAccept(@PathVariable("id") @Positive long answerId,
                                     @RequestBody TokenDto tokenDto) {
-        if (tokenDto.getAccessToken().equals("_")) {
+        if (tokenDto.getAccessToken().equals("not")) {
             throw new UnauthorizedException("로그인이 필요합니다.");
         }
         Answer answer = answerService.findById(answerId);
@@ -84,7 +84,7 @@ public class AnswerController {
     @PostMapping("/{id}/accept/undo")
     public ResponseEntity getAcceptUndo(@PathVariable("id") @Positive long answerId,
                                         @RequestBody TokenDto tokenDto){
-        if (tokenDto.getAccessToken().equals("_")) {
+        if (tokenDto.getAccessToken().equals("not")) {
             throw new UnauthorizedException("로그인이 필요합니다.");
         }
         Answer answer = answerService.findById(answerId);
@@ -102,7 +102,7 @@ public class AnswerController {
     @DeleteMapping("/{id}/delete")
     public ResponseEntity deleteAnswer(@PathVariable("id") @Positive long answerId,
                                        @RequestBody TokenDto tokenDto){
-        if (tokenDto.getAccessToken().equals("_")) {
+        if (tokenDto.getAccessToken().equals("not")) {
             throw new UnauthorizedException("로그인이 필요합니다.");
         }
         if (!answerService.hasAnswer(answerId,userService.findByAccessToken(tokenDto.getAccessToken()))){

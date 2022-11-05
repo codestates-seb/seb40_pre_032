@@ -51,7 +51,7 @@ public class UserController {
 
     @GetMapping("/myPage")
     public ResponseEntity getMyPage(@RequestHeader(value = "accessToken") String accessToken) {
-        if (accessToken.equals("_")) {
+        if (accessToken.equals("not")) {
             throw new UnauthorizedException("로그인이 필요합니다.");
         }
 

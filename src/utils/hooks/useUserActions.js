@@ -19,7 +19,6 @@ export default function useUserActions() {
 			)
 			.then((response) => {
 				localStorage.setItem('userInfo', JSON.stringify(response.data));
-				console.log(response.data);
 				setUserAuth(response.data);
 			})
 			.catch((error) => {

@@ -8,6 +8,8 @@ import LoginHeader from '../LoginHeader';
 
 export default function MainPage() {
 	const auth = JSON.parse(localStorage.getItem('user'));
+	const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+	console.log(userInfo);
 
 	return (
 		<div className="flex flex-col items-center">

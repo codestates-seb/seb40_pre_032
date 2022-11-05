@@ -12,10 +12,9 @@ function AddTag({ tags, setTags }) {
 	const [inputValue, setInputValue] = useState('');
 
 	const addTags = (event) => {
-		if (event.key === 'Enter') {
-			setTags([...tags, event.target.value]);
-			setInputValue('');
-		}
+		if (event.target.value === '' || tags.includes(event.target.value)) return;
+		setTags([...tags, event.target.value]);
+		setInputValue('');
 	};
 
 	const removeTags = (indexToRemove) => {
@@ -49,7 +48,7 @@ function AddTag({ tags, setTags }) {
 				onChange={(event) => setInputValue(event.target.value)}
 				type="text"
 				onKeyUp={(event) => {
-					addTags(event);
+					event.key === 'Enter' && addTags(event);
 				}}
 			/>
 		</div>

@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
@@ -8,7 +8,7 @@ import elapsed from '../../utils/hooks/elapsed';
 
 function AnswerUserInfo({ answerId }) {
 	const auth = JSON.parse(localStorage.getItem('user'));
-	const user = JSON.parse(localStorage.getItem('userInfo'));
+	const [userInfo, setUserInfo] = useState({});
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
@@ -47,10 +47,17 @@ function AnswerUserInfo({ answerId }) {
 		}
 	};
 
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem('userInfo'));
+		if (user !== null) {
+			setUserInfo(user);
+		}
+	}, []);
+
 	return (
 		<div className="mt-6 flex flex-row h-[50px]">
 			<div className="w-[280px]">
-				{answerData.owner.userId === user.userId ? (
+				{answerData.owner.userId === userInfo.userId ? (
 					<>
 						<button
 							className="mr-2 text-sm text-gray-500"

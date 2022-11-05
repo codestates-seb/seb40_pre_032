@@ -8,14 +8,16 @@ import userAtom from '../_state/userAuth';
 export default function Callback() {
 	const navigate = useNavigate();
 	const tokenPath = window.location.pathname;
+	console.log('tokenpath', tokenPath);
 	const tokenInfo = tokenPath.split('%20');
 	const setUserAuth = useSetRecoilState(userAtom);
 	const setAuth = useSetRecoilState(authAtom);
 
 	useEffect(() => {
 		const token = tokenInfo[1];
+		console.log(token);
 		localStorage.setItem('user', JSON.stringify(token));
-		setAuth(token);
+		setAuth('token', token);
 		axios
 			.get(
 				'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
@@ -24,6 +26,7 @@ export default function Callback() {
 				},
 			)
 			.then((response) => {
+				console.log('response', response);
 				localStorage.setItem('userInfo', JSON.stringify(response.data));
 				setUserAuth(response.data);
 			})
@@ -31,7 +34,7 @@ export default function Callback() {
 				navigate('/');
 			})
 			.catch((error) => {
-				alert(error);
+				console.log(error);
 				navigate('/');
 			});
 	}, []);

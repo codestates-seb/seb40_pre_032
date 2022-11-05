@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from './Logo';
 import HeaderInput from './HeaderInput';
 
 function LoginHeader() {
-	const user = JSON.parse(localStorage.getItem('userInfo'));
+	const [user, setUser] = useState({});
+
+	useEffect(() => {
+		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+		if (userInfo !== null) {
+			setUser(userInfo);
+		}
+	}, []);
 
 	return (
 		<div className="fixed top-0 inset-x-0 flex flex-col z-10">
@@ -21,7 +28,7 @@ function LoginHeader() {
 							to="/mypage"
 							className="flex items-center hover:bg-[hsl(210,8%,90%)] cursor-pointer h-full"
 						>
-							<img src={user.profileImage} alt="userProfile" className="w-4" />
+							<img src={user?.profileImage} alt="userProfile" className="w-4" />
 							<div className="mr-1 pl-[5px] ">{user.displayName}</div>
 						</Link>
 						<div className="flex justify-center h-full items-center w-[40px] cursor-pointer px-[10px] hover:bg-[hsl(210,8%,90%)]">

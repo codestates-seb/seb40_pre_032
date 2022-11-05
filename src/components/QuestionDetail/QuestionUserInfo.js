@@ -7,10 +7,11 @@ import {
 	getQuestionById,
 } from '../../utils/hooks/useQuestion';
 import elapsed from '../../utils/hooks/elapsed';
+import { useEffect, useState } from 'react';
 
 function QuestionUserInfo() {
 	const auth = JSON.parse(localStorage.getItem('user'));
-	const user = JSON.parse(localStorage.getItem('userInfo'));
+	const [userInfo, setUserInfo] = useState({});
 
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
@@ -50,10 +51,17 @@ function QuestionUserInfo() {
 		}
 	};
 
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem('userInfo'));
+		if (user !== null) {
+			setUserInfo(user);
+		}
+	}, []);
+
 	return (
 		<div className="flex flex-row h-[50px]">
 			<div className="w-[280px]">
-				{data?.data.owner.userId === user.userId ? (
+				{data?.data.owner.userId === userInfo.userId ? (
 					<>
 						<button
 							className="mr-2 text-sm text-gray-500"

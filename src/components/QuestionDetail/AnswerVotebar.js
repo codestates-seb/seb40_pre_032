@@ -1,5 +1,5 @@
 /* eslint-disable */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
@@ -12,7 +12,7 @@ import {
 
 function AnswerVotebar({ answerId }) {
 	const auth = JSON.parse(localStorage.getItem('user'));
-	const user = JSON.parse(localStorage.getItem('userInfo'));
+	const [userInfo, setUserInfo] = useState({});
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
 	// 답변 채택 기능 구현 완료
@@ -70,6 +70,13 @@ function AnswerVotebar({ answerId }) {
 	// 	}
 	// };
 
+	useEffect(() => {
+		const user = JSON.parse(localStorage.getItem('userInfo'));
+		if (user !== null) {
+			setUserInfo(user);
+		}
+	}, []);
+
 	return (
 		<div className="w-[40px] mr-4">
 			<button
@@ -111,7 +118,7 @@ function AnswerVotebar({ answerId }) {
 					/>
 				</svg>
 			</div>
-			{answerData.owner.userId === user.userId ? (
+			{answerData.owner.userId === userInfo.userId ? (
 				<button type="button">
 					<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 						<path

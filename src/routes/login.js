@@ -96,11 +96,9 @@ export default function Login() {
 							<button
 								type="button"
 								className="w-full rounded bg-green-500 my-3 py-2  text-center text-base text-white hover:bg-green-600 focus:outline-none focus:ring focus:ring-blue-300 block"
+								onClick={userActions.naverLogin}
 							>
-								<SiNaver
-									className="inline text-xl mr-1"
-									onClick={userActions.naverLogin}
-								/>
+								<SiNaver className="inline text-xl mr-1" />
 								Log in with Naver
 							</button>
 

@@ -4,7 +4,6 @@ import axios from 'axios';
 import { useRecoilValue } from 'recoil';
 import authAtom from '../../_state/auth';
 
-// 프록시 서버 우회하는 성웅님 서버 URL
 const BASE_URL =
 	'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
 

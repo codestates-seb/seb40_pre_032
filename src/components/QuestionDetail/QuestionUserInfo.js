@@ -7,11 +7,9 @@ import {
 	getQuestionById,
 } from '../../utils/hooks/useQuestion';
 import elapsed from '../../utils/hooks/elapsed';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../../_state/auth';
 
 function QuestionUserInfo() {
-	const auth = useRecoilValue(authAtom);
+	const auth = JSON.parse(localStorage.getItem('user'));
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 	const { questionId } = useParams();

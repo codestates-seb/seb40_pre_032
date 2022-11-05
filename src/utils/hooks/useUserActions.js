@@ -1,19 +1,15 @@
-// import{ useEffect } from 'react'; // useEffect
 import { useSetRecoilState, useRecoilValue } from 'recoil';
-// import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import authAtom from '../../_state/auth';
 import userAtom from '../../_state/userAuth';
 
 export default function useUserActions() {
-	// const navigate = useNavigate();
-	// const baseUrl = `http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080`;
 	const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
 
 	function translateToken() {
 		const auth = useRecoilValue(authAtom);
 		const userAuth = useRecoilValue(userAtom);
-		const setUserAuth = useSetRecoilState(userAuth); // set함수 반환
+		const setUserAuth = useSetRecoilState(userAuth);
 		axios
 			.get(
 				'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
@@ -29,7 +25,6 @@ export default function useUserActions() {
 			.catch((error) => {
 				alert(error);
 			});
-		console.log('get왜 안돼', auth);
 	}
 
 	function naverLogin() {

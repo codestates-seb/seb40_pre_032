@@ -11,18 +11,16 @@ import AnswerHeader from '../components/QuestionDetail/AnswerHeader';
 import AnswerContainer from '../components/QuestionDetail/AnswerContainer';
 import AnswerEditor from '../components/QuestionDetail/AnswerEditor';
 import { getQuestionById } from '../utils/hooks/useQuestion';
-import { useRecoilValue } from 'recoil';
-import userAtom from '../_state/userAuth';
 import LoginHeader from '../components/LoginHeader';
 
 function QuestionDetail() {
-	const user = useRecoilValue(userAtom);
+	const auth = JSON.parse(localStorage.getItem('user'));
 	const { questionId } = useParams();
 	const data = getQuestionById(questionId);
 
 	return (
 		<div>
-			{user === 'not' ? <Header /> : <LoginHeader />}
+			{auth === null ? <Header /> : <LoginHeader />}
 			<div className="flex justify-center ">
 				<LeftSidebar />
 				<div className="border-l-2 border-gray-200 px-4 w-[1120px]">

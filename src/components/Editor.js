@@ -1,6 +1,5 @@
 /* eslint-disable */
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import { useMutation, useQueryClient } from 'react-query';
 import 'react-quill/dist/quill.snow.css';
@@ -18,8 +17,6 @@ function Editor() {
 			},
 		},
 	});
-
-	const navigate = useNavigate();
 
 	const [title, setTitle] = useState('');
 	const [quillText, setQuillText] = useState('');

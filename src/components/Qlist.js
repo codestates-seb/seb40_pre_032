@@ -28,7 +28,6 @@ function Qlist() {
 			refetchOnWindowFocus: false,
 		},
 	);
-	console.log(data?.data.items);
 
 	return (
 		<div className="p-[24px] w-[727px]  border-l-[1px] border-solid border-[hsl(210,8%,85%)] mb-4">

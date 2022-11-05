@@ -13,6 +13,7 @@ import AnswerEditor from '../components/QuestionDetail/AnswerEditor';
 import { getQuestionById } from '../utils/hooks/useQuestion';
 import { useRecoilValue } from 'recoil';
 import userAtom from '../_state/userAuth';
+import LoginHeader from '../components/LoginHeader';
 
 function QuestionDetail() {
 	const user = useRecoilValue(userAtom);

@@ -2,8 +2,8 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
-import { downAnswerVoteById } from '../../utils/hooks/useAnswer';
 import {
+	downQuestionVoteById,
 	getQuestionById,
 	upQuestionVoteById,
 } from '../../utils/hooks/useQuestion';
@@ -17,7 +17,7 @@ function QuestionVotebar() {
 
 	const data = getQuestionById(questionId);
 	const upQuestionVote = upQuestionVoteById(questionId);
-	const downQuestionVote = downAnswerVoteById(questionId);
+	const downQuestionVote = downQuestionVoteById(questionId);
 
 	const handleUpClick = () => {
 		upQuestionVote.mutate(

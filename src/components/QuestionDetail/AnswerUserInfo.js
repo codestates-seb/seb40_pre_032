@@ -63,24 +63,22 @@ function AnswerUserInfo({ answerId }) {
 	return (
 		<div className="mt-6 flex flex-row h-[50px]">
 			<div className="w-[280px]">
-				{answerData.owner.userId === currentUser.data.userId ? (
-					<>
-						<button
-							className="mr-2 text-sm text-gray-500"
-							type="button"
-							onClick={handleEdit}
-						>
-							Edit
-						</button>
-						<button
-							className="mr-2 text-sm text-gray-500"
-							type="button"
-							onClick={handleDelete}
-						>
-							Delete
-						</button>
-					</>
-				) : null}
+				<button
+					className="mr-2 text-sm text-gray-500"
+					type="button"
+					disabled={answerData.owner.userId !== currentUser.data.data.userId}
+					onClick={handleEdit}
+				>
+					Edit
+				</button>
+				<button
+					className="mr-2 text-sm text-gray-500"
+					type="button"
+					disabled={answerData.owner.userId !== currentUser.data.data.userId}
+					onClick={handleDelete}
+				>
+					Delete
+				</button>
 			</div>
 			{/* 수정된 적 없으면 빈칸 */}
 			<div className="w-[280px]">

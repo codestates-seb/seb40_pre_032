@@ -49,8 +49,6 @@ public class Question {
     @Column
     private LocalDateTime modifiedAt;
 
-//    @OneToMany(mappedBy = "question")
-//    private List<QuestionTag> tags = new ArrayList<>();
     @ManyToMany
     @JoinTable(name = "question_tag")
     private List<Tag> tags = new ArrayList<>();
@@ -74,7 +72,7 @@ public class Question {
         return tags;
     }
 
-    public UserDto.owner getOwnerDto(){
+    public UserDto.owner getOwnerDto() {
         User user = this.user;
         UserDto.owner owner = new UserDto.owner(user.getUserId(), user.getDisplayName(), user.getProfileImage());
         return owner;

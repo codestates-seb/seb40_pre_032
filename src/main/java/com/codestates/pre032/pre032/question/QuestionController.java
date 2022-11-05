@@ -15,6 +15,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Controller
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -45,7 +46,7 @@ public class QuestionController {
     @PostMapping("/add")
 //    @PreAuthorize("isAuthenticated()")
     public ResponseEntity addQuestion(@Validated @RequestBody QuestionDto.Post requestBody) {
-        if (requestBody.getAccessToken()==null){
+        if (requestBody.getAccessToken() == null) {
             throw new UnauthorizedException("로그인이 필요합니다.");
         }
 
@@ -53,24 +54,25 @@ public class QuestionController {
         System.out.println(user.getEmail());
 
         Question question = questionService.create(questionMapper.questionPostDtoToQuestion(requestBody),
-                requestBody.getTags(),user);
+                requestBody.getTags(), user);
         QuestionDto.Response response = questionMapper.questionToQuestionResponse(question);
 
         return new ResponseEntity<>(response, HttpStatus.CREATED);
     }
-    // 수정 페이지 요청
-    @GetMapping("/{questionId}/edit")
-    public ResponseEntity getUpdatePage(@PathVariable("questionId") Long id,@RequestBody TokenDto requestBody){
-        //로그인이 안되어있으면
-        if (requestBody.getAccessToken()==null){
-            throw new UnauthorizedException("로그인이 필요합니다.");
-        }
-        // 본인이 작성한 질문이 아니면
-        if (!questionService.hasQuestion(id,userService.findByAccessToken(requestBody.getAccessToken()))){
-            throw new UnauthorizedException("작성자가 아닙니다.");
-        }
-        return new ResponseEntity(HttpStatus.OK);
-    }
+
+    //    // 수정 페이지 요청
+//    @GetMapping("/{questionId}/edit")
+//    public ResponseEntity getUpdatePage(@PathVariable("questionId") Long id,@RequestBody TokenDto requestBody){
+//        //로그인이 안되어있으면
+//        if (requestBody.getAccessToken()==null){
+//            throw new UnauthorizedException("로그인이 필요합니다.");
+//        }
+//        // 본인이 작성한 질문이 아니면
+//        if (!questionService.hasQuestion(id,userService.findByAccessToken(requestBody.getAccessToken()))){
+//            throw new UnauthorizedException("작성자가 아닙니다.");
+//        }
+//        return new ResponseEntity(HttpStatus.OK);
+//    }
     // 수정 기능
     @PatchMapping("/{questionId}/edit")
     public ResponseEntity updateQuestion(@PathVariable("questionId") Long id,
@@ -85,7 +87,7 @@ public class QuestionController {
     public ResponseEntity questionDetail(@PathVariable("questionId") Long id,
                                          @RequestHeader(value = "accessToken") String accessToken) {
         Question question = questionService.getDetail(id);
-        Boolean isWriter = questionService.getWriter(id,userService.findByAccessToken(accessToken));
+        Boolean isWriter = questionService.getWriter(id, userService.findByAccessToken(accessToken));
         User user = question.getUser();
 
         QuestionDto.questionDetailsResponse response = questionMapper.questionToQuestionDetailsResponseDto(question, isWriter);
@@ -107,7 +109,7 @@ public class QuestionController {
     public ResponseEntity deleteQuestion(@PathVariable("questionId") Long id,
                                          @RequestBody TokenDto requestBody) {
         // 본인이 작성한 질문이 아니면
-        if (!questionService.hasQuestion(id,userService.findByAccessToken(requestBody.getAccessToken()))){
+        if (!questionService.hasQuestion(id, userService.findByAccessToken(requestBody.getAccessToken()))) {
             throw new UnauthorizedException("작성자가 아닙니다.");
         }
         Question question = this.questionService.find(id);
@@ -118,7 +120,7 @@ public class QuestionController {
 
     //답변이 없는 질문들
     @GetMapping("/sortByUnanswered")
-    public ResponseEntity selectUnanswer(){
+    public ResponseEntity selectUnanswer() {
         List<Question> questions = questionService.selectUnanswer();
         return new ResponseEntity<>(
                 new MainResponseDto(questionMapper.questionsToQuestionContentResponsesDto(questions)), HttpStatus.OK);
@@ -126,7 +128,7 @@ public class QuestionController {
 
     //추천 수 기준으로 정렬
     @GetMapping("/sortByScore")
-    public ResponseEntity sortScore(){
+    public ResponseEntity sortScore() {
         List<Question> questions = questionService.sortScore();
         return new ResponseEntity<>(
                 new MainResponseDto(questionMapper.questionsToQuestionContentResponsesDto(questions)), HttpStatus.OK);
@@ -134,13 +136,41 @@ public class QuestionController {
 
     //조회 수 기준으로 정렬
     @GetMapping("/sortByViewCount")
-    public ResponseEntity sortViewCount(){
+    public ResponseEntity sortViewCount() {
         List<Question> questions = questionService.sortCount();
         return new ResponseEntity<>(
                 new MainResponseDto(questionMapper.questionsToQuestionContentResponsesDto(questions)), HttpStatus.OK);
     }
 
     // 추천기능
+    @PostMapping("/{questionId}/upVote")
+    public ResponseEntity upVote(@PathVariable("questionId") Long id,
+                                 @RequestBody QuestionDto.Post requestBody) {
+        if (requestBody.getAccessToken() == null) {
+            throw new UnauthorizedException("로그인이 필요합니다.");
+        }
+        Question question = questionService.find(id);
+        User user = userService.findByAccessToken(requestBody.getAccessToken());
+
+        questionService.upVote(question,user);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping("/{questionId}/downVote")
+    public ResponseEntity downVote(@PathVariable("questionId") Long id,
+                                 @RequestBody TokenDto tokenDto) {
+        if (tokenDto == null) {
+            throw new UnauthorizedException("로그인이 필요합니다.");
+        }
+        Question question = questionService.find(id);
+        User user = userService.findByAccessToken(tokenDto.getAccessToken());
+
+        questionService.downVote(question,user);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
 //    @PostMapping("{question_id}/upVote")
 //    public ResponseEntity upVote(){
 //

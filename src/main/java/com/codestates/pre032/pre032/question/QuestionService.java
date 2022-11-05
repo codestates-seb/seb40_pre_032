@@ -4,7 +4,6 @@ import com.codestates.pre032.pre032.exception.DataNotFoundException;
 import com.codestates.pre032.pre032.tag.Tag;
 import com.codestates.pre032.pre032.tag.TagService;
 import com.codestates.pre032.pre032.user.User;
-import com.codestates.pre032.pre032.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -14,15 +13,11 @@ import java.util.*;
 @Service
 public class QuestionService {
     private final QuestionRepository questionRepository;
-
-    private final UserService userService;
     private final TagService tagService;
 
 
-    public QuestionService(QuestionRepository questionRepository, UserService userService, TagService tagService) {
+    public QuestionService(QuestionRepository questionRepository, TagService tagService) {
         this.questionRepository = questionRepository;
-        this.userService = userService;
-
         this.tagService = tagService;
     }
 
@@ -36,8 +31,6 @@ public class QuestionService {
         List<Tag> tagList = tagService.stringToTags(question, tags);
         question.setUser(user);
         question.setTags(tagList);
-
-        //todo : user 정보 입력
 
         return this.questionRepository.save(question);
     }
@@ -69,17 +62,19 @@ public class QuestionService {
     }
 
     //Viewcount 내림차순 정렬
-    public List<Question> sortCount(){
+    public List<Question> sortCount() {
         List<Question> answer = this.questionRepository.sortViewCount();
         return answer;
     }
+
     //답변 없는 질문 조회
-    public List<Question> selectUnanswer(){
+    public List<Question> selectUnanswer() {
         List<Question> answer = this.questionRepository.selectUnanswered();
         return answer;
     }
+
     //추천 수 기준 정렬
-    public List<Question>  sortScore(){
+    public List<Question> sortScore() {
         List<Question> answer = this.questionRepository.sortScore();
         return answer;
     }
@@ -121,6 +116,7 @@ public class QuestionService {
 
         return answer;
     }
+
     // 검색기능에 병합되는 메서드 (검색결과를 합친다).
     public List<Question> sumQuestions(List<Question> questionList1, List<Question> questionList2) {
         for (int i = 0; i < questionList2.size(); i++) {
@@ -163,9 +159,9 @@ public class QuestionService {
         }
     }
 
-    public boolean hasQuestion(Long questionId, User user){
+    public boolean hasQuestion(Long questionId, User user) {
         Question question = questionRepository.findById(questionId).get();
-        if (question.getUser()==user){
+        if (question.getUser() == user) {
             return true;
         }
         return false;
@@ -179,5 +175,17 @@ public class QuestionService {
             }
         }
         return false;
+    }
+
+    // 추천 기능
+    public void upVote(Question question, User user) {
+        question.setScore(question.getScore()+1);
+        questionRepository.save(question);
+    }
+
+    // 비추천 기능
+    public void downVote(Question question, User user) {
+        question.setScore(question.getScore()-1);
+        questionRepository.save(question);
     }
 }

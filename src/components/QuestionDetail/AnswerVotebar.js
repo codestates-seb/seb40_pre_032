@@ -9,8 +9,11 @@ import {
 	acceptAnswerById,
 	undoAcceptAnswerById,
 } from '../../utils/hooks/useAnswer';
+import { useRecoilValue } from 'recoil';
+import authAtom from '../../_state/auth';
 
 function AnswerVotebar({ answerId }) {
+	const auth = useRecoilValue(authAtom);
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
 	const [isAccepted, setIsAccepted] = useState(false);
@@ -28,7 +31,7 @@ function AnswerVotebar({ answerId }) {
 
 	const handleUpClick = () => {
 		upAnswerVote.mutate(
-			{},
+			{ accessToken: auth },
 			{
 				onSuccess: () =>
 					queryClient.invalidateQueries(['question', questionId]),
@@ -38,7 +41,7 @@ function AnswerVotebar({ answerId }) {
 
 	const handleDownClick = () => {
 		downAnswerVote.mutate(
-			{},
+			{ accessToken: auth },
 			{
 				onSuccess: () =>
 					queryClient.invalidateQueries(['question', questionId]),

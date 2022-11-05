@@ -41,16 +41,22 @@ export const editQuestionById = (questionId) => {
 };
 
 export const upQuestionVoteById = (questionId) => {
-	const upQuestionVote = useMutation(() => {
-		return axios.post(`${BASE_URL}/questions/${questionId}/upvote`);
+	const upQuestionVote = useMutation((accessToken) => {
+		return axios.post(
+			`${BASE_URL}/questions/${questionId}/upVote`,
+			accessToken,
+		);
 	});
 
 	return upQuestionVote;
 };
 
 export const downQuestionVoteById = (questionId) => {
-	const downQuestionVote = useMutation(() => {
-		return axios.post(`${BASE_URL}/questions/${questionId}/downvote`);
+	const downQuestionVote = useMutation((accessToken) => {
+		return axios.post(
+			`${BASE_URL}/questions/${questionId}/downVote`,
+			accessToken,
+		);
 	});
 
 	return downQuestionVote;

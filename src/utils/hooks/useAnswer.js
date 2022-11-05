@@ -1,8 +1,6 @@
 /* eslint-disable */
-import { useQuery, useMutation } from 'react-query';
+import { useMutation } from 'react-query';
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../../_state/auth';
 
 // 프록시 서버 우회하는 성웅님 서버 URL
 const BASE_URL =
@@ -35,8 +33,8 @@ export const editAnswerById = (answerId) => {
 };
 
 export const upAnswerVoteById = (answerId) => {
-	const upAnswerVote = useMutation(() => {
-		return axios.post(`${BASE_URL}/answers/${answerId}/upvote`, {});
+	const upAnswerVote = useMutation((accessToken) => {
+		return axios.post(`${BASE_URL}/answers/${answerId}/upVote`, accessToken);
 	});
 
 	return upAnswerVote;
@@ -44,7 +42,7 @@ export const upAnswerVoteById = (answerId) => {
 
 export const downAnswerVoteById = (answerId) => {
 	const downAnswerVote = useMutation(() => {
-		return axios.post(`${BASE_URL}/answers/${answerId}/downvote`);
+		return axios.post(`${BASE_URL}/answers/${answerId}/downVote`, accessToken);
 	});
 
 	return downAnswerVote;
@@ -64,17 +62,4 @@ export const undoAcceptAnswerById = (answerId) => {
 	});
 
 	return undoAcceptAnswer;
-};
-
-export const getCurrentUser = () => {
-	const currentUser = useQuery(['user'], () => {
-		const auth = useRecoilValue(authAtom);
-		return axios.get(`${BASE_URL}/users/myPage`, {
-			headers: {
-				accessToken: auth,
-			},
-		});
-	});
-
-	return currentUser.data;
 };

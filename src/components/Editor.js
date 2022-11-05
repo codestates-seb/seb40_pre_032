@@ -7,8 +7,11 @@ import 'react-quill/dist/quill.snow.css';
 import TagInput from './TagInput';
 import Accordian from './Accordian';
 import axios from 'axios';
+import { useRecoilValue } from 'recoil';
+import authAtom from '../_state/auth';
 
 function Editor() {
+	const auth = useRecoilValue(authAtom);
 	const queryClient = useQueryClient({
 		defaultOptions: {
 			queries: {
@@ -30,9 +33,19 @@ function Editor() {
 		setQuillText(event);
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		const newQuestion = { title, questionContent: quillText, tags };
+	const addQuestion = useMutation((newQuestion) => {
+		axios.post(
+			'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/add',
+			newQuestion,
+		);
+	});
+	const handleSubmit = () => {
+		const newQuestion = {
+			title,
+			questionContent: quillText,
+			tags,
+			accessToken: auth,
+		};
 		addQuestion.mutate(newQuestion, {
 			onSuccess: () => {
 				navigate('/');
@@ -40,13 +53,6 @@ function Editor() {
 			},
 		});
 	};
-
-	const addQuestion = useMutation((newQuestion) => {
-		axios.post(
-			'http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080/questions/add',
-			newQuestion,
-		);
-	});
 
 	return (
 		<main className="flex items-center mx-auto justify-center">

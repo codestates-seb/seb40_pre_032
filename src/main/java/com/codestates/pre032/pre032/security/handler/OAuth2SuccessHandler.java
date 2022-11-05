@@ -86,10 +86,16 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
     private void redirect(HttpServletRequest request, HttpServletResponse response, String email) throws IOException {
         String accessToken = delegateAccessToken(email);  // (6-1)
+        User user = userService.findByEmail(email);
+
+        String id = user.getUserId().toString();
+        String displayName = user.getDisplayName();
+        String profileImage = user.getProfileImage();
 
         response.setHeader("AccessToken", "bearer " + accessToken);
 //        todo: 배포시에는 아마존으로 수정
-        getRedirectStrategy().sendRedirect(request, response, "http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com/callback/access_token=bearer " + accessToken);   // (6-4)
+        response.sendRedirect("http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com/callback/access_token=bearer "+accessToken+"&profile_image="+profileImage+"&user_id="+id+"&display_name="+displayName+"&profile_image="+profileImage+"&email="+email);
+//        getRedirectStrategy().sendRedirect(request, response, "http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com/callback/access_token=bearer " + accessToken);   // (6-4)
 //        getRedirectStrategy().sendRedirect(request, response, "http://localhost:3000/callback/access_token=bearer " + accessToken);   // (6-4)
     }
 

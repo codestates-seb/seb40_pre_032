@@ -58,7 +58,7 @@ public class LoginService {
         return (GithubToken) response.getBody();
     }
 
-    public String getLogin(String accessToken) {
+    public String[] getLogin(String accessToken) {
         HttpHeaders headers = new HttpHeaders();
         headers.setBearerAuth(accessToken);
         HttpEntity<Void> request = new HttpEntity<>(headers);
@@ -88,7 +88,10 @@ public class LoginService {
             userService.createUser(user);
         }
         String jwtToken = delegateAccessToken(user);
-        return jwtToken;
+
+
+//        return jwtToken;
+        return new String[] {jwtToken,user.getUserId().toString(),user.getDisplayName(),user.getProfileImage(),user.getEmail()};
     }
 
     private String delegateAccessToken(User user) {

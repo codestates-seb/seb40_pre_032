@@ -27,11 +27,15 @@ public class LoginController {
     public void githubLogin(@PathParam("code") String code, HttpServletResponse response) throws IOException {
         GithubToken githubToken = loginService.getAccessToken(code);
 //        response.setHeader("AccessToken", githubToken.getAuthorizationValue());
-
-        String accessToken  = loginService.getLogin(githubToken.getAccessToken());
-
+        String[] all = loginService.getLogin(githubToken.getAccessToken());
+        String accessToken  = all[0];
+        String id = all[1];
+        String displayName = all[2];
+        String profileImage = all[3];
+        String email = all[4];
         //todo: 배포시 변경
-        response.sendRedirect("http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com/callback/access_token=bearer "+accessToken);
+//        response.sendRedirect("http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com/callback/access_token=bearer "+accessToken);
+        response.sendRedirect("http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com/callback/access_token=bearer "+accessToken+"&profile_image="+profileImage+"&user_id="+id+"&display_name="+displayName+"&profile_image="+profileImage+"&email="+email);
 //        response.sendRedirect("http://localhost:3000//callback/access_token=bearer "+accessToken);
     }
 }

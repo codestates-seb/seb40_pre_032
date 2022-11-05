@@ -5,6 +5,7 @@ import HeaderInput from './HeaderInput';
 
 function LoginHeader() {
 	const user = JSON.parse(localStorage.getItem('userInfo'));
+
 	return (
 		<div className="fixed top-0 inset-x-0 flex flex-col z-10">
 			<div className="w-full bg-[#f38227] h-[3px]" />

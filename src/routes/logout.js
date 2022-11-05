@@ -30,8 +30,8 @@ export default function Logout() {
 				console.log(response);
 				localStorage.removeItem('user');
 				localStorage.removeItem('userInfo');
-				setAuth(null);
-				setUserAuth(null);
+				setAuth('');
+				setUserAuth('');
 			})
 			.then(() => {
 				navigate('/');

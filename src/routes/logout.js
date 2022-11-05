@@ -1,40 +1,50 @@
 /* eslint-disable */
 import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { SiAskubuntu, SiServerfault, SiSuperuser } from 'react-icons/si';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaStackExchange, FaStackOverflow } from 'react-icons/fa';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { GrStackOverflow } from 'react-icons/gr';
-// import axios from 'axios';
+import axios from 'axios';
 import Header from '../components/Header';
 import authAtom from '../_state/auth';
+import userAtom from '../_state/userAuth';
+import LoginHeader from '../components/LoginHeader';
 
 export default function Logout() {
-	const auth = useRecoilValue(authAtom);
-	// const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
-	// const userEmail = '전역에 저장해놓은 email';
+	const userAuth = useRecoilValue(userAtom);
 	const navigate = useNavigate();
 	const setAuth = useSetRecoilState(authAtom);
-	useEffect(() => {
-		if (auth === null) navigate('/login');
-	});
-	const logout = () => {
-		// email
-		// const config = { headers: { Authorization: `Bearer${auth.accessToken}` } };
-		localStorage.removeItem('user');
-		setAuth(null);
-		// axios.post(`${baseUrl}/user`, { email }, config).then((response) => {
-		// 	console.log(response);
-		// 	localStorage.removeItem('user');
-		// 	setAuth(null);
+	const setUserAuth = useSetRecoilState(userAtom);
 
-		// });
+	const logout = (e) => {
+		e.preventDefault();
+		axios
+			.post(
+				`http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/logout`,
+				{ email: `${userAuth.email}` },
+			)
+			.then((response) => {
+				alert('로그아웃 되었습니다');
+				console.log(response);
+				localStorage.removeItem('user');
+				localStorage.removeItem('userInfo');
+				setAuth('');
+				setUserAuth('');
+			})
+			.then(() => {
+				navigate('/');
+			})
+			.catch((error) => {
+				alert(error);
+				navigate('/');
+			});
 	};
-	console.log(auth);
+
 	return (
 		<>
-			<Header />
+			{userAuth === '' ? <Header /> : <LoginHeader />}
 			<div className="lg:w-full w-full  bg-gray-200">
 				<div className="flex flex-col">
 					<div className="flex h-screen bg-gray-200">
@@ -122,7 +132,7 @@ export default function Logout() {
 									<button
 										className="text-sm rounded bg-sky-500 text-white p-2 hover:bg-blue-600 focus:outline-none focus:ring focus:ring-blue-200"
 										type="submit"
-										onClick={() => logout()} // userEmail
+										onClick={logout} // userEmail
 									>
 										Log out
 									</button>
@@ -130,7 +140,7 @@ export default function Logout() {
 										className="text-sm rounded text-blue-500 p-2 ml-3 hover:bg-sky-100 focus:outline-none focus:ring focus:ring-blue-200"
 										type="submit"
 									>
-										Cancel
+										<Link to="/">Cancel</Link>
 									</button>
 								</div>
 								<div className="w-64 text-xs mt-7 text-gray-600">

@@ -21,7 +21,7 @@ function QuestionDetail() {
 
 	return (
 		<div>
-			{user === null ? <Header /> : <LoginHeader />}
+			{user === '' ? <Header /> : <LoginHeader />}
 			<div className="flex justify-center ">
 				<LeftSidebar />
 				<div className="border-l-2 border-gray-200 px-4 w-[1120px]">

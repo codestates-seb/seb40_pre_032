@@ -1,37 +1,19 @@
-/* eslint-disable */
-import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useRecoilValue } from 'recoil'; // 전역 상태값 불러오는 함수
-import axios from 'axios';
+import React from 'react';
+import { useRecoilValue } from 'recoil';
 import EditUserProfile from '../components/EditUserProfile';
 import UserButtonCol from '../components/UserButtonCol';
 import UserButtonRow from '../components/UserButtonRow';
 import Header from '../components/Header';
 import LeftSidebar from '../components/LeftSidebar';
-import authAtom from '../_state/auth'; // 토큰과 사용자 정보가 들어있는 장소
+import userAuth from '../_state/userAuth';
+import LoginHeader from '../components/LoginHeader';
 
 export default function MyPage() {
-	const baseUrl = `http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080`;
-	const auth = useRecoilValue(authAtom);
-	const navigate = useNavigate();
-	const [userInfo, setUserInfo] = useState();
-
-	console.log(auth);
-
-	useEffect(() => {
-		if (auth === null) navigate('/');
-		axios
-			.post(`${baseUrl}/users/info`, { auth })
-			.then((response) => {
-				setUserInfo(response.data);
-				navigate('/');
-			})
-			.catch((error) => alert(error));
-	});
+	const userInfo = useRecoilValue(userAuth);
 
 	return (
 		<>
-			<Header />
+			{userInfo === '' ? <Header /> : <LoginHeader />}
 			<div className="flex justify-center align-middle">
 				<LeftSidebar />
 				<div className="w-full mx-3 lg:w-fit mt-14 ">
@@ -51,13 +33,13 @@ export default function MyPage() {
 									<div className="font-bold mt-10 mb-1">Display Name</div>
 									<input
 										type="name"
-										value="Name"
+										defaultValue={userInfo?.displayName}
 										className="rounded w-3/4 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
 									/>
-									<div className="font-bold mt-4 mb-1">{userInfo}</div>
+									<div className="font-bold mt-4 mb-1">Email</div>
 									<input
 										type="email"
-										value="test@gmail.com"
+										defaultValue={userInfo?.email}
 										className="rounded w-3/4 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
 									/>
 									{/* 이부분 커스텀 필요!! */}

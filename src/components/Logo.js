@@ -29,7 +29,7 @@ function Logo() {
 			>
 				<img
 					alt="stackoverflow logo"
-					src="/img/stack.png"
+					src="/image/stack.png"
 					className="w-[150px] h-[30px]"
 				/>
 			</Link>

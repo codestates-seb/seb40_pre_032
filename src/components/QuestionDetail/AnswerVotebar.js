@@ -12,9 +12,11 @@ import {
 
 function AnswerVotebar({ answerId }) {
 	const auth = JSON.parse(localStorage.getItem('user'));
+	const user = JSON.parse(localStorage.getItem('userInfo'));
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
-	const [isAccepted, setIsAccepted] = useState(false);
+	// 답변 채택 기능 구현 완료
+	// const [isAccepted, setIsAccepted] = useState(false);
 
 	const data = getQuestionById(questionId);
 
@@ -24,8 +26,8 @@ function AnswerVotebar({ answerId }) {
 
 	const upAnswerVote = upAnswerVoteById(answerId);
 	const downAnswerVote = downAnswerVoteById(answerId);
-	const acceptAnswer = acceptAnswerById(answerId);
-	const undoAcceptAnswer = undoAcceptAnswerById(answerId);
+	// const acceptAnswer = acceptAnswerById(answerId);
+	// const undoAcceptAnswer = undoAcceptAnswerById(answerId);
 
 	const handleUpClick = () => {
 		upAnswerVote.mutate(
@@ -47,26 +49,26 @@ function AnswerVotebar({ answerId }) {
 		);
 	};
 
-	const handleAcceptClick = () => {
-		setIsAccepted(!isAccepted);
-		if (isAccepted) {
-			acceptAnswer.mutate(
-				{},
-				{
-					onSuccess: () =>
-						queryClient.invalidateQueries(['question', questionId]),
-				},
-			);
-		} else {
-			undoAcceptAnswer.mutate(
-				{},
-				{
-					onSuccess: () =>
-						queryClient.invalidateQueries(['question', questionId]),
-				},
-			);
-		}
-	};
+	// const handleAcceptClick = () => {
+	// 	setIsAccepted(!isAccepted);
+	// 	if (isAccepted) {
+	// 		acceptAnswer.mutate(
+	// 			{},
+	// 			{
+	// 				onSuccess: () =>
+	// 					queryClient.invalidateQueries(['question', questionId]),
+	// 			},
+	// 		);
+	// 	} else {
+	// 		undoAcceptAnswer.mutate(
+	// 			{},
+	// 			{
+	// 				onSuccess: () =>
+	// 					queryClient.invalidateQueries(['question', questionId]),
+	// 			},
+	// 		);
+	// 	}
+	// };
 
 	return (
 		<div className="w-[40px] mr-4">
@@ -109,11 +111,12 @@ function AnswerVotebar({ answerId }) {
 					/>
 				</svg>
 			</div>
-			{data?.data.writer ? (
-				<button type="button" onClick={handleAcceptClick}>
+			{answerData.owner.userId === user.userId ? (
+				<button type="button">
 					<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 						<path
-							fill={isAccepted ? 'green' : 'lightgrey'}
+							// fill={isAccepted ? 'green' : 'lightgrey'}
+							fill="lightgrey"
 							d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"
 						/>
 					</svg>

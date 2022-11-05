@@ -43,8 +43,11 @@ function Editor() {
 		};
 		addQuestion.mutate(newQuestion, {
 			onSuccess: () => {
+				// navigate('/');
 				document.location.href = '/';
-				return queryClient.invalidateQueries(['questions']);
+				return queryClient.invalidateQueries(['questions'], {
+					refetchInactive: true,
+				});
 			},
 		});
 	};

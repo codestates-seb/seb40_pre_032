@@ -1,15 +1,13 @@
 /* eslint-disable */
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
 import { deleteAnswerById } from '../../utils/hooks/useAnswer';
 import elapsed from '../../utils/hooks/elapsed';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../../_state/auth';
 
 function AnswerUserInfo({ answerId }) {
-	const auth = useRecoilValue(authAtom);
+	const auth = JSON.parse(localStorage.getItem('user'));
 	const user = JSON.parse(localStorage.getItem('userInfo'));
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();

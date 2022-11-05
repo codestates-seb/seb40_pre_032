@@ -7,8 +7,11 @@ import {
 	getQuestionById,
 	upQuestionVoteById,
 } from '../../utils/hooks/useQuestion';
+import { useRecoilValue } from 'recoil';
+import authAtom from '../../_state/auth';
 
 function QuestionVotebar() {
+	const auth = useRecoilValue(authAtom);
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
 
@@ -18,7 +21,7 @@ function QuestionVotebar() {
 
 	const handleUpClick = () => {
 		upQuestionVote.mutate(
-			{},
+			{ accessToken: auth },
 			{
 				onSuccess: () =>
 					queryClient.invalidateQueries(['question', questionId]),
@@ -28,7 +31,7 @@ function QuestionVotebar() {
 
 	const handleDownClick = () => {
 		downQuestionVote.mutate(
-			{},
+			{ accessToken: auth },
 			{
 				onSuccess: () =>
 					queryClient.invalidateQueries(['question', questionId]),

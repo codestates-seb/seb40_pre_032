@@ -42,13 +42,9 @@ export default function Logout() {
 			});
 	};
 
-	useEffect(() => {
-		if (userAuth === null) navigate('/');
-	}, []);
-
 	return (
 		<>
-			{userAuth === null ? <Header /> : <LoginHeader />}
+			{userAuth === '' ? <Header /> : <LoginHeader />}
 			<div className="lg:w-full w-full  bg-gray-200">
 				<div className="flex flex-col">
 					<div className="flex h-screen bg-gray-200">

@@ -1,7 +1,8 @@
 /* eslint-disable */
 import React from 'react';
+import axios from 'axios';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQueryClient } from 'react-query';
+import { useQueryClient, useQuery } from 'react-query';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
 import { deleteAnswerById } from '../../utils/hooks/useAnswer';
 import elapsed from '../../utils/hooks/elapsed';
@@ -13,6 +14,17 @@ function AnswerUserInfo({ answerId }) {
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
+
+	const currentUser = useQuery(['user'], () => {
+		return axios.get(
+			'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
+			{
+				headers: {
+					accessToken: auth,
+				},
+			},
+		);
+	});
 
 	const data = getQuestionById(questionId);
 	const answerData = data?.data.answers.find(
@@ -51,26 +63,24 @@ function AnswerUserInfo({ answerId }) {
 	return (
 		<div className="mt-6 flex flex-row h-[50px]">
 			<div className="w-[280px]">
-				<button className="mr-2 text-sm text-gray-500" type="button">
-					Share
-				</button>
-				<button
-					className="mr-2 text-sm text-gray-500"
-					type="button"
-					onClick={handleEdit}
-				>
-					Edit
-				</button>
-				<button className="mr-2 text-sm text-gray-500" type="button">
-					Follow
-				</button>
-				<button
-					className="mr-2 text-sm text-gray-500"
-					type="button"
-					onClick={handleDelete}
-				>
-					Delete
-				</button>
+				{answerData.owner.userId === currentUser.data.data.userId ? (
+					<>
+						<button
+							className="mr-2 text-sm text-gray-500"
+							type="button"
+							onClick={handleEdit}
+						>
+							Edit
+						</button>
+						<button
+							className="mr-2 text-sm text-gray-500"
+							type="button"
+							onClick={handleDelete}
+						>
+							Delete
+						</button>
+					</>
+				) : null}
 			</div>
 			{/* 수정된 적 없으면 빈칸 */}
 			<div className="w-[280px]">
@@ -82,8 +92,14 @@ function AnswerUserInfo({ answerId }) {
 				<div className="text-gray-500 text-sm">
 					asked {elapsed(answerData.creationDate)}
 				</div>
-				<div className="text-blue-500 text-sm">
-					{/* {answerData.owner.displayName} */}
+				<div className="flex flex-row">
+					<img
+						className="h-[20px] w-[20px]"
+						src={answerData.owner.profileImage}
+					/>
+					<span className="text-blue-500 text-sm ml-2">
+						{answerData.owner.displayName}
+					</span>
 				</div>
 			</div>
 		</div>

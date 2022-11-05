@@ -13,7 +13,7 @@ export default function MyPage() {
 
 	return (
 		<>
-			{userInfo === null ? <Header /> : <LoginHeader />}
+			{userInfo === '' ? <Header /> : <LoginHeader />}
 			<div className="flex justify-center align-middle">
 				<LeftSidebar />
 				<div className="w-full mx-3 lg:w-fit mt-14 ">

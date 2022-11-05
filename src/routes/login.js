@@ -29,10 +29,6 @@ export default function Login() {
 		setUserPassword(e.target.value);
 	};
 
-	useEffect(() => {
-		if (auth !== null) navigate('/');
-	}, []);
-
 	const onSubmit = (e) => {
 		e.preventDefault();
 		axios

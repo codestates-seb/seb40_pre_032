@@ -9,8 +9,11 @@ import {
 	acceptAnswerById,
 	undoAcceptAnswerById,
 } from '../../utils/hooks/useAnswer';
+import { useRecoilValue } from 'recoil';
+import authAtom from '../../_state/auth';
 
 function AnswerVotebar({ answerId }) {
+	const auth = useRecoilValue(authAtom);
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
 	const [isAccepted, setIsAccepted] = useState(false);
@@ -28,7 +31,7 @@ function AnswerVotebar({ answerId }) {
 
 	const handleUpClick = () => {
 		upAnswerVote.mutate(
-			{},
+			{ accessToken: auth },
 			{
 				onSuccess: () =>
 					queryClient.invalidateQueries(['question', questionId]),
@@ -38,7 +41,7 @@ function AnswerVotebar({ answerId }) {
 
 	const handleDownClick = () => {
 		downAnswerVote.mutate(
-			{},
+			{ accessToken: auth },
 			{
 				onSuccess: () =>
 					queryClient.invalidateQueries(['question', questionId]),
@@ -112,14 +115,16 @@ function AnswerVotebar({ answerId }) {
 					/>
 				</svg>
 			</div>
-			<button type="button" onClick={handleAcceptClick}>
-				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
-					<path
-						fill={isAccepted ? 'green' : 'lightgrey'}
-						d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"
-					/>
-				</svg>
-			</button>
+			{data?.data.writer ? (
+				<button type="button" onClick={handleAcceptClick}>
+					<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
+						<path
+							fill={isAccepted ? 'green' : 'lightgrey'}
+							d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"
+						/>
+					</svg>
+				</button>
+			) : null}
 		</div>
 	);
 }

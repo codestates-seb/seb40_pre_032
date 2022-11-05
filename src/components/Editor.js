@@ -35,7 +35,7 @@ function Editor() {
 
 	const addQuestion = useMutation((newQuestion) => {
 		axios.post(
-			'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/add',
+			'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/add',
 			newQuestion,
 		);
 	});

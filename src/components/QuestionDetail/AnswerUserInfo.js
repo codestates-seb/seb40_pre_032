@@ -17,7 +17,7 @@ function AnswerUserInfo({ answerId }) {
 
 	const currentUser = useQuery(['user'], () => {
 		return axios.get(
-			'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
+			'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
 			{
 				headers: {
 					accessToken: auth,

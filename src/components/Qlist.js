@@ -8,6 +8,7 @@ import NumNBtn from './Mainpage/NumNBtn';
 import AllQuestions from './Mainpage/AllQuestions';
 import Pagination from './Mainpage/Pagination';
 import api from '../_state/api';
+import { useEffect } from 'react';
 
 function Qlist() {
 	// const address = useRecoilValue(api);
@@ -28,6 +29,7 @@ function Qlist() {
 		},
 	);
 	console.log(data?.data.items);
+
 	return (
 		<div className="p-[24px] w-[727px]  border-l-[1px] border-solid border-[hsl(210,8%,85%)] mb-4">
 			<QuestionHeading />

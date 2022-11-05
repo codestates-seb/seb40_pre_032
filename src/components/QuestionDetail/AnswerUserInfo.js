@@ -1,8 +1,7 @@
 /* eslint-disable */
-import React from 'react';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { useQueryClient, useQuery } from 'react-query';
+import { useQueryClient } from 'react-query';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
 import { deleteAnswerById } from '../../utils/hooks/useAnswer';
 import elapsed from '../../utils/hooks/elapsed';
@@ -10,21 +9,11 @@ import { useRecoilValue } from 'recoil';
 import authAtom from '../../_state/auth';
 
 function AnswerUserInfo({ answerId }) {
+	const [userInfo, setUserInfo] = useState('');
 	const auth = useRecoilValue(authAtom);
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
-
-	const currentUser = useQuery(['user'], () => {
-		return axios.get(
-			'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/users/myPage',
-			{
-				headers: {
-					accessToken: auth,
-				},
-			},
-		);
-	});
 
 	const data = getQuestionById(questionId);
 	const answerData = data?.data.answers.find(
@@ -60,10 +49,17 @@ function AnswerUserInfo({ answerId }) {
 		}
 	};
 
+	useEffect(() => {
+		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+		if (userInfo !== null) {
+			setUserInfo(userInfo);
+		}
+	}, []);
+
 	return (
 		<div className="mt-6 flex flex-row h-[50px]">
 			<div className="w-[280px]">
-				{answerData.owner.userId === currentUser.data.data.userId ? (
+				{answerData.owner.userId === userInfo.userId ? (
 					<>
 						<button
 							className="mr-2 text-sm text-gray-500"

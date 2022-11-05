@@ -44,7 +44,7 @@ export default function Logout() {
 
 	return (
 		<>
-			{userAuth === '' ? <Header /> : <LoginHeader />}
+			{userAuth === 'not' ? <Header /> : <LoginHeader />}
 			<div className="lg:w-full w-full  bg-gray-200">
 				<div className="flex flex-col">
 					<div className="flex h-screen bg-gray-200">

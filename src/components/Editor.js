@@ -7,11 +7,9 @@ import 'react-quill/dist/quill.snow.css';
 import TagInput from './TagInput';
 import Accordian from './Accordian';
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../_state/auth';
 
 function Editor() {
-	const auth = useRecoilValue(authAtom);
+	const auth = JSON.parse(localStorage.getItem('user'));
 	const queryClient = useQueryClient({
 		defaultOptions: {
 			queries: {
@@ -48,7 +46,7 @@ function Editor() {
 		};
 		addQuestion.mutate(newQuestion, {
 			onSuccess: () => {
-				navigate('/');
+				document.location.href = '/';
 				return queryClient.invalidateQueries(['questions']);
 			},
 		});

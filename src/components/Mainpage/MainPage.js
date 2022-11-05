@@ -11,8 +11,6 @@ import authAtom from '../../_state/userAuth'; // 토큰과 사용자 정보가 �
 
 export default function MainPage() {
 	const user = useRecoilValue(authAtom);
-	const auth = useRecoilValue(authAtom);
-	console.log(auth);
 
 	return (
 		<div className="flex flex-col items-center">

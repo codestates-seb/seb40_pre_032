@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
@@ -11,7 +10,6 @@ import Header from '../components/Header';
 import useUserActions from '../utils/hooks/useUserActions';
 
 export default function SignUp() {
-	// const baseUrl = `http://ec2-15-165-146-60.ap-northeast-2.compute.amazonaws.com:8080`;
 	const userActions = useUserActions();
 	const navigate = useNavigate();
 	const [dpName, setDpName] = useState('');

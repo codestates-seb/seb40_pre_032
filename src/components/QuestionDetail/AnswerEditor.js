@@ -5,12 +5,10 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { useParams } from 'react-router-dom';
 import { addAnswerToQuestion } from '../../utils/hooks/useAnswer';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../../_state/auth';
 import { Link } from 'react-router-dom';
 
 function AnswerEditor() {
-	const auth = useRecoilValue(authAtom);
+	const auth = JSON.parse(localStorage.getItem('user'));
 	const queryClient = useQueryClient();
 	const [quillText, setQuillText] = useState('');
 	const { questionId } = useParams();

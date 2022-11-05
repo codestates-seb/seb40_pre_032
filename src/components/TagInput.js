@@ -8,6 +8,7 @@ function TagInput({ tags, setTags }) {
 	};
 
 	const addTags = (event) => {
+		if (event.target.value === '' || tags.includes(event.target.value)) return;
 		setTags([...tags, event.target.value]);
 		event.target.value = '';
 	};

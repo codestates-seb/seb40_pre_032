@@ -1,17 +1,14 @@
 /* eslint-disable */
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import ReactQuill from 'react-quill';
 import { useMutation, useQueryClient } from 'react-query';
 import 'react-quill/dist/quill.snow.css';
 import TagInput from './TagInput';
 import Accordian from './Accordian';
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../_state/auth';
 
 function Editor() {
-	const auth = useRecoilValue(authAtom);
+	const auth = JSON.parse(localStorage.getItem('user'));
 	const queryClient = useQueryClient({
 		defaultOptions: {
 			queries: {
@@ -20,8 +17,6 @@ function Editor() {
 			},
 		},
 	});
-
-	const navigate = useNavigate();
 
 	const [title, setTitle] = useState('');
 	const [quillText, setQuillText] = useState('');
@@ -35,7 +30,7 @@ function Editor() {
 
 	const addQuestion = useMutation((newQuestion) => {
 		axios.post(
-			'http://cors-anywhere.herokuapp.com/http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/add',
+			'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080/questions/add',
 			newQuestion,
 		);
 	});
@@ -48,7 +43,7 @@ function Editor() {
 		};
 		addQuestion.mutate(newQuestion, {
 			onSuccess: () => {
-				navigate('/');
+				document.location.href = '/';
 				return queryClient.invalidateQueries(['questions']);
 			},
 		});

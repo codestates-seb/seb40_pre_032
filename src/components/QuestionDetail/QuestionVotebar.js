@@ -2,22 +2,20 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useQueryClient } from 'react-query';
-import { downAnswerVoteById } from '../../utils/hooks/useAnswer';
 import {
+	downQuestionVoteById,
 	getQuestionById,
 	upQuestionVoteById,
 } from '../../utils/hooks/useQuestion';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../../_state/auth';
 
 function QuestionVotebar() {
-	const auth = useRecoilValue(authAtom);
+	const auth = JSON.parse(localStorage.getItem('user'));
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
 
 	const data = getQuestionById(questionId);
 	const upQuestionVote = upQuestionVoteById(questionId);
-	const downQuestionVote = downAnswerVoteById(questionId);
+	const downQuestionVote = downQuestionVoteById(questionId);
 
 	const handleUpClick = () => {
 		upQuestionVote.mutate(
@@ -46,7 +44,6 @@ function QuestionVotebar() {
 				className="flex justify-center"
 				onClick={handleUpClick}
 			>
-				{/* up button */}
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 					<path fill="lightgrey" d="M2 25h32L18 9 2 25Z" />
 				</svg>
@@ -59,14 +56,12 @@ function QuestionVotebar() {
 				className="flex justify-center mb-2"
 				onClick={handleDownClick}
 			>
-				{/* down button */}
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 					<path fill="lightgrey" d="M2 11h32L18 27 2 11Z" />
 				</svg>
 			</button>
 			<div className="flex justify-center mb-3">
 				<button type="button">
-					{/* bookmark icon */}
 					<svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18">
 						<path
 							fill="lightgrey"
@@ -76,7 +71,6 @@ function QuestionVotebar() {
 				</button>
 			</div>
 			<div className="flex justify-center">
-				{/* history icon */}
 				<svg
 					aria-hidden="true"
 					className=""

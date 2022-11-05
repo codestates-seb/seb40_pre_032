@@ -1,20 +1,18 @@
 /* eslint-disable */
-import React, { useEffect } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import { SiAskubuntu, SiServerfault, SiSuperuser } from 'react-icons/si';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { FaStackExchange, FaStackOverflow } from 'react-icons/fa';
 import { useSetRecoilState, useRecoilValue } from 'recoil';
 import { GrStackOverflow } from 'react-icons/gr';
 import axios from 'axios';
-import Header from '../components/Header';
 import authAtom from '../_state/auth';
 import userAtom from '../_state/userAuth';
 import LoginHeader from '../components/LoginHeader';
 
 export default function Logout() {
 	const userAuth = useRecoilValue(userAtom);
-	const navigate = useNavigate();
 	const setAuth = useSetRecoilState(authAtom);
 	const setUserAuth = useSetRecoilState(userAtom);
 
@@ -30,21 +28,21 @@ export default function Logout() {
 				console.log(response);
 				localStorage.removeItem('user');
 				localStorage.removeItem('userInfo');
-				setAuth('');
-				setUserAuth('');
+				setAuth('_');
+				setUserAuth('_');
 			})
 			.then(() => {
-				navigate('/');
+				document.location.href = '/';
 			})
 			.catch((error) => {
 				alert(error);
-				navigate('/');
+				document.location.href = '/';
 			});
 	};
 
 	return (
 		<>
-			{userAuth === '' ? <Header /> : <LoginHeader />}
+			<LoginHeader />
 			<div className="lg:w-full w-full  bg-gray-200">
 				<div className="flex flex-col">
 					<div className="flex h-screen bg-gray-200">

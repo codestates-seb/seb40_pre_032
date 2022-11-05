@@ -55,8 +55,12 @@ function AllQuestions({ questions, offset, limit }) {
 									</ul>
 								</div>
 								<div className="flex">
-									<div >
-										<img src={question.owner.profileImage} alt="userImage" className="w-4 mr-1" />
+									<div>
+										<img
+											src={question.owner.profileImage}
+											alt="userImage"
+											className="w-4 mr-1"
+										/>
 									</div>
 									<div className="text-[#6aa1de] text-[12px]">
 										{question.owner.displayName}

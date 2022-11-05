@@ -1,19 +1,16 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
 import EditUserProfile from '../components/EditUserProfile';
 import UserButtonCol from '../components/UserButtonCol';
 import UserButtonRow from '../components/UserButtonRow';
-import Header from '../components/Header';
 import LeftSidebar from '../components/LeftSidebar';
-import userAuth from '../_state/userAuth';
 import LoginHeader from '../components/LoginHeader';
 
 export default function MyPage() {
-	const userInfo = useRecoilValue(userAuth);
+	const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
 	return (
 		<>
-			{userInfo === '' ? <Header /> : <LoginHeader />}
+			<LoginHeader />
 			<div className="flex justify-center align-middle">
 				<LeftSidebar />
 				<div className="w-full mx-3 lg:w-fit mt-14 ">
@@ -42,7 +39,6 @@ export default function MyPage() {
 										defaultValue={userInfo?.email}
 										className="rounded w-3/4 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
 									/>
-									{/* 이부분 커스텀 필요!! */}
 									<div className="font-bold  mt-4 mb-1">Password</div>
 									<input
 										type="password"

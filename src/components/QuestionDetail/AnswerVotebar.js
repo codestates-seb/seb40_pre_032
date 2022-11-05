@@ -9,11 +9,9 @@ import {
 	acceptAnswerById,
 	undoAcceptAnswerById,
 } from '../../utils/hooks/useAnswer';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../../_state/auth';
 
 function AnswerVotebar({ answerId }) {
-	const auth = useRecoilValue(authAtom);
+	const auth = JSON.parse(localStorage.getItem('user'));
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
 	const [isAccepted, setIsAccepted] = useState(false);
@@ -72,7 +70,6 @@ function AnswerVotebar({ answerId }) {
 
 	return (
 		<div className="w-[40px] mr-4">
-			{/* up button */}
 			<button
 				type="button"
 				className="flex justify-center"
@@ -90,14 +87,12 @@ function AnswerVotebar({ answerId }) {
 				className="flex justify-center mb-2"
 				onClick={handleDownClick}
 			>
-				{/* down button */}
 				<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 					<path fill="lightgrey" d="M2 11h32L18 27 2 11Z" />
 				</svg>
 			</button>
 			<div className="flex justify-center mb-3">
 				<button type="button">
-					{/* bookmark icon */}
 					<svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18">
 						<path
 							fill="lightgrey"
@@ -107,7 +102,6 @@ function AnswerVotebar({ answerId }) {
 				</button>
 			</div>
 			<div className="flex justify-center">
-				{/* history icon */}
 				<svg aria-hidden="true" width="19" height="18" viewBox="0 0 19 18">
 					<path
 						fill="lightgrey"

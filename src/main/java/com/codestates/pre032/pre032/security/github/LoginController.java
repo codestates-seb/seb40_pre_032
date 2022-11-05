@@ -31,7 +31,7 @@ public class LoginController {
         String accessToken  = loginService.getLogin(githubToken.getAccessToken());
 
         //todo: 배포시 변경
-//        response.sendRedirect("http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com/callback/access_token=bearer "+accessToken);
-        response.sendRedirect("http://localhost:3000//callback/access_token=bearer "+accessToken);
+        response.sendRedirect("http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com/callback/access_token=bearer "+accessToken);
+//        response.sendRedirect("http://localhost:3000//callback/access_token=bearer "+accessToken);
     }
 }

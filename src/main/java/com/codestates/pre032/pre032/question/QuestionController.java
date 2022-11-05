@@ -46,7 +46,7 @@ public class QuestionController {
     @PostMapping("/add")
 //    @PreAuthorize("isAuthenticated()")
     public ResponseEntity addQuestion(@Validated @RequestBody QuestionDto.Post requestBody) {
-        if (requestBody.getAccessToken().equals("")) {
+        if (requestBody.getAccessToken().equals("_")) {
             throw new UnauthorizedException("로그인이 필요합니다.");
         }
 
@@ -86,11 +86,11 @@ public class QuestionController {
     @GetMapping("/{questionId}")
     public ResponseEntity questionDetail(@PathVariable("questionId") Long id,
                                          @RequestHeader(value = "accessToken") String accessToken) {
-        if (accessToken.equals("")){
-            throw new UnauthorizedException("로그인이 필요합니다.");
+        Boolean isWriter = false;
+        if (!accessToken.equals("_")){
+            isWriter = questionService.getWriter(id, userService.findByAccessToken(accessToken));
         }
         Question question = questionService.getDetail(id);
-        Boolean isWriter = questionService.getWriter(id, userService.findByAccessToken(accessToken));
         User user = question.getUser();
 
         QuestionDto.questionDetailsResponse response = questionMapper.questionToQuestionDetailsResponseDto(question, isWriter);
@@ -149,7 +149,7 @@ public class QuestionController {
     @PostMapping("/{questionId}/upVote")
     public ResponseEntity upVote(@PathVariable("questionId") Long id,
                                  @RequestBody TokenDto tokenDto) {
-        if (tokenDto.getAccessToken().equals("")) {
+        if (tokenDto.getAccessToken().equals("_")) {
             throw new UnauthorizedException("로그인이 필요합니다.");
         }
         Question question = questionService.find(id);
@@ -160,10 +160,11 @@ public class QuestionController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    // 비추천기능
     @PostMapping("/{questionId}/downVote")
     public ResponseEntity downVote(@PathVariable("questionId") Long id,
                                  @RequestBody TokenDto tokenDto) {
-        if (tokenDto.getAccessToken().equals("")) {
+        if (tokenDto.getAccessToken().equals("_")) {
             throw new UnauthorizedException("로그인이 필요합니다.");
         }
         Question question = questionService.find(id);

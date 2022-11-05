@@ -7,8 +7,6 @@ import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
 import { editQuestionById } from '../../utils/hooks/useQuestion';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../../_state/auth';
 
 function AddTag({ tags, setTags }) {
 	const [inputValue, setInputValue] = useState('');
@@ -59,7 +57,7 @@ function AddTag({ tags, setTags }) {
 }
 
 function QuestionEditor() {
-	const auth = useRecoilValue(authAtom);
+	const auth = JSON.parse(localStorage.getItem('user'));
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
@@ -79,9 +77,7 @@ function QuestionEditor() {
 		setTitleValue(event.target.value);
 	};
 
-	const handleSubmit = (event) => {
-		event.preventDefault();
-
+	const handleSubmit = () => {
 		const editedQuestion = {
 			title: titleValue,
 			questionContent: quillText,

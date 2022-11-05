@@ -7,11 +7,9 @@ import { useQueryClient } from 'react-query';
 import { useNavigate } from 'react-router-dom';
 import { getQuestionById } from '../../utils/hooks/useQuestion';
 import { editAnswerById } from '../../utils/hooks/useAnswer';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../../_state/auth';
 
 function AnswerEditor() {
-	const auth = useRecoilValue(authAtom);
+	const auth = JSON.parse(localStorage.getItem('user'));
 	const navigate = useNavigate();
 	const location = useLocation();
 	const queryClient = useQueryClient();

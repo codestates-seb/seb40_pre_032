@@ -9,8 +9,8 @@ import { useRecoilValue } from 'recoil';
 import authAtom from '../../_state/auth';
 
 function AnswerUserInfo({ answerId }) {
-	const [userInfo, setUserInfo] = useState('');
 	const auth = useRecoilValue(authAtom);
+	const user = JSON.parse(localStorage.getItem('userInfo'));
 	const navigate = useNavigate();
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
@@ -49,17 +49,10 @@ function AnswerUserInfo({ answerId }) {
 		}
 	};
 
-	useEffect(() => {
-		const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-		if (userInfo !== null) {
-			setUserInfo(userInfo);
-		}
-	}, []);
-
 	return (
 		<div className="mt-6 flex flex-row h-[50px]">
 			<div className="w-[280px]">
-				{answerData.owner.userId === userInfo.userId ? (
+				{answerData.owner.userId === user.userId ? (
 					<>
 						<button
 							className="mr-2 text-sm text-gray-500"
@@ -78,7 +71,6 @@ function AnswerUserInfo({ answerId }) {
 					</>
 				) : null}
 			</div>
-			{/* 수정된 적 없으면 빈칸 */}
 			<div className="w-[280px]">
 				<button type="button" className="text-blue-500 text-sm">
 					{/* edited (editedAt) ago */}

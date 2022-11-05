@@ -10,6 +10,8 @@ import elapsed from '../../utils/hooks/elapsed';
 
 function QuestionUserInfo() {
 	const auth = JSON.parse(localStorage.getItem('user'));
+	const user = JSON.parse(localStorage.getItem('userInfo'));
+
 	const queryClient = useQueryClient();
 	const navigate = useNavigate();
 	const { questionId } = useParams();
@@ -51,7 +53,7 @@ function QuestionUserInfo() {
 	return (
 		<div className="flex flex-row h-[50px]">
 			<div className="w-[280px]">
-				{data?.data.writer ? (
+				{data?.data.owner.userId === user.userId ? (
 					<>
 						<button
 							className="mr-2 text-sm text-gray-500"

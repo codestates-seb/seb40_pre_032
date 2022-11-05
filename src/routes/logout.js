@@ -1,4 +1,5 @@
-import React from 'react'; // useEffect
+/* eslint-disable */
+import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { SiAskubuntu, SiServerfault, SiSuperuser } from 'react-icons/si';
 import { AiTwotoneSetting } from 'react-icons/ai';
@@ -9,12 +10,13 @@ import axios from 'axios';
 import Header from '../components/Header';
 import authAtom from '../_state/auth';
 import userAtom from '../_state/userAuth';
+import LoginHeader from '../components/LoginHeader';
 
 export default function Logout() {
 	const userAuth = useRecoilValue(userAtom);
 	const navigate = useNavigate();
 	const setAuth = useSetRecoilState(authAtom);
-	const setUserAuth = useSetRecoilState(userAtom); // set함수 반환
+	const setUserAuth = useSetRecoilState(userAtom);
 
 	const logout = (e) => {
 		e.preventDefault();
@@ -39,11 +41,14 @@ export default function Logout() {
 				navigate('/');
 			});
 	};
-	// useEffect(()=>{if(userAuth===null) 		navigate('/');})
+
+	useEffect(() => {
+		if (userAuth === null) navigate('/');
+	}, []);
 
 	return (
 		<>
-			<Header />
+			{userAuth === null ? <Header /> : <LoginHeader />}
 			<div className="lg:w-full w-full  bg-gray-200">
 				<div className="flex flex-col">
 					<div className="flex h-screen bg-gray-200">

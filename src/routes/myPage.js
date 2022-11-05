@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import React from 'react';
 import { useRecoilValue } from 'recoil';
 import EditUserProfile from '../components/EditUserProfile';
 import UserButtonCol from '../components/UserButtonCol';
@@ -7,18 +6,14 @@ import UserButtonRow from '../components/UserButtonRow';
 import Header from '../components/Header';
 import LeftSidebar from '../components/LeftSidebar';
 import userAuth from '../_state/userAuth';
+import LoginHeader from '../components/LoginHeader';
 
 export default function MyPage() {
-	const navigate = useNavigate();
 	const userInfo = useRecoilValue(userAuth);
 
-	useEffect(() => {
-		if (userInfo === null) navigate('/');
-	});
-	console.log(userInfo);
 	return (
 		<>
-			<Header />
+			{userInfo === null ? <Header /> : <LoginHeader />}
 			<div className="flex justify-center align-middle">
 				<LeftSidebar />
 				<div className="w-full mx-3 lg:w-fit mt-14 ">
@@ -38,13 +33,13 @@ export default function MyPage() {
 									<div className="font-bold mt-10 mb-1">Display Name</div>
 									<input
 										type="name"
-										value={userInfo?.displayName}
+										defaultValue={userInfo?.displayName}
 										className="rounded w-3/4 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
 									/>
 									<div className="font-bold mt-4 mb-1">Email</div>
 									<input
 										type="email"
-										value={userInfo?.email}
+										defaultValue={userInfo?.email}
 										className="rounded w-3/4 border-solid border-[1px] border-gray-500 py-1 px-2 focus:outline-none focus:ring focus:ring-blue-200"
 									/>
 									{/* 이부분 커스텀 필요!! */}

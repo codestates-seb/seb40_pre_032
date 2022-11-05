@@ -38,7 +38,7 @@ export default function useUserActions() {
 	}
 
 	function githubLogin() {
-		const GITHUB_LOGIN_URL = `https://github.com/login/oauth/authorize?client_id=82422b0d46b1255e9450`;
+		const GITHUB_LOGIN_URL = `https://github.com/login/oauth/authorize?client_id=bb0d7862c04e3967a361`;
 		window.location.href = GITHUB_LOGIN_URL;
 	}
 

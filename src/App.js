@@ -2,7 +2,7 @@ import React, { Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
-import MainPage from './components/Mainpage/MainPage';
+import MainPage from './components/MainPage/MainPage';
 import Login from './routes/login';
 import SignUp from './routes/signUp';
 import Editor from './components/Editor';

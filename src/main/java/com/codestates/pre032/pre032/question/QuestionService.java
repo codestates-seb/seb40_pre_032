@@ -216,6 +216,7 @@ public class QuestionService {
         score.setQuestion(question);
         score.setUser(user);
         scoreService.saveScore(score);
+        question.setViewCount(question.getViewCount()-1);
         questionRepository.save(question);
     }
 
@@ -230,6 +231,7 @@ public class QuestionService {
         score.setQuestion(question);
         score.setUser(user);
         scoreService.saveScore(score);
+        question.setViewCount(question.getViewCount()-1);
         questionRepository.save(question);
     }
 

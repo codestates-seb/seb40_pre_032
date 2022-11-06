@@ -1,5 +1,6 @@
 package com.codestates.pre032.pre032.score;
 
+import com.codestates.pre032.pre032.answer.Answer;
 import com.codestates.pre032.pre032.question.Question;
 import com.codestates.pre032.pre032.user.User;
 import lombok.Getter;
@@ -20,6 +21,10 @@ public class Score {
     @ManyToOne
     @JoinColumn(name = "question")
     private Question question;
+
+    @ManyToOne
+    @JoinColumn(name = "answer")
+    private Answer answer;
 
     @ManyToOne
     @JoinColumn(name = "user")

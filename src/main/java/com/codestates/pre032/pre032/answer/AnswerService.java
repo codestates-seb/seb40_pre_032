@@ -3,6 +3,8 @@ package com.codestates.pre032.pre032.answer;
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
 import com.codestates.pre032.pre032.question.Question;
 import com.codestates.pre032.pre032.question.QuestionService;
+import com.codestates.pre032.pre032.score.Score;
+import com.codestates.pre032.pre032.score.ScoreService;
 import com.codestates.pre032.pre032.user.User;
 import org.springframework.stereotype.Service;
 
@@ -16,9 +18,12 @@ public class AnswerService {
 
     private final QuestionService questionService;
 
-    public AnswerService(AnswerRepository answerRepository, QuestionService questionService) {
+    private final ScoreService scoreService;
+
+    public AnswerService(AnswerRepository answerRepository, QuestionService questionService, ScoreService scoreService) {
         this.answerRepository = answerRepository;
         this.questionService = questionService;
+        this.scoreService = scoreService;
     }
 
     public Answer create(Long id, Answer answer, User user){
@@ -86,16 +91,32 @@ public class AnswerService {
 
     // 추천 기능
     public void upVote(Answer answer, User user) {
+        Score score = scoreService.findByUserAndAnswer(user, answer);
+
+        if (score.getStatus()!=1){
+            score.setStatus(score.getStatus()+1);
+            answer.setScore(answer.getScore()+1);
+        }
+        score.setAnswer(answer);
+        score.setUser(user);
+        scoreService.saveScore(score);
         Question question = answer.getQuestion();
-        answer.setScore(answer.getScore()+1);
         questionService.downViewCount(question);
         answerRepository.save(answer);
     }
 
     // 비추천 기능
     public void downVote(Answer answer, User user) {
+        Score score = scoreService.findByUserAndAnswer(user, answer);
+
+        if (score.getStatus()!=-1){
+            score.setStatus(score.getStatus()-1);
+            answer.setScore(answer.getScore()-1);
+        }
+        score.setAnswer(answer);
+        score.setUser(user);
+        scoreService.saveScore(score);
         Question question = answer.getQuestion();
-        answer.setScore(answer.getScore()-1);
         questionService.downViewCount(question);
         answerRepository.save(answer);
     }

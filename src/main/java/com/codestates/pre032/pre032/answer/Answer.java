@@ -2,6 +2,7 @@ package com.codestates.pre032.pre032.answer;
 
 
 import com.codestates.pre032.pre032.question.Question;
+import com.codestates.pre032.pre032.score.Score;
 import com.codestates.pre032.pre032.user.User;
 import com.codestates.pre032.pre032.user.UserDto;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @NoArgsConstructor
 @Getter
@@ -43,6 +45,9 @@ public class Answer {
 
     @Column(nullable = false)
     private LocalDateTime modifiedAt = LocalDateTime.now();
+
+    @OneToMany(mappedBy = "answer")
+    private List<Score> likeUsers;
 
     public UserDto.owner getOwnerDto(){
         User user = this.user;

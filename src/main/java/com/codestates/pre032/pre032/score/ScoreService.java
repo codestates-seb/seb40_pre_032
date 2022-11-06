@@ -1,5 +1,6 @@
 package com.codestates.pre032.pre032.score;
 
+import com.codestates.pre032.pre032.answer.Answer;
 import com.codestates.pre032.pre032.question.Question;
 import com.codestates.pre032.pre032.user.User;
 import org.springframework.stereotype.Service;
@@ -23,6 +24,17 @@ public class ScoreService {
             return new Score();
         }
     }
+
+    public Score findByUserAndAnswer(User user, Answer answer) {
+        Optional<Score> score =
+                this.scoreRepository.findByUserAndAnswer(user, answer);
+        if (score.isPresent()) {
+            return score.get();
+        } else {
+            return new Score();
+        }
+    }
+
     public void saveScore(Score score){
         this.scoreRepository.save(score);
     }

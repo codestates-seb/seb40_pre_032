@@ -66,6 +66,18 @@ public class UserController {
 //    public String accessDenied() {
 //        return "access-denied";
 //    }
+    @PostMapping("/myPage/{userId}/edit")
+    public ResponseEntity updateMyPage(@RequestHeader(value = "accessToken") String accessToken,
+                                       @RequestBody UserDto.update requestBody) {
+        if (accessToken.equals("not")) {
+            throw new UnauthorizedException("로그인이 필요합니다.");
+        }
+        User user = this.userService.findByAccessToken(accessToken);
+        User updateUser = userService.updateUser(user, requestBody);
 
+        UserDto.response response = this.userMapper.userToUserResponseDto(updateUser);
+
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
 
 }

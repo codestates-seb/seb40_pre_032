@@ -73,6 +73,12 @@ public class QuestionService {
     //답변 없는 질문 조회
     public List<Question> selectUnanswer() {
         List<Question> answer = this.questionRepository.selectUnanswered();
+        Collections.sort(answer, new Comparator<Question>() {
+            @Override
+            public int compare(Question q1, Question q2) {
+                return q2.getCreationDate().compareTo(q1.getCreationDate());
+            }
+        });
         return answer;
     }
 

@@ -1,7 +1,9 @@
 package com.codestates.pre032.pre032.user;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
+import com.codestates.pre032.pre032.exception.UnauthorizedException;
 import com.codestates.pre032.pre032.exception.UserExistsException;
+import com.codestates.pre032.pre032.security.dto.LoginDto;
 import com.codestates.pre032.pre032.security.jwt.JwtTokenizer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -49,6 +51,17 @@ public class UserService {
         Optional<User> user = userRepository.findByEmail(email);
         if (user.isPresent())
             throw new UserExistsException("이미 등록된 이메일입니다.");
+    }
+
+    public User updateUser(User user, UserDto.update dto){
+        UserDto.login loginDto = new UserDto.login();
+        loginDto.setEmail(dto.getEmail());
+        loginDto.setPassword(dto.getPassword());
+        if (verifyPassword(loginDto)){
+            throw new UnauthorizedException("사용자 정보가 일치하지 않습니다");
+        }
+        user.setDisplayName(dto.getDisplayName());
+        return this.userRepository.save(user);
     }
 
     public User find(Long id) {

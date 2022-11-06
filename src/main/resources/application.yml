@@ -88,7 +88,7 @@ server:
 jwt:
   #  원래는 그냥 입력하면 안되는데 환경변수 설정 귀찮아서 그냥 입력함
   secret: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-  access-token-expiration-minutes: 30
+  access-token-expiration-minutes: 300
 
 config:
   domain: http://pre-032-bucket.s3-website.ap-northeast-2.amazonaws.com

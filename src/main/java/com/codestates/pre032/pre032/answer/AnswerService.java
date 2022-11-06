@@ -86,13 +86,17 @@ public class AnswerService {
 
     // 추천 기능
     public void upVote(Answer answer, User user) {
+        Question question = answer.getQuestion();
         answer.setScore(answer.getScore()+1);
+        questionService.downViewCount(question);
         answerRepository.save(answer);
     }
 
     // 비추천 기능
     public void downVote(Answer answer, User user) {
+        Question question = answer.getQuestion();
         answer.setScore(answer.getScore()-1);
+        questionService.downViewCount(question);
         answerRepository.save(answer);
     }
 }

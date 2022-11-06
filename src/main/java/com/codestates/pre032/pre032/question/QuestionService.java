@@ -190,4 +190,9 @@ public class QuestionService {
         question.setViewCount(question.getViewCount()-1);
         questionRepository.save(question);
     }
+
+    // 버그 임시 해결을 위한 조회수 1다운
+    public void downViewCount(Question question){
+        question.setViewCount(question.getViewCount()-1);
+    }
 }

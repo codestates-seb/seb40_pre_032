@@ -115,8 +115,12 @@ function AnswerVotebar({ answerId }) {
 					/>
 				</svg>
 			</div>
-			{data?.data.owner.userId === userInfo.userId ? (
-				<button type="button" onClick={handleAcceptClick}>
+			{answerData.accepted || data?.data.owner.userId === userInfo.userId ? (
+				<button
+					type="button"
+					disabled={data?.data.owner.userId === userInfo.userId ? false : true}
+					onClick={handleAcceptClick}
+				>
 					<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 						<path
 							fill={answerData.accepted ? 'green' : 'lightgrey'}

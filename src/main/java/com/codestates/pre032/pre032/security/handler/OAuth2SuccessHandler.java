@@ -61,7 +61,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         }
 
         if (profileImage.equals(null)) {
-            profileImage = "https://bucket-seb40.s3.ap-northeast-2.amazonaws.com/default_profile.png";
+            profileImage = "https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image.png";
         }
 
 

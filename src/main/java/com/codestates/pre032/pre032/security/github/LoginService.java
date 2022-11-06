@@ -74,7 +74,7 @@ public class LoginService {
         String profileImage = response.getProfileImage();
         //todo: 프로필 이미지가 없을 때 기본 이미지 설정 로직
         if (profileImage.equals(null)) {
-            profileImage = "https://bucket-seb40.s3.ap-northeast-2.amazonaws.com/default_profile.png";
+            profileImage = "https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image.png";
         }
 
         User user = userService.findByEmailOrCreate(email);

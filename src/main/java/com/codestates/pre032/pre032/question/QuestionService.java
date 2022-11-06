@@ -1,6 +1,8 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.exception.DataNotFoundException;
+import com.codestates.pre032.pre032.score.Score;
+import com.codestates.pre032.pre032.score.ScoreService;
 import com.codestates.pre032.pre032.tag.Tag;
 import com.codestates.pre032.pre032.tag.TagService;
 import com.codestates.pre032.pre032.user.User;
@@ -18,10 +20,13 @@ public class QuestionService {
 
     private final UserService userService;
 
-    public QuestionService(QuestionRepository questionRepository, TagService tagService, UserService userService) {
+    private final ScoreService scoreService;
+
+    public QuestionService(QuestionRepository questionRepository, TagService tagService, UserService userService, ScoreService scoreService) {
         this.questionRepository = questionRepository;
         this.tagService = tagService;
         this.userService = userService;
+        this.scoreService = scoreService;
     }
 
     public Question create(Question question, List<String> tags, User user) {
@@ -202,15 +207,29 @@ public class QuestionService {
 
     // 추천 기능
     public void upVote(Question question, User user) {
-        question.setScore(question.getScore()+1);
-        question.setViewCount(question.getViewCount()-1);
+        Score score = scoreService.findByUserAndQuestion(user, question);
+
+        if (score.getStatus()!=1){
+            score.setStatus(score.getStatus()+1);
+            question.setScore(question.getScore()+1);
+        }
+        score.setQuestion(question);
+        score.setUser(user);
+        scoreService.saveScore(score);
         questionRepository.save(question);
     }
 
     // 비추천 기능
     public void downVote(Question question, User user) {
-        question.setScore(question.getScore()-1);
-        question.setViewCount(question.getViewCount()-1);
+        Score score = scoreService.findByUserAndQuestion(user, question);
+
+        if (score.getStatus()!=-1){
+            score.setStatus(score.getStatus()-1);
+            question.setScore(question.getScore()-1);
+        }
+        score.setQuestion(question);
+        score.setUser(user);
+        scoreService.saveScore(score);
         questionRepository.save(question);
     }
 

@@ -2,6 +2,7 @@ package com.codestates.pre032.pre032.user;
 
 import com.codestates.pre032.pre032.answer.Answer;
 import com.codestates.pre032.pre032.question.Question;
+import com.codestates.pre032.pre032.score.Score;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -50,4 +51,7 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Answer> answers;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
+    private List<Score> likeUsers;
 }

@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.answer.Answer;
+import com.codestates.pre032.pre032.score.Score;
 import com.codestates.pre032.pre032.tag.Tag;
 import com.codestates.pre032.pre032.user.User;
 import com.codestates.pre032.pre032.user.UserDto;
@@ -63,6 +64,9 @@ public class Question {
 
     @Column
     private int answerCount;
+
+    @OneToMany(mappedBy = "question")
+    private List<Score> likeUsers;
 
     public List<String> getTagstr() {
         List<String> tags = new ArrayList<>();

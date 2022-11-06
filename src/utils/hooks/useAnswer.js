@@ -40,7 +40,7 @@ export const upAnswerVoteById = (answerId) => {
 };
 
 export const downAnswerVoteById = (answerId) => {
-	const downAnswerVote = useMutation(() => {
+	const downAnswerVote = useMutation((accessToken) => {
 		return axios.post(`${BASE_URL}/answers/${answerId}/downVote`, accessToken);
 	});
 
@@ -48,16 +48,19 @@ export const downAnswerVoteById = (answerId) => {
 };
 
 export const acceptAnswerById = (answerId) => {
-	const acceptAnswer = useMutation(() => {
-		return axios.patch(`${BASE_URL}/answers/${answerId}/accept`);
+	const acceptAnswer = useMutation((accessToken) => {
+		return axios.post(`${BASE_URL}/answers/${answerId}/accept`, accessToken);
 	});
 
 	return acceptAnswer;
 };
 
 export const undoAcceptAnswerById = (answerId) => {
-	const undoAcceptAnswer = useMutation(() => {
-		return axios.patch(`${BASE_URL}/answers/${answerId}/accept/undo`);
+	const undoAcceptAnswer = useMutation((accessToken) => {
+		return axios.post(
+			`${BASE_URL}/answers/${answerId}/accept/undo`,
+			accessToken,
+		);
 	});
 
 	return undoAcceptAnswer;

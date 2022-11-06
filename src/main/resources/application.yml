@@ -1,31 +1,12 @@
 #################################################
 # 로컬 ##
 #
-spring:
-  profiles:
-    include: oauth
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/pre032?serverTimezone=Asia/Seoul
-    username: user
-    password: 1234
-  jpa:
-    hibernate:
-      ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true;
-
-#################################################
-# 서버 ##
-
 #spring:
 #  profiles:
 #    include: oauth
 #  datasource:
 #    driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:3306/pre032?serverTimezone=Asia/Seoul
+#    url: jdbc:mysql://localhost:3306/pre032?serverTimezone=Asia/Seoul
 #    username: user
 #    password: 1234
 #  jpa:
@@ -35,6 +16,25 @@ spring:
 #    properties:
 #      hibernate:
 #        format_sql: true;
+
+#################################################
+# 서버 ##
+
+spring:
+  profiles:
+    include: oauth
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:3306/pre032?serverTimezone=Asia/Seoul
+    username: user
+    password: 1234
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true;
 
 
 #################################################

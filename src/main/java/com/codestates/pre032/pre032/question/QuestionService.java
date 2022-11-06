@@ -180,12 +180,14 @@ public class QuestionService {
     // 추천 기능
     public void upVote(Question question, User user) {
         question.setScore(question.getScore()+1);
+        question.setViewCount(question.getViewCount()-1);
         questionRepository.save(question);
     }
 
     // 비추천 기능
     public void downVote(Question question, User user) {
         question.setScore(question.getScore()-1);
+        question.setViewCount(question.getViewCount()-1);
         questionRepository.save(question);
     }
 }

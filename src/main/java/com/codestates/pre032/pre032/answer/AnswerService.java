@@ -83,4 +83,16 @@ public class AnswerService {
         }
         return false;
     }
+
+    // 추천 기능
+    public void upVote(Answer answer, User user) {
+        answer.setScore(answer.getScore()+1);
+        answerRepository.save(answer);
+    }
+
+    // 비추천 기능
+    public void downVote(Answer answer, User user) {
+        answer.setScore(answer.getScore()-1);
+        answerRepository.save(answer);
+    }
 }

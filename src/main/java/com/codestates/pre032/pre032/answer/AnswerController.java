@@ -112,4 +112,34 @@ public class AnswerController {
 
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    // 추천기능
+    @PostMapping("/{answerId}/upVote")
+    public ResponseEntity upVote(@PathVariable("answerId") Long id,
+                                 @RequestBody TokenDto tokenDto) {
+        if (tokenDto.getAccessToken().equals("not")) {
+            throw new UnauthorizedException("로그인이 필요합니다.");
+        }
+        Answer answer = answerService.findById(id);
+        User user = userService.findByAccessToken(tokenDto.getAccessToken());
+
+        answerService.upVote(answer, user);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    // 비추천기능
+    @PostMapping("/{answerId}/downVote")
+    public ResponseEntity downVote(@PathVariable("answerId") Long id,
+                                   @RequestBody TokenDto tokenDto) {
+        if (tokenDto.getAccessToken().equals("not")) {
+            throw new UnauthorizedException("로그인이 필요합니다.");
+        }
+        Answer answer = answerService.findById(id);
+        User user = userService.findByAccessToken(tokenDto.getAccessToken());
+
+        answerService.downVote(answer, user);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

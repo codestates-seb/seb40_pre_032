@@ -8,14 +8,12 @@ import userAtom from '../_state/userAuth';
 export default function Callback() {
 	const navigate = useNavigate();
 	const tokenPath = window.location.pathname;
-	console.log('tokenpath', tokenPath);
 	const tokenInfo = tokenPath.split('%20');
 	const setUserAuth = useSetRecoilState(userAtom);
 	const setAuth = useSetRecoilState(authAtom);
 
 	useEffect(() => {
 		const token = tokenInfo[1];
-		console.log(token);
 		localStorage.setItem('user', JSON.stringify(token));
 		setAuth('token', token);
 		axios

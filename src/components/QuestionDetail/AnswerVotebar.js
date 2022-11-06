@@ -15,8 +15,6 @@ function AnswerVotebar({ answerId }) {
 	const [userInfo, setUserInfo] = useState({});
 	const queryClient = useQueryClient();
 	const { questionId } = useParams();
-	// 답변 채택 기능 구현 완료
-	// const [isAccepted, setIsAccepted] = useState(false);
 
 	const data = getQuestionById(questionId);
 
@@ -26,8 +24,8 @@ function AnswerVotebar({ answerId }) {
 
 	const upAnswerVote = upAnswerVoteById(answerId);
 	const downAnswerVote = downAnswerVoteById(answerId);
-	// const acceptAnswer = acceptAnswerById(answerId);
-	// const undoAcceptAnswer = undoAcceptAnswerById(answerId);
+	const acceptAnswer = acceptAnswerById(answerId);
+	const undoAcceptAnswer = undoAcceptAnswerById(answerId);
 
 	const handleUpClick = () => {
 		upAnswerVote.mutate(
@@ -49,26 +47,25 @@ function AnswerVotebar({ answerId }) {
 		);
 	};
 
-	// const handleAcceptClick = () => {
-	// 	setIsAccepted(!isAccepted);
-	// 	if (isAccepted) {
-	// 		acceptAnswer.mutate(
-	// 			{},
-	// 			{
-	// 				onSuccess: () =>
-	// 					queryClient.invalidateQueries(['question', questionId]),
-	// 			},
-	// 		);
-	// 	} else {
-	// 		undoAcceptAnswer.mutate(
-	// 			{},
-	// 			{
-	// 				onSuccess: () =>
-	// 					queryClient.invalidateQueries(['question', questionId]),
-	// 			},
-	// 		);
-	// 	}
-	// };
+	const handleAcceptClick = () => {
+		if (!answerData.accepted) {
+			acceptAnswer.mutate(
+				{ accessToken: auth },
+				{
+					onSuccess: () =>
+						queryClient.invalidateQueries(['question', questionId]),
+				},
+			);
+		} else {
+			undoAcceptAnswer.mutate(
+				{ accessToken: auth },
+				{
+					onSuccess: () =>
+						queryClient.invalidateQueries(['question', questionId]),
+				},
+			);
+		}
+	};
 
 	useEffect(() => {
 		const user = JSON.parse(localStorage.getItem('userInfo'));
@@ -118,12 +115,11 @@ function AnswerVotebar({ answerId }) {
 					/>
 				</svg>
 			</div>
-			{answerData.owner.userId === userInfo.userId ? (
-				<button type="button">
+			{data?.data.owner.userId === userInfo.userId ? (
+				<button type="button" onClick={handleAcceptClick}>
 					<svg aria-hidden="true" width="36" height="36" viewBox="0 0 36 36">
 						<path
-							// fill={isAccepted ? 'green' : 'lightgrey'}
-							fill="lightgrey"
+							fill={answerData.accepted ? 'green' : 'lightgrey'}
 							d="m6 14 8 8L30 6v8L14 30l-8-8v-8Z"
 						/>
 					</svg>

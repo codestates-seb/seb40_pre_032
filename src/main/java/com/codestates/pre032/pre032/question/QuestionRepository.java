@@ -1,6 +1,7 @@
 package com.codestates.pre032.pre032.question;
 
 import com.codestates.pre032.pre032.tag.Tag;
+import com.codestates.pre032.pre032.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
     Integer countByTags(Tag tag);
-    
+    List<Question> findByUser(User user);
     @Query("select q from Question q order by q.creationDate desc" )
     List<Question> findAllOrder();
 

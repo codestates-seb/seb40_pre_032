@@ -4,6 +4,7 @@ import com.codestates.pre032.pre032.exception.DataNotFoundException;
 import com.codestates.pre032.pre032.tag.Tag;
 import com.codestates.pre032.pre032.tag.TagService;
 import com.codestates.pre032.pre032.user.User;
+import com.codestates.pre032.pre032.user.UserService;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -15,10 +16,12 @@ public class QuestionService {
     private final QuestionRepository questionRepository;
     private final TagService tagService;
 
+    private final UserService userService;
 
-    public QuestionService(QuestionRepository questionRepository, TagService tagService) {
+    public QuestionService(QuestionRepository questionRepository, TagService tagService, UserService userService) {
         this.questionRepository = questionRepository;
         this.tagService = tagService;
+        this.userService = userService;
     }
 
     public Question create(Question question, List<String> tags, User user) {
@@ -136,6 +139,20 @@ public class QuestionService {
     public List<Question> getQuestionsByTag(String tagStr) {
         Tag tag = this.tagService.stringToTag(tagStr);
         List<Question> questions = tag.getQuestions();
+        Collections.sort(questions, new Comparator<Question>() {
+            @Override
+            public int compare(Question q1, Question q2) {
+                return q2.getCreationDate().compareTo(q1.getCreationDate());
+            }
+        });
+
+        return questions;
+    }
+
+    // 유저 검색 기능
+    public List<Question> getQuestionsByUser(Long userId) {
+        User user = userService.find(userId);
+        List<Question> questions = questionRepository.findByUser(user);
         Collections.sort(questions, new Comparator<Question>() {
             @Override
             public int compare(Question q1, Question q2) {

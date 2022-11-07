@@ -7,7 +7,7 @@
 |도현수 (FE / 팀장)|정하승 (FE)|이제훈 (FE)|안유진 (FE)|
 |:-:|:-:|:-:|:-:|
 |<img src="https://avatars.githubusercontent.com/u/105625895?v=4" width=150>|<img src="https://avatars.githubusercontent.com/u/88266129?v=4" width=150 >|<img src="https://avatars.githubusercontent.com/u/106265483?v=4" width=150>|<img src="https://s3.us-west-2.amazonaws.com/secure.notion-static.com/4bdb2dab-55a0-44e9-85f4-4642a8c7b2bc/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20221105%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20221105T153842Z&X-Amz-Expires=86400&X-Amz-Signature=9cb4da8342e673d4c99dbb4e056b6d9e838230b86938c82ae6b2f13786486a4c&X-Amz-SignedHeaders=host&response-content-disposition=filename%3D%22Untitled.png%22&x-id=GetObject" width=150>|
-|[@dohyeons](https://github.com/dohyeons)|[@HA-SEUNG-JEONG](https://github.com/HA-SEUNG-JEONG)|[@Eugenius1st](https://github.com/Eugenius1st)   |[@leejehoon92](https://github.com/leejehoon92)|
+|[@dohyeons](https://github.com/dohyeons)|[@HA-SEUNG-JEONG](https://github.com/HA-SEUNG-JEONG)| [@leejehoon92](https://github.com/leejehoon92)   |[@Eugenius1st](https://github.com/Eugenius1st)|
 
 |이지성 (BE)|양주윤 (BE)|조성웅 (BE)|
 |:-:|:-:|:-:|

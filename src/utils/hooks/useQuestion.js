@@ -1,14 +1,15 @@
 /* eslint-disable */
 import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
-import { useRecoilValue } from 'recoil';
-import authAtom from '../../_state/auth';
 
 const BASE_URL =
 	'http://ec2-43-201-80-20.ap-northeast-2.compute.amazonaws.com:8080';
 
 export const getQuestionById = (questionId) => {
-	const auth = useRecoilValue(authAtom);
+	let auth = JSON.parse(localStorage.getItem('user'));
+	if (auth === null) {
+		auth = 'not';
+	}
 	const { data } = useQuery(['question', questionId], () => {
 		return axios.get(`${BASE_URL}/questions/${questionId}`, {
 			headers: { accessToken: auth },

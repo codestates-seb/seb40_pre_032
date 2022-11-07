@@ -24,7 +24,6 @@ export default function Callback() {
 				},
 			)
 			.then((response) => {
-				console.log('response', response);
 				localStorage.setItem('userInfo', JSON.stringify(response.data));
 				setUserAuth(response.data);
 			})

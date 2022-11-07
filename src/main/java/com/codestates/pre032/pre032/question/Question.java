@@ -65,7 +65,7 @@ public class Question {
     @Column
     private int answerCount;
 
-    @OneToMany(mappedBy = "question")
+    @OneToMany(mappedBy = "question", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Score> likeUsers;
 
     public List<String> getTagstr() {

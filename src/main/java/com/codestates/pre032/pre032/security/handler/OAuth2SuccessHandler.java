@@ -23,7 +23,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
 
     private final UserService userService;
 
-    public OAuth2SuccessHandler(JwtTokenizer jwtTokenizer,UserService userService) {
+    public OAuth2SuccessHandler(JwtTokenizer jwtTokenizer, UserService userService) {
         this.jwtTokenizer = jwtTokenizer;
         this.userService = userService;
     }
@@ -37,23 +37,23 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         String sub = "";
         String email = "";
         String displayName = "";
-        String profileImage= "";
+        String profileImage = "";
 
-        if (oAuth2User.getAttributes().containsKey("response")){
-            String temp = oAuth2User.getAttributes().get("response").toString().replaceAll("\\{","").replaceAll("}","").replaceAll(", ","=");
+        if (oAuth2User.getAttributes().containsKey("response")) {
+            String temp = oAuth2User.getAttributes().get("response").toString().replaceAll("\\{", "").replaceAll("}", "").replaceAll(", ", "=");
             String[] tempArr = temp.split("=");
             for (int i = 0; i < tempArr.length; i++) {
-                if (tempArr[i].equals("id")){
-                    sub = tempArr[i+1];
-                }else if (tempArr[i].equals("email")){
+                if (tempArr[i].equals("id")) {
+                    sub = tempArr[i + 1];
+                } else if (tempArr[i].equals("email")) {
                     email = tempArr[i + 1];
                 } else if (tempArr[i].equals("name")) {
-                    displayName = tempArr[i+1];
-                } else if (tempArr[i].equals("profile_image")){
-                    profileImage = tempArr[i+1];
+                    displayName = tempArr[i + 1];
+                } else if (tempArr[i].equals("profile_image")) {
+                    profileImage = tempArr[i + 1];
                 }
             }
-        }else {
+        } else {
             sub = String.valueOf(oAuth2User.getAttributes().get("sub"));
             email = String.valueOf(oAuth2User.getAttributes().get("email"));
             displayName = String.valueOf(oAuth2User.getAttributes().get("name"));
@@ -61,7 +61,15 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         }
 
         if (profileImage.equals(null)) {
-            profileImage = "https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image.png";
+            int random = (int) ((Math.random() * 10000) % 10);
+            if (random % 3 == 0) {
+                profileImage = "https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image.png";
+            } else if (random % 3 == 1) {
+                profileImage = "https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image2.png";
+            }
+            if (random % 3 == 2) {
+                profileImage = "https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image3.png";
+            }
         }
 
 
@@ -105,7 +113,7 @@ public class OAuth2SuccessHandler extends SimpleUrlAuthenticationSuccessHandler 
         User user = userService.findByEmail(email);
 
         claims.put("email", user.getEmail());
-        claims.put("userId",user.getUserId());
+        claims.put("userId", user.getUserId());
 
         String subject = user.getEmail();
         Date expiration = jwtTokenizer.getTokenExpiration(jwtTokenizer.getAccessTokenExpirationMinutes());

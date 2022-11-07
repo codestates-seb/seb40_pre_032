@@ -8,6 +8,7 @@ import lombok.Setter;
 import javax.validation.constraints.AssertTrue;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
 
 @NoArgsConstructor
@@ -24,6 +25,7 @@ public class UserDto {
         private String displayName;
 
         @NotBlank
+        @Size(min=4, max=12)
         private String password;
 
         @AssertTrue(message = "체크박스를 클릭해 주세요")

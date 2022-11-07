@@ -34,7 +34,16 @@ public class UserService {
         User user = new User();
         user.setDisplayName(dto.getDisplayName());
         user.setEmail(dto.getEmail());
-        user.setProfileImage("https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image.png");
+        int random = (int)((Math.random()*10000)%10);
+        if (random%3==0){
+            user.setProfileImage("https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image.png");
+        }
+        else if (random%3==1){
+            user.setProfileImage("https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image2.png");
+        }
+        if (random%3==2){
+            user.setProfileImage("https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image3.png");
+        }
         String encryptedPassword = passwordEncoder.encode(dto.getPassword());
         user.setPassword(encryptedPassword);
         user.setCreationDate(LocalDateTime.now());

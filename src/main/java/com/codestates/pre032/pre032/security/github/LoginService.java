@@ -73,15 +73,24 @@ public class LoginService {
         String displayName = response.getName();
         String profileImage = response.getProfileImage();
         //todo: 프로필 이미지가 없을 때 기본 이미지 설정 로직
-        if (profileImage.equals(null)) {
-            profileImage = "https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image.png";
-        }
 
         User user = userService.findByEmailOrCreate(email);
         if (user == null) {
             user = new User();
             user.setEmail(email);
             user.setDisplayName(displayName);
+            if (profileImage.equals(null)) {
+                int random = (int)((Math.random()*10000)%10);
+                if (random%3==0){
+                    user.setProfileImage("https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image.png");
+                }
+                else if (random%3==1){
+                    user.setProfileImage("https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image2.png");
+                }
+                if (random%3==2){
+                    user.setProfileImage("https://pre-032-bucket.s3.ap-northeast-2.amazonaws.com/default_profile_image3.png");
+                }
+            }
             user.setProfileImage(profileImage);
             user.setCreationDate(LocalDateTime.now());
             user.setPassword(PasswordEncoderFactories.createDelegatingPasswordEncoder().encode("프리프로젝트032"));

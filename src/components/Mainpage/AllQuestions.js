@@ -2,6 +2,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { v4 as uuidv4 } from 'uuid';
+import DisplayName from '../DisplayName';
 
 function AllQuestions({ questions, offset, limit }) {
 	return (
@@ -62,9 +63,7 @@ function AllQuestions({ questions, offset, limit }) {
 											className="w-4 mr-1"
 										/>
 									</div>
-									<div className="text-[#6aa1de] text-[12px]">
-										{question.owner.displayName}
-									</div>
+									<DisplayName question={question}/>
 								</div>
 							</div>
 						</div>

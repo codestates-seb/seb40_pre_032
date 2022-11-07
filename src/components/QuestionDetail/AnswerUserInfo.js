@@ -76,14 +76,14 @@ function AnswerUserInfo({ answerId }) {
 					</>
 				) : null}
 			</div>
-			<div className="w-[280px]">
+			<div className="w-[250px]">
 				<button type="button" className="text-blue-500 text-sm">
 					{/* edited (editedAt) ago */}
 				</button>
 			</div>
-			<div className="w-[150px] px-2 py-1">
+			<div className="w-[200px] px-2 py-1">
 				<div className="text-gray-500 text-sm">
-					asked {elapsed(answerData.creationDate)}
+					answered {elapsed(answerData.creationDate)}
 				</div>
 				<div className="flex flex-row">
 					<img

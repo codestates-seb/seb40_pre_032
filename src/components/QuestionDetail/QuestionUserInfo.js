@@ -80,14 +80,14 @@ function QuestionUserInfo() {
 					</>
 				) : null}
 			</div>
-			<div className="w-[280px]">
+			<div className="w-[250px]">
 				<button type="button" className="text-blue-500 text-sm">
 					{data?.data.creationDate === data?.data.modifiedAt
 						? null
 						: `edited ${elapsed(data?.data.modifiedAt)}`}
 				</button>
 			</div>
-			<div className="w-[150px] bg-sky-100 px-2 py-1">
+			<div className="w-[200px] bg-sky-100 px-2 py-1">
 				<div className="text-gray-500 text-sm">
 					asked {elapsed(data?.data.creationDate)}
 				</div>

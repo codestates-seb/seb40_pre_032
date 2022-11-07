@@ -46,7 +46,7 @@ public class Answer {
     @Column(nullable = false)
     private LocalDateTime modifiedAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "answer")
+    @OneToMany(mappedBy = "answer" , cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Score> likeUsers;
 
     public UserDto.owner getOwnerDto(){
